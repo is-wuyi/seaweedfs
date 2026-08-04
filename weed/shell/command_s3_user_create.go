@@ -24,17 +24,16 @@ func (c *commandS3UserCreate) Name() string {
 }
 
 func (c *commandS3UserCreate) Help() string {
-	return `create an S3 IAM user
+	return `创建一个 S3 IAM 用户
 
 	s3.user.create -name <username>
 	s3.user.create -name <username> -access_key <key> -secret_key <secret>
 
-	Creates a new user with a credential pair. If -access_key and -secret_key
-	are omitted, they are generated automatically.
+	使用一对凭证创建新用户。如果省略 -access_key 和 -secret_key，将自动生成。
 
-	After creating a user, attach policies with s3.policy.attach.
+	创建用户后，使用 s3.policy.attach 附加策略。
 
-	Output: JSON to stdout. Secret key is printed to stderr only.
+	输出：JSON 输出到 stdout。秘密密钥仅输出到 stderr。
 `
 }
 

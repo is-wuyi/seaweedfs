@@ -22,7 +22,7 @@ func (c *commandS3UserEnable) Name() string {
 }
 
 func (c *commandS3UserEnable) Help() string {
-	return `enable a disabled S3 IAM user
+	return `启用一个被禁用的 S3 IAM 用户
 
 	s3.user.enable -name <username>
 `

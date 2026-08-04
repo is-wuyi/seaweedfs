@@ -77,8 +77,8 @@ func init() {
 
 var cmdUpdate = &Command{
 	UsageLine: "update [-dir=/path/to/dir] [-name=name] [-version=x.xx]",
-	Short:     "get latest or specific version from https://github.com/seaweedfs/seaweedfs",
-	Long:      `get latest or specific version from https://github.com/seaweedfs/seaweedfs`,
+	Short:     "从 https://github.com/seaweedfs/seaweedfs 获取最新或指定版本",
+	Long:      `从 https://github.com/seaweedfs/seaweedfs 获取最新或指定版本`,
 }
 
 func runUpdate(cmd *Command, args []string) bool {

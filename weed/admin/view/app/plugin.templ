@@ -23,7 +23,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-outline-secondary" id="plugin-refresh-all-btn">
-                            <i class="fas fa-sync-alt me-1"></i>Refresh
+                            <i class="fas fa-sync-alt me-1"></i>刷新
                         </button>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 <ul class="nav nav-tabs" id="plugin-top-tabs">
                     <li class="nav-item">
                         <button type="button" class="nav-link active" data-plugin-top-tab="overview">
-                            <i class="fas fa-chart-line me-1"></i>Overview
+                            <i class="fas fa-chart-line me-1"></i>概览
                         </button>
                     </li>
                 </ul>
@@ -47,22 +47,22 @@ templ Plugin(page string, initialJob string, lane string) {
                 <ul class="nav nav-pills gap-2" id="plugin-subtabs">
                     <li class="nav-item">
                         <button type="button" class="nav-link active" data-plugin-subtab="configuration">
-                            <i class="fas fa-sliders-h me-1"></i>Configuration
+                            <i class="fas fa-sliders-h me-1"></i>配置
                         </button>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="nav-link" data-plugin-subtab="detection">
-                            <i class="fas fa-search me-1"></i>Job Detection
+                            <i class="fas fa-search me-1"></i>任务检测
                         </button>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="nav-link" data-plugin-subtab="queue">
-                            <i class="fas fa-list me-1"></i>Job Queue
+                            <i class="fas fa-list me-1"></i>任务队列
                         </button>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="nav-link" data-plugin-subtab="execution">
-                            <i class="fas fa-tasks me-1"></i>Job Execution
+                            <i class="fas fa-tasks me-1"></i>任务执行
                         </button>
                     </li>
                 </ul>
@@ -82,7 +82,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-md-3 mb-3">
                     <div class="card border-warning h-100">
                         <div class="card-body text-center">
-                            <div class="text-uppercase text-muted small mb-1">Active Jobs</div>
+                            <div class="text-uppercase text-muted small mb-1">活跃任务</div>
                             <h4 class="mb-0" id="plugin-status-active-jobs">0</h4>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-md-3 mb-3">
                     <div class="card border-success h-100">
                         <div class="card-body text-center">
-                            <div class="text-uppercase text-muted small mb-1">Activities (recent)</div>
+                            <div class="text-uppercase text-muted small mb-1">活动(近期)</div>
                             <h4 class="mb-0" id="plugin-status-activities">0</h4>
                         </div>
                     </div>
@@ -98,7 +98,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-md-3 mb-3">
                     <div class="card border-secondary h-100">
                         <div class="card-body text-center">
-                            <div class="text-uppercase text-muted small mb-1">Next Run</div>
+                            <div class="text-uppercase text-muted small mb-1">下次运行</div>
                             <h4 class="mb-0 plugin-scheduler-next-run">-</h4>
                             <div class="text-muted small plugin-scheduler-next-run-meta"></div>
                         </div>
@@ -109,20 +109,20 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header">
-                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Per Job Type Summary</h5>
+                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>按任务类型汇总</h5>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
                                 <table class="table table-sm table-hover mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Job Type</th>
-                                            <th>Active Jobs</th>
-                                            <th>Recent Activities</th>
+                                            <th>任务类型</th>
+                                            <th>活跃任务</th>
+                                            <th>近期活动</th>
                                         </tr>
                                     </thead>
                                     <tbody id="plugin-jobtype-summary-body">
-                                        <tr><td colspan="3" class="text-muted text-center py-3">Loading...</td></tr>
+                                        <tr><td colspan="3" class="text-muted text-center py-3">加载中...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -134,28 +134,28 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Scheduler State</h5>
-                            <small class="text-muted">Sequential scheduler with per-job runtime limits</small>
+                            <h5 class="mb-0"><i class="fas fa-clock me-2"></i>调度器状态</h5>
+                            <small class="text-muted">顺序调度器,具有每任务运行时限制</small>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
                                 <table class="table table-sm table-hover mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Job Type</th>
-                                            <th>Enabled</th>
-                                            <th>Detector</th>
-                                            <th>In Flight</th>
-                                            <th>Max Runtime</th>
-                                            <th>Exec Global</th>
-                                            <th>Exec/Worker</th>
-                                            <th>Executor Workers</th>
-                                            <th>Effective Exec</th>
-                                            <th>Last Run</th>
+                                            <th>任务类型</th>
+                                            <th>已启用</th>
+                                            <th>检测器</th>
+                                            <th>进行中</th>
+                                            <th>最大运行时</th>
+                                            <th>全局并发</th>
+                                            <th>每 Worker 并发</th>
+                                            <th>执行 Worker 数</th>
+                                            <th>有效并发</th>
+                                            <th>上次运行</th>
                                         </tr>
                                     </thead>
                                     <tbody id="plugin-scheduler-table-body">
-                                        <tr><td colspan="10" class="text-muted text-center py-3">Loading...</td></tr>
+                                        <tr><td colspan="10" class="text-muted text-center py-3">加载中...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -175,13 +175,13 @@ templ Plugin(page string, initialJob string, lane string) {
                                     <thead class="table-light sticky-top">
                                         <tr>
                                             <th>Worker</th>
-                                            <th>Address</th>
-                                            <th>Capabilities</th>
-                                            <th>Load</th>
+                                            <th>地址</th>
+                                            <th>能力</th>
+                                            <th>负载</th>
                                         </tr>
                                     </thead>
                                     <tbody id="plugin-workers-table-body">
-                                        <tr><td colspan="4" class="text-muted text-center py-3">Loading...</td></tr>
+                                        <tr><td colspan="4" class="text-muted text-center py-3">加载中...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -196,48 +196,48 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-lg-8 mb-3">
                     <div class="card shadow-sm h-100">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0"><i class="fas fa-sliders-h me-2"></i>Job Type Configuration</h5>
-                            <small class="text-muted" id="plugin-config-updated-at">Not loaded</small>
+                            <h5 class="mb-0"><i class="fas fa-sliders-h me-2"></i>任务类型配置</h5>
+                            <small class="text-muted" id="plugin-config-updated-at">未加载</small>
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <div class="small text-muted">Selected Job Type</div>
+                                <div class="small text-muted">已选任务类型</div>
                                 <div class="fw-semibold" id="plugin-selected-job-type">-</div>
                             </div>
 
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 class="mb-0">Descriptor</h6>
+                                    <h6 class="mb-0">描述符</h6>
                                     <button type="button" class="btn btn-sm btn-outline-secondary" id="plugin-refresh-schema-btn">
-                                        <i class="fas fa-cloud-download-alt me-1"></i>Refresh Schema
+                                        <i class="fas fa-cloud-download-alt me-1"></i>刷新 schema
                                     </button>
                                 </div>
-                                <div class="alert alert-light border" id="plugin-descriptor-summary">Select a job type to load schema and config.</div>
+                                <div class="alert alert-light border" id="plugin-descriptor-summary">选择一个任务类型以加载 schema 和配置。</div>
                             </div>
 
                             <div class="mb-3">
-                                <h6>Admin Config Form</h6>
+                                <h6>管理配置表单</h6>
                                 <div id="plugin-admin-config-form" class="plugin-form-root">
-                                    <div class="text-muted">No admin form loaded.</div>
+                                    <div class="text-muted">未加载管理表单。</div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <h6>Worker Config Form</h6>
+                                <h6>Worker 配置表单</h6>
                                 <div id="plugin-worker-config-form" class="plugin-form-root">
-                                    <div class="text-muted">No worker form loaded.</div>
+                                    <div class="text-muted">未加载 worker 表单。</div>
                                 </div>
                             </div>
 
                             <div class="d-flex flex-wrap gap-2">
                                 <button type="button" class="btn btn-primary" id="plugin-save-config-btn">
-                                    <i class="fas fa-save me-1"></i>Save Config
+                                    <i class="fas fa-save me-1"></i>保存配置
                                 </button>
                                 <button type="button" class="btn btn-outline-primary" id="plugin-trigger-detection-btn">
-                                    <i class="fas fa-search me-1"></i>Run Detection
+                                    <i class="fas fa-search me-1"></i>运行检测
                                 </button>
                                 <button type="button" class="btn btn-outline-success" id="plugin-run-workflow-btn">
-                                    <i class="fas fa-play me-1"></i>Run Detect + Execute
+                                    <i class="fas fa-play me-1"></i>运行检测 + 执行
                                 </button>
                             </div>
                         </div>
@@ -247,52 +247,52 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-lg-4 mb-3">
                     <div class="card shadow-sm">
                         <div class="card-header">
-                            <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>Job Scheduling Settings</h5>
+                            <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>任务调度设置</h5>
                         </div>
                         <div class="card-body">
                             <div class="row g-2" id="plugin-admin-settings-form">
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-enabled">Enabled</label>
+                                    <label class="form-label" for="plugin-admin-enabled">已启用</label>
                                     <div class="form-check form-switch mt-1">
                                         <input class="form-check-input" type="checkbox" id="plugin-admin-enabled"/>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-detection-interval">Detection Interval (min)</label>
+                                    <label class="form-label" for="plugin-admin-detection-interval">检测间隔(分钟)</label>
                                     <input type="number" class="form-control" id="plugin-admin-detection-interval" min="0"/>
-                                    <div class="form-text">How often to check for new work.</div>
+                                    <div class="form-text">检查新任务的频率。</div>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-detection-timeout">Detection Timeout (s)</label>
+                                    <label class="form-label" for="plugin-admin-detection-timeout">检测超时(秒)</label>
                                     <input type="number" class="form-control" id="plugin-admin-detection-timeout" min="0"/>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-execution-timeout">Execution Timeout (s)</label>
+                                    <label class="form-label" for="plugin-admin-execution-timeout">执行超时(秒)</label>
                                     <input type="number" class="form-control" id="plugin-admin-execution-timeout" min="0"/>
-                                    <div class="form-text">Per-attempt deadline for one job. Size-aware tasks may extend this automatically.</div>
+                                    <div class="form-text">单个任务的每次尝试截止时间。感知大小的任务可能会自动延长此时间。</div>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-max-runtime">Job Type Max Runtime (s)</label>
+                                    <label class="form-label" for="plugin-admin-max-runtime">任务类型最大运行时(秒)</label>
                                     <input type="number" class="form-control" id="plugin-admin-max-runtime" min="0"/>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-max-results">Max Jobs / Detection</label>
+                                    <label class="form-label" for="plugin-admin-max-results">每次检测最大任务数</label>
                                     <input type="number" class="form-control" id="plugin-admin-max-results" min="0"/>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-global-exec">Global Execution Concurrency</label>
+                                    <label class="form-label" for="plugin-admin-global-exec">全局执行并发</label>
                                     <input type="number" class="form-control" id="plugin-admin-global-exec" min="0"/>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-per-worker-exec">Per Worker Concurrency</label>
+                                    <label class="form-label" for="plugin-admin-per-worker-exec">每 Worker 并发</label>
                                     <input type="number" class="form-control" id="plugin-admin-per-worker-exec" min="0"/>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-retry-limit">Retry Limit</label>
+                                    <label class="form-label" for="plugin-admin-retry-limit">重试次数</label>
                                     <input type="number" class="form-control" id="plugin-admin-retry-limit" min="0"/>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" for="plugin-admin-retry-backoff">Retry Backoff (s)</label>
+                                    <label class="form-label" for="plugin-admin-retry-backoff">重试退避(秒)</label>
                                     <input type="number" class="form-control" id="plugin-admin-retry-backoff" min="0"/>
                                 </div>
                             </div>
@@ -301,12 +301,12 @@ templ Plugin(page string, initialJob string, lane string) {
 
                     <div class="card shadow-sm mt-3">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0"><i class="fas fa-hourglass-half me-2"></i>Next Run</h5>
-                            <small class="text-muted">Scheduler</small>
+                            <h5 class="mb-0"><i class="fas fa-hourglass-half me-2"></i>下次运行</h5>
+                            <small class="text-muted">调度器</small>
                         </div>
                         <div class="card-body">
                             <div class="h5 mb-1 plugin-scheduler-next-run">-</div>
-                            <div class="text-muted small plugin-scheduler-next-run-meta">Not scheduled</div>
+                            <div class="text-muted small plugin-scheduler-next-run-meta">未调度</div>
                         </div>
                     </div>
                 </div>
@@ -316,43 +316,43 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-lg-6 mb-3">
                     <div class="card shadow-sm h-100">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0"><i class="fas fa-clipboard-check me-2"></i>Run History</h5>
-                            <small class="text-muted">Keep last 10 success + last 10 errors</small>
+                            <h5 class="mb-0"><i class="fas fa-clipboard-check me-2"></i>运行历史</h5>
+                            <small class="text-muted">保留最近 10 次成功 + 最近 10 次错误</small>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 mb-3">
-                                    <h6 class="text-success">Successful Runs</h6>
+                                    <h6 class="text-success">成功运行</h6>
                                     <div class="table-responsive">
                                         <table class="table table-sm table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Time</th>
-                                                    <th>Job ID</th>
+                                                    <th>时间</th>
+                                                    <th>任务 ID</th>
                                                     <th>Worker</th>
-                                                    <th>Duration</th>
+                                                    <th>时长</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="plugin-runs-success-body">
-                                                <tr><td colspan="4" class="text-muted">No data</td></tr>
+                                                <tr><td colspan="4" class="text-muted">无数据</td></tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <h6 class="text-danger">Error Runs</h6>
+                                    <h6 class="text-danger">错误运行</h6>
                                     <div class="table-responsive">
                                         <table class="table table-sm table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Time</th>
-                                                    <th>Job ID</th>
+                                                    <th>时间</th>
+                                                    <th>任务 ID</th>
                                                     <th>Worker</th>
-                                                    <th>Error</th>
+                                                    <th>错误</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="plugin-runs-error-body">
-                                                <tr><td colspan="4" class="text-muted">No data</td></tr>
+                                                <tr><td colspan="4" class="text-muted">无数据</td></tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -365,10 +365,10 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-lg-6 mb-3">
                     <div class="card shadow-sm h-100">
                         <div class="card-header">
-                            <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Detection Results</h5>
+                            <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i>检测结果</h5>
                         </div>
                         <div class="card-body" id="plugin-detection-results">
-                            <div class="text-muted">Run detection to see proposals.</div>
+                            <div class="text-muted">运行检测以查看提议。</div>
                         </div>
                     </div>
                 </div>
@@ -380,9 +380,9 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <h5 class="mb-0"><i class="fas fa-list me-2"></i>Job Queue</h5>
+                            <h5 class="mb-0"><i class="fas fa-list me-2"></i>任务队列</h5>
                             <div class="d-flex gap-2 align-items-center flex-wrap">
-                                <small class="text-muted">States: pending/assigned/running</small>
+                                <small class="text-muted">状态: pending/assigned/running</small>
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -390,17 +390,17 @@ templ Plugin(page string, initialJob string, lane string) {
                                 <table class="table table-sm table-hover mb-0">
                                     <thead class="table-light sticky-top">
                                         <tr>
-                                            <th>Job ID</th>
-                                            <th>Type</th>
-                                            <th>State</th>
-                                            <th>Progress</th>
+                                            <th>任务 ID</th>
+                                            <th>类型</th>
+                                            <th>状态</th>
+                                            <th>进度</th>
                                             <th>Worker</th>
-                                            <th>Updated</th>
-                                            <th>Message</th>
+                                            <th>更新时间</th>
+                                            <th>消息</th>
                                         </tr>
                                     </thead>
                                     <tbody id="plugin-queue-jobs-table-body">
-                                        <tr><td colspan="7" class="text-muted text-center py-3">Loading...</td></tr>
+                                        <tr><td colspan="7" class="text-muted text-center py-3">加载中...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -415,25 +415,25 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <h5 class="mb-0"><i class="fas fa-search me-2"></i>Detection Jobs</h5>
-                            <div class="small text-muted">Detection activities for selected job type</div>
+                            <h5 class="mb-0"><i class="fas fa-search me-2"></i>检测任务</h5>
+                            <div class="small text-muted">所选任务类型的检测活动</div>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
                                 <table class="table table-sm table-hover mb-0">
                                     <thead class="table-light sticky-top">
                                         <tr>
-                                            <th>Time</th>
-                                            <th>Job Type</th>
-                                            <th>Request ID</th>
+                                            <th>时间</th>
+                                            <th>任务类型</th>
+                                            <th>请求 ID</th>
                                             <th>Worker</th>
-                                            <th>Stage</th>
-                                            <th>Source</th>
-                                            <th>Message</th>
+                                            <th>阶段</th>
+                                            <th>来源</th>
+                                            <th>消息</th>
                                         </tr>
                                     </thead>
                                     <tbody id="plugin-detection-table-body">
-                                        <tr><td colspan="7" class="text-muted text-center py-3">Loading...</td></tr>
+                                        <tr><td colspan="7" class="text-muted text-center py-3">加载中...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -448,15 +448,15 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Execution Jobs</h5>
+                            <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>执行任务</h5>
                             <div class="d-flex gap-2 align-items-center flex-wrap">
                                 <select class="form-select form-select-sm" id="plugin-monitor-job-state-filter" style="min-width: 180px;">
-                                    <option value="">All States</option>
-                                    <option value="assigned">Assigned</option>
-                                    <option value="running">Running</option>
-                                    <option value="succeeded">Succeeded</option>
-                                    <option value="failed">Failed</option>
-                                    <option value="canceled">Canceled</option>
+                                    <option value="">全部状态</option>
+                                    <option value="assigned">已分配</option>
+                                    <option value="running">运行中</option>
+                                    <option value="succeeded">已成功</option>
+                                    <option value="failed">已失败</option>
+                                    <option value="canceled">已取消</option>
                                 </select>
                             </div>
                         </div>
@@ -465,17 +465,17 @@ templ Plugin(page string, initialJob string, lane string) {
                                 <table class="table table-hover mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Job ID</th>
-                                            <th>Type</th>
-                                            <th>State</th>
-                                            <th>Progress</th>
+                                            <th>任务 ID</th>
+                                            <th>类型</th>
+                                            <th>状态</th>
+                                            <th>进度</th>
                                             <th>Worker</th>
-                                            <th>Updated</th>
-                                            <th>Message</th>
+                                            <th>更新时间</th>
+                                            <th>消息</th>
                                         </tr>
                                     </thead>
                                     <tbody id="plugin-execution-jobs-table-body">
-                                        <tr><td colspan="7" class="text-muted text-center py-3">Loading...</td></tr>
+                                        <tr><td colspan="7" class="text-muted text-center py-3">加载中...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -488,24 +488,24 @@ templ Plugin(page string, initialJob string, lane string) {
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <h5 class="mb-0"><i class="fas fa-stream me-2"></i>Execution Activities</h5>
-                            <small class="text-muted">Non-detection events only</small>
+                            <h5 class="mb-0"><i class="fas fa-stream me-2"></i>执行活动</h5>
+                            <small class="text-muted">仅非检测事件</small>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
                                 <table class="table table-sm table-hover mb-0">
                                     <thead class="table-light sticky-top">
                                         <tr>
-                                            <th>Time</th>
-                                            <th>Job Type</th>
-                                            <th>Job ID</th>
-                                            <th>Source</th>
-                                            <th>Stage</th>
-                                            <th>Message</th>
+                                            <th>时间</th>
+                                            <th>任务类型</th>
+                                            <th>任务 ID</th>
+                                            <th>来源</th>
+                                            <th>阶段</th>
+                                            <th>消息</th>
                                         </tr>
                                     </thead>
                                     <tbody id="plugin-execution-activities-table-body">
-                                        <tr><td colspan="6" class="text-muted text-center py-3">Loading...</td></tr>
+                                        <tr><td colspan="6" class="text-muted text-center py-3">加载中...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -520,16 +520,16 @@ templ Plugin(page string, initialJob string, lane string) {
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="plugin-job-detail-modal-label"><i class="fas fa-file-alt me-2"></i>Job Detail</h5>
+                    <h5 class="modal-title" id="plugin-job-detail-modal-label"><i class="fas fa-file-alt me-2"></i>任务详情</h5>
                     <div class="ms-auto me-2">
                         <button type="button" class="btn btn-outline-danger btn-sm" id="plugin-expire-job-btn" disabled>
-                            <i class="fas fa-stop-circle me-1"></i>Expire Job
+                            <i class="fas fa-stop-circle me-1"></i>终止任务
                         </button>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="plugin-job-detail-content">
-                    <div class="text-muted">Select a job to view details.</div>
+                    <div class="text-muted">选择一个任务以查看详情。</div>
                 </div>
             </div>
         </div>
@@ -684,7 +684,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 var response = await fetch(basePath(url), requestOptions);
                 var data = await readResponseJSON(response);
                 if (!response.ok) {
-                    var message = (data && (data.error || data.message)) ? (data.error || data.message) : ('Request failed: ' + response.status);
+                    var message = (data && (data.error || data.message)) ? (data.error || data.message) : ('请求失败: ' + response.status);
                     var requestError = new Error(message);
                     requestError.responseData = data;
                     requestError.responseStatus = response.status;
@@ -889,7 +889,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 var html = '' +
                     '<li class="nav-item">' +
                     '<button type="button" class="nav-link" data-plugin-top-tab="overview">' +
-                    '<i class="fas fa-chart-line me-1"></i>Overview' +
+                    '<i class="fas fa-chart-line me-1"></i>概览' +
                     '</button>' +
                     '</li>';
 
@@ -1050,7 +1050,7 @@ templ Plugin(page string, initialJob string, lane string) {
                         kind: 'data',
                         label: String(shardID),
                         className: 'bg-primary',
-                        title: 'Data shard ' + shardID,
+                        title: '数据分片 ' + shardID,
                     };
                 }
                 var parityIndex = shardID - dataShardCount;
@@ -1058,7 +1058,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     kind: 'parity',
                     label: String(shardID),
                     className: 'bg-warning text-dark',
-                    title: 'Parity shard ' + shardID + ' (index ' + parityIndex + ')',
+                    title: '校验分片 ' + shardID + ' (索引 ' + parityIndex + ')',
                 };
             }
 
@@ -1088,7 +1088,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     if (!fallbackText) {
                         return '';
                     }
-                    return '<div class="mb-3"><h6>Execution Plan</h6><pre class="plugin-job-detail-json">' + escapeHtml(fallbackText) + '</pre></div>';
+                    return '<div class="mb-3"><h6>执行计划</h6><pre class="plugin-job-detail-json">' + escapeHtml(fallbackText) + '</pre></div>';
                 }
 
                 var dataShards = parseIntOrDefault(plan.data_shards, 10);
@@ -1099,26 +1099,26 @@ templ Plugin(page string, initialJob string, lane string) {
                 var assignments = Array.isArray(plan.shard_assignments) ? plan.shard_assignments : [];
 
                 var html = '';
-                html += '<div class="mb-3"><h6>Execution Plan</h6>';
+                html += '<div class="mb-3"><h6>执行计划</h6>';
                 html += '<div class="row g-2 mb-2">' +
                     '<div class="col-md-3"><small><strong>Volume:</strong> ' + escapeHtml(textOrDash(plan.volume_id)) + '</small></div>' +
                     '<div class="col-md-3"><small><strong>Collection:</strong> ' + escapeHtml(textOrDash(plan.collection)) + '</small></div>' +
-                    '<div class="col-md-3"><small><strong>Shards:</strong> ' + escapeHtml(String(dataShards)) + '+' + escapeHtml(String(parityShards)) + '</small></div>' +
-                    '<div class="col-md-3"><small><strong>Total:</strong> ' + escapeHtml(String(totalShards)) + '</small></div>' +
+                    '<div class="col-md-3"><small><strong>分片:</strong> ' + escapeHtml(String(dataShards)) + '+' + escapeHtml(String(parityShards)) + '</small></div>' +
+                    '<div class="col-md-3"><small><strong>总数:</strong> ' + escapeHtml(String(totalShards)) + '</small></div>' +
                     '</div>';
 
                 html += '<div class="small text-muted mb-2">' +
-                    '<span class="badge bg-primary me-1">Data</span>' +
-                    '<span class="badge bg-warning text-dark me-2">Parity</span>' +
-                    'Source and target placement per shard.' +
+                    '<span class="badge bg-primary me-1">数据</span>' +
+                    '<span class="badge bg-warning text-dark me-2">校验</span>' +
+                    '每个分片的源和目标放置位置。' +
                     '</div>';
 
                 function renderEndpointsTable(title, endpoints) {
                     if (!endpoints.length) {
-                        return '<div class="mb-2"><strong>' + escapeHtml(title) + ':</strong> <span class="text-muted">none</span></div>';
+                        return '<div class="mb-2"><strong>' + escapeHtml(title) + ':</strong> <span class="text-muted">无</span></div>';
                     }
                     var table = '<div class="table-responsive mb-2"><table class="table table-sm table-striped mb-0">' +
-                        '<thead><tr><th>#</th><th>Node</th><th>DC</th><th>Rack</th><th>Volume</th><th>Shards</th></tr></thead><tbody>';
+                        '<thead><tr><th>#</th><th>节点</th><th>DC</th><th>机架</th><th>Volume</th><th>分片</th></tr></thead><tbody>';
                     for (var i = 0; i < endpoints.length; i++) {
                         var endpoint = endpoints[i] || {};
                         var endpointShards = normalizeShardIDs(endpoint.shard_ids);
@@ -1135,13 +1135,13 @@ templ Plugin(page string, initialJob string, lane string) {
                     return '<div class="mb-2"><strong>' + escapeHtml(title) + '</strong></div>' + table;
                 }
 
-                html += renderEndpointsTable('Sources', sources);
-                html += renderEndpointsTable('Targets', targets);
+                html += renderEndpointsTable('源', sources);
+                html += renderEndpointsTable('目标', targets);
 
                 if (assignments.length) {
-                    html += '<div class="mb-2"><strong>Shard Assignments</strong></div>';
+                    html += '<div class="mb-2"><strong>分片分配</strong></div>';
                     html += '<div class="table-responsive"><table class="table table-sm table-striped mb-0">' +
-                        '<thead><tr><th>Shard</th><th>Kind</th><th>Target</th><th>DC</th><th>Rack</th></tr></thead><tbody>';
+                        '<thead><tr><th>分片</th><th>类型</th><th>目标</th><th>DC</th><th>机架</th></tr></thead><tbody>';
                     for (var j = 0; j < assignments.length; j++) {
                         var assignment = assignments[j] || {};
                         var shardID = parseIntOrDefault(assignment.shard_id, -1);
@@ -1165,7 +1165,7 @@ templ Plugin(page string, initialJob string, lane string) {
             }
 
             function renderBalanceExecutionPlan(plan) {
-                var html = '<div class="mb-3"><h6>Execution Plan</h6>';
+                var html = '<div class="mb-3"><h6>执行计划</h6>';
                 var moves = Array.isArray(plan.moves) ? plan.moves : [];
 
                 if (moves.length === 0) {
@@ -1177,14 +1177,14 @@ templ Plugin(page string, initialJob string, lane string) {
                     html += `<div class="row g-2 mb-2">
                         <div class="col-md-3"><small><strong>Volume:</strong> ${escapeHtml(vid)}</small></div>
                         <div class="col-md-3"><small><strong>Collection:</strong> ${escapeHtml(col)}</small></div>
-                        <div class="col-md-3"><small><strong>Source:</strong> <code>${escapeHtml(src)}</code></small></div>
-                        <div class="col-md-3"><small><strong>Target:</strong> <code>${escapeHtml(dst)}</code></small></div>
+                        <div class="col-md-3"><small><strong>源:</strong> <code>${escapeHtml(src)}</code></small></div>
+                        <div class="col-md-3"><small><strong>目标:</strong> <code>${escapeHtml(dst)}</code></small></div>
                         </div>`;
                 } else {
                     // Batch balance job
-                    html += '<div class="mb-2"><span class="badge bg-info">' + escapeHtml(String(moves.length)) + ' moves</span></div>';
+                    html += '<div class="mb-2"><span class="badge bg-info">' + escapeHtml(String(moves.length)) + ' 次移动</span></div>';
                     html += '<div class="table-responsive"><table class="table table-sm table-striped mb-0">' +
-                        '<thead><tr><th>#</th><th>Volume</th><th>Source</th><th>Target</th><th>Collection</th></tr></thead><tbody>';
+                        '<thead><tr><th>#</th><th>Volume</th><th>源</th><th>目标</th><th>Collection</th></tr></thead><tbody>';
                     for (var i = 0; i < moves.length; i++) {
                         var move = moves[i] || {};
                         html += `<tr>
@@ -1222,11 +1222,11 @@ templ Plugin(page string, initialJob string, lane string) {
                 expireBtn.setAttribute('data-job-id', jobID);
                 expireBtn.disabled = !jobID || !active;
                 if (!jobID) {
-                    expireBtn.title = 'Select a job to expire.';
+                    expireBtn.title = '选择一个任务以终止。';
                 } else if (!active) {
-                    expireBtn.title = 'Job is not active.';
+                    expireBtn.title = '任务不活跃。';
                 } else {
-                    expireBtn.title = 'Expire job to unblock scheduling.';
+                    expireBtn.title = '终止任务以解除调度阻塞。';
                 }
             }
 
@@ -1236,7 +1236,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     return;
                 }
 
-                var reason = window.prompt('Expire job ' + normalizedJobID + '? Optional reason:', 'job expired by admin request');
+                var reason = window.prompt('终止任务 ' + normalizedJobID + '? 可选原因:', 'job expired by admin request');
                 if (reason === null) {
                     return;
                 }
@@ -1251,14 +1251,14 @@ templ Plugin(page string, initialJob string, lane string) {
                         reason: reason,
                     });
                     if (response && response.expired === false) {
-                        notify(response.message || 'Job is not active.', 'info');
+                        notify(response.message || '任务不活跃。', 'info');
                     } else {
-                        notify('Job expired: ' + normalizedJobID, 'success');
+                        notify('任务已终止: ' + normalizedJobID, 'success');
                     }
                     await refreshJobsAndActivities();
                     await openJobDetail(normalizedJobID);
                 } catch (e) {
-                    notify('Failed to expire job: ' + e.message, 'error');
+                    notify('终止任务失败: ' + e.message, 'error');
                 }
             }
 
@@ -1283,7 +1283,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 setExpireButtonState(null);
-                contentRoot.innerHTML = '<div class="text-muted">Loading job detail...</div>';
+                contentRoot.innerHTML = '<div class="text-muted">加载任务详情...</div>';
                 try {
                     var detail = await pluginRequest('GET', '/api/plugin/jobs/' + encodePath(normalizedJobID) + '/detail?activity_limit=500&related_limit=20');
                     var job = (detail && detail.job) ? detail.job : {};
@@ -1295,34 +1295,34 @@ templ Plugin(page string, initialJob string, lane string) {
 
                     html += '<div class="row g-3 mb-3">' +
                         '<div class="col-lg-8">' +
-                        '<div><strong>Job ID:</strong> ' + escapeHtml(textOrDash(job.job_id || normalizedJobID)) + '</div>' +
-                        '<div><strong>Type:</strong> ' + escapeHtml(textOrDash(job.job_type)) + '</div>' +
-                        '<div><strong>State:</strong> ' + escapeHtml(textOrDash(job.state)) + '</div>' +
+                        '<div><strong>任务 ID:</strong> ' + escapeHtml(textOrDash(job.job_id || normalizedJobID)) + '</div>' +
+                        '<div><strong>类型:</strong> ' + escapeHtml(textOrDash(job.job_type)) + '</div>' +
+                        '<div><strong>状态:</strong> ' + escapeHtml(textOrDash(job.state)) + '</div>' +
                         '<div><strong>Worker:</strong> ' + escapeHtml(textOrDash(job.worker_id)) + '</div>' +
-                        '<div><strong>Updated:</strong> ' + escapeHtml(parseTime(job.updated_at) || '-') + '</div>' +
+                        '<div><strong>更新时间:</strong> ' + escapeHtml(parseTime(job.updated_at) || '-') + '</div>' +
                         '</div>' +
                         '<div class="col-lg-4">' +
-                        '<div><strong>Attempt:</strong> ' + escapeHtml(textOrDash(job.attempt)) + '</div>' +
-                        '<div><strong>Progress:</strong> ' + escapeHtml(String(Math.round(Number(job.progress || 0)))) + '%</div>' +
-                        '<div><strong>Created:</strong> ' + escapeHtml(parseTime(job.created_at) || '-') + '</div>' +
-                        '<div><strong>Completed:</strong> ' + escapeHtml(parseTime(job.completed_at) || '-') + '</div>' +
+                        '<div><strong>尝试次数:</strong> ' + escapeHtml(textOrDash(job.attempt)) + '</div>' +
+                        '<div><strong>进度:</strong> ' + escapeHtml(String(Math.round(Number(job.progress || 0)))) + '%</div>' +
+                        '<div><strong>创建时间:</strong> ' + escapeHtml(parseTime(job.created_at) || '-') + '</div>' +
+                        '<div><strong>完成时间:</strong> ' + escapeHtml(parseTime(job.completed_at) || '-') + '</div>' +
                         '</div>' +
                         '</div>';
 
                     if (job.summary) {
-                        html += '<div class="mb-2"><strong>Summary:</strong> ' + escapeHtml(String(job.summary)) + '</div>';
+                        html += '<div class="mb-2"><strong>摘要:</strong> ' + escapeHtml(String(job.summary)) + '</div>';
                     }
                     if (job.detail) {
-                        html += '<div class="mb-2"><strong>Detail:</strong> ' + escapeHtml(String(job.detail)) + '</div>';
+                        html += '<div class="mb-2"><strong>详情:</strong> ' + escapeHtml(String(job.detail)) + '</div>';
                     }
                     if (job.message) {
-                        html += '<div class="mb-2"><strong>Message:</strong> ' + escapeHtml(String(job.message)) + '</div>';
+                        html += '<div class="mb-2"><strong>消息:</strong> ' + escapeHtml(String(job.message)) + '</div>';
                     }
                     if (job.error_message) {
-                        html += '<div class="mb-2 text-danger"><strong>Error:</strong> ' + escapeHtml(String(job.error_message)) + '</div>';
+                        html += '<div class="mb-2 text-danger"><strong>错误:</strong> ' + escapeHtml(String(job.error_message)) + '</div>';
                     }
                     if (job.result_summary) {
-                        html += '<div class="mb-2"><strong>Result:</strong> ' + escapeHtml(String(job.result_summary)) + '</div>';
+                        html += '<div class="mb-2"><strong>结果:</strong> ' + escapeHtml(String(job.result_summary)) + '</div>';
                     }
 
                     var executionPlan = extractExecutionPlan(job);
@@ -1332,32 +1332,32 @@ templ Plugin(page string, initialJob string, lane string) {
 
                     var parametersText = toPrettyJson(removeExecutionPlanForDisplay(job.parameters));
                     if (parametersText) {
-                        html += '<div class="mb-3"><h6>Parameters</h6><pre class="plugin-job-detail-json">' + escapeHtml(parametersText) + '</pre></div>';
+                        html += '<div class="mb-3"><h6>参数</h6><pre class="plugin-job-detail-json">' + escapeHtml(parametersText) + '</pre></div>';
                     }
                     var labelsText = toPrettyJson(job.labels);
                     if (labelsText) {
-                        html += '<div class="mb-3"><h6>Labels</h6><pre class="plugin-job-detail-json">' + escapeHtml(labelsText) + '</pre></div>';
+                        html += '<div class="mb-3"><h6>标签</h6><pre class="plugin-job-detail-json">' + escapeHtml(labelsText) + '</pre></div>';
                     }
                     var outputsText = toPrettyJson(job.result_output_values);
                     if (outputsText) {
-                        html += '<div class="mb-3"><h6>Result Output Values</h6><pre class="plugin-job-detail-json">' + escapeHtml(outputsText) + '</pre></div>';
+                        html += '<div class="mb-3"><h6>结果输出值</h6><pre class="plugin-job-detail-json">' + escapeHtml(outputsText) + '</pre></div>';
                     }
 
                     if (runRecord) {
-                        html += '<div class="mb-3"><h6>Run Record</h6>' +
-                            '<div><strong>Outcome:</strong> ' + escapeHtml(textOrDash(runRecord.outcome)) + '</div>' +
-                            '<div><strong>Duration:</strong> ' + escapeHtml(formatDurationMs(runRecord.duration_ms)) + '</div>' +
-                            '<div><strong>Completed:</strong> ' + escapeHtml(parseTime(runRecord.completed_at) || '-') + '</div>' +
-                            '<div><strong>Message:</strong> ' + escapeHtml(textOrDash(runRecord.message)) + '</div>' +
+                        html += '<div class="mb-3"><h6>运行记录</h6>' +
+                            '<div><strong>结果:</strong> ' + escapeHtml(textOrDash(runRecord.outcome)) + '</div>' +
+                            '<div><strong>时长:</strong> ' + escapeHtml(formatDurationMs(runRecord.duration_ms)) + '</div>' +
+                            '<div><strong>完成时间:</strong> ' + escapeHtml(parseTime(runRecord.completed_at) || '-') + '</div>' +
+                            '<div><strong>消息:</strong> ' + escapeHtml(textOrDash(runRecord.message)) + '</div>' +
                             '</div>';
                     }
 
-                    html += '<h6 class="mt-3">Activity Timeline</h6>';
+                    html += '<h6 class="mt-3">活动时间线</h6>';
                     if (!activities.length) {
-                        html += '<div class="text-muted mb-3">No activity records.</div>';
+                        html += '<div class="text-muted mb-3">没有活动记录。</div>';
                     } else {
                         html += '<div class="table-responsive mb-3"><table class="table table-sm table-striped">' +
-                            '<thead><tr><th>Time</th><th>Stage</th><th>Source</th><th>Worker</th><th>Message</th></tr></thead><tbody>';
+                            '<thead><tr><th>时间</th><th>阶段</th><th>来源</th><th>Worker</th><th>消息</th></tr></thead><tbody>';
                         for (var i = 0; i < activities.length; i++) {
                             var activity = activities[i] || {};
                             html += '<tr>' +
@@ -1372,8 +1372,8 @@ templ Plugin(page string, initialJob string, lane string) {
                     }
 
                     if (relatedJobs.length) {
-                        html += '<h6>Related Jobs</h6><div class="table-responsive"><table class="table table-sm table-hover">' +
-                            '<thead><tr><th>Job ID</th><th>State</th><th>Worker</th><th>Updated</th></tr></thead><tbody>';
+                        html += '<h6>相关任务</h6><div class="table-responsive"><table class="table table-sm table-hover">' +
+                            '<thead><tr><th>任务 ID</th><th>状态</th><th>Worker</th><th>更新时间</th></tr></thead><tbody>';
                         for (var j = 0; j < relatedJobs.length; j++) {
                             var related = relatedJobs[j] || {};
                             html += '<tr>' +
@@ -1389,7 +1389,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     contentRoot.innerHTML = html;
                 } catch (e) {
                     setExpireButtonState(null);
-                    contentRoot.innerHTML = '<div class="alert alert-danger mb-0">Failed to load job detail: ' + escapeHtml(e.message) + '</div>';
+                    contentRoot.innerHTML = '<div class="alert alert-danger mb-0">加载任务详情失败: ' + escapeHtml(e.message) + '</div>';
                 }
             }
 
@@ -1508,7 +1508,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 jobTypes.sort();
 
                 if (jobTypes.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan=\"3\" class=\"text-muted text-center py-3\">No job types discovered</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan=\"3\" class=\"text-muted text-center py-3\">未发现任务类型</td></tr>';
                     return;
                 }
 
@@ -1553,7 +1553,7 @@ templ Plugin(page string, initialJob string, lane string) {
 
                 var states = Array.isArray(state.schedulerStates) ? state.schedulerStates : [];
                 if (!states.length) {
-                    tbody.innerHTML = '<tr><td colspan="10" class="text-muted text-center py-3">No scheduler state available</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="10" class="text-muted text-center py-3">无可用调度器状态</td></tr>';
                     return;
                 }
 
@@ -1562,7 +1562,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     var item = states[i] || {};
                     var enabled = !!item.enabled;
                     var inFlight = !!item.detection_in_flight;
-                    var detector = item.detector_available ? textOrDash(item.detector_worker_id) : 'No detector';
+                    var detector = item.detector_available ? textOrDash(item.detector_worker_id) : '无检测器';
                     var maxRuntimeSeconds = Number(item.job_type_max_runtime_seconds || 0);
                     var maxRuntimeText = maxRuntimeSeconds > 0 ? (String(maxRuntimeSeconds) + 's') : '-';
                     var globalExec = Number(item.global_execution_concurrency || 0);
@@ -1577,12 +1577,12 @@ templ Plugin(page string, initialJob string, lane string) {
                     var lastRunTime = parseTime(item.last_run_completed_at);
                     var lastRunText = '-';
                     if (lastRunStatus !== '-' || lastRunTime) {
-                        var statusLabel = lastRunStatus !== '-' ? lastRunStatus : 'run';
+                        var statusLabel = lastRunStatus !== '-' ? lastRunStatus : '运行';
                         lastRunText = lastRunTime ? (statusLabel + ' @ ' + lastRunTime) : statusLabel;
                     }
 
-                    var enabledBadge = enabled ? '<span class="badge bg-success">Enabled</span>' : '<span class="badge bg-secondary">Disabled</span>';
-                    var inFlightBadge = inFlight ? '<span class="badge bg-warning text-dark">Yes</span>' : '<span class="badge bg-light text-dark">No</span>';
+                    var enabledBadge = enabled ? '<span class="badge bg-success">已启用</span>' : '<span class="badge bg-secondary">已禁用</span>';
+                    var inFlightBadge = inFlight ? '<span class="badge bg-warning text-dark">是</span>' : '<span class="badge bg-light text-dark">否</span>';
                     var policyErrorHtml = '';
                     if (item.policy_error) {
                         policyErrorHtml = '<div><small class="text-danger">' + escapeHtml(String(item.policy_error)) + '</small></div>';
@@ -1617,7 +1617,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 valueNodes.forEach(function(node) {
                     node.textContent = display;
                 });
-                var metaText = nextRun ? 'Local time' : 'Not scheduled';
+                var metaText = nextRun ? '本地时间' : '未调度';
                 if (metaNodes.length) {
                     metaNodes.forEach(function(node) {
                         node.textContent = metaText;
@@ -1628,7 +1628,7 @@ templ Plugin(page string, initialJob string, lane string) {
             function renderWorkers() {
                 var tbody = document.getElementById('plugin-workers-table-body');
                 if (!state.workers.length) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-muted text-center py-3">No connected workers</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="4" class="text-muted text-center py-3">没有已连接的 worker</td></tr>';
                     return;
                 }
 
@@ -1675,10 +1675,10 @@ templ Plugin(page string, initialJob string, lane string) {
                         }
                     });
                     var loadLines = [];
-                    loadLines.push('Detect: ' + String(detUsed) + '/' + String(detTotal));
-                    loadLines.push('Execute: ' + String(execUsed) + '/' + String(execTotal));
-                    loadLines.push('Running: ' + String(Array.isArray(runningWork) ? runningWork.length : 0));
-                    loadLines.push('Queued: ' + String(queuedTotal));
+                    loadLines.push('检测: ' + String(detUsed) + '/' + String(detTotal));
+                    loadLines.push('执行: ' + String(execUsed) + '/' + String(execTotal));
+                    loadLines.push('运行中: ' + String(Array.isArray(runningWork) ? runningWork.length : 0));
+                    loadLines.push('队列: ' + String(queuedTotal));
 
                     rows += '<tr>' +
                         '<td><div class="fw-semibold">' + escapeHtml(workerID) + '</div></td>' +
@@ -1746,7 +1746,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (!filteredJobs.length) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center py-3">No execution jobs tracked yet</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center py-3">暂无执行任务</td></tr>';
                     return;
                 }
 
@@ -1774,7 +1774,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     var jobTypeCell = escapeHtml(textOrDash(executionJob.job_type));
                     var execLabels = executionJob.labels || {};
                     if (execLabels.batch === 'true' && execLabels.batch_size) {
-                        jobTypeCell += ' <span class="badge bg-info">' + escapeHtml(execLabels.batch_size) + ' moves</span>';
+                        jobTypeCell += ' <span class="badge bg-info">' + escapeHtml(execLabels.batch_size) + ' 次移动</span>';
                     }
 
                     rows += '<tr>' +
@@ -1813,7 +1813,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (!filteredJobs.length) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center py-3">No queued/active jobs</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center py-3">无队列/活跃任务</td></tr>';
                     return;
                 }
 
@@ -1869,7 +1869,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (!filteredActivities.length) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center py-3">No detection jobs tracked yet</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center py-3">暂无检测任务</td></tr>';
                     return;
                 }
 
@@ -1911,7 +1911,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (!filteredActivities.length) {
-                    tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center py-3">No execution activities yet</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center py-3">暂无执行活动</td></tr>';
                     return;
                 }
 
@@ -2039,7 +2039,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     }
                     var intValue = parseInt(value, 10);
                     if (Number.isNaN(intValue)) {
-                        throw new Error('Invalid int64 value for field ' + field.name);
+                        throw new Error('字段 ' + field.name + ' 的 int64 值无效');
                     }
                     return { int64_value: String(intValue) };
                 }
@@ -2050,7 +2050,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     }
                     var doubleValue = parseFloat(value);
                     if (Number.isNaN(doubleValue)) {
-                        throw new Error('Invalid number for field ' + field.name);
+                        throw new Error('字段 ' + field.name + ' 的数值无效');
                     }
                     return { double_value: doubleValue };
                 }
@@ -2280,7 +2280,7 @@ templ Plugin(page string, initialJob string, lane string) {
 
                 root.innerHTML = '';
                 if (!form || !Array.isArray(form.sections) || form.sections.length === 0) {
-                    root.innerHTML = '<div class="text-muted">No fields provided by descriptor.</div>';
+                    root.innerHTML = '<div class="text-muted">描述符未提供字段。</div>';
                     return;
                 }
 
@@ -2308,7 +2308,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     if (!fields.length) {
                         var noFields = document.createElement('div');
                         noFields.className = 'text-muted';
-                        noFields.textContent = 'No fields in this section.';
+                        noFields.textContent = '此部分没有字段。';
                         sectionBody.appendChild(noFields);
                     }
 
@@ -2469,7 +2469,7 @@ templ Plugin(page string, initialJob string, lane string) {
                                 missing = String(rawValue || '').trim() === '';
                             }
                             if (missing) {
-                                throw new Error('Missing required field: ' + (field.label || field.name));
+                                throw new Error('缺少必填字段: ' + (field.label || field.name));
                             }
                         }
 
@@ -2486,15 +2486,15 @@ templ Plugin(page string, initialJob string, lane string) {
             function renderDescriptorSummary() {
                 var summary = document.getElementById('plugin-descriptor-summary');
                 if (!state.descriptor) {
-                    summary.innerHTML = 'No descriptor loaded.';
+                    summary.innerHTML = '未加载描述符。';
                     return;
                 }
 
                 var descriptor = state.descriptor;
                 var html = '';
                 html += '<div><strong>' + escapeHtml(textOrDash(descriptor.display_name || descriptor.job_type)) + '</strong></div>';
-                html += '<div><small>Job Type: ' + escapeHtml(textOrDash(descriptor.job_type)) + '</small></div>';
-                html += '<div><small>Descriptor Version: ' + escapeHtml(textOrDash(descriptor.descriptor_version)) + '</small></div>';
+                html += '<div><small>任务类型: ' + escapeHtml(textOrDash(descriptor.job_type)) + '</small></div>';
+                html += '<div><small>描述符版本: ' + escapeHtml(textOrDash(descriptor.descriptor_version)) + '</small></div>';
                 if (descriptor.description) {
                     html += '<div class="mt-1">' + escapeHtml(descriptor.description) + '</div>';
                 }
@@ -2545,7 +2545,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     }
                     var parsed = parseInt(raw, 10);
                     if (Number.isNaN(parsed) || parsed < 0) {
-                        throw new Error('Invalid number for ' + id);
+                        throw new Error('数值无效: ' + id);
                     }
                     return parsed;
                 }
@@ -2572,7 +2572,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 var errorRuns = (history && Array.isArray(history.error_runs)) ? history.error_runs : [];
 
                 if (!successRuns.length) {
-                    successBody.innerHTML = '<tr><td colspan="4" class="text-muted">No successful runs</td></tr>';
+                    successBody.innerHTML = '<tr><td colspan="4" class="text-muted">无成功运行</td></tr>';
                 } else {
                     var successRows = '';
                     for (var i = 0; i < successRuns.length; i++) {
@@ -2588,7 +2588,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (!errorRuns.length) {
-                    errorBody.innerHTML = '<tr><td colspan="4" class="text-muted">No error runs</td></tr>';
+                    errorBody.innerHTML = '<tr><td colspan="4" class="text-muted">无错误运行</td></tr>';
                 } else {
                     var errorRows = '';
                     for (var j = 0; j < errorRuns.length; j++) {
@@ -2669,7 +2669,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (!data) {
-                    root.innerHTML = '<div class="text-muted">No results.</div>';
+                    root.innerHTML = '<div class="text-muted">无结果。</div>';
                     return;
                 }
 
@@ -2687,7 +2687,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 var html = '';
-                html += '<div class="mb-2"><strong>Detection Run</strong></div>';
+                html += '<div class="mb-2"><strong>检测运行</strong></div>';
                 if (requestID) {
                     html += '<div><small>request_id: ' + escapeHtml(String(requestID)) + '</small></div>';
                 }
@@ -2700,9 +2700,9 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (!proposals.length) {
-                    html += '<div class="mt-2 text-muted">No proposals returned.</div>';
+                    html += '<div class="mt-2 text-muted">未返回任何 proposal。</div>';
                 } else {
-                    html += '<div class="mt-2 mb-1"><strong>' + escapeHtml(String(proposals.length)) + '</strong> proposal(s)</div>';
+                    html += '<div class="mt-2 mb-1"><strong>' + escapeHtml(String(proposals.length)) + '</strong> 个 proposal</div>';
                     for (var i = 0; i < proposals.length; i++) {
                         var proposal = proposals[i] || {};
                         var pID = proposalID(proposal);
@@ -2723,7 +2723,7 @@ templ Plugin(page string, initialJob string, lane string) {
 
                 if (activities.length) {
                     html += '<hr class="my-2"/>';
-                    html += '<div class="mb-2"><strong>Detection Process</strong></div>';
+                    html += '<div class="mb-2"><strong>检测过程</strong></div>';
                     for (var j = 0; j < activities.length; j++) {
                         var activity = activities[j] || {};
                         var activityStage = activity.stage || '-';
@@ -2753,10 +2753,10 @@ templ Plugin(page string, initialJob string, lane string) {
                 state.loadedJobType = '';
                 state.descriptor = null;
                 state.config = null;
-                document.getElementById('plugin-descriptor-summary').textContent = 'No descriptor loaded.';
-                document.getElementById('plugin-admin-config-form').innerHTML = '<div class="text-muted">No admin form loaded.</div>';
-                document.getElementById('plugin-worker-config-form').innerHTML = '<div class="text-muted">No worker form loaded.</div>';
-                document.getElementById('plugin-config-updated-at').textContent = 'Not loaded';
+                document.getElementById('plugin-descriptor-summary').textContent = '未加载描述符。';
+                document.getElementById('plugin-admin-config-form').innerHTML = '<div class="text-muted">未加载管理表单。</div>';
+                document.getElementById('plugin-worker-config-form').innerHTML = '<div class="text-muted">未加载 worker 表单。</div>';
+                document.getElementById('plugin-config-updated-at').textContent = '未加载';
                 renderRunHistory(null);
                 renderDetectionResult(null);
             }
@@ -2770,7 +2770,7 @@ templ Plugin(page string, initialJob string, lane string) {
                 renderNavigationState();
 
                 var summary = document.getElementById('plugin-descriptor-summary');
-                summary.textContent = 'Loading descriptor and config...';
+                summary.textContent = '正在加载描述符和配置...';
 
                 try {
                     if (forceRefresh) {
@@ -2786,9 +2786,9 @@ templ Plugin(page string, initialJob string, lane string) {
                 } catch (schemaError) {
                     state.loadedJobType = '';
                     state.descriptor = null;
-                    summary.innerHTML = '<span class="text-danger">Failed to load descriptor: ' + escapeHtml(schemaError.message) + '</span>';
-                    document.getElementById('plugin-admin-config-form').innerHTML = '<div class="text-muted">No admin form loaded.</div>';
-                    document.getElementById('plugin-worker-config-form').innerHTML = '<div class="text-muted">No worker form loaded.</div>';
+                    summary.innerHTML = '<span class="text-danger">加载描述符失败: ' + escapeHtml(schemaError.message) + '</span>';
+                    document.getElementById('plugin-admin-config-form').innerHTML = '<div class="text-muted">未加载管理表单。</div>';
+                    document.getElementById('plugin-worker-config-form').innerHTML = '<div class="text-muted">未加载 worker 表单。</div>';
                     throw schemaError;
                 }
 
@@ -2796,7 +2796,7 @@ templ Plugin(page string, initialJob string, lane string) {
                     state.config = await pluginRequest('GET', '/api/plugin/job-types/' + encodePath(jobType) + '/config');
                 } catch (configError) {
                     state.config = null;
-                    notify('Failed to load config: ' + configError.message, 'error');
+                    notify('加载配置失败: ' + configError.message, 'error');
                 }
 
                 renderDescriptorSummary();
@@ -2808,9 +2808,9 @@ templ Plugin(page string, initialJob string, lane string) {
                 }
 
                 if (state.config && state.config.updated_at) {
-                    document.getElementById('plugin-config-updated-at').textContent = 'Updated: ' + (parseTime(state.config.updated_at) || state.config.updated_at);
+                    document.getElementById('plugin-config-updated-at').textContent = '已更新: ' + (parseTime(state.config.updated_at) || state.config.updated_at);
                 } else {
-                    document.getElementById('plugin-config-updated-at').textContent = 'Not saved yet';
+                    document.getElementById('plugin-config-updated-at').textContent = '尚未保存';
                 }
                 state.loadedJobType = jobType;
 
@@ -2833,18 +2833,18 @@ templ Plugin(page string, initialJob string, lane string) {
                     renderRunHistory(history);
                 } catch (e) {
                     renderRunHistory(null);
-                    notify('Failed to load run history: ' + e.message, 'error');
+                    notify('加载运行历史失败: ' + e.message, 'error');
                 }
             }
 
             async function saveConfig() {
                 var jobType = state.selectedJobType || getSelectedJobType();
                 if (!jobType) {
-                    notify('Select a job type first.', 'error');
+                    notify('请先选择一个任务类型。', 'error');
                     return;
                 }
                 if (!state.descriptor) {
-                    notify('Load descriptor before saving config.', 'error');
+                    notify('保存配置前请先加载描述符。', 'error');
                     return;
                 }
 
@@ -2864,10 +2864,10 @@ templ Plugin(page string, initialJob string, lane string) {
 
                 try {
                     state.config = await pluginRequest('PUT', '/api/plugin/job-types/' + encodePath(jobType) + '/config', payload);
-                    document.getElementById('plugin-config-updated-at').textContent = 'Updated: ' + (parseTime(state.config.updated_at) || state.config.updated_at || 'just now');
-                    notify('Config saved for ' + jobType, 'success');
+                    document.getElementById('plugin-config-updated-at').textContent = '已更新: ' + (parseTime(state.config.updated_at) || state.config.updated_at || '刚刚');
+                    notify('已为 ' + jobType + ' 保存配置', 'success');
                 } catch (e) {
-                    notify('Failed to save config: ' + e.message, 'error');
+                    notify('保存配置失败: ' + e.message, 'error');
                 }
             }
 
@@ -2886,7 +2886,7 @@ templ Plugin(page string, initialJob string, lane string) {
             async function runDetection() {
                 var jobType = state.selectedJobType || getSelectedJobType();
                 if (!jobType) {
-                    notify('Select a job type first.', 'error');
+                    notify('请先选择一个任务类型。', 'error');
                     return;
                 }
 
@@ -2901,21 +2901,21 @@ templ Plugin(page string, initialJob string, lane string) {
                         state.lastDetectionByJobType[jobType] = e.responseData;
                         renderDetectionResult(e.responseData);
                     }
-                    notify('Detection failed: ' + e.message, 'error');
+                    notify('检测失败: ' + e.message, 'error');
                     return;
                 }
 
                 try {
                     await refreshJobsAndActivities();
                 } catch (refreshErr) {
-                    notify('Detection succeeded, but monitoring refresh failed: ' + refreshErr.message, 'error');
+                    notify('检测成功,但监控刷新失败: ' + refreshErr.message, 'error');
                 }
             }
 
             async function runWorkflow() {
                 var jobType = state.selectedJobType || getSelectedJobType();
                 if (!jobType) {
-                    notify('Select a job type first.', 'error');
+                    notify('请先选择一个任务类型。', 'error');
                     return;
                 }
 
@@ -2924,17 +2924,17 @@ templ Plugin(page string, initialJob string, lane string) {
                         max_results: getMaxResults(),
                     });
                     var resultRoot = document.getElementById('plugin-detection-results');
-                    resultRoot.innerHTML = '<div class="mb-2"><strong>Workflow completed</strong></div>' +
-                        '<div>Detected: <strong>' + escapeHtml(String(data.detected_count || 0)) + '</strong></div>' +
-                        '<div>Ready to Execute: <strong>' + escapeHtml(String(data.ready_to_execute_count || 0)) + '</strong></div>' +
-                        '<div>Skipped (Already Active): <strong>' + escapeHtml(String(data.skipped_active_count || 0)) + '</strong></div>' +
-                        '<div>Executed: <strong>' + escapeHtml(String(data.executed_count || 0)) + '</strong></div>' +
-                        '<div class="text-success">Success: ' + escapeHtml(String(data.success_count || 0)) + '</div>' +
-                        '<div class="text-danger">Errors: ' + escapeHtml(String(data.error_count || 0)) + '</div>';
+                    resultRoot.innerHTML = '<div class="mb-2"><strong>工作流已完成</strong></div>' +
+                        '<div>已检测: <strong>' + escapeHtml(String(data.detected_count || 0)) + '</strong></div>' +
+                        '<div>可执行: <strong>' + escapeHtml(String(data.ready_to_execute_count || 0)) + '</strong></div>' +
+                        '<div>已跳过(已活跃): <strong>' + escapeHtml(String(data.skipped_active_count || 0)) + '</strong></div>' +
+                        '<div>已执行: <strong>' + escapeHtml(String(data.executed_count || 0)) + '</strong></div>' +
+                        '<div class="text-success">成功: ' + escapeHtml(String(data.success_count || 0)) + '</div>' +
+                        '<div class="text-danger">错误: ' + escapeHtml(String(data.error_count || 0)) + '</div>';
                     await loadRunHistory(jobType);
                     await refreshJobsAndActivities();
                 } catch (e) {
-                    notify('Workflow run failed: ' + e.message, 'error');
+                    notify('工作流运行失败: ' + e.message, 'error');
                 }
             }
 
@@ -3001,7 +3001,7 @@ templ Plugin(page string, initialJob string, lane string) {
 
                     await refreshJobsAndActivities();
                 } catch (e) {
-                    notify('Refresh failed: ' + e.message, 'error');
+                    notify('刷新失败: ' + e.message, 'error');
                 }
             }
 
@@ -3032,14 +3032,14 @@ templ Plugin(page string, initialJob string, lane string) {
                 document.getElementById('plugin-refresh-schema-btn').addEventListener('click', async function() {
                     var jobType = getSelectedJobType();
                     if (!jobType) {
-                        notify('Select a job type first.', 'error');
+                        notify('请先选择一个任务类型。', 'error');
                         return;
                     }
                     try {
                         await loadDescriptorAndConfig(jobType, true);
-                        notify('Schema refreshed for ' + jobType, 'success');
+                        notify('已为 ' + jobType + ' 刷新 schema', 'success');
                     } catch (e) {
-                        notify('Schema refresh failed: ' + e.message, 'error');
+                        notify('刷新 schema 失败: ' + e.message, 'error');
                     }
                 });
 

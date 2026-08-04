@@ -10,23 +10,23 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div>
             <h1 class="h2">
-                <i class="fas fa-th-large me-2"></i>EC Volume Details
+                <i class="fas fa-th-large me-2"></i>EC 卷详情
             </h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href={ dash.PUrl(ctx, "/admin") } class="text-decoration-none">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href={ dash.PUrl(ctx, "/storage/ec-shards") } class="text-decoration-none">EC Volumes</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Volume {fmt.Sprintf("%d", data.VolumeID)}</li>
+                    <li class="breadcrumb-item"><a href={ dash.PUrl(ctx, "/admin") } class="text-decoration-none">仪表盘</a></li>
+                    <li class="breadcrumb-item"><a href={ dash.PUrl(ctx, "/storage/ec-shards") } class="text-decoration-none">EC 卷</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">卷 {fmt.Sprintf("%d", data.VolumeID)}</li>
                 </ol>
             </nav>
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary" onclick="history.back()">
-                    <i class="fas fa-arrow-left me-1"></i>Back
+                    <i class="fas fa-arrow-left me-1"></i>返回
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-primary" onclick="window.location.reload()">
-                    <i class="fas fa-refresh me-1"></i>Refresh
+                    <i class="fas fa-refresh me-1"></i>刷新
                 </button>
             </div>
         </div>
@@ -38,42 +38,42 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-info-circle me-2"></i>Volume Information
+                        <i class="fas fa-info-circle me-2"></i>卷信息
                     </h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-borderless">
                         <tr>
-                            <td><strong>Volume ID:</strong></td>
+                            <td><strong>卷 ID:</strong></td>
                             <td>{fmt.Sprintf("%d", data.VolumeID)}</td>
                         </tr>
                         <tr>
-                            <td><strong>Collection:</strong></td>
+                            <td><strong>集合:</strong></td>
                             <td>
                                 if data.Collection != "" {
                                     <span class="badge bg-info">{data.Collection}</span>
                                 } else {
-                                    <span class="text-muted">default</span>
+                                    <span class="text-muted">默认</span>
                                 }
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>Status:</strong></td>
+                            <td><strong>状态:</strong></td>
                             <td>
                                 if data.IsComplete {
                                     <span class="badge bg-success">
-                                        <i class="fas fa-check me-1"></i>Complete ({data.TotalShards}/{fmt.Sprintf("%d", erasure_coding.TotalShardsCount)} shards)
+                                        <i class="fas fa-check me-1"></i>完整 ({data.TotalShards}/{fmt.Sprintf("%d", erasure_coding.TotalShardsCount)} 分片)
                                     </span>
                                 } else {
                                     <span class="badge bg-warning">
-                                        <i class="fas fa-exclamation-triangle me-1"></i>Incomplete ({data.TotalShards}/{fmt.Sprintf("%d", erasure_coding.TotalShardsCount)} shards)
+                                        <i class="fas fa-exclamation-triangle me-1"></i>不完整 ({data.TotalShards}/{fmt.Sprintf("%d", erasure_coding.TotalShardsCount)} 分片)
                                     </span>
                                 }
                             </td>
                         </tr>
                         if !data.IsComplete {
                             <tr>
-                                <td><strong>Missing Shards:</strong></td>
+                                <td><strong>缺失分片:</strong></td>
                                 <td>
                                     for i, shardID := range data.MissingShards {
                                         if i > 0 { 
@@ -85,10 +85,10 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                             </tr>
                         }
                         <tr>
-                            <td><strong>Data Centers:</strong></td>
+                            <td><strong>数据中心:</strong></td>
                             <td>
                                 for i, dc := range data.DataCenters {
-                                    if i > 0 { 
+                                    if i > 0 {
                                         <span>, </span>
                                     }
                                     <span class="badge bg-primary">{dc}</span>
@@ -96,13 +96,13 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>Servers:</strong></td>
+                            <td><strong>服务器:</strong></td>
                             <td>
-                                <span class="text-muted">{fmt.Sprintf("%d servers", len(data.Servers))}</span>
+                                <span class="text-muted">{fmt.Sprintf("%d 台服务器", len(data.Servers))}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>Last Updated:</strong></td>
+                            <td><strong>最后更新:</strong></td>
                             <td>
                                 <span class="text-muted">{data.LastUpdated.Format("2006-01-02 15:04:05")}</span>
                             </td>
@@ -116,7 +116,7 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-chart-pie me-2"></i>Shard Distribution
+                        <i class="fas fa-chart-pie me-2"></i>分片分布
                     </h5>
                 </div>
                 <div class="card-body">
@@ -124,38 +124,38 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                         <div class="col-4">
                             <div class="border rounded p-3">
                                 <h3 class="text-primary mb-1">{fmt.Sprintf("%d", data.TotalShards)}</h3>
-                                <small class="text-muted">Total Shards</small>
+                                <small class="text-muted">分片总数</small>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="border rounded p-3">
                                 <h3 class="text-success mb-1">{fmt.Sprintf("%d", len(data.DataCenters))}</h3>
-                                <small class="text-muted">Data Centers</small>
+                                <small class="text-muted">数据中心</small>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="border rounded p-3">
                                 <h3 class="text-info mb-1">{fmt.Sprintf("%d", len(data.Servers))}</h3>
-                                <small class="text-muted">Servers</small>
+                                <small class="text-muted">服务器</small>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Shard Distribution Visualization -->
                     <div class="mt-3">
-                        <h6>Present Shards:</h6>
+                        <h6>已存在分片:</h6>
                         <div class="d-flex flex-wrap gap-1">
                             for _, shard := range data.Shards {
                                 @renderEcShardBadge(shard.ShardID, false)
                             }
                         </div>
                         <div class="small text-muted mt-2">
-                            <span class="badge bg-primary me-1">Data</span>
-                            <span class="badge bg-warning text-dark me-2">Parity</span>
-                            Data shards are blue, parity shards are yellow.
+                            <span class="badge bg-primary me-1">数据</span>
+                            <span class="badge bg-warning text-dark me-2">校验</span>
+                            数据分片为蓝色,校验分片为黄色。
                         </div>
                         if len(data.MissingShards) > 0 {
-                            <h6 class="mt-2">Missing Shards:</h6>
+                            <h6 class="mt-2">缺失分片:</h6>
                             <div class="d-flex flex-wrap gap-1">
                                 for _, shardID := range data.MissingShards {
                                     @renderEcShardBadge(uint32(shardID), true)
@@ -172,7 +172,7 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
     <div class="card">
         <div class="card-header">
             <h5 class="card-title mb-0">
-                <i class="fas fa-list me-2"></i>Shard Details
+                <i class="fas fa-list me-2"></i>分片详情
             </h5>
         </div>
         <div class="card-body">
@@ -183,7 +183,7 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                             <tr>
                                 <th>
                                     <a href="#" onclick="sortBy('shard_id')" class="text-dark text-decoration-none">
-                                        Shard ID
+                                        分片 ID
                                         if data.SortBy == "shard_id" {
                                             if data.SortOrder == "asc" {
                                                 <i class="fas fa-sort-up ms-1"></i>
@@ -197,7 +197,7 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                                 </th>
                                 <th>
                                     <a href="#" onclick="sortBy('server')" class="text-dark text-decoration-none">
-                                        Server
+                                        服务器
                                         if data.SortBy == "server" {
                                             if data.SortOrder == "asc" {
                                                 <i class="fas fa-sort-up ms-1"></i>
@@ -211,7 +211,7 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                                 </th>
                                 <th>
                                     <a href="#" onclick="sortBy('data_center')" class="text-dark text-decoration-none">
-                                        Data Center
+                                        数据中心
                                         if data.SortBy == "data_center" {
                                             if data.SortOrder == "asc" {
                                                 <i class="fas fa-sort-up ms-1"></i>
@@ -225,7 +225,7 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                                 </th>
                                 <th>
                                     <a href="#" onclick="sortBy('rack')" class="text-dark text-decoration-none">
-                                        Rack
+                                        机架
                                         if data.SortBy == "rack" {
                                             if data.SortOrder == "asc" {
                                                 <i class="fas fa-sort-up ms-1"></i>
@@ -237,9 +237,9 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                                         }
                                     </a>
                                 </th>
-                                <th class="text-dark">Disk Type</th>
-                                <th class="text-dark">Shard Size</th>
-                                <th class="text-dark">Actions</th>
+                                <th class="text-dark">磁盘类型</th>
+                                <th class="text-dark">分片大小</th>
+                                <th class="text-dark">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -267,7 +267,7 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
                                         </td>
                                         <td>
                                             <a href={ templ.SafeURL(fmt.Sprintf("//%s/ui/index.html", shard.Server)) } target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-external-link-alt me-1"></i>Volume Server
+                                                <i class="fas fa-external-link-alt me-1"></i>volume 服务器
                                             </a>
                                         </td>
                                     </tr>
@@ -278,8 +278,8 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
             } else {
                 <div class="text-center py-4">
                     <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
-                    <h5>No EC shards found</h5>
-                    <p class="text-muted">This volume may not be EC encoded yet.</p>
+                    <h5>未找到 EC 分片</h5>
+                    <p class="text-muted">该卷可能尚未进行 EC 编码。</p>
                 </div>
             }
         </div>
@@ -307,15 +307,15 @@ templ EcVolumeDetails(data dash.EcVolumeDetailsData) {
 templ renderEcShardBadge(shardID uint32, missing bool) {
 	if shardID < erasure_coding.DataShardsCount {
 		if missing {
-			<span class="badge bg-primary opacity-50 me-1 mb-1" title={ fmt.Sprintf("Missing data shard %d", shardID) }>{ fmt.Sprintf("D%02d", shardID) }</span>
+			<span class="badge bg-primary opacity-50 me-1 mb-1" title={ fmt.Sprintf("缺失数据分片 %d", shardID) }>{ fmt.Sprintf("D%02d", shardID) }</span>
 		} else {
-			<span class="badge bg-primary me-1 mb-1" title={ fmt.Sprintf("Data shard %d", shardID) }>{ fmt.Sprintf("D%02d", shardID) }</span>
+			<span class="badge bg-primary me-1 mb-1" title={ fmt.Sprintf("数据分片 %d", shardID) }>{ fmt.Sprintf("D%02d", shardID) }</span>
 		}
 	} else {
 		if missing {
-			<span class="badge bg-warning text-dark opacity-50 me-1 mb-1" title={ fmt.Sprintf("Missing parity shard %d", shardID) }>{ fmt.Sprintf("P%02d", shardID) }</span>
+			<span class="badge bg-warning text-dark opacity-50 me-1 mb-1" title={ fmt.Sprintf("缺失校验分片 %d", shardID) }>{ fmt.Sprintf("P%02d", shardID) }</span>
 		} else {
-			<span class="badge bg-warning text-dark me-1 mb-1" title={ fmt.Sprintf("Parity shard %d", shardID) }>{ fmt.Sprintf("P%02d", shardID) }</span>
+			<span class="badge bg-warning text-dark me-1 mb-1" title={ fmt.Sprintf("校验分片 %d", shardID) }>{ fmt.Sprintf("P%02d", shardID) }</span>
 		}
 	}
 }

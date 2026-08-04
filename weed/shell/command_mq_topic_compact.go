@@ -26,9 +26,9 @@ func (c *commandMqTopicCompact) Name() string {
 }
 
 func (c *commandMqTopicCompact) Help() string {
-	return `compact the topic storage into parquet format
+	return `将 topic 存储 compact 为 parquet 格式
 
-	Example:
+	示例：
 		mq.topic.compact -namespace <namespace> -topic <topic_name> -timeAgo <time_ago>
 
 `

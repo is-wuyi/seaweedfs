@@ -11,12 +11,12 @@ import (
 templ S3TablesTables(data dash.S3TablesTablesData) {
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">
-			<i class="fas fa-table me-2"></i>S3 Tables
+			<i class="fas fa-table me-2"></i>S3 Tables 表
 		</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group me-2">
 				<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createS3TablesTableModal">
-					<i class="fas fa-plus me-1"></i>Create Table
+					<i class="fas fa-plus me-1"></i>创建表
 				</button>
 			</div>
 		</div>
@@ -25,17 +25,17 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 		{{ bucketName, parseErr := s3tables.ParseBucketNameFromARN(data.BucketARN) }}
 		if parseErr == nil {
 			<a href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/s3tables/buckets/%s/namespaces", url.PathEscape(bucketName))) } class="btn btn-sm btn-outline-secondary">
-				<i class="fas fa-arrow-left me-1"></i>Back to Namespaces
+				<i class="fas fa-arrow-left me-1"></i>返回命名空间
 			</a>
 		} else {
-			<button type="button" class="btn btn-sm btn-outline-secondary" disabled title="Invalid bucket ARN">
-				<i class="fas fa-arrow-left me-1"></i>Back to Namespaces
+			<button type="button" class="btn btn-sm btn-outline-secondary" disabled title="无效的 bucket ARN">
+				<i class="fas fa-arrow-left me-1"></i>返回命名空间
 			</button>
 		}
 		<span class="text-muted ms-2">Bucket ARN: { data.BucketARN }</span>
-		<span class="text-muted ms-2">Namespace: { data.Namespace }</span>
+		<span class="text-muted ms-2">命名空间: { data.Namespace }</span>
 		if parseErr != nil {
-			<span class="text-danger ms-2">Invalid bucket ARN</span>
+			<span class="text-danger ms-2">无效的 bucket ARN</span>
 		}
 	</div>
 	<div id="s3tables-tables-content" data-bucket-arn={ data.BucketARN } data-namespace={ data.Namespace }>
@@ -46,7 +46,7 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									Total Tables
+									表总数
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.TotalTables) }
@@ -65,7 +65,7 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-									Last Updated
+									最后更新
 								</div>
 								<div class="h6 mb-0 font-weight-bold text-gray-800">
 									{ data.LastUpdated.Format("15:04") }
@@ -84,21 +84,21 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 				<div class="card shadow mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary">
-							<i class="fas fa-table me-2"></i>Tables
-						</h6>
+						<i class="fas fa-table me-2"></i>表
+					</h6>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-hover" width="100%" cellspacing="0" id="s3tablesTablesTable">
 								<thead>
 									<tr>
-										<th>Name</th>
-										<th>Table ARN</th>
-										<th>Created</th>
-										<th>Modified</th>
-										<th>S3 Location</th>
-										<th>Metadata</th>
-										<th>Actions</th>
+										<th>名称</th>
+									<th>Table ARN</th>
+									<th>创建时间</th>
+									<th>修改时间</th>
+									<th>S3 位置</th>
+									<th>元数据</th>
+									<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -126,23 +126,23 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 											<td>
 												<div class="btn-group btn-group-sm" role="group">
 													if parseErr == nil {
-														<a class="btn btn-outline-primary btn-sm" href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/s3tables/buckets/%s/namespaces/%s/tables/%s", url.PathEscape(bucketName), url.PathEscape(data.Namespace), url.PathEscape(tableName))) } title="View Iceberg Details">
-															<i class="fas fa-eye"></i>
-														</a>
-													} else {
-														<button type="button" class="btn btn-outline-primary btn-sm" disabled title="Invalid bucket ARN">
-															<i class="fas fa-eye"></i>
-														</button>
-													}
-													<button type="button" class="btn btn-outline-success btn-sm s3tables-tags-btn" data-resource-arn={ table.TableARN } title="Tags">
-														<i class="fas fa-tags"></i>
+														<a class="btn btn-outline-primary btn-sm" href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/s3tables/buckets/%s/namespaces/%s/tables/%s", url.PathEscape(bucketName), url.PathEscape(data.Namespace), url.PathEscape(tableName))) } title="查看 Iceberg 详情">
+														<i class="fas fa-eye"></i>
+													</a>
+												} else {
+													<button type="button" class="btn btn-outline-primary btn-sm" disabled title="无效的 bucket ARN">
+														<i class="fas fa-eye"></i>
 													</button>
-													<button type="button" class="btn btn-outline-info btn-sm s3tables-table-policy-btn" data-table-arn={ table.TableARN } data-table-name={ tableName } title="Table Policy">
-														<i class="fas fa-shield-alt"></i>
-													</button>
-													<button type="button" class="btn btn-outline-danger btn-sm s3tables-delete-table-btn" data-table-name={ tableName } title="Delete">
-														<i class="fas fa-trash"></i>
-													</button>
+												}
+												<button type="button" class="btn btn-outline-success btn-sm s3tables-tags-btn" data-resource-arn={ table.TableARN } title="标签">
+													<i class="fas fa-tags"></i>
+												</button>
+												<button type="button" class="btn btn-outline-info btn-sm s3tables-table-policy-btn" data-table-arn={ table.TableARN } data-table-name={ tableName } title="表策略">
+													<i class="fas fa-shield-alt"></i>
+												</button>
+												<button type="button" class="btn btn-outline-danger btn-sm s3tables-delete-table-btn" data-table-name={ tableName } title="删除">
+													<i class="fas fa-trash"></i>
+												</button>
 												</div>
 											</td>
 										</tr>
@@ -152,11 +152,11 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 											<td colspan="7" class="text-center text-muted py-4">
 												<i class="fas fa-table fa-3x mb-3 text-muted"></i>
 												<div>
-													<h5>No tables found</h5>
-													<p>Create your first table to start storing data.</p>
-													<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createS3TablesTableModal">
-														<i class="fas fa-plus me-1"></i>Create Table
-													</button>
+													<h5>未找到表</h5>
+												<p>创建你的第一个表来开始存储数据。</p>
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createS3TablesTableModal">
+													<i class="fas fa-plus me-1"></i>创建表
+												</button>
 												</div>
 											</td>
 										</tr>
@@ -174,35 +174,35 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="createS3TablesTableModalLabel">
-						<i class="fas fa-plus me-2"></i>Create Table
-					</h5>
+					<i class="fas fa-plus me-2"></i>创建表
+				</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<form id="createS3TablesTableForm">
 					<div class="modal-body">
 						<div class="mb-3">
-							<label for="s3tablesTableName" class="form-label">Table Name</label>
+							<label for="s3tablesTableName" class="form-label">表名称</label>
 							<input type="text" class="form-control" id="s3tablesTableName" name="name" required/>
 						</div>
 						<div class="mb-3">
-							<label for="s3tablesTableFormat" class="form-label">Format</label>
+							<label for="s3tablesTableFormat" class="form-label">格式</label>
 							<select class="form-select" id="s3tablesTableFormat" name="format">
 								<option value="ICEBERG" selected>ICEBERG</option>
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="s3tablesTableMetadata" class="form-label">Metadata JSON (optional)</label>
+							<label for="s3tablesTableMetadata" class="form-label">元数据 JSON(可选)</label>
 							<textarea class="form-control" id="s3tablesTableMetadata" name="metadata" rows="6" placeholder="{ }"></textarea>
 						</div>
 						<div class="mb-3">
-							<label for="s3tablesTableTags" class="form-label">Tags</label>
+							<label for="s3tablesTableTags" class="form-label">标签</label>
 							<input type="text" class="form-control" id="s3tablesTableTags" name="tags" placeholder="key1=value1,key2=value2"/>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">
-							<i class="fas fa-plus me-1"></i>Create
+							<i class="fas fa-plus me-1"></i>创建
 						</button>
 					</div>
 				</form>
@@ -214,21 +214,21 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="deleteS3TablesTableModalLabel">
-						<i class="fas fa-exclamation-triangle me-2 text-warning"></i>Delete Table
-					</h5>
+					<i class="fas fa-exclamation-triangle me-2 text-warning"></i>删除表
+				</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>Are you sure you want to delete the table <strong id="deleteS3TablesTableName"></strong>?</p>
+					<p>确定要删除表 <strong id="deleteS3TablesTableName"></strong> 吗?</p>
 					<div class="mb-3">
-						<label for="deleteS3TablesTableVersion" class="form-label">Version Token (optional)</label>
+						<label for="deleteS3TablesTableVersion" class="form-label">版本令牌(可选)</label>
 						<input type="text" class="form-control" id="deleteS3TablesTableVersion" placeholder="Version token"/>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 					<button type="button" class="btn btn-danger" onclick="deleteS3TablesTable()">
-						<i class="fas fa-trash me-1"></i>Delete
+						<i class="fas fa-trash me-1"></i>删除
 					</button>
 				</div>
 			</div>
@@ -239,8 +239,8 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="s3tablesTablePolicyModalLabel">
-						<i class="fas fa-shield-alt me-2"></i>Table Policy
-					</h5>
+					<i class="fas fa-shield-alt me-2"></i>表策略
+				</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<form id="s3tablesTablePolicyForm">
@@ -249,17 +249,17 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 						<input type="hidden" id="s3tablesTablePolicyNamespace" name="namespace"/>
 						<input type="hidden" id="s3tablesTablePolicyName" name="name"/>
 						<div class="mb-3">
-							<label for="s3tablesTablePolicyText" class="form-label">Policy JSON</label>
+							<label for="s3tablesTablePolicyText" class="form-label">策略 JSON</label>
 							<textarea class="form-control" id="s3tablesTablePolicyText" name="policy" rows="12" placeholder="{ }"></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
 						<button type="button" class="btn btn-outline-danger" onclick="deleteS3TablesTablePolicy()">
-							<i class="fas fa-trash me-1"></i>Delete Policy
+							<i class="fas fa-trash me-1"></i>删除策略
 						</button>
 						<button type="submit" class="btn btn-primary">
-							<i class="fas fa-save me-1"></i>Save Policy
+							<i class="fas fa-save me-1"></i>保存策略
 						</button>
 					</div>
 				</form>
@@ -271,33 +271,33 @@ templ S3TablesTables(data dash.S3TablesTablesData) {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="s3tablesTagsModalLabel">
-						<i class="fas fa-tags me-2"></i>Resource Tags
-					</h5>
+					<i class="fas fa-tags me-2"></i>资源标签
+				</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<form id="s3tablesTagsForm">
 					<div class="modal-body">
 						<input type="hidden" id="s3tablesTagsResourceArn" name="resource_arn"/>
 						<div class="mb-3">
-							<label class="form-label">Existing Tags</label>
-							<pre class="bg-light p-3 border rounded" id="s3tablesTagsList">Loading...</pre>
+							<label class="form-label">现有标签</label>
+							<pre class="bg-light p-3 border rounded" id="s3tablesTagsList">加载中...</pre>
 						</div>
 						<div class="mb-3">
-							<label for="s3tablesTagsInput" class="form-label">Add or Update Tags</label>
+							<label for="s3tablesTagsInput" class="form-label">添加或更新标签</label>
 							<input type="text" class="form-control" id="s3tablesTagsInput" placeholder="key1=value1,key2=value2"/>
 						</div>
 						<div class="mb-3">
-							<label for="s3tablesTagsDeleteInput" class="form-label">Remove Tag Keys</label>
+							<label for="s3tablesTagsDeleteInput" class="form-label">移除标签键</label>
 							<input type="text" class="form-control" id="s3tablesTagsDeleteInput" placeholder="key1,key2"/>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
 						<button type="button" class="btn btn-outline-danger" onclick="deleteS3TablesTags()">
-							<i class="fas fa-trash me-1"></i>Remove Tags
+							<i class="fas fa-trash me-1"></i>移除标签
 						</button>
 						<button type="submit" class="btn btn-primary">
-							<i class="fas fa-save me-1"></i>Update Tags
+							<i class="fas fa-save me-1"></i>更新标签
 						</button>
 					</div>
 				</form>

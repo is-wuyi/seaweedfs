@@ -33,33 +33,33 @@ func (c *commandVolumeTierUpload) Name() string {
 }
 
 func (c *commandVolumeTierUpload) Help() string {
-	return `upload the dat file of a volume to a remote tier
+	return `将某个卷的 dat 文件上传到远程分层
 
 	volume.tier.upload [-collection=""] [-fullPercent=95] [-quietFor=1h]
 	volume.tier.upload [-collection=""] -volumeId=<volume_id> -dest=<storage_backend> [-keepLocalDatFile]
 
-	e.g.:
+	例如:
 	volume.tier.upload -volumeId=7 -dest=s3
 	volume.tier.upload -volumeId=7 -dest=s3.default
 
-	The <storage_backend> is defined in master.toml.
-	For example, "s3.default" in [storage.backend.s3.default]
+	<storage_backend> 在 master.toml 中定义。
+	例如,[storage.backend.s3.default] 中的 "s3.default"
 
-	This command will move the dat file of a volume to a remote tier.
+	此命令会将某个卷的 dat 文件迁移到远程分层。
 
-	SeaweedFS enables scalable and fast local access to lots of files, 
-	and the cloud storage is slower by cost efficient. How to combine them together?
+	SeaweedFS 提供了对大量文件可扩展且快速的本地访问,
+	而云存储速度较慢但成本更低。如何将两者结合?
 
-	Usually the data follows 80/20 rule: only 20% of data is frequently accessed.
-	We can offload the old volumes to the cloud.
+	通常数据遵循 80/20 法则:只有 20% 的数据会被频繁访问。
+	我们可以将旧卷卸载到云端。
 
-	With this, SeaweedFS can be both fast and scalable, and infinite storage space.
-	Just add more local SeaweedFS volume servers to increase the throughput.
+	这样,SeaweedFS 既能保持快速和可扩展,又能拥有无限的存储空间。
+	只需增加更多本地 SeaweedFS volume 服务器即可提升吞吐量。
 
-	The index file is still local, and the same O(1) disk read is applied to the remote file.
+	索引文件仍然保留在本地,对远程文件同样采用 O(1) 的磁盘读取。
 
-	Each replica keeps its own local index pointing at the same remote object,
-	so the volume keeps its replica count for reads after tiering.
+	每个副本保留各自的本地索引,指向同一个远程对象,
+	因此分层后卷在读取时仍能保持其副本数。
 
 `
 }

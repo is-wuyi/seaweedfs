@@ -69,20 +69,16 @@ func init() {
 
 var cmdFilerBackup = &Command{
 	UsageLine: "filer.backup -filer=<filerHost>:<filerPort> ",
-	Short:     "resume-able continuously replicate files from a SeaweedFS cluster to another location defined in replication.toml",
-	Long: `resume-able continuously replicate files from a SeaweedFS cluster to another location defined in replication.toml
+	Short:     "可断点续传地持续将文件从 SeaweedFS 集群复制到 replication.toml 中定义的另一位置",
+	Long: `可断点续传地持续将文件从 SeaweedFS 集群复制到 replication.toml 中定义的另一位置
 
-	filer.backup listens on filer notifications. If any file is updated, it will fetch the updated content,
-	and write to the destination. This is to replace filer.replicate command since additional message queue is not needed.
+	filer.backup 监听 filer 通知。如果有任何文件被更新,它会获取更新后的内容并写入目的地。这用于替代 filer.replicate 命令,因为不需要额外的消息队列。
 
-	If restarted and "-timeAgo" is not set, the synchronization will resume from the previous checkpoints, persisted every minute.
-	A fresh sync will start from the earliest metadata logs.
+	如果重启且未设置 "-timeAgo",同步将从之前的检查点恢复,检查点每分钟持久化一次。
+	全新的同步会从最早的元数据日志开始。
 
-	On a fresh sync the metadata event log only re-materializes files that still exist on the source; entries that were
-	created and later deleted are replayed as a create-then-delete pair and therefore never appear on the destination.
-	Pass "-initialSnapshot" to walk the live filer tree first and seed the destination with the current tree, then
-	subscribe from the walk-start timestamp. This also re-seeds a reinitialized destination: it overwrites the saved
-	checkpoint and re-walks on every start, so remove it once the backup is caught up.
+	在全新同步时,元数据事件日志只会重新物化源上仍然存在的文件;先创建后被删除的条目会以"先创建后删除"的形式重放,因此永远不会出现在目的地。
+	传入 "-initialSnapshot" 可先遍历活跃的 filer 树,用当前树填充目的地,然后从遍历开始的时间戳订阅。这也会重新填充已重新初始化的目的地:它会覆盖已保存的检查点并在每次启动时重新遍历,因此一旦备份追平就应移除该参数。
 
 `,
 }

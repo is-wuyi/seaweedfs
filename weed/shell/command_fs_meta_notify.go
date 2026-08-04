@@ -22,11 +22,11 @@ func (c *commandFsMetaNotify) Name() string {
 }
 
 func (c *commandFsMetaNotify) Help() string {
-	return `recursively send directory and file meta data to notification message queue
+	return `递归发送目录和文件的元数据到通知消息队列
 
-	fs.meta.notify	# send meta data from current directory to notification message queue
+	fs.meta.notify	# 从当前目录发送元数据到通知消息队列
 
-	The message queue will use it to trigger replication from this filer.
+	消息队列将使用它来触发从此 filer 的副本同步。
 
 `
 }

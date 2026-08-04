@@ -15,7 +15,7 @@
                 $('.inlinesparkline-' + period).sparkline('html', {
                     type: 'line',
                     barColor: 'red',
-                    tooltipSuffix: ' request per ' + period,
+                    tooltipSuffix: ' 请求 / ' + period,
                 });
             }
         });
@@ -39,15 +39,15 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <h2>Disk Stats</h2>
+                <h2>磁盘统计</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Path</th>
-                            <th>Disk</th>
-                            <th>Total</th>
-                            <th>Free</th>
-                            <th>Usage</th>
+                            <th>路径</th>
+                            <th>磁盘</th>
+                            <th>总计</th>
+                            <th>空闲</th>
+                            <th>使用率</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,32 +65,32 @@
             </div>
 
             <div class="col-sm-6">
-                <h2>System Stats</h2>
+                <h2>系统统计</h2>
                 <table class="table table-condensed table-striped">
                     <tr>
-                        <th>Masters</th>
+                        <th>master</th>
                         <td>{{.Masters}}</td>
                     </tr>
                     <tr>
-                        <th>Weekly # ReadRequests</th>
+                        <th>每周读请求数</th>
                         <td><span class="inlinesparkline-day">{{ .Counters.ReadRequests.WeekCounter.ToList | join
                                 }}</span>
                         </td>
                     </tr>
                     <tr>
-                        <th>Daily # ReadRequests</th>
+                        <th>每日读请求数</th>
                         <td><span class="inlinesparkline-hour">{{ .Counters.ReadRequests.DayCounter.ToList | join
                                 }}</span>
                         </td>
                     </tr>
                     <tr>
-                        <th>Hourly # ReadRequests</th>
+                        <th>每小时读请求数</th>
                         <td><span class="inlinesparkline-minute">{{ .Counters.ReadRequests.HourCounter.ToList | join
                                 }}</span>
                         </td>
                     </tr>
                     <tr>
-                        <th>Last Minute # ReadRequests</th>
+                        <th>最近一分钟读请求数</th>
                         <td><span class="inlinesparkline-second">{{ .Counters.ReadRequests.MinuteCounter.ToList | join
                                 }}</span>
                         </td>
@@ -106,19 +106,19 @@
         </div>
 
         <div class="row">
-            <h2>Volumes</h2>
+            <h2>卷</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Collection</th>
-                        <th>Disk</th>
-                        <th>Data Size</th>
-                        <th>Files</th>
-                        <th>Trash</th>
+                        <th>ID</th>
+                        <th>集合</th>
+                        <th>磁盘</th>
+                        <th>数据大小</th>
+                        <th>文件数</th>
+                        <th>回收站</th>
                         <th>TTL</th>
-                        <th>ReadOnly</th>
-                        <th>Version</th>
+                        <th>只读</th>
+                        <th>版本</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -141,16 +141,16 @@
 
         {{ if isNotEmpty .RemoteVolumes }}
         <div class="row">
-            <h2>Remote Volumes</h2>
+            <h2>远端卷</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Collection</th>
-                        <th>Size</th>
-                        <th>Files</th>
-                        <th>Trash</th>
-                        <th>Remote</th>
+                        <th>ID</th>
+                        <th>集合</th>
+                        <th>大小</th>
+                        <th>文件数</th>
+                        <th>回收站</th>
+                        <th>远端</th>
                         <th>Key</th>
                     </tr>
                 </thead>
@@ -173,15 +173,15 @@
 
         {{ if isNotEmpty .EcVolumes }}
         <div class="row">
-            <h2>Erasure Coding Shards</h2>
+            <h2>EC 分片</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Collection</th>
-                        <th>Total Size</th>
-                        <th>Shard Details</th>
-                        <th>CreatedAt</th>
+                        <th>ID</th>
+                        <th>集合</th>
+                        <th>总大小</th>
+                        <th>分片详情</th>
+                        <th>创建时间</th>
                     </tr>
                 </thead>
                 <tbody>

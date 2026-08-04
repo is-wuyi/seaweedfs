@@ -68,7 +68,7 @@ func (c *commandClusterStatus) Name() string {
 }
 
 func (c *commandClusterStatus) Help() string {
-	return `outputs a quick overview of the cluster status`
+	return `输出集群状态的快速概览`
 }
 
 func (c *commandClusterStatus) HasTag(CommandTag) bool {

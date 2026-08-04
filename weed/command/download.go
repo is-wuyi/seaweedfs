@@ -37,14 +37,14 @@ func init() {
 
 var cmdDownload = &Command{
 	UsageLine: "download -master=localhost:9333 -dir=one_directory fid1 [fid2 fid3 ...]",
-	Short:     "download files by file id",
-	Long: `download files by file id.
+	Short:     "按文件 ID 下载文件",
+	Long: `按文件 ID 下载文件。
 
-  Usually you just need to use curl to lookup the file's volume server, and then download them directly.
-  This download tool combine the two steps into one.
+  通常你只需用 curl 查找文件所在的 volume 服务器,然后直接下载即可。
+  这个下载工具将这两步合二为一。
 
-  What's more, if you use "weed upload -maxMB=..." option to upload a big file divided into chunks, you can
-  use this tool to download the chunks and merge them automatically.
+  此外,如果你使用 "weed upload -maxMB=..." 选项上传了一个被切分成 chunk 的大文件,你可以
+  使用此工具下载这些 chunk 并自动合并。
 
   `,
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SeaweedFS Filer {{ .Version }}</title>
+    <title>SeaweedFS filer(文件服务器) {{ .Version }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/seaweedfsstatic/bootstrap/3.3.1/css/bootstrap.min.css">
     <style>
@@ -82,17 +82,17 @@
     <div class="page-header">
         <h1>
             <a href="https://github.com/seaweedfs/seaweedfs"><img src="/seaweedfsstatic/seaweed50x50.png"></img></a>
-            SeaweedFS Filer <small>{{ .Version }}</small>
+            SeaweedFS filer(文件服务器) <small>{{ .Version }}</small>
         </h1>
     </div>
     <div class="row">
         <div>
             <div class="btn-group btn-group-sm pull-right" role="group" style="margin-top:3px;">
                 <label class="btn btn-default" onclick="handleCreateDir()">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Folder
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新建文件夹
                 </label>
                 <label class="btn btn-default" for="fileElem">
-                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Upload
+                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> 上传
                 </label>
             </div>
             <ol class="breadcrumb">
@@ -171,7 +171,7 @@
     {{ if .ShouldDisplayLoadMore }}
     <div class="row">
         <a href="{{ printpath .Path }}?limit={{ .Limit }}&lastFileName={{ queryEscape .LastFileName }}" >
-        Load more
+        加载更多
         </a>
     </div>
     {{ end }}
@@ -244,7 +244,7 @@
 
     function renderProgress() {
         var values = Object.values(uploadList);
-        var html = '<table class="table">\n<tr><th>Uploading</th><\/tr>\n';
+        var html = '<table class="table">\n<tr><th>上传中</th><\/tr>\n';
         for (let i of values) {
             var progressBarClass = 'progress-bar-striped active';
             if (i.percent >= 100) {
@@ -310,7 +310,7 @@
     }
 
     function handleCreateDir() {
-        var dirName = prompt('Folder Name:', '');
+        var dirName = prompt('文件夹名称：', '');
         dirName = dirName.trim();
         if (dirName == null || dirName == '') {
             return;
@@ -332,7 +332,7 @@
     }
 
     function handleRename(originName, basePath) {
-        var newName = prompt('New Name:', originName);
+        var newName = prompt('新名称：', originName);
         if (newName == null || newName == '') {
             return;
         }
@@ -347,7 +347,7 @@
     }
 
     function handleDelete(path) {
-        if (!confirm('Are you sure to delete ' + path + '?')) {
+        if (!confirm('确定要删除 ' + path + ' 吗？')) {
             return;
         }
         var url = path;

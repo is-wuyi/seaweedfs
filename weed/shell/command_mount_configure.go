@@ -25,12 +25,12 @@ func (c *commandMountConfigure) Name() string {
 }
 
 func (c *commandMountConfigure) Help() string {
-	return `configure the mount on current server
+	return `在当前服务器上配置挂载
 
 	mount.configure -dir=<mount_directory>
 
-	This command connects with local mount via unix socket, so it can only run locally.
-	The "mount_directory" value needs to be exactly the same as how mount was started in "weed mount -dir=<mount_directory>"
+	此命令通过 unix socket 与本地挂载通信,因此只能在本地运行。
+	"mount_directory" 值需要与 "weed mount -dir=<mount_directory>" 启动挂载时完全一致
 
 `
 }

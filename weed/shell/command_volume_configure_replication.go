@@ -29,9 +29,9 @@ func (c *commandVolumeConfigureReplication) Name() string {
 }
 
 func (c *commandVolumeConfigureReplication) Help() string {
-	return `change volume replication value
+	return `修改卷的副本值
 
-	This command changes a volume replication value. It should be followed by "volume.fix.replication".
+	此命令用于修改卷的副本值。执行后应接着运行 "volume.fix.replication"。
 
 `
 }

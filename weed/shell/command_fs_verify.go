@@ -46,7 +46,7 @@ func (c *commandFsVerify) Name() string {
 }
 
 func (c *commandFsVerify) Help() string {
-	return `recursively verify all files under a directory
+	return `递归验证目录下的所有文件
 
 	fs.verify [-v] [-modifyTimeAgo 1h] /buckets/dir
 

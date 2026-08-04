@@ -51,20 +51,19 @@ func init() {
 
 var cmdBackup = &Command{
 	UsageLine: "backup -dir=. -volumeId=234 -master=localhost:9333",
-	Short:     "incrementally backup a volume to local folder",
-	Long: `Incrementally backup volume data.
+	Short:     "增量备份一个 volume 到本地目录",
+	Long: `增量备份卷数据。
 
-	It is expected that you use this inside a script, to loop through
-	all possible volume ids that needs to be backup to local folder.
+	建议你在脚本中使用此命令,循环遍历所有需要备份到本地文件夹的卷 ID。
 
-	The volume id does not need to exist locally or even remotely.
-	This will help to backup future new volumes.
+	卷 ID 不需要在本地或远端存在。
+	这有助于备份未来的新卷。
 
-	Usually backing up is just copying the .dat (and .idx) files.
-	But it's tricky to incrementally copy the differences.
+	通常备份只是复制 .dat(和 .idx)文件。
+	但增量复制差异部分比较棘手。
 
-	The complexity comes when there are multiple addition, deletion and compaction.
-	This tool will handle them correctly and efficiently, avoiding unnecessary data transportation.
+	复杂性来自于多次添加、删除和 compact 操作。
+	此工具会正确且高效地处理这些情况,避免不必要的数据传输。
   `,
 }
 

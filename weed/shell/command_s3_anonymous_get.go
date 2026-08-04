@@ -25,7 +25,7 @@ func (c *commandS3AnonymousGet) Name() string {
 }
 
 func (c *commandS3AnonymousGet) Help() string {
-	return `show anonymous access for a bucket
+	return `显示一个 bucket 的匿名访问权限
 
 	s3.anonymous.get -bucket <bucket_name>
 `

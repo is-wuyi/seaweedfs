@@ -27,12 +27,12 @@ func (c *commandS3Configure) Name() string {
 }
 
 func (c *commandS3Configure) Help() string {
-	return `configure and apply s3 options for each bucket
+	return `为每个 bucket 配置并应用 s3 选项
 
-	# see the current configuration file content
+	# 查看当前配置文件内容
 	s3.configure
 
-	# create a new identity with account information
+	# 创建一个带账号信息的新身份
 	s3.configure -user=username -actions=Read,Write,List,Tagging -buckets=bucket-name -policies=policy1,policy2 -access_key=key -secret_key=secret -account_id=id -account_display_name=name -account_email=email@example.com -apply
 	`
 }

@@ -24,13 +24,13 @@ func (c *commandMqTopicTruncate) Name() string {
 }
 
 func (c *commandMqTopicTruncate) Help() string {
-	return `clear all data from a topic while preserving topic structure
+	return `清除一个 topic 的所有数据，但保留 topic 结构
 
-	Example:
+	示例：
 		mq.topic.truncate -namespace <namespace> -topic <topic_name>
 
-	This command removes all log files and parquet files from all partitions
-	of the specified topic, while keeping the topic configuration intact.
+	此命令会从指定 topic 的所有分区中删除所有日志文件和 parquet 文件，
+	同时保持 topic 配置不变。
 `
 }
 

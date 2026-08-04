@@ -21,7 +21,7 @@ func (c *commandCollectionDelete) Name() string {
 }
 
 func (c *commandCollectionDelete) Help() string {
-	return `delete specified collection
+	return `删除指定的集合
 
 	collection.delete -collection <collection_name> -apply
 

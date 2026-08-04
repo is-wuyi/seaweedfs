@@ -22,11 +22,11 @@ func (c *commandS3UserShow) Name() string {
 }
 
 func (c *commandS3UserShow) Help() string {
-	return `show details of an S3 IAM user
+	return `显示 S3 IAM 用户的详情
 
 	s3.user.show -name <username>
 
-	Output: JSON object with user details.
+	输出：包含用户详情的 JSON 对象。
 `
 }
 

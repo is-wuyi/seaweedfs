@@ -30,12 +30,12 @@ func (c *commandFsMetaLoad) Name() string {
 }
 
 func (c *commandFsMetaLoad) Help() string {
-	return `load saved filer meta data to restore the directory and file structure
+	return `加载已保存的 filer 元数据以恢复目录和文件结构
 
 	fs.meta.load <filer_host>-<port>-<time>.meta
-	fs.meta.load -v=false <filer_host>-<port>-<time>.meta // skip printing out the verbose output
- 	fs.meta.load -concurrency=1 <filer_host>-<port>-<time>.meta // number of parallel meta load to filer
-	fs.meta.load -dirPrefix=/buckets/important <filer_host>.meta // load any dirs with prefix "important"
+	fs.meta.load -v=false <filer_host>-<port>-<time>.meta // 跳过输出详细信息
+ 	fs.meta.load -concurrency=1 <filer_host>-<port>-<time>.meta // 并行加载到 filer 的数量
+	fs.meta.load -dirPrefix=/buckets/important <filer_host>.meta // 加载任何前缀为 "important" 的目录
 
 `
 }

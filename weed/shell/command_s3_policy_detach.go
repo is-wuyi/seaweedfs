@@ -22,7 +22,7 @@ func (c *commandS3PolicyDetach) Name() string {
 }
 
 func (c *commandS3PolicyDetach) Help() string {
-	return `detach a policy from an S3 IAM user
+	return `从 S3 IAM 用户分离一个策略
 
 	s3.policy.detach -policy <policy_name> -user <username>
 `

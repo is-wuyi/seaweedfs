@@ -25,12 +25,12 @@ func (c *commandVolumeDeleteEmpty) Name() string {
 }
 
 func (c *commandVolumeDeleteEmpty) Help() string {
-	return `delete empty volumes from all volume servers
+	return `从所有 volume 服务器删除空卷
 
 	volume.deleteEmpty -quietFor=24h -apply
 	volume.deleteEmpty -collectionPattern=important* -quietFor=24h -apply
 
-	This command deletes all empty volumes from one volume server.
+	此命令从一个 volume 服务器删除所有空卷。
 
 `
 }

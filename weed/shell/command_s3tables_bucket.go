@@ -25,21 +25,21 @@ func (c *commandS3TablesBucket) Name() string {
 }
 
 func (c *commandS3TablesBucket) Help() string {
-	return `manage s3tables table buckets
+	return `管理 s3tables table buckets
 
-# create a table bucket
+# 创建 table bucket
 	s3tables.bucket -create -name <bucket> -account <account_id> [-tags key1=val1,key2=val2]
 
-# list table buckets
+# 列出 table bucket
 s3tables.bucket -list -account <account_id> [-prefix <prefix>] [-limit <n>] [-continuation <token>]
 
-# get a table bucket
+# 获取 table bucket
 	s3tables.bucket -get -name <bucket> -account <account_id>
 
-# delete a table bucket
+# 删除 table bucket
 	s3tables.bucket -delete -name <bucket> -account <account_id>
 
-# manage bucket policy
+# 管理 bucket policy
 	s3tables.bucket -put-policy -name <bucket> -account <account_id> -file policy.json
 	s3tables.bucket -get-policy -name <bucket> -account <account_id>
 	s3tables.bucket -delete-policy -name <bucket> -account <account_id>

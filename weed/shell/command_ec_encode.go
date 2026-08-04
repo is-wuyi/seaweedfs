@@ -45,54 +45,53 @@ func (c *commandEcEncode) Name() string {
 }
 
 func (c *commandEcEncode) Help() string {
-	return `apply erasure coding to a volume
+	return `对卷应用 erasure coding
 
 	ec.encode [-collection=""] [-fullPercent=95 -quietFor=1h] [-batchSize=10] [-verbose] [-sourceDiskType=<disk_type>] [-diskType=<disk_type>]
 	ec.encode [-volumeId=<volume_id>|-volumeIds=<volume_id>,...] [-batchSize=10] [-verbose] [-diskType=<disk_type>]
 
-	This command will:
-	1. freeze one volume
-	2. apply erasure coding to the volume
-	3. (optionally) re-balance encoded shards across multiple volume servers
+	此命令会:
+	1. 冻结一个卷
+	2. 对该卷应用 erasure coding
+	3. (可选)在多个 volume 服务器之间重新均衡编码后的分片
 
-	The erasure coding is 10.4. So ideally you have more than 14 volume servers, and you can afford
-	to lose 4 volume servers.
+	erasure coding 为 10.4。因此理想情况下你有超过 14 个 volume 服务器,可以容忍
+	丢失 4 个 volume 服务器。
 
-	If the number of volumes are not high, the worst case is that you only have 4 volume servers,
-	and the shards are spread as 4,4,3,3, respectively. You can afford to lose one volume server.
+	如果卷数量不多,最坏的情况是你只有 4 个 volume 服务器,
+	分片会分别按 4、4、3、3 分布。此时可以容忍丢失一个 volume 服务器。
 
-	If you only have less than 4 volume servers, with erasure coding, at least you can afford to
-	have 4 corrupted shard files.
+	如果只有不到 4 个 volume 服务器,使用 erasure coding 至少可以容忍
+	4 个分片文件损坏。
 
-	The -collection parameter supports regular expressions for pattern matching:
-	  - Use exact match: ec.encode -collection="^mybucket$"
-	  - Match multiple buckets: ec.encode -collection="bucket.*"
-	  - Match all collections: ec.encode -collection=".*"
+	-collection 参数支持使用正则表达式进行模式匹配:
+	  - 精确匹配:ec.encode -collection="^mybucket$"
+	  - 匹配多个 bucket:ec.encode -collection="bucket.*"
+	  - 匹配所有集合:ec.encode -collection=".*"
 
-	Options:
-	  -verbose: show detailed reasons why volumes are not selected for encoding
-	  -sourceDiskType: filter source volumes by disk type (hdd, ssd, or empty for all)
-	  -diskType: target disk type for EC shards (hdd, ssd, or empty for default hdd)
-	  -batchSize: encode/rebalance/verify/delete this many volumes at a time (default 10; 0 = all in one batch)
-	  -volumeIds: comma-separated volume IDs to encode
+	选项:
+	  -verbose:显示卷未被选中进行编码的详细原因
+	  -sourceDiskType:按磁盘类型筛选源卷(hdd、ssd,或留空表示全部)
+	  -diskType:EC 分片的目标磁盘类型(hdd、ssd,或留空默认为 hdd)
+	  -batchSize:每次编码/rebalance/校验/删除的卷数量(默认 10;0 = 一次性处理所有)
+	  -volumeIds:逗号分隔的要编码的 volume ID
 
-	Each batch is committed independently. If a later batch fails, earlier batches
-	are already encoded and their original volumes deleted.
+	每个批次独立提交。如果后续批次失败,先前批次已完成编码并删除了原始卷。
 
-	Examples:
-	  # Encode SSD volumes to SSD EC shards (same tier)
+	示例:
+	  # 将 SSD 卷编码为 SSD EC 分片(同一分层)
 	  ec.encode -collection=mybucket -sourceDiskType=ssd -diskType=ssd
 
-	  # Encode SSD volumes to HDD EC shards (tier migration to cheaper storage)
+	  # 将 SSD 卷编码为 HDD EC 分片(分层迁移到更便宜的存储)
 	  ec.encode -collection=mybucket -sourceDiskType=ssd -diskType=hdd
 
-	  # Encode all volumes to SSD EC shards
+	  # 将所有卷编码为 SSD EC 分片
 	  ec.encode -collection=mybucket -diskType=ssd
 
-	  # Encode selected volume IDs and delete originals after each batch
+	  # 编码选定的 volume ID,并在每个批次后删除原始卷
 	  ec.encode -volumeIds=101,102,103 -batchSize=2
 
-	Re-balancing algorithm:
+	重新均衡算法:
 	` + ecBalanceAlgorithmDescription
 }
 

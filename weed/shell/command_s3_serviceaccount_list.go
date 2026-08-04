@@ -22,12 +22,12 @@ func (c *commandS3ServiceAccountList) Name() string {
 }
 
 func (c *commandS3ServiceAccountList) Help() string {
-	return `list service accounts
+	return `列出服务账号
 
 	s3.serviceaccount.list
 	s3.serviceaccount.list -user <parent_user>
 
-	Lists all service accounts, optionally filtered by parent user.
+	列出所有服务账号，可选按父用户过滤。
 `
 }
 

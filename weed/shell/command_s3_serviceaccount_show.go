@@ -23,7 +23,7 @@ func (c *commandS3ServiceAccountShow) Name() string {
 }
 
 func (c *commandS3ServiceAccountShow) Help() string {
-	return `show details of a service account
+	return `显示服务账号的详情
 
 	s3.serviceaccount.show -id <service_account_id>
 `

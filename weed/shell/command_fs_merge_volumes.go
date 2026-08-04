@@ -42,9 +42,9 @@ func (c *commandFsMergeVolumes) Name() string {
 }
 
 func (c *commandFsMergeVolumes) Help() string {
-	return `re-locate chunks into target volumes and try to clear lighter volumes.
+	return `将 chunk 重新定位到目标 volume 中,尝试清空较轻的 volume。
 
-	This would help clear half-full volumes and let vacuum system to delete them later.
+	这有助于清空半满的 volume,让 vacuum 系统之后删除它们。
 
 	fs.mergeVolumes [-toVolumeId=y] [-fromVolumeId=x] [-collection="*"] [-dir=/] [-apply]
 `

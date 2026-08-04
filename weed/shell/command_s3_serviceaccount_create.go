@@ -26,13 +26,12 @@ func (c *commandS3ServiceAccountCreate) Name() string {
 }
 
 func (c *commandS3ServiceAccountCreate) Help() string {
-	return `create a service account for an S3 IAM user
+	return `为 S3 IAM 用户创建一个服务账号
 
 	s3.serviceaccount.create -user <parent_user> -description "my app"
 	s3.serviceaccount.create -user <parent_user> -actions Read,List -expiry 24h
 
-	Service accounts are linked to a parent user and can have restricted
-	permissions (a subset of the parent's actions).
+	服务账号关联到父用户，可以具有受限的权限（父用户操作的一个子集）。
 `
 }
 

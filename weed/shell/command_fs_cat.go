@@ -22,7 +22,7 @@ func (c *commandFsCat) Name() string {
 }
 
 func (c *commandFsCat) Help() string {
-	return `stream the file content on to the screen
+	return `将文件内容流式输出到屏幕
 
 	fs.cat /dir/file_name
 `

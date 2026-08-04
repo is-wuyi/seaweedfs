@@ -60,35 +60,35 @@ func (c *commandVolumeCheckDisk) Name() string {
 }
 
 func (c *commandVolumeCheckDisk) Help() string {
-	return `check all replicated volumes to find and fix inconsistencies. It is optional and resource intensive.
+	return `检查所有有副本的卷以发现并修复不一致。此命令是可选的,且比较消耗资源。
 
-	How it works:
+	工作原理:
 
-	find all volumes that are replicated
+	找出所有有副本的卷
 
-	for each writable volume ID, if there are more than 2 replicas, find one pair with the largest 2 in file count
-		for the pair volume A and B
-			append entries in A and not in B to B
-			append entries in B and not in A to A
+	对于每个可写卷 ID,如果有超过 2 个副本,找出文件数最多的两个组成一对
+		对于这对卷 A 和 B
+			将 A 中存在但 B 中不存在的 entry 追加到 B
+			将 B 中存在但 A 中不存在的 entry 追加到 A
 
-	optionally, for each non-writable volume replica A
-		select a writable volume replica B
-		if entries in A don't match B
-			prune late volume entries not matching its index file
-			append missing entries from B into A
-			mark the volume as writable (healthy)
+	可选地,对于每个不可写卷副本 A
+		选择一个可写卷副本 B
+		如果 A 中的 entry 与 B 不匹配
+			裁剪与其索引文件不匹配的晚期卷 entry
+			将 B 中缺失的 entry 追加到 A
+			将该卷标记为可写(健康)
 
-	Options:
-	  -slow: check all replicas even if file counts are the same
-	  -v: verbose mode with detailed progress output
-	  -volumeId: check only a specific volume ID (0 for all)
-	  -apply: actually apply the fixes (default is simulation mode)
-	  -fixReadOnly: also check and repair read-only volumes using uni-directional sync
-	  -syncDeleted: sync deletion records during repair
-	  -nonRepairThreshold: maximum fraction of missing keys allowed for repair (default 0.3)
-	  -resurrectMissingNeedles: copy needles absent on one replica back from the other, e.g. after replication failures.
-	    Only repairs replicas that were never vacuumed (compaction revision 0), where an absent needle is provably
-	    a missing write and not a vacuumed delete. Counts toward -nonRepairThreshold.
+	选项:
+	  -slow:即使文件数相同也检查所有副本
+	  -v:详细模式,输出详细的进度信息
+	  -volumeId:仅检查指定的 volume ID(0 表示全部)
+	  -apply:实际应用修复(默认为模拟模式)
+	  -fixReadOnly:也使用单向同步检查并修复只读卷
+	  -syncDeleted:在修复期间同步删除记录
+	  -nonRepairThreshold:修复允许的最大缺失键比例(默认 0.3)
+	  -resurrectMissingNeedles:从另一个副本拷回某个副本上缺失的 needle,例如在副本失败之后。
+	    仅修复从未 vacuum 过的副本(compaction revision 为 0),此时缺失的 needle 可证明是
+	    一次缺失的写入而非被 vacuum 删除。会计入 -nonRepairThreshold。
 
 `
 }

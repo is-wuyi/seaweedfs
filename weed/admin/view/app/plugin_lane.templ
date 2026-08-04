@@ -12,15 +12,15 @@ templ PluginLane(page string, lane string) {
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <div>
-                        <h2 class="mb-0"><i class="fas fa-layer-group me-2"></i>{ lane } Lane Workers</h2>
-                        <p class="text-muted mb-0">Workers and scheduler status for the { lane } scheduling lane.</p>
+                        <h2 class="mb-0"><i class="fas fa-layer-group me-2"></i>{ lane } Lane Worker</h2>
+                        <p class="text-muted mb-0">{ lane } 调度 lane 的 worker 和调度器状态。</p>
                     </div>
                     <div class="btn-group">
                         <a href="/plugin" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-1"></i>All Workers
+                            <i class="fas fa-arrow-left me-1"></i>全部 Worker
                         </a>
                         <button type="button" class="btn btn-outline-secondary" id="plugin-lane-refresh-btn">
-                            <i class="fas fa-sync-alt me-1"></i>Refresh
+                            <i class="fas fa-sync-alt me-1"></i>刷新
                         </button>
                     </div>
                 </div>
@@ -31,11 +31,11 @@ templ PluginLane(page string, lane string) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0"><i class="fas fa-server me-2"></i>Lane Scheduler Status</h5>
+                        <h5 class="card-title mb-0"><i class="fas fa-server me-2"></i>Lane 调度器状态</h5>
                     </div>
                     <div class="card-body" id="plugin-lane-scheduler-status">
                         <div class="text-center text-muted py-3">
-                            <i class="fas fa-spinner fa-spin me-1"></i>Loading scheduler status...
+                            <i class="fas fa-spinner fa-spin me-1"></i>正在加载调度器状态...
                         </div>
                     </div>
                 </div>
@@ -46,11 +46,11 @@ templ PluginLane(page string, lane string) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0"><i class="fas fa-tasks me-2"></i>Job Types</h5>
+                        <h5 class="card-title mb-0"><i class="fas fa-tasks me-2"></i>任务类型</h5>
                     </div>
                     <div class="card-body" id="plugin-lane-job-types">
                         <div class="text-center text-muted py-3">
-                            <i class="fas fa-spinner fa-spin me-1"></i>Loading job types...
+                            <i class="fas fa-spinner fa-spin me-1"></i>正在加载任务类型...
                         </div>
                     </div>
                 </div>
@@ -61,11 +61,11 @@ templ PluginLane(page string, lane string) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0"><i class="fas fa-plug me-2"></i>Connected Workers</h5>
+                        <h5 class="card-title mb-0"><i class="fas fa-plug me-2"></i>已连接的 Worker</h5>
                     </div>
                     <div class="card-body" id="plugin-lane-workers">
                         <div class="text-center text-muted py-3">
-                            <i class="fas fa-spinner fa-spin me-1"></i>Loading workers...
+                            <i class="fas fa-spinner fa-spin me-1"></i>正在加载 worker...
                         </div>
                     </div>
                 </div>
@@ -93,27 +93,27 @@ templ PluginLane(page string, lane string) {
                 })
                 .catch(err => {
                     const el = document.getElementById(containerId);
-                    if (el) el.innerHTML = '<div class="alert alert-danger">Failed to load: ' + err.message + '</div>';
+                    if (el) el.innerHTML = '<div class="alert alert-danger">加载失败: ' + err.message + '</div>';
                 });
         }
 
         function renderSchedulerStatus(data) {
-            if (!data || !data.scheduler) return '<div class="text-muted">No scheduler data</div>';
+            if (!data || !data.scheduler) return '<div class="text-muted">无调度器数据</div>';
             const s = data.scheduler;
             let html = '<div class="row">';
-            html += '<div class="col-md-3"><strong>Phase:</strong> ' + (s.current_phase || 'idle') + '</div>';
-            html += '<div class="col-md-3"><strong>Idle Sleep:</strong> ' + (s.idle_sleep_seconds || 0) + 's</div>';
-            html += '<div class="col-md-3"><strong>Current Job Type:</strong> ' + (s.current_job_type || '-') + '</div>';
-            html += '<div class="col-md-3"><strong>Next Detection:</strong> ' + (s.next_detection_at ? new Date(s.next_detection_at).toLocaleTimeString() : '-') + '</div>';
+            html += '<div class="col-md-3"><strong>阶段:</strong> ' + (s.current_phase || 'idle') + '</div>';
+            html += '<div class="col-md-3"><strong>空闲休眠:</strong> ' + (s.idle_sleep_seconds || 0) + 's</div>';
+            html += '<div class="col-md-3"><strong>当前任务类型:</strong> ' + (s.current_job_type || '-') + '</div>';
+            html += '<div class="col-md-3"><strong>下次检测:</strong> ' + (s.next_detection_at ? new Date(s.next_detection_at).toLocaleTimeString() : '-') + '</div>';
             html += '</div>';
             if (s.job_types && s.job_types.length > 0) {
-                html += '<hr><table class="table table-sm table-hover mb-0"><thead><tr><th>Job Type</th><th>Enabled</th><th>Interval</th><th>In Flight</th><th>Next Detection</th></tr></thead><tbody>';
+                html += '<hr><table class="table table-sm table-hover mb-0"><thead><tr><th>任务类型</th><th>已启用</th><th>间隔</th><th>进行中</th><th>下次检测</th></tr></thead><tbody>';
                 s.job_types.forEach(jt => {
                     html += '<tr>';
                     html += '<td>' + jt.job_type + '</td>';
-                    html += '<td>' + (jt.enabled ? '<span class="badge bg-success">Yes</span>' : '<span class="badge bg-secondary">No</span>') + '</td>';
+                    html += '<td>' + (jt.enabled ? '<span class="badge bg-success">是</span>' : '<span class="badge bg-secondary">否</span>') + '</td>';
                     html += '<td>' + (jt.detection_interval_minutes || '-') + 'm</td>';
-                    html += '<td>' + (jt.detection_in_flight ? '<span class="badge bg-warning">Yes</span>' : 'No') + '</td>';
+                    html += '<td>' + (jt.detection_in_flight ? '<span class="badge bg-warning">是</span>' : '否') + '</td>';
                     html += '<td>' + (jt.next_detection_at ? new Date(jt.next_detection_at).toLocaleTimeString() : '-') + '</td>';
                     html += '</tr>';
                 });
@@ -123,14 +123,14 @@ templ PluginLane(page string, lane string) {
         }
 
         function renderJobTypes(data) {
-            if (!data || data.length === 0) return '<div class="text-muted">No job types in this lane</div>';
+            if (!data || data.length === 0) return '<div class="text-muted">此 lane 没有任务类型</div>';
             const filtered = data.filter(s => s.lane === lane);
-            if (filtered.length === 0) return '<div class="text-muted">No job types in this lane</div>';
-            let html = '<table class="table table-sm table-hover mb-0"><thead><tr><th>Job Type</th><th>Enabled</th><th>Concurrency</th><th>Detection Interval</th><th>Status</th></tr></thead><tbody>';
+            if (filtered.length === 0) return '<div class="text-muted">此 lane 没有任务类型</div>';
+            let html = '<table class="table table-sm table-hover mb-0"><thead><tr><th>任务类型</th><th>已启用</th><th>并发</th><th>检测间隔</th><th>状态</th></tr></thead><tbody>';
             filtered.forEach(s => {
                 html += '<tr>';
                 html += '<td><a href="' + basePath('/plugin/configuration?job=' + s.job_type) + '">' + s.job_type + '</a></td>';
-                html += '<td>' + (s.enabled ? '<span class="badge bg-success">Yes</span>' : '<span class="badge bg-secondary">No</span>') + '</td>';
+                html += '<td>' + (s.enabled ? '<span class="badge bg-success">是</span>' : '<span class="badge bg-secondary">否</span>') + '</td>';
                 html += '<td>' + (s.global_execution_concurrency || 1) + '</td>';
                 html += '<td>' + (s.detection_interval_minutes || '-') + 'm</td>';
                 html += '<td>' + (s.last_run_status || '-') + '</td>';
@@ -141,8 +141,8 @@ templ PluginLane(page string, lane string) {
         }
 
         function renderWorkers(data) {
-            if (!data || data.length === 0) return '<div class="text-muted">No workers connected for this lane</div>';
-            let html = '<table class="table table-sm table-hover mb-0"><thead><tr><th>Worker ID</th><th>Address</th><th>Job Types</th><th>Connected</th><th>Last Seen</th></tr></thead><tbody>';
+            if (!data || data.length === 0) return '<div class="text-muted">此 lane 没有已连接的 worker</div>';
+            let html = '<table class="table table-sm table-hover mb-0"><thead><tr><th>Worker ID</th><th>地址</th><th>任务类型</th><th>已连接</th><th>最近可见</th></tr></thead><tbody>';
             data.forEach(w => {
                 const jobTypes = Object.keys(w.Capabilities || {}).join(', ');
                 html += '<tr>';

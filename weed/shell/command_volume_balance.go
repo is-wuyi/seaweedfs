@@ -50,64 +50,63 @@ func (c *commandVolumeBalance) Name() string {
 }
 
 func (c *commandVolumeBalance) Help() string {
-	return `balance all volumes among volume servers
+	return `在 volume 服务器之间均衡所有卷
 
 	volume.balance [-collection ALL_COLLECTIONS|EACH_COLLECTION|<collection_name>] [-apply] [-dataCenter=<data_center_name>] [-racks=rack_name_one,rack_name_two] [-nodes=192.168.0.1:8080,192.168.0.2:8080] [-volumesPerExec=5] [-byDiskUsage] [-maxDiskUsagePercent=90]
 
-	The -collection parameter supports:
-	  - ALL_COLLECTIONS: balance across all collections
-	  - EACH_COLLECTION: balance each collection separately
-	  - Regular expressions for pattern matching:
-	    * Use exact match: volume.balance -collection="^mybucket$"
-	    * Match multiple buckets: volume.balance -collection="bucket.*"
-	    * Match all user collections: volume.balance -collection="user-.*"
+	-collection 参数支持:
+	  - ALL_COLLECTIONS:在所有集合之间均衡
+	  - EACH_COLLECTION:分别对每个集合进行均衡
+	  - 使用正则表达式进行模式匹配:
+	    * 精确匹配:volume.balance -collection="^mybucket$"
+	    * 匹配多个 bucket:volume.balance -collection="bucket.*"
+	    * 匹配所有用户集合:volume.balance -collection="user-.*"
 
-	The -volumesPerExec parameter limits the maximum number of volume moves in one command execution.
-	If unset - the command will try to balance all volumes at once.
-	It might be beneficial to set, if your cluster has lots of volumes growing and topology changes faster than balancing can occur.
+	-volumesPerExec 参数限制单次命令执行中卷迁移的最大数量。
+	若不设置,命令会尝试一次性均衡所有卷。
+	如果你的集群有大量不断增长的卷,且拓扑变化快于均衡速度,设置该参数会有所帮助。
 
-	The -maxDiskUsagePercent flag (default 90) skips any move target whose physical disk is already used at
-	or above that percentage, using the real filesystem capacity each volume server reports. This is the
-	default guard against an over-configured maxVolumeCount making a physically full disk look empty: such
-	a server is never chosen as a move target, judged per server against its own disk so heterogeneous disk
-	sizes are handled correctly. Set it to 0 (or >=100) to disable. Servers running an older build that does
-	not report disk bytes are not gated, and balancing falls back to slot-only behavior for them.
+	-maxDiskUsagePercent 标志(默认 90)会跳过任何物理磁盘已使用率达到或超过该百分比
+	的迁移目标,使用每个 volume 服务器上报的真实文件系统容量。这是针对 maxVolumeCount
+	配置过高导致物理磁盘已满却看起来为空的默认防护:此类服务器永远不会被选为迁移目标,
+	按各自磁盘单独判断,因此能正确处理异构磁盘大小。设为 0(或 >=100)可禁用。运行较旧
+	版本、不上报磁盘字节数的服务器不受此限制,对其回退为仅按槽位均衡的行为。
 
-	The -byDiskUsage flag ranks servers by their reported physical disk used percentage instead of the
-	default slot-density metric. If any server does not report physical disk bytes (older build), ranking
-	falls back to the sum of volume sizes for all servers, since the two scales are not comparable. The
-	default metric normalizes by maxVolumeCount, so a server whose maxVolumeCount is configured too high
-	for its disk looks nearly empty even when its disk is physically full, and balancing can drain
-	less-full servers onto it. Use -byDiskUsage to balance actual disk usage instead.
+	-byDiskUsage 标志按各服务器上报的物理磁盘使用百分比排序,而非默认的槽位密度指标。
+	如果任意服务器不上报物理磁盘字节数(较旧版本),排序会回退为所有服务器卷大小之和,
+	因为两种度量不可比较。默认指标按 maxVolumeCount 归一化,因此 maxVolumeCount 配置
+	过高(相对其磁盘)的服务器即使磁盘物理上已满也看起来几乎为空,均衡会把较空服务器
+	的卷排到它上面。使用 -byDiskUsage 可改为按实际磁盘使用量均衡。
 
-	Algorithm:
+	算法:
 
-	For each type of volume server (different max volume count limit){
-		for each collection {
-			balanceWritableVolumes()
-			balanceReadOnlyVolumes()
-		}
+对于每种类型的 volume 服务器(不同的最大卷数限制){
+	for each collection {
+		balanceWritableVolumes()
+		balanceReadOnlyVolumes()
 	}
+}
 
-	func balanceWritableVolumes(){
-		idealWritableVolumeRatio = totalWritableVolumes / totalNumberOfMaxVolumes
-		for hasMovedOneVolume {
-			sort all volume servers ordered by the localWritableVolumeRatio = localWritableVolumes to localVolumeMax
-			pick the volume server B with the highest localWritableVolumeRatio y
-			for any the volume server A with the number of writable volumes x + 1 <= idealWritableVolumeRatio * localVolumeMax {
-				if y > localWritableVolumeRatio {
-					if B has a writable volume id v that A does not have, and satisfy v replication requirements {
-						move writable volume v from A to B
-					}
+func balanceWritableVolumes(){
+	idealWritableVolumeRatio = totalWritableVolumes / totalNumberOfMaxVolumes
+	for hasMovedOneVolume {
+		按 localWritableVolumeRatio(= localWritableVolumes / localVolumeMax)对所有 volume 服务器排序
+		选取 localWritableVolumeRatio 值 y 最高的 volume 服务器 B
+		对于任意可写卷数量 x + 1 <= idealWritableVolumeRatio * localVolumeMax 的 volume 服务器 A {
+			if y > localWritableVolumeRatio {
+				if B 拥有 A 没有的可写卷 id v,且满足 v 的副本要求 {
+					将可写卷 v 从 A 迁移到 B
 				}
 			}
 		}
 	}
-	func balanceReadOnlyVolumes(){
-		//similar to balanceWritableVolumes
-	}
+}
+func balanceReadOnlyVolumes(){
+	//与 balanceWritableVolumes 类似
+}
 
 `
+
 }
 
 func (c *commandVolumeBalance) HasTag(CommandTag) bool {

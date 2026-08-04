@@ -23,22 +23,22 @@ func (c *commandS3BucketVersioning) Name() string {
 }
 
 func (c *commandS3BucketVersioning) Help() string {
-	return `view or update S3 bucket versioning configuration
+	return `查看或更新 S3 bucket 的版本控制配置
 
-	Example:
-		# View the current versioning status
+	示例：
+		# 查看当前的版本控制状态
 		s3.bucket.versioning -name <bucket_name>
 
-		# Enable versioning
+		# 启用版本控制
 		s3.bucket.versioning -name <bucket_name> -enable
 
-		# Suspend versioning
+		# 暂停版本控制
 		s3.bucket.versioning -name <bucket_name> -suspend
 
-		# Set versioning status explicitly (Enabled or Suspended)
+		# 显式设置版本控制状态（Enabled 或 Suspended）
 		s3.bucket.versioning -name <bucket_name> -status Enabled
 
-	Object Lock requires versioning to be enabled and prevents suspending it.
+	Object Lock 要求启用版本控制，并阻止暂停版本控制。
 `
 }
 

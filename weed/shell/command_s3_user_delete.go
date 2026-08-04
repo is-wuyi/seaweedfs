@@ -22,7 +22,7 @@ func (c *commandS3UserDelete) Name() string {
 }
 
 func (c *commandS3UserDelete) Help() string {
-	return `delete an S3 IAM user
+	return `删除一个 S3 IAM 用户
 
 	s3.user.delete -name <username>
 `

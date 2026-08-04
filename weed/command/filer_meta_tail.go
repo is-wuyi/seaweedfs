@@ -20,8 +20,8 @@ func init() {
 
 var cmdFilerMetaTail = &Command{
 	UsageLine: "filer.meta.tail [-filer=localhost:8888] [-pathPrefix=/]",
-	Short:     "see continuous changes on a filer",
-	Long: `See continuous changes on a filer.
+	Short:     "查看 filer 上的持续变更",
+	Long: `查看 filer 上的持续变更。
 
 	weed filer.meta.tail -timeAgo=30h | grep truncate
 	weed filer.meta.tail -timeAgo=30h | jq .

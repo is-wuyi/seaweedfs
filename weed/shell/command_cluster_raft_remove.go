@@ -21,9 +21,9 @@ func (c *commandRaftServerRemove) Name() string {
 }
 
 func (c *commandRaftServerRemove) Help() string {
-	return `remove a server from the raft cluster
+	return `从 raft 集群移除一个服务器
 
-	Example:
+	示例:
 		cluster.raft.remove -id <server_name>
 `
 }

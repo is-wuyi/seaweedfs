@@ -37,21 +37,21 @@ func (c *commandRemoteMount) Name() string {
 }
 
 func (c *commandRemoteMount) Help() string {
-	return `mount remote storage and optionally pull its metadata
+	return `挂载远端存储并可选地拉取其元数据
 
-	# assume a remote storage is configured to name "cloud1"
+	# 假设远端存储已配置为名称 "cloud1"
 	remote.configure -name=cloud1 -type=s3 -s3.access_key=xxx -s3.secret_key=yyy
 
-	# mount and pull one bucket (full upfront metadata sync)
+	# 挂载并拉取一个 bucket（完整的预先元数据同步）
 	remote.mount -dir=/xxx -remote=cloud1/bucket
-	# mount without upfront sync; metadata is fetched lazily on access
+	# 挂载但不进行预先同步；元数据在访问时按需懒加载
 	remote.mount -dir=/xxx -remote=cloud1/bucket -metadataStrategy=lazy
-	# mount and pull one directory in the bucket
+	# 挂载并拉取 bucket 中的一个目录
 	remote.mount -dir=/xxx -remote=cloud1/bucket/dir1
-	# mount with on-demand directory listing cached for 5 minutes
+	# 挂载并按需缓存目录列表 5 分钟
 	remote.mount -dir=/xxx -remote=cloud1/bucket -listingCacheTTL=300
 
-	# after mount, start a separate process to write updates to remote storage
+	# 挂载后，启动一个独立的进程将更新写入远端存储
 	weed filer.remote.sync -filer=<filerHost>:<filerPort> -dir=/xxx
 
 `

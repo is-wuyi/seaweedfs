@@ -24,7 +24,7 @@ func (c *commandS3BucketList) Name() string {
 }
 
 func (c *commandS3BucketList) Help() string {
-	return `list all buckets
+	return `列出所有 bucket
 
 `
 }

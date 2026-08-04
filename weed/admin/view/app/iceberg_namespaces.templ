@@ -24,7 +24,7 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group me-2">
 				<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createIcebergNamespaceModal">
-					<i class="fas fa-plus me-1"></i>Create Namespace
+					<i class="fas fa-plus me-1"></i>创建命名空间
 				</button>
 			</div>
 		</div>
@@ -60,7 +60,7 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-									Total Namespaces
+									命名空间总数
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.TotalNamespaces) }
@@ -81,7 +81,7 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 				<div class="card shadow mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary">
-							<i class="fas fa-sitemap me-2"></i>Catalog Browser
+							<i class="fas fa-sitemap me-2"></i>Catalog 浏览器
 						</h6>
 					</div>
 					<div class="card-body">
@@ -94,18 +94,18 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 											<i class="fas fa-folder text-warning me-2"></i>{ ns.Name }
 										</button>
 										<a class="btn btn-sm btn-outline-primary" href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/iceberg/%s/namespaces/%s/tables", url.PathEscape(data.CatalogName), url.PathEscape(ns.Name))) }>
-											<i class="fas fa-table me-1"></i>Open
+											<i class="fas fa-table me-1"></i>打开
 										</a>
 									</div>
 									<div class="collapse mt-2 iceberg-namespace-collapse" id={ namespaceID } data-namespace={ ns.Name } data-catalog-name={ data.CatalogName }>
-										<div class="text-muted small">Loading...</div>
+										<div class="text-muted small">加载中...</div>
 									</div>
 								</li>
 							}
 							if len(data.Namespaces) == 0 {
 								<li class="list-group-item text-center text-muted py-4">
 									<i class="fas fa-folder-open fa-2x mb-2 text-muted"></i>
-									<div>No namespaces available.</div>
+									<div>暂无可用命名空间。</div>
 								</li>
 							}
 						</ul>
@@ -120,7 +120,7 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 				<div class="card shadow mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary">
-							<i class="fas fa-folder me-2"></i>Namespaces
+							<i class="fas fa-folder me-2"></i>命名空间
 						</h6>
 					</div>
 					<div class="card-body">
@@ -128,10 +128,10 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 							<table class="table table-hover" width="100%" cellspacing="0">
 								<thead>
 									<tr>
-										<th>Namespace</th>
-										<th>REST Endpoint</th>
-										<th>Created</th>
-										<th>Actions</th>
+										<th>命名空间</th>
+									<th>REST 端点</th>
+									<th>创建时间</th>
+									<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -153,7 +153,7 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 											</td>
 											<td>
 												<div class="btn-group btn-group-sm" role="group">
-													<a class="btn btn-outline-primary btn-sm" href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/iceberg/%s/namespaces/%s/tables", url.PathEscape(data.CatalogName), url.PathEscape(ns.Name))) } title="Browse Tables">
+													<a class="btn btn-outline-primary btn-sm" href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/iceberg/%s/namespaces/%s/tables", url.PathEscape(data.CatalogName), url.PathEscape(ns.Name))) } title="浏览表">
 														<i class="fas fa-table"></i>
 													</a>
 												</div>
@@ -165,8 +165,8 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 											<td colspan="4" class="text-center text-muted py-4">
 												<i class="fas fa-folder-open fa-3x mb-3 text-muted"></i>
 												<div>
-													<h5>No namespaces found</h5>
-													<p>Create namespaces via the Iceberg REST API or S3 Tables API.</p>
+													<h5>未找到命名空间</h5>
+												<p>通过 Iceberg REST API 或 S3 Tables API 创建命名空间。</p>
 												</div>
 											</td>
 										</tr>
@@ -184,25 +184,25 @@ templ IcebergNamespaces(data dash.IcebergNamespacesData) {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="createIcebergNamespaceModalLabel">
-						<i class="fas fa-plus me-2"></i>Create Namespace
-					</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<form id="createIcebergNamespaceForm">
-					<div class="modal-body">
-						<input type="hidden" id="icebergNamespaceBucketArn" name="bucket_arn" value={ data.BucketARN }/>
-						<input type="hidden" id="icebergNamespaceCsrfToken" name="csrf_token"/>
-						<div class="mb-3">
-							<label for="icebergNamespaceName" class="form-label">Namespace</label>
-							<input type="text" class="form-control" id="icebergNamespaceName" name="name" placeholder="analytics" required/>
-							<div class="form-text">Use lowercase letters, numbers, and underscores. Use dots for nested namespaces (for example, analytics.daily).</div>
-						</div>
+						<i class="fas fa-plus me-2"></i>创建命名空间
+				</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form id="createIcebergNamespaceForm">
+				<div class="modal-body">
+					<input type="hidden" id="icebergNamespaceBucketArn" name="bucket_arn" value={ data.BucketARN }/>
+					<input type="hidden" id="icebergNamespaceCsrfToken" name="csrf_token"/>
+					<div class="mb-3">
+						<label for="icebergNamespaceName" class="form-label">命名空间</label>
+						<input type="text" class="form-control" id="icebergNamespaceName" name="name" placeholder="analytics" required/>
+						<div class="form-text">使用小写字母、数字和下划线。使用点号表示嵌套命名空间(例如 analytics.daily)。</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-primary">
-							<i class="fas fa-plus me-1"></i>Create
-						</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-plus me-1"></i>创建
+					</button>
 					</div>
 				</form>
 			</div>

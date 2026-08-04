@@ -23,7 +23,7 @@ func (c *commandFsLogPurge) Name() string {
 }
 
 func (c *commandFsLogPurge) Help() string {
-	return `purge filer logs
+	return `清理 filer 日志
 
 	fs.log.purge [-v] [-daysAgo 365]
 `

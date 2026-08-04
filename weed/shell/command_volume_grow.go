@@ -24,7 +24,7 @@ func (c *commandGrow) Name() string {
 }
 
 func (c *commandGrow) Help() string {
-	return `grow volumes
+	return `扩容卷
 
 	volume.grow [-collection=<collection name>] [-dataCenter=<data center name>]
 

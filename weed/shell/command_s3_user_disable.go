@@ -22,12 +22,11 @@ func (c *commandS3UserDisable) Name() string {
 }
 
 func (c *commandS3UserDisable) Help() string {
-	return `disable an S3 IAM user
+	return `禁用一个 S3 IAM 用户
 
 	s3.user.disable -name <username>
 
-	Disabled users cannot authenticate. Their credentials and policies
-	are preserved and will take effect again when the user is re-enabled.
+	被禁用的用户无法进行身份验证。其凭证和策略会被保留，并在用户重新启用时再次生效。
 `
 }
 

@@ -68,27 +68,27 @@ func (c *commandVolumeFsck) Name() string {
 }
 
 func (c *commandVolumeFsck) Help() string {
-	return `check all volumes to find entries not used by the filer. It is optional and resource intensive.
+	return `检查所有卷以找出 filer 未使用的 entry。此命令是可选的,且比较消耗资源。
 
-	Important assumption!!!
-		the system is all used by one filer.
+	重要假设!!!
+		整个系统只被一个 filer 使用。
 
-	This command works this way:
-	1. collect all file ids from all volumes, as set A
-	2. collect all file ids from the filer, as set B
-	3. find out the set A subtract B
+	此命令的工作方式:
+	1. 从所有卷收集所有 file id,作为集合 A
+	2. 从 filer 收集所有 file id,作为集合 B
+	3. 求出集合 A 减去 B 的差集
 
-	If -findMissingChunksInFiler is enabled, this works
-	in a reverse way:
-	1. collect all file ids from all volumes, as set A
-	2. collect all file ids from the filer, as set B
-	3. find out the set B subtract A
+	如果启用了 -findMissingChunksInFiler,则以
+	相反的方式工作:
+	1. 从所有卷收集所有 file id,作为集合 A
+	2. 从 filer 收集所有 file id,作为集合 B
+	3. 求出集合 B 减去 A 的差集
 
-	-cutoffTimeAgo is used to only check chunks older than the cutoff time.
-	This is important because:
-		Chunks are uploaded to volume servers before metadata is committed to filer.
-		A newly uploaded chunk may appear as orphan if metadata commit is still pending.
-		The default 5h cutoff provides sufficient buffer for metadata commits.
+	-cutoffTimeAgo 用于只检查早于截止时间的 chunk。
+	这很重要,因为:
+		Chunk 会在元数据提交到 filer 之前上传到 volume 服务器。
+		如果元数据提交仍在进行中,新上传的 chunk 可能会显示为孤儿。
+		默认的 5 小时截止时间为元数据提交提供了充足的缓冲。
 
 `
 }

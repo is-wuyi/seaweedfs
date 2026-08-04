@@ -332,33 +332,33 @@ func init() {
 
 var cmdMini = &Command{
 	UsageLine: "mini -dir=/tmp",
-	Short:     "start a complete SeaweedFS setup optimized for S3 beginners and small/dev use cases",
-	Long: `start a complete SeaweedFS setup with all components optimized for small/dev use cases
+	Short:     "启动一个针对 S3 初学者和小型/开发场景优化的完整 SeaweedFS 环境",
+	Long: `启动一个针对小型/开发场景优化的完整 SeaweedFS 环境
 
-This command starts all components in one process (master, volume, filer,
-S3 gateway, WebDAV gateway, and Admin UI).
+此命令在一个进程中启动所有组件(master、volume、filer、
+S3 网关、WebDAV 网关和 Admin UI)。
 
-All settings are optimized for small/dev use cases:
-- Volume size limit: auto configured based on disk space (64MB-1024MB)
-- Volume max: 0 (auto-configured based on free disk space)
-- Pre-stop seconds: 1 (faster shutdown)
-- Master peers: none (single master mode)
+所有设置都针对小型/开发场景进行了优化:
+- 卷大小限制:根据磁盘空间自动配置(64MB-1024MB)
+- 最大卷数:0(根据可用磁盘空间自动配置)
+- 停止前等待秒数:1(更快关闭)
+- master peers:无(单 master 模式)
 
-This is perfect for:
-- Development and testing
-- Learning SeaweedFS
-- Small deployments
-- Local S3-compatible storage
+非常适合:
+- 开发和测试
+- 学习 SeaweedFS
+- 小型部署
+- 本地 S3 兼容存储
 
-Example Usage:
-	weed mini                   # Use current directory
-	weed mini -dir=/data        # Custom data directory
-	weed mini -dir=/data -master.port=9444  # Custom master port
-	weed mini -dir=/data -bucket=my-bucket             # Pre-create an S3 bucket on startup
-	weed mini -dir=/data -bucket=bucket1,bucket2       # Pre-create multiple S3 buckets
-	weed mini -dir=/data -tableBucket=iceberg-tables   # Pre-create an S3 Tables bucket
+示例用法:
+	weed mini                   # 使用当前目录
+	weed mini -dir=/data        # 自定义数据目录
+	weed mini -dir=/data -master.port=9444  # 自定义 master 端口
+	weed mini -dir=/data -bucket=my-bucket             # 启动时预创建一个 S3 桶
+	weed mini -dir=/data -bucket=bucket1,bucket2       # 预创建多个 S3 桶
+	weed mini -dir=/data -tableBucket=iceberg-tables   # 预创建一个 S3 Tables 桶
 
-After starting, you can access:
+启动后,你可以访问:
 - Master UI:       http://localhost:9333
 - Volume Server:   http://localhost:9340
 - Filer UI:        http://localhost:8888
@@ -367,10 +367,9 @@ After starting, you can access:
 - WebDAV:          http://localhost:7333
 - Admin UI:        http://localhost:23646
 
-S3 Access:
-The S3 endpoint is available at http://localhost:8333. For client
-configuration and IAM setup, see the project documentation or use the
-Admin UI (http://localhost:23646) to manage users and policies.
+S3 访问:
+S3 端点可在 http://localhost:8333 访问。有关客户端配置和 IAM 设置,
+请参阅项目文档或使用 Admin UI(http://localhost:23646)来管理用户和策略。
 
 `,
 }

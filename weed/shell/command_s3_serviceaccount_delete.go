@@ -21,7 +21,7 @@ func (c *commandS3ServiceAccountDelete) Name() string {
 }
 
 func (c *commandS3ServiceAccountDelete) Help() string {
-	return `delete a service account
+	return `删除一个服务账号
 
 	s3.serviceaccount.delete -id <service_account_id>
 `

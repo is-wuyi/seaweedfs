@@ -44,26 +44,26 @@ func init() {
 
 var cmdIam = &Command{
 	UsageLine: "iam [-port=8111] [-filer=<ip:port>[,<ip:port>]...] [-master=<ip:port>,<ip:port>]",
-	Short:     "[DEPRECATED] start a standalone iam API compatible server",
-	Long: `[DEPRECATED] start a standalone iam API compatible server.
+	Short:     "[已弃用] 启动一个独立的 IAM API 兼容服务器",
+	Long: `[已弃用] 启动一个独立的 IAM API 兼容服务器。
 
-	DEPRECATION NOTICE:
-	The standalone 'weed iam' command is deprecated and will be removed in a future release.
-	
-	The IAM API is now embedded in the S3 server by default. Simply use 'weed s3' instead,
-	which provides both S3 and IAM APIs on the same port (enabled by default with -iam=true).
-	
-	This simplifies deployment by running a single server instead of two separate servers,
-	following the pattern used by MinIO and Ceph RGW.
-	
-	To use the embedded IAM API:
-	  weed s3 -port=8333          # IAM API is available on the same port
-	
-	To disable the embedded IAM API (if you prefer the old behavior):
-	  weed s3 -iam=false          # Run S3 without IAM
-	  weed iam -port=8111         # Run IAM separately (deprecated)
+	弃用通知:
+	独立的 'weed iam' 命令已弃用,将在未来版本中移除。
 
-	Multiple filer addresses can be specified for high availability, separated by commas.`,
+	IAM API 现在默认内嵌在 S3 服务器中。直接使用 'weed s3' 即可,
+	它会在同一个端口上同时提供 S3 和 IAM API(默认通过 -iam=true 启用)。
+
+	这样只需运行单个服务器而非两个独立服务器,简化了部署,
+	遵循了 MinIO 和 Ceph RGW 所采用的模式。
+
+	使用内嵌的 IAM API:
+	  weed s3 -port=8333          # IAM API 在同一端口上可用
+
+	禁用内嵌的 IAM API(如果你偏好旧行为):
+	  weed s3 -iam=false          # 运行不带 IAM 的 S3
+	  weed iam -port=8111         # 单独运行 IAM(已弃用)
+
+可指定多个 filer 地址以实现高可用,以逗号分隔。`,
 }
 
 func runIam(cmd *Command, args []string) bool {

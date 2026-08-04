@@ -126,18 +126,18 @@ func init() {
 
 var cmdFilerSynchronize = &Command{
 	UsageLine: "filer.sync -a=<oneFilerHost>:<oneFilerPort> -b=<otherFilerHost>:<otherFilerPort>",
-	Short:     "resumable continuous synchronization between two active-active or active-passive SeaweedFS clusters",
-	Long: `resumable continuous synchronization for file changes between two active-active or active-passive filers
+	Short:     "两个双活或主备 SeaweedFS 集群之间可断点续传的持续同步",
+	Long: `两个双活或主备 filer 之间可断点续传的文件变更持续同步
 
-	filer.sync listens on filer notifications. If any file is updated, it will fetch the updated content,
-	and write to the other destination. Different from filer.replicate:
+	filer.sync 监听 filer 通知。如果有任何文件被更新,它会获取更新后的内容,
+	并写入到另一个目的地。与 filer.replicate 的不同之处:
 
-	* filer.sync only works between two filers.
-	* filer.sync does not need any special message queue setup.
-	* filer.sync supports both active-active and active-passive modes.
-	
-	If restarted, the synchronization will resume from the previous checkpoints, persisted every minute.
-	A fresh sync will start from the earliest metadata logs.
+	* filer.sync 只能在两个 filer 之间工作。
+	* filer.sync 不需要任何特殊的消息队列设置。
+	* filer.sync 同时支持双活和主备模式。
+
+	如果重启,同步将从之前的检查点恢复,检查点每分钟持久化一次。
+	全新的同步会从最早的元数据日志开始。
 
 `,
 }

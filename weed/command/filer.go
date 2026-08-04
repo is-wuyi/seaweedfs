@@ -92,123 +92,123 @@ type FilerOptions struct {
 
 func init() {
 	cmdFiler.Run = runFiler // break init cycle
-	f.mastersString = cmdFiler.Flag.String("master", "localhost:9333", "comma-separated master servers or a single DNS SRV record of at least 1 master server, prepended with dnssrv+")
-	f.filerGroup = cmdFiler.Flag.String("filerGroup", "", "share metadata with other filers in the same filerGroup")
-	f.collection = cmdFiler.Flag.String("collection", "", "all data will be stored in this default collection")
-	f.ip = cmdFiler.Flag.String("ip", util.DetectedHostAddress(), "filer server http listen ip address")
-	f.bindIp = cmdFiler.Flag.String("ip.bind", "", "ip address to bind to. If empty, default to same as -ip option.")
-	f.port = cmdFiler.Flag.Int("port", 8888, "filer server http listen port")
-	f.portGrpc = cmdFiler.Flag.Int("port.grpc", 0, "filer server grpc listen port")
-	f.publicPort = cmdFiler.Flag.Int("port.readonly", 0, "readonly port opened to public")
-	f.defaultReplicaPlacement = cmdFiler.Flag.String("defaultReplicaPlacement", "", "default replication type. If not specified, use master setting.")
-	f.disableDirListing = cmdFiler.Flag.Bool("disableDirListing", false, "turn off directory listing")
-	f.maxMB = cmdFiler.Flag.Int("maxMB", 4, "split files larger than the limit")
-	f.dirListingLimit = cmdFiler.Flag.Int("dirListLimit", 100000, "limit sub dir listing size")
-	f.dataCenter = cmdFiler.Flag.String("dataCenter", "", "prefer to read and write to volumes in this data center")
-	f.rack = cmdFiler.Flag.String("rack", "", "prefer to write to volumes in this rack")
-	f.disableHttp = cmdFiler.Flag.Bool("disableHttp", false, "disable http request, only gRpc operations are allowed")
-	f.cipher = cmdFiler.Flag.Bool("encryptVolumeData", false, "encrypt data on volume servers")
-	f.metricsHttpPort = cmdFiler.Flag.Int("metricsPort", 0, "Prometheus metrics listen port")
-	f.metricsHttpIp = cmdFiler.Flag.String("metricsIp", "", "metrics listen ip. If empty, default to same as -ip.bind option.")
-	f.saveToFilerLimit = cmdFiler.Flag.Int("saveToFilerLimit", 0, "files smaller than this limit will be saved in filer store")
-	f.defaultLevelDbDirectory = cmdFiler.Flag.String("defaultStoreDir", ".", "if filer.toml is empty, use an embedded filer store in the directory")
-	f.concurrentUploadLimitMB = cmdFiler.Flag.Int("concurrentUploadLimitMB", 0, "limit total concurrent upload size, 0 means unlimited")
-	f.concurrentFileUploadLimit = cmdFiler.Flag.Int("concurrentFileUploadLimit", 0, "limit number of concurrent file uploads, 0 means unlimited")
-	f.debug = cmdFiler.Flag.Bool("debug", false, "serves runtime profiling data, e.g., http://localhost:<debug.port>/debug/pprof/goroutine?debug=2")
-	f.debugPort = cmdFiler.Flag.Int("debug.port", 6060, "http port for debugging")
-	f.localSocket = cmdFiler.Flag.String("localSocket", "", "default to /tmp/seaweedfs-filer-<port>.sock")
-	f.showUIDirectoryDelete = cmdFiler.Flag.Bool("ui.deleteDir", true, "enable filer UI show delete directory button")
-	f.downloadMaxMBps = cmdFiler.Flag.Int("downloadMaxMBps", 0, "download max speed for each download request, in MB per second")
-	f.diskType = cmdFiler.Flag.String("disk", "", "[hdd|ssd|<tag>] hard drive or solid state drive or any tag")
-	f.allowedOrigins = cmdFiler.Flag.String("allowedOrigins", "*", "comma separated list of allowed origins")
-	f.exposeDirectoryData = cmdFiler.Flag.Bool("exposeDirectoryData", true, "whether to return directory metadata and content in Filer UI")
-	f.tusBasePath = cmdFiler.Flag.String("tusBasePath", "/.tus", "TUS resumable upload endpoint base path (e.g., /.tus)")
+	f.mastersString = cmdFiler.Flag.String("master", "localhost:9333", "逗号分隔的 master 服务器,或至少 1 个 master 服务器的单条 DNS SRV 记录,需以 dnssrv+ 为前缀")
+	f.filerGroup = cmdFiler.Flag.String("filerGroup", "", "与同一 filerGroup 中的其他 filer 共享元数据")
+	f.collection = cmdFiler.Flag.String("collection", "", "所有数据将存储在此默认集合中")
+	f.ip = cmdFiler.Flag.String("ip", util.DetectedHostAddress(), "filer 服务器 http 监听 IP 地址")
+	f.bindIp = cmdFiler.Flag.String("ip.bind", "", "绑定的 IP 地址。为空则默认与 -ip 选项相同。")
+	f.port = cmdFiler.Flag.Int("port", 8888, "filer 服务器 http 监听端口")
+	f.portGrpc = cmdFiler.Flag.Int("port.grpc", 0, "filer 服务器 grpc 监听端口")
+	f.publicPort = cmdFiler.Flag.Int("port.readonly", 0, "对公众开放的只读端口")
+	f.defaultReplicaPlacement = cmdFiler.Flag.String("defaultReplicaPlacement", "", "默认副本策略。未指定时使用 master 设置。")
+	f.disableDirListing = cmdFiler.Flag.Bool("disableDirListing", false, "关闭目录列表")
+	f.maxMB = cmdFiler.Flag.Int("maxMB", 4, "拆分超过该限制的大文件")
+	f.dirListingLimit = cmdFiler.Flag.Int("dirListLimit", 100000, "限制子目录列表大小")
+	f.dataCenter = cmdFiler.Flag.String("dataCenter", "", "优先读写此数据中心中的 volume")
+	f.rack = cmdFiler.Flag.String("rack", "", "优先写入此机架中的 volume")
+	f.disableHttp = cmdFiler.Flag.Bool("disableHttp", false, "禁用 http 请求,仅允许 gRPC 操作")
+	f.cipher = cmdFiler.Flag.Bool("encryptVolumeData", false, "加密 volume 服务器上的数据")
+	f.metricsHttpPort = cmdFiler.Flag.Int("metricsPort", 0, "Prometheus 指标监听端口")
+	f.metricsHttpIp = cmdFiler.Flag.String("metricsIp", "", "指标监听 IP。为空则默认与 -ip.bind 选项相同。")
+	f.saveToFilerLimit = cmdFiler.Flag.Int("saveToFilerLimit", 0, "小于此限制的文件将保存到 filer 存储中")
+	f.defaultLevelDbDirectory = cmdFiler.Flag.String("defaultStoreDir", ".", "如果 filer.toml 为空,则使用该目录下的内嵌 filer 存储")
+	f.concurrentUploadLimitMB = cmdFiler.Flag.Int("concurrentUploadLimitMB", 0, "限制总并发上传大小,0 表示不限制")
+	f.concurrentFileUploadLimit = cmdFiler.Flag.Int("concurrentFileUploadLimit", 0, "限制并发文件上传数量,0 表示不限制")
+	f.debug = cmdFiler.Flag.Bool("debug", false, "提供运行时性能分析数据,例如 http://localhost:<debug.port>/debug/pprof/goroutine?debug=2")
+	f.debugPort = cmdFiler.Flag.Int("debug.port", 6060, "用于调试的 http 端口")
+	f.localSocket = cmdFiler.Flag.String("localSocket", "", "默认为 /tmp/seaweedfs-filer-<port>.sock")
+	f.showUIDirectoryDelete = cmdFiler.Flag.Bool("ui.deleteDir", true, "启用 filer UI 显示删除目录按钮")
+	f.downloadMaxMBps = cmdFiler.Flag.Int("downloadMaxMBps", 0, "每个下载请求的最大下载速度,单位为 MB 每秒")
+	f.diskType = cmdFiler.Flag.String("disk", "", "[hdd|ssd|<tag>] 机械硬盘、固态硬盘或任意标签")
+	f.allowedOrigins = cmdFiler.Flag.String("allowedOrigins", "*", "逗号分隔的允许来源列表")
+	f.exposeDirectoryData = cmdFiler.Flag.Bool("exposeDirectoryData", true, "是否在 Filer UI 中返回目录元数据和内容")
+	f.tusBasePath = cmdFiler.Flag.String("tusBasePath", "/.tus", "TUS 可恢复上传端点的基础路径(例如 /.tus)")
 
 	// start s3 on filer
-	filerStartS3 = cmdFiler.Flag.Bool("s3", false, "whether to start S3 gateway")
-	filerS3Options.port = cmdFiler.Flag.Int("s3.port", 8333, "s3 server http listen port")
-	filerS3Options.portHttps = cmdFiler.Flag.Int("s3.port.https", 0, "s3 server https listen port")
-	filerS3Options.portGrpc = cmdFiler.Flag.Int("s3.port.grpc", 0, "s3 server grpc listen port")
-	filerS3Options.domainName = cmdFiler.Flag.String("s3.domainName", "", "suffix of the host name in comma separated list, {bucket}.{domainName}")
-	filerS3Options.allowedOrigins = cmdFiler.Flag.String("s3.allowedOrigins", "*", "comma separated list of allowed origins")
-	filerS3Options.dataCenter = cmdFiler.Flag.String("s3.dataCenter", "", "prefer to read and write to volumes in this data center")
-	filerS3Options.tlsPrivateKey = cmdFiler.Flag.String("s3.key.file", "", "path to the TLS private key file")
-	filerS3Options.tlsCertificate = cmdFiler.Flag.String("s3.cert.file", "", "path to the TLS certificate file")
-	filerS3Options.config = cmdFiler.Flag.String("s3.config", "", "path to the config file")
-	filerS3Options.iamConfig = cmdFiler.Flag.String("s3.iam.config", "", "path to the advanced IAM config file")
-	filerS3Options.auditLogConfig = cmdFiler.Flag.String("s3.auditLogConfig", "", "path to the audit log config file")
-	filerS3Options.metricsHttpPort = cmdFiler.Flag.Int("s3.metricsPort", 0, "Prometheus metrics listen port")
-	filerS3Options.metricsHttpIp = cmdFiler.Flag.String("s3.metricsIp", "", "metrics listen ip. If empty, default to same as -s3.ip.bind option.")
-	cmdFiler.Flag.Bool("s3.allowEmptyFolder", true, "deprecated, ignored. Empty folder cleanup is now automatic.")
-	filerS3Options.allowDeleteBucketNotEmpty = cmdFiler.Flag.Bool("s3.allowDeleteBucketNotEmpty", true, "allow recursive deleting all entries along with bucket")
-	filerS3Options.localSocket = cmdFiler.Flag.String("s3.localSocket", "", "default to /tmp/seaweedfs-s3-<port>.sock")
-	filerS3Options.tlsCACertificate = cmdFiler.Flag.String("s3.cacert.file", "", "path to the TLS CA certificate file")
-	filerS3Options.tlsVerifyClientCert = cmdFiler.Flag.Bool("s3.tlsVerifyClientCert", false, "whether to verify the client's certificate")
-	filerS3Options.bindIp = cmdFiler.Flag.String("s3.ip.bind", "", "ip address to bind to. If empty, default to same as -ip.bind option.")
-	filerS3Options.idleTimeout = cmdFiler.Flag.Int("s3.idleTimeout", 120, "connection idle seconds")
-	filerS3Options.concurrentUploadLimitMB = cmdFiler.Flag.Int("s3.concurrentUploadLimitMB", 0, "limit total concurrent upload size for S3, 0 means unlimited")
-	filerS3Options.concurrentFileUploadLimit = cmdFiler.Flag.Int("s3.concurrentFileUploadLimit", 0, "limit number of concurrent file uploads for S3, 0 means unlimited")
-	filerS3Options.enableIam = cmdFiler.Flag.Bool("s3.iam", true, "enable embedded IAM API on the same S3 port")
-	filerS3Options.cipher = cmdFiler.Flag.Bool("s3.encryptVolumeData", false, "encrypt data on volume servers for S3 uploads")
-	filerS3Options.iamReadOnly = cmdFiler.Flag.Bool("s3.iam.readOnly", true, "disable IAM write operations on this server")
-	filerS3Options.portIceberg = cmdFiler.Flag.Int("s3.port.iceberg", 8181, "Iceberg REST Catalog server listen port (0 to disable)")
-	filerS3Options.externalUrl = cmdFiler.Flag.String("s3.externalUrl", "", "the external URL clients use to connect (e.g. https://api.example.com:9000). Used for S3 signature verification behind a reverse proxy. Falls back to S3_EXTERNAL_URL env var.")
-	filerS3Options.defaultFileMode = cmdFiler.Flag.String("s3.defaultFileMode", "", "default file mode for S3 uploaded objects, e.g. 0660, 0644, 0666")
+	filerStartS3 = cmdFiler.Flag.Bool("s3", false, "是否启动 S3 网关")
+	filerS3Options.port = cmdFiler.Flag.Int("s3.port", 8333, "s3 服务器 http 监听端口")
+	filerS3Options.portHttps = cmdFiler.Flag.Int("s3.port.https", 0, "s3 服务器 https 监听端口")
+	filerS3Options.portGrpc = cmdFiler.Flag.Int("s3.port.grpc", 0, "s3 服务器 grpc 监听端口")
+	filerS3Options.domainName = cmdFiler.Flag.String("s3.domainName", "", "以逗号分隔的主机名后缀列表,{bucket}.{domainName}")
+	filerS3Options.allowedOrigins = cmdFiler.Flag.String("s3.allowedOrigins", "*", "逗号分隔的允许来源列表")
+	filerS3Options.dataCenter = cmdFiler.Flag.String("s3.dataCenter", "", "优先读写此数据中心中的 volume")
+	filerS3Options.tlsPrivateKey = cmdFiler.Flag.String("s3.key.file", "", "TLS 私钥文件路径")
+	filerS3Options.tlsCertificate = cmdFiler.Flag.String("s3.cert.file", "", "TLS 证书文件路径")
+	filerS3Options.config = cmdFiler.Flag.String("s3.config", "", "配置文件路径")
+	filerS3Options.iamConfig = cmdFiler.Flag.String("s3.iam.config", "", "高级 IAM 配置文件路径")
+	filerS3Options.auditLogConfig = cmdFiler.Flag.String("s3.auditLogConfig", "", "审计日志配置文件路径")
+	filerS3Options.metricsHttpPort = cmdFiler.Flag.Int("s3.metricsPort", 0, "Prometheus 指标监听端口")
+	filerS3Options.metricsHttpIp = cmdFiler.Flag.String("s3.metricsIp", "", "指标监听 IP。为空则默认与 -s3.ip.bind 选项相同。")
+	cmdFiler.Flag.Bool("s3.allowEmptyFolder", true, "已废弃,忽略。空目录清理现已自动执行。")
+	filerS3Options.allowDeleteBucketNotEmpty = cmdFiler.Flag.Bool("s3.allowDeleteBucketNotEmpty", true, "允许随桶一起递归删除所有条目")
+	filerS3Options.localSocket = cmdFiler.Flag.String("s3.localSocket", "", "默认为 /tmp/seaweedfs-s3-<port>.sock")
+	filerS3Options.tlsCACertificate = cmdFiler.Flag.String("s3.cacert.file", "", "TLS CA 证书文件路径")
+	filerS3Options.tlsVerifyClientCert = cmdFiler.Flag.Bool("s3.tlsVerifyClientCert", false, "是否校验客户端证书")
+	filerS3Options.bindIp = cmdFiler.Flag.String("s3.ip.bind", "", "绑定的 IP 地址。为空则默认与 -ip.bind 选项相同。")
+	filerS3Options.idleTimeout = cmdFiler.Flag.Int("s3.idleTimeout", 120, "连接空闲秒数")
+	filerS3Options.concurrentUploadLimitMB = cmdFiler.Flag.Int("s3.concurrentUploadLimitMB", 0, "限制 S3 的总并发上传大小,0 表示不限制")
+	filerS3Options.concurrentFileUploadLimit = cmdFiler.Flag.Int("s3.concurrentFileUploadLimit", 0, "限制 S3 的并发文件上传数量,0 表示不限制")
+	filerS3Options.enableIam = cmdFiler.Flag.Bool("s3.iam", true, "在同一 S3 端口上启用内嵌 IAM API")
+	filerS3Options.cipher = cmdFiler.Flag.Bool("s3.encryptVolumeData", false, "为 S3 上传加密 volume 服务器上的数据")
+	filerS3Options.iamReadOnly = cmdFiler.Flag.Bool("s3.iam.readOnly", true, "在此服务器上禁用 IAM 写操作")
+	filerS3Options.portIceberg = cmdFiler.Flag.Int("s3.port.iceberg", 8181, "Iceberg REST Catalog 服务器监听端口(0 表示禁用)")
+	filerS3Options.externalUrl = cmdFiler.Flag.String("s3.externalUrl", "", "客户端用于连接的外部 URL(例如 https://api.example.com:9000)。用于反向代理后的 S3 签名校验。回退到 S3_EXTERNAL_URL 环境变量。")
+	filerS3Options.defaultFileMode = cmdFiler.Flag.String("s3.defaultFileMode", "", "S3 上传对象的默认文件模式,例如 0660、0644、0666")
 	filerS3Options.cacheSizeMB = cmdFiler.Flag.Int64("s3.cacheCapacityMB", 0, "in-memory chunk cache capacity in MB for S3 GETs shared across requests (0 disables)")
 
 	// start webdav on filer
-	filerStartWebDav = cmdFiler.Flag.Bool("webdav", false, "whether to start webdav gateway")
-	filerWebDavOptions.port = cmdFiler.Flag.Int("webdav.port", 7333, "webdav server http listen port")
-	filerWebDavOptions.collection = cmdFiler.Flag.String("webdav.collection", "", "collection to create the files")
-	filerWebDavOptions.replication = cmdFiler.Flag.String("webdav.replication", "", "replication to create the files")
-	filerWebDavOptions.disk = cmdFiler.Flag.String("webdav.disk", "", "[hdd|ssd|<tag>] hard drive or solid state drive or any tag")
-	filerWebDavOptions.tlsPrivateKey = cmdFiler.Flag.String("webdav.key.file", "", "path to the TLS private key file")
-	filerWebDavOptions.tlsCertificate = cmdFiler.Flag.String("webdav.cert.file", "", "path to the TLS certificate file")
-	filerWebDavOptions.cacheDir = cmdFiler.Flag.String("webdav.cacheDir", os.TempDir(), "local cache directory for file chunks")
+	filerStartWebDav = cmdFiler.Flag.Bool("webdav", false, "是否启动 webdav 网关")
+	filerWebDavOptions.port = cmdFiler.Flag.Int("webdav.port", 7333, "webdav 服务器 http 监听端口")
+	filerWebDavOptions.collection = cmdFiler.Flag.String("webdav.collection", "", "创建文件所用的集合")
+	filerWebDavOptions.replication = cmdFiler.Flag.String("webdav.replication", "", "创建文件所用的副本策略")
+	filerWebDavOptions.disk = cmdFiler.Flag.String("webdav.disk", "", "[hdd|ssd|<tag>] 机械硬盘、固态硬盘或任意标签")
+	filerWebDavOptions.tlsPrivateKey = cmdFiler.Flag.String("webdav.key.file", "", "TLS 私钥文件路径")
+	filerWebDavOptions.tlsCertificate = cmdFiler.Flag.String("webdav.cert.file", "", "TLS 证书文件路径")
+	filerWebDavOptions.cacheDir = cmdFiler.Flag.String("webdav.cacheDir", os.TempDir(), "文件 chunk 的本地缓存目录")
 	filerWebDavOptions.cacheSizeMB = cmdFiler.Flag.Int64("webdav.cacheCapacityMB", 0, "local cache capacity in MB")
-	filerWebDavOptions.maxMB = cmdFiler.Flag.Int("webdav.maxMB", 4, "split files larger than the limit")
-	filerWebDavOptions.filerRootPath = cmdFiler.Flag.String("webdav.filer.path", "/", "use this remote path from filer server")
+	filerWebDavOptions.maxMB = cmdFiler.Flag.Int("webdav.maxMB", 4, "拆分超过该限制的大文件")
+	filerWebDavOptions.filerRootPath = cmdFiler.Flag.String("webdav.filer.path", "/", "使用来自 filer 服务器的此远程路径")
 
 	// start iam on filer
-	filerStartIam = cmdFiler.Flag.Bool("iam", false, "whether to start IAM service")
-	filerIamOptions.ip = cmdFiler.Flag.String("iam.ip", *f.ip, "iam server http listen ip address")
-	filerIamOptions.port = cmdFiler.Flag.Int("iam.port", 8111, "iam server http listen port")
+	filerStartIam = cmdFiler.Flag.Bool("iam", false, "是否启动 IAM 服务")
+	filerIamOptions.ip = cmdFiler.Flag.String("iam.ip", *f.ip, "iam 服务器 http 监听 IP 地址")
+	filerIamOptions.port = cmdFiler.Flag.Int("iam.port", 8111, "iam 服务器 http 监听端口")
 
-	filerStartSftp = cmdFiler.Flag.Bool("sftp", false, "whether to start the SFTP server")
-	filerSftpOptions.port = cmdFiler.Flag.Int("sftp.port", 2022, "SFTP server listen port")
-	filerSftpOptions.sshPrivateKey = cmdFiler.Flag.String("sftp.sshPrivateKey", "", "path to the SSH private key file for host authentication")
-	filerSftpOptions.hostKeysFolder = cmdFiler.Flag.String("sftp.hostKeysFolder", "", "path to folder containing SSH private key files for host authentication")
-	filerSftpOptions.authMethods = cmdFiler.Flag.String("sftp.authMethods", "password,publickey", "comma-separated list of allowed auth methods: password, publickey, certificate")
-	filerSftpOptions.maxAuthTries = cmdFiler.Flag.Int("sftp.maxAuthTries", 6, "maximum number of authentication attempts per connection")
-	filerSftpOptions.bannerMessage = cmdFiler.Flag.String("sftp.bannerMessage", "SeaweedFS SFTP Server - Unauthorized access is prohibited", "message displayed before authentication")
-	filerSftpOptions.loginGraceTime = cmdFiler.Flag.Duration("sftp.loginGraceTime", 2*time.Minute, "timeout for authentication")
-	filerSftpOptions.clientAliveInterval = cmdFiler.Flag.Duration("sftp.clientAliveInterval", 5*time.Second, "interval for sending keep-alive messages")
-	filerSftpOptions.clientAliveCountMax = cmdFiler.Flag.Int("sftp.clientAliveCountMax", 3, "maximum number of missed keep-alive messages before disconnecting")
-	filerSftpOptions.userStoreFile = cmdFiler.Flag.String("sftp.userStoreFile", "", "path to JSON file containing user credentials and permissions")
-	filerSftpOptions.trustedUserCAKeysFile = cmdFiler.Flag.String("sftp.trustedUserCAKeysFile", "", "path to a file with trusted user CA public keys (OpenSSH authorized_keys format); required when 'certificate' is in -sftp.authMethods")
-	filerSftpOptions.dataCenter = cmdFiler.Flag.String("sftp.dataCenter", "", "prefer to read and write to volumes in this data center")
-	filerSftpOptions.bindIp = cmdFiler.Flag.String("sftp.ip.bind", "", "ip address to bind to. If empty, default to same as -ip.bind option.")
-	filerSftpOptions.localSocket = cmdFiler.Flag.String("sftp.localSocket", "", "default to /tmp/seaweedfs-sftp-<port>.sock")
+	filerStartSftp = cmdFiler.Flag.Bool("sftp", false, "是否启动 SFTP 服务器")
+	filerSftpOptions.port = cmdFiler.Flag.Int("sftp.port", 2022, "SFTP 服务器监听端口")
+	filerSftpOptions.sshPrivateKey = cmdFiler.Flag.String("sftp.sshPrivateKey", "", "用于主机认证的 SSH 私钥文件路径")
+	filerSftpOptions.hostKeysFolder = cmdFiler.Flag.String("sftp.hostKeysFolder", "", "包含用于主机认证的 SSH 私钥文件的文件夹路径")
+	filerSftpOptions.authMethods = cmdFiler.Flag.String("sftp.authMethods", "password,publickey", "逗号分隔的允许认证方式列表:password、publickey、certificate")
+	filerSftpOptions.maxAuthTries = cmdFiler.Flag.Int("sftp.maxAuthTries", 6, "每个连接的最大认证尝试次数")
+	filerSftpOptions.bannerMessage = cmdFiler.Flag.String("sftp.bannerMessage", "SeaweedFS SFTP Server - Unauthorized access is prohibited", "认证前显示的消息")
+	filerSftpOptions.loginGraceTime = cmdFiler.Flag.Duration("sftp.loginGraceTime", 2*time.Minute, "认证超时")
+	filerSftpOptions.clientAliveInterval = cmdFiler.Flag.Duration("sftp.clientAliveInterval", 5*time.Second, "发送保活消息的间隔")
+	filerSftpOptions.clientAliveCountMax = cmdFiler.Flag.Int("sftp.clientAliveCountMax", 3, "断开连接前允许错过的最大保活消息数")
+	filerSftpOptions.userStoreFile = cmdFiler.Flag.String("sftp.userStoreFile", "", "包含用户凭证和权限的 JSON 文件路径")
+	filerSftpOptions.trustedUserCAKeysFile = cmdFiler.Flag.String("sftp.trustedUserCAKeysFile", "", "包含受信任用户 CA 公钥的文件路径(OpenSSH authorized_keys 格式);当 -sftp.authMethods 中包含 'certificate' 时必需")
+	filerSftpOptions.dataCenter = cmdFiler.Flag.String("sftp.dataCenter", "", "优先读写此数据中心中的 volume")
+	filerSftpOptions.bindIp = cmdFiler.Flag.String("sftp.ip.bind", "", "绑定的 IP 地址。为空则默认与 -ip.bind 选项相同。")
+	filerSftpOptions.localSocket = cmdFiler.Flag.String("sftp.localSocket", "", "默认为 /tmp/seaweedfs-sftp-<port>.sock")
 }
 
 func filerLongDesc() string {
-	desc := `start a file server which accepts REST operation for any files.
+	desc := `启动一个文件服务器,接受对任意文件的 REST 操作。
 
-	//create or overwrite the file, the directories /path/to will be automatically created
+	//创建或覆盖文件,/path/to 目录会自动创建
 	POST /path/to/file
-	//get the file content
+	//获取文件内容
 	GET /path/to/file
-	//create or overwrite the file, the filename in the multipart request will be used
+	//创建或覆盖文件,使用 multipart 请求中的文件名
 	POST /path/to/
-	//return a json format subdirectory and files listing
+	//返回 json 格式的子目录和文件列表
 	GET /path/to/
 
-	The configuration file "filer.toml" is read from ".", "$HOME/.seaweedfs/", "/usr/local/etc/seaweedfs/", or "/etc/seaweedfs/", in that order.
-	If the "filer.toml" is not found, an embedded filer store will be created under "-defaultStoreDir".
+	配置文件 "filer.toml" 会按以下顺序读取:"."、"$HOME/.seaweedfs/"、"/usr/local/etc/seaweedfs/" 或 "/etc/seaweedfs/"。
+	如果找不到 "filer.toml",会在 "-defaultStoreDir" 下创建一个内嵌的 filer 存储。
 
-	The example filer.toml configuration file can be generated by "weed scaffold -config=filer"
+	示例 filer.toml 配置文件可通过 "weed scaffold -config=filer" 生成
 
-Supported Filer Stores:
+支持的 Filer 存储:
 `
 
 	storeNames := make([]string, len(filer.Stores))
@@ -222,7 +222,7 @@ Supported Filer Stores:
 
 var cmdFiler = &Command{
 	UsageLine: "filer -port=8888 -master=<ip:port>[,<ip:port>]*",
-	Short:     "start a file server that points to a master server, or a list of master servers",
+	Short:     "启动一个指向一个或多个 master 服务器的文件服务器",
 	Long:      filerLongDesc(),
 }
 

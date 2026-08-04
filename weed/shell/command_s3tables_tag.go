@@ -19,18 +19,18 @@ func (c *commandS3TablesTag) Name() string {
 }
 
 func (c *commandS3TablesTag) Help() string {
-	return `manage s3tables tags
+	return `管理 s3tables 标签
 
-# tag a table bucket
+# 为 table bucket 添加标签
 s3tables.tag -put -bucket <bucket> -account <account_id> -tags key1=val1,key2=val2
 
-# tag a table
+# 为 table 添加标签
 s3tables.tag -put -bucket <bucket> -account <account_id> -namespace <namespace> -name <table> -tags key1=val1,key2=val2
 
-# list tags for a resource
+# 列出资源标签
 s3tables.tag -list -bucket <bucket> -account <account_id> [-namespace <namespace> -name <table>]
 
-# remove tags
+# 删除标签
 s3tables.tag -delete -bucket <bucket> -account <account_id> [-namespace <namespace> -name <table>] -keys key1,key2
 `
 }

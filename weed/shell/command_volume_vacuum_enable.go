@@ -19,7 +19,7 @@ func (c *commandEnableVacuum) Name() string {
 }
 
 func (c *commandEnableVacuum) Help() string {
-	return `enable vacuuming request from Master
+	return `启用来自 Master 的 vacuum 请求
 
 	volume.vacuum.enable
 

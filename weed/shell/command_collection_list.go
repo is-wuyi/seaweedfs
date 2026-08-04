@@ -22,7 +22,7 @@ func (c *commandCollectionList) Name() string {
 }
 
 func (c *commandCollectionList) Help() string {
-	return `list all collections`
+	return `列出所有集合`
 }
 
 func (c *commandCollectionList) HasTag(CommandTag) bool {

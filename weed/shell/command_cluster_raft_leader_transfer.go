@@ -21,24 +21,23 @@ func (c *commandRaftLeaderTransfer) Name() string {
 }
 
 func (c *commandRaftLeaderTransfer) Help() string {
-	return `transfer raft leadership to another master server
+	return `将 raft leader 转移到另一台 master 服务器
 
-	This command initiates a graceful leadership transfer from the current
-	leader to another server. Use this before performing maintenance on
-	the current leader to reduce errors in filers and other components.
+	此命令启动一次从当前 leader 到另一台服务器的优雅 leader 转移。
+	在对当前 leader 执行维护之前使用此命令,以减少 filer 及其他组件中的错误。
 
-	Examples:
-		# Transfer to any eligible follower (auto-selection)
+	示例:
+		# 转移到任意合格的 follower(自动选择)
 		cluster.raft.transferLeader
 
-		# Transfer to a specific server
+		# 转移到指定服务器
 		cluster.raft.transferLeader -id <server_id> -address <server_grpc_address>
 
-	Notes:
-		- Requires hashicorp raft (-raftHashicorp=true on master)
-		- This command must be sent to the current leader
-		- The target server must be a voting member of the raft cluster
-		- Use 'cluster.raft.ps' to list available servers and identify the leader
+	注意:
+		- 需要 hashicorp raft(master 上设置 -raftHashicorp=true)
+		- 此命令必须发送给当前 leader
+		- 目标服务器必须是 raft 集群中具有投票权的成员
+		- 使用 'cluster.raft.ps' 列出可用服务器并确定 leader
 `
 }
 

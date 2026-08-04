@@ -8,12 +8,12 @@ import (
 templ ClusterMasters(data dash.ClusterMastersData) {
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">
-			<i class="fas fa-crown me-2"></i>Masters
+			<i class="fas fa-crown me-2"></i>master
 		</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group me-2">
 				<button type="button" class="btn btn-sm btn-outline-primary" onclick="exportMasters()">
-					<i class="fas fa-download me-1"></i>Export
+					<i class="fas fa-download me-1"></i>导出
 				</button>
 			</div>
 		</div>
@@ -28,7 +28,7 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									Total Masters
+									master 总数
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.TotalMasters) }
@@ -48,7 +48,7 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-									Leaders
+									leader
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.LeaderCount) }
@@ -68,13 +68,13 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-									Cluster Health
+									集群健康
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									if data.LeaderCount > 0 {
-										Healthy
+										健康
 									} else {
-										Warning
+										警告
 									}
 								</div>
 							</div>
@@ -91,7 +91,7 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">
-					<i class="fas fa-crown me-2"></i>Masters
+					<i class="fas fa-crown me-2"></i>master
 				</h6>
 			</div>
 			<div class="card-body">
@@ -100,10 +100,10 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 						<table class="table table-hover" id="mastersTable">
 							<thead>
 								<tr>
-									<th>Address</th>
-									<th>Role</th>
-									<th>Suffrage</th>
-									<th>Actions</th>
+									<th>地址</th>
+									<th>角色</th>
+									<th>投票权</th>
+									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -118,11 +118,11 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 										<td>
 											if master.IsLeader {
 												<span class="badge bg-warning text-dark">
-													<i class="fas fa-star me-1"></i>Leader
+													<i class="fas fa-star me-1"></i>leader
 												</span>
 											} else {
 												<span class="badge bg-secondary">
-													<i class="fas fa-circle me-1"></i>Follower
+													<i class="fas fa-circle me-1"></i>follower
 												</span>
 											}
 										</td>
@@ -136,9 +136,9 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 											}
 										</td>
 										<td>
-											<button type="button" 
-													class="btn btn-outline-primary btn-sm" 
-													title="View Details"
+											<button type="button"
+													class="btn btn-outline-primary btn-sm"
+													title="查看详情"
 													data-action="view-details"
 													data-address={master.Address}
 													data-leader={fmt.Sprintf("%t", master.IsLeader)}
@@ -154,8 +154,8 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 				} else {
 					<div class="text-center py-5">
 						<i class="fas fa-crown fa-3x text-muted mb-3"></i>
-						<h5 class="text-muted">No Masters Found</h5>
-						<p class="text-muted">No master servers are currently available in the cluster.</p>
+						<h5 class="text-muted">未找到 master</h5>
+						<p class="text-muted">集群中当前没有可用的 master 服务器。</p>
 					</div>
 				}
 			</div>
@@ -166,7 +166,7 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 			<div class="col-12">
 				<small class="text-muted">
 					<i class="fas fa-clock me-1"></i>
-					Last updated: { data.LastUpdated.Format("2006-01-02 15:04:05") }
+					最后更新: { data.LastUpdated.Format("2006-01-02 15:04:05") }
 				</small>
 			</div>
 		</div>
@@ -200,34 +200,34 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 			'<div class="modal-dialog modal-lg">' +
 			'<div class="modal-content">' +
 			'<div class="modal-header">' +
-			'<h5 class="modal-title"><i class="fas fa-crown me-2"></i>Master Details: ' + address + '</h5>' +
-			'<button type="button" class="btn-close" data-bs-dismiss="modal"></button>' +
-			'</div>' +
-			'<div class="modal-body">' +
-			'<div class="row">' +
-			'<div class="col-md-6">' +
-			'<h6 class="text-primary"><i class="fas fa-info-circle me-1"></i>Basic Information</h6>' +
-			'<table class="table table-sm">' +
-			'<tr><td><strong>Address:</strong></td><td>' + address + '</td></tr>' +
-			'<tr><td><strong>Role:</strong></td><td>' + 
-			(isLeader ? '<span class="badge bg-warning text-dark"><i class="fas fa-star me-1"></i>Leader</span>' : 
-			'<span class="badge bg-secondary">Follower</span>') + '</td></tr>' +
-			'<tr><td><strong>Suffrage:</strong></td><td>' + (suffrage || 'N/A') + '</td></tr>' +
-			'<tr><td><strong>Status:</strong></td><td><span class="badge bg-success">Active</span></td></tr>' +
-			'</table>' +
-			'</div>' +
-			'<div class="col-md-6">' +
-			'<h6 class="text-primary"><i class="fas fa-link me-1"></i>Quick Actions</h6>' +
-			'<div class="d-grid gap-2">' +
-			'<a href="//' + address + '" target="_blank" class="btn btn-outline-primary">' +
-			'<i class="fas fa-external-link-alt me-1"></i>Open Master UI' +
-			'</a>' +
-			'</div>' +
-			'</div>' +
-			'</div>' +
-			'</div>' +
-			'<div class="modal-footer">' +
-			'<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>' +
+			'<h5 class="modal-title"><i class="fas fa-crown me-2"></i>master 详情: ' + address + '</h5>' +
+		'<button type="button" class="btn-close" data-bs-dismiss="modal"></button>' +
+		'</div>' +
+		'<div class="modal-body">' +
+		'<div class="row">' +
+		'<div class="col-md-6">' +
+		'<h6 class="text-primary"><i class="fas fa-info-circle me-1"></i>基本信息</h6>' +
+		'<table class="table table-sm">' +
+		'<tr><td><strong>地址:</strong></td><td>' + address + '</td></tr>' +
+		'<tr><td><strong>角色:</strong></td><td>' +
+		(isLeader ? '<span class="badge bg-warning text-dark"><i class="fas fa-star me-1"></i>leader</span>' :
+		'<span class="badge bg-secondary">follower</span>') + '</td></tr>' +
+		'<tr><td><strong>投票权:</strong></td><td>' + (suffrage || 'N/A') + '</td></tr>' +
+		'<tr><td><strong>状态:</strong></td><td><span class="badge bg-success">活跃</span></td></tr>' +
+		'</table>' +
+		'</div>' +
+		'<div class="col-md-6">' +
+		'<h6 class="text-primary"><i class="fas fa-link me-1"></i>快速操作</h6>' +
+		'<div class="d-grid gap-2">' +
+		'<a href="//' + address + '" target="_blank" class="btn btn-outline-primary">' +
+		'<i class="fas fa-external-link-alt me-1"></i>打开 master UI' +
+		'</a>' +
+		'</div>' +
+		'</div>' +
+		'</div>' +
+		'</div>' +
+		'<div class="modal-footer">' +
+		'<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>' +
 			'</div>' +
 			'</div>' +
 			'</div>' +
@@ -264,8 +264,8 @@ templ ClusterMasters(data dash.ClusterMastersData) {
 			return null;
 		}).filter(row => row !== null);
 		
-		const csvContent = "data:text/csv;charset=utf-8," + 
-			"Address,Role,Suffrage\n" +
+		const csvContent = "data:text/csv;charset=utf-8," +
+			"地址,角色,投票权\n" +
 			rows.map(r => '"' + r.address + '","' + r.role + '","' + r.suffrage + '"').join("\n");
 		
 		const encodedUri = encodeURI(csvContent);

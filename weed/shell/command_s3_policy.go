@@ -25,18 +25,18 @@ func (c *commandS3Policy) Name() string {
 }
 
 func (c *commandS3Policy) Help() string {
-	return `manage s3 policies
+	return `管理 s3 策略
 
-	# create or update a policy
+	# 创建或更新策略
 	s3.policy -put -name=mypolicy -file=policy.json
 
-	# list all policies
+	# 列出所有策略
 	s3.policy -list
 
-	# get a policy
+	# 获取策略
 	s3.policy -get -name=mypolicy
 
-	# delete a policy
+	# 删除策略
 	s3.policy -delete -name=mypolicy
 	`
 }

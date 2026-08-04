@@ -32,29 +32,26 @@ func (c *commandS3LifecycleRunShard) Name() string {
 }
 
 func (c *commandS3LifecycleRunShard) Help() string {
-	return `manually run one daily-replay pass for the given shards
+	return `为给定的 shard 手动运行一次 daily-replay 轮次
 
-Drives dailyrun.Run once against the live filer + S3 server: builds
-the engine snapshot from filer-backed bucket configs, opens the
-meta-log subscription per shard, dispatches due actions via
-LifecycleDelete, and walks the live tree for any walker-bound rules.
-Persists each shard's cursor to /etc/s3/lifecycle/daily-cursors/
-so subsequent runs resume.
+针对实时的 filer + S3 服务器运行一次 dailyrun.Run：从 filer 支持的 bucket
+配置构建 engine 快照，按 shard 打开 meta-log 订阅，通过 LifecycleDelete
+分派到期的动作，并为任何 walker 绑定的规则遍历实时树。将每个 shard 的游标
+持久化到 /etc/s3/lifecycle/daily-cursors/，以便后续运行可恢复。
 
-Used by the s3-tests CI workflow and the test/s3/lifecycle/
-integration tests to drive expirations on demand without standing up
-the full admin+worker plugin stack.
+被 s3-tests CI 工作流和 test/s3/lifecycle/ 集成测试使用，用于按需驱动过期，
+而无需搭建完整的 admin+worker 插件栈。
 
-	# single shard
+	# 单个 shard
 	s3.lifecycle.run-shard -shard 0 -s3 localhost:8333 -events 100
 
-	# contiguous range
+	# 连续范围
 	s3.lifecycle.run-shard -shards 0-15 -s3 localhost:8333 -events 5000
 
-	# explicit set
+	# 显式集合
 	s3.lifecycle.run-shard -shards 0,3,7 -s3 localhost:8333
 
-	# bounded wall-clock
+	# 限定挂钟时间
 	s3.lifecycle.run-shard -shards 0-15 -s3 localhost:8333 -runtime 10s
 `
 }

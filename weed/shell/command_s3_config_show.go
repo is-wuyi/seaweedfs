@@ -21,12 +21,11 @@ func (c *commandS3ConfigShow) Name() string {
 }
 
 func (c *commandS3ConfigShow) Help() string {
-	return `show a summary of the current S3 IAM configuration
+	return `显示当前 S3 IAM 配置的概要
 
 	s3.config.show
 
-	Displays counts and a brief listing of users, policies, service accounts,
-	and groups. Use s3.iam.export for the full JSON dump.
+	显示用户、策略、服务账号和组的数量及简要列表。如需完整的 JSON 转储，请使用 s3.iam.export。
 `
 }
 

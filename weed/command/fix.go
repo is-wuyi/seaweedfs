@@ -29,10 +29,10 @@ func init() {
 
 var cmdFix = &Command{
 	UsageLine: "fix [-remoteFile=false] [-volumeId=234] [-collection=bigData] /tmp",
-	Short:     "run weed tool fix on files or whole folders to recreate index file(s) if corrupted",
-	Long: `Fix runs the SeaweedFS fix command on local dat files ( or remote files) or whole folders to re-create the index .idx file. If fixing remote files, you need to synchronize master.toml to the same directory on the current node as on the master node.
-  You Need to stop the volume server when running this command.
-  Use -ecx to rebuild a lost EC index (.ecx) — and the .vif when missing — from the local .ec## shards.
+	Short:     "对文件或整个目录运行 weed 工具 fix,在索引文件损坏时重建索引",
+	Long: `Fix 对本地 dat 文件(或远端文件)或整个目录运行 SeaweedFS fix 命令,以重新创建索引 .idx 文件。如果修复远端文件,你需要将 master.toml 同步到当前节点上与 master 节点相同的目录。
+  运行此命令时你需要停止 volume 服务器。
+  使用 -ecx 可从本地 .ec## 分片重建丢失的 EC 索引(.ecx)——以及在缺失时重建 .vif。
 `,
 }
 

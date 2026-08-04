@@ -85,21 +85,21 @@ func init() {
 
 var cmdAdmin = &Command{
 	UsageLine: "admin -port=23646 -master=localhost:9333 [-filerGroup=group] [-port.grpc=33646] [-dataDir=/path/to/data]",
-	Short:     "start SeaweedFS web admin interface",
-	Long: `Start a web admin interface for SeaweedFS cluster management.
+	Short:     "启动 SeaweedFS Web 管理界面",
+	Long: `启动一个用于 SeaweedFS 集群管理的 Web 管理界面。
 
-  The admin interface provides a modern web interface for:
-  - Cluster topology visualization and monitoring
-  - Volume management and operations
-  - File browser and management
-  - System metrics and performance monitoring
-  - Configuration management
-  - Maintenance operations
+  该管理界面提供了一个现代化的 Web 界面,用于:
+  - 集群拓扑可视化和监控
+  - 卷管理和操作
+  - 文件浏览和管理
+  - 系统指标和性能监控
+  - 配置管理
+  - 维护操作
 
-  The admin interface automatically discovers filers from the master servers.
-  A gRPC server for worker connections runs on the configured gRPC port (default: HTTP port + 10000).
+  管理界面会自动从 master 服务器发现 filer。
+  用于 worker 连接的 gRPC 服务器运行在配置的 gRPC 端口上(默认:HTTP 端口 + 10000)。
 
-  Example Usage:
+  示例用法:
     weed admin -port=23646 -master="master1:9333,master2:9333"
     weed admin -port=23646 -master="localhost:9333" -filerGroup="tenant-a"
     weed admin -port=23646 -master="localhost:9333" -dataDir="/var/lib/seaweedfs-admin"
@@ -107,88 +107,88 @@ var cmdAdmin = &Command{
     weed admin -port=9900 -port.grpc=19900 -master="localhost:9333"
     weed admin -port=23646 -master="localhost:9333" -urlPrefix="/seaweedfs"
 
-  Data Directory:
-    - If dataDir is specified, admin configuration and maintenance data is persisted
-    - The directory will be created if it doesn't exist
-    - Configuration files are stored in JSON format for easy editing
-    - Without dataDir, all configuration is kept in memory only
+  数据目录:
+    - 如果指定了 dataDir,管理配置和维护数据会被持久化
+    - 如果目录不存在则会自动创建
+    - 配置文件以 JSON 格式存储,便于编辑
+    - 不指定 dataDir 时,所有配置仅保存在内存中
 
-  Authentication:
-    - If adminPassword is not set, the admin interface runs without authentication
-    - If adminPassword is set, users must login with adminUser/adminPassword (full access)
-    - Optional read-only access: set readOnlyUser and readOnlyPassword for view-only access
-    - Read-only users can view cluster status and configurations but cannot make changes
-    - IMPORTANT: When read-only credentials are configured, adminPassword MUST also be set
-    - This ensures an admin account exists to manage and authorize read-only access
-    - Sessions are secured with auto-generated session keys
-    - Credentials can also be set via security.toml [admin] section or environment variables:
-      WEED_ADMIN_USER, WEED_ADMIN_PASSWORD, WEED_ADMIN_READONLY_USER, WEED_ADMIN_READONLY_PASSWORD
-    - Precedence: CLI flag > env var / security.toml > default value
+  身份认证:
+    - 如果未设置 adminPassword,管理界面将在无认证状态下运行
+    - 如果设置了 adminPassword,用户必须使用 adminUser/adminPassword 登录(完全访问权限)
+    - 可选的只读访问:设置 readOnlyUser 和 readOnlyPassword 以获得仅查看权限
+    - 只读用户可以查看集群状态和配置,但无法进行更改
+    - 重要:配置只读凭据时,必须同时设置 adminPassword
+    - 这确保存在管理员账号来管理和授权只读访问
+    - 会话通过自动生成的会话密钥进行保护
+    - 凭据也可通过 security.toml 的 [admin] 段或环境变量设置:
+      WEED_ADMIN_USER、WEED_ADMIN_PASSWORD、WEED_ADMIN_READONLY_USER、WEED_ADMIN_READONLY_PASSWORD
+    - 优先级:CLI 标志 > 环境变量 / security.toml > 默认值
 
-  Security Configuration:
-    - The admin server reads TLS configuration from security.toml
-    - Configure [https.admin] section in security.toml for HTTPS support
-    - If https.admin.key is set, the server will start in TLS mode
-    - If https.admin.ca is set, mutual TLS authentication is enabled
-    - Set strong adminPassword for production deployments
-    - Configure firewall rules to restrict admin interface access
+  安全配置:
+    - 管理 server 从 security.toml 读取 TLS 配置
+    - 在 security.toml 中配置 [https.admin] 段以支持 HTTPS
+    - 如果设置了 https.admin.key,服务器将以 TLS 模式启动
+    - 如果设置了 https.admin.ca,则启用双向 TLS 认证
+    - 生产环境部署请设置强 adminPassword
+    - 配置防火墙规则以限制管理界面的访问
 
-  security.toml Example:
+  security.toml 示例:
     [https.admin]
     cert = "/etc/ssl/admin.crt"
     key = "/etc/ssl/admin.key"
-    ca = "/etc/ssl/ca.crt"     # optional, for mutual TLS
+    ca = "/etc/ssl/ca.crt"     # 可选,用于双向 TLS
 
-  Worker Communication:
-    - Workers connect via gRPC on HTTP port + 10000
-    - Workers use [grpc.admin] configuration from security.toml
-    - TLS is automatically used if certificates are configured
-    - Workers fall back to insecure connections if TLS is unavailable
+  Worker 通信:
+    - worker 通过 HTTP 端口 + 10000 上的 gRPC 连接
+    - worker 使用 security.toml 中的 [grpc.admin] 配置
+    - 如果配置了证书,会自动使用 TLS
+    - 如果 TLS 不可用,worker 会回退到非安全连接
 
-  Plugin:
-    - Always enabled on the worker gRPC port
-    - Registers plugin.proto gRPC service on the same worker gRPC port
-    - External workers connect with: weed worker -admin=<admin_host:admin_port>
-    - Persists plugin metadata under dataDir/plugin when dataDir is configured
+  插件:
+    - 始终在 worker gRPC 端口上启用
+    - 在同一个 worker gRPC 端口上注册 plugin.proto gRPC 服务
+    - 外部 worker 通过以下方式连接:weed worker -admin=<admin_host:admin_port>
+    - 配置了 dataDir 时,插件元数据会持久化到 dataDir/plugin 下
 
-  URL Prefix (Subdirectory Deployment):
-    - Use -urlPrefix to run the admin UI behind a reverse proxy under a subdirectory
-    - Example: -urlPrefix="/seaweedfs" makes the UI available at /seaweedfs/admin
-    - The reverse proxy should forward /seaweedfs/* requests to the admin server
-    - All static assets, API endpoints, and navigation links will use the prefix
-    - Session cookies are scoped to the prefix path
+  URL 前缀(子目录部署):
+    - 使用 -urlPrefix 在反向代理的子目录下运行管理 UI
+    - 示例:-urlPrefix="/seaweedfs" 使 UI 可在 /seaweedfs/admin 访问
+    - 反向代理应将 /seaweedfs/* 请求转发到管理服务器
+    - 所有静态资源、API 端点和导航链接都会使用该前缀
+    - 会话 cookie 的作用域限定于该前缀路径
 
-  Debugging and Profiling:
-    - Use -debug to start a pprof HTTP server for live profiling (localhost only)
-    - Set -debug.port to choose the pprof port (default 6060)
-    - Profiles are accessible at http://127.0.0.1:<debug.port>/debug/pprof/
-    - Use -cpuprofile and -memprofile to write profiles to files on shutdown
-    - WARNING: -debug exposes runtime internals; use only in trusted environments
-    - Examples:
+  调试和分析:
+    - 使用 -debug 启动 pprof HTTP 服务器进行实时性能分析(仅限 localhost)
+    - 设置 -debug.port 来选择 pprof 端口(默认 6060)
+    - 性能分析可通过 http://127.0.0.1:<debug.port>/debug/pprof/ 访问
+    - 使用 -cpuprofile 和 -memprofile 在关闭时将性能分析写入文件
+    - 警告:-debug 会暴露运行时内部信息;仅在受信任的环境中使用
+    - 示例:
       weed admin -debug -debug.port=6060 -master="localhost:9333"
       weed admin -cpuprofile=cpu.prof -memprofile=mem.prof -master="localhost:9333"
 
-  Metrics:
-    - Use -metricsPort to expose Prometheus metrics at http://<host>:<metricsPort>/metrics
-    - Use -metricsIp to bind the metrics endpoint to a specific ip (default: all interfaces)
-    - Metrics are disabled when -metricsPort is 0 (the default)
-    - Example: weed admin -metricsPort=9327 -master="localhost:9333"
+  指标:
+    - 使用 -metricsPort 在 http://<host>:<metricsPort>/metrics 暴露 Prometheus 指标
+    - 使用 -metricsIp 将指标端点绑定到特定 ip(默认:所有接口)
+    - 当 -metricsPort 为 0(默认值)时禁用指标
+    - 示例:weed admin -metricsPort=9327 -master="localhost:9333"
 
-  Maintenance Configuration:
-    - An optional admin.toml declares maintenance task settings
-      ([maintenance.vacuum], [maintenance.balance], [maintenance.erasure_coding])
-    - Settings in admin.toml are applied at every startup, overriding values
-      saved from the admin UI, so they can be managed declaratively
-    - Requires -dataDir; values can also be set via WEED_* environment
-      variables, e.g. WEED_MAINTENANCE_VACUUM_GARBAGE_THRESHOLD=0.3
-    - Settings are applied to both the legacy task policy and the plugin
-      config store, so they take effect for the admin UI and plugin workers
-    - Generate example admin.toml: weed scaffold -config=admin
+  维护配置:
+    - 可选的 admin.toml 声明维护任务设置
+      ([maintenance.vacuum]、[maintenance.balance]、[maintenance.erasure_coding])
+    - admin.toml 中的设置会在每次启动时应用,覆盖从管理 UI
+      保存的值,因此可以以声明式方式管理
+    - 需要 -dataDir;值也可通过 WEED_* 环境变量设置,
+      例如 WEED_MAINTENANCE_VACUUM_GARBAGE_THRESHOLD=0.3
+    - 设置会同时应用到旧版任务策略和插件配置存储,
+      因此对管理 UI 和插件 worker 都生效
+    - 生成示例 admin.toml:weed scaffold -config=admin
 
-  Configuration File:
-    - The security.toml and admin.toml files are read from ".", "$HOME/.seaweedfs/",
-      "/usr/local/etc/seaweedfs/", or "/etc/seaweedfs/", in that order
-    - Generate example security.toml: weed scaffold -config=security
+  配置文件:
+    - security.toml 和 admin.toml 文件会按以下顺序读取:"."、"$HOME/.seaweedfs/"、
+      "/usr/local/etc/seaweedfs/" 或 "/etc/seaweedfs/"
+    - 生成示例 security.toml:weed scaffold -config=security
 
 `,
 }

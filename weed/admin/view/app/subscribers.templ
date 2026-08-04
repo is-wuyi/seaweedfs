@@ -8,8 +8,8 @@ templ Subscribers(data dash.SubscribersData) {
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="h3 mb-0">Message Queue Subscribers</h1>
-                    <small class="text-muted">Last updated: {data.LastUpdated.Format("2006-01-02 15:04:05")}</small>
+                    <h1 class="h3 mb-0">消息队列订阅者</h1>
+                    <small class="text-muted">最后更新: {data.LastUpdated.Format("2006-01-02 15:04:05")}</small>
                 </div>
 
                 <!-- Summary Cards -->
@@ -17,7 +17,7 @@ templ Subscribers(data dash.SubscribersData) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-body">
-                                <h5 class="card-title">Total Subscribers</h5>
+                                <h5 class="card-title">订阅者总数</h5>
                                 <h3 class="text-primary">{fmt.Sprintf("%d", data.TotalSubscribers)}</h3>
                             </div>
                         </div>
@@ -25,7 +25,7 @@ templ Subscribers(data dash.SubscribersData) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-body">
-                                <h5 class="card-title">Active Subscribers</h5>
+                                <h5 class="card-title">活跃订阅者</h5>
                                 <h3 class="text-success">{fmt.Sprintf("%d", data.ActiveSubscribers)}</h3>
                             </div>
                         </div>
@@ -33,7 +33,7 @@ templ Subscribers(data dash.SubscribersData) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-body">
-                                <h5 class="card-title">Inactive Subscribers</h5>
+                                <h5 class="card-title">非活跃订阅者</h5>
                                 <h3 class="text-warning">{fmt.Sprintf("%d", data.TotalSubscribers - data.ActiveSubscribers)}</h3>
                             </div>
                         </div>
@@ -43,10 +43,10 @@ templ Subscribers(data dash.SubscribersData) {
                 <!-- Subscribers Table -->
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Subscribers</h5>
+                        <h5 class="mb-0">订阅者</h5>
                         <div>
                             <button class="btn btn-sm btn-outline-secondary" onclick="exportSubscribersCSV()">
-                                <i class="fas fa-download me-1"></i>Export CSV
+                                <i class="fas fa-download me-1"></i>导出 CSV
                             </button>
                         </div>
                     </div>
@@ -54,21 +54,21 @@ templ Subscribers(data dash.SubscribersData) {
                         if len(data.Subscribers) == 0 {
                             <div class="text-center py-4">
                                 <i class="fas fa-user-friends fa-3x text-muted mb-3"></i>
-                                <h5>No Subscribers Found</h5>
-                                <p class="text-muted">No message queue subscribers are currently active.</p>
+                                <h5>未找到订阅者</h5>
+                                <p class="text-muted">当前没有活跃的消息队列订阅者。</p>
                             </div>
                         } else {
                             <div class="table-responsive">
                                 <table class="table table-striped" id="subscribersTable">
                                     <thead>
                                         <tr>
-                                            <th>Subscriber Name</th>
-                                            <th>Topic</th>
-                                            <th>Consumer Group</th>
-                                            <th>Status</th>
-                                            <th>Messages Processed</th>
-                                            <th>Last Seen</th>
-                                            <th>Created</th>
+                                            <th>订阅者名称</th>
+                                            <th>topic</th>
+                                            <th>consumer group</th>
+                                            <th>状态</th>
+                                            <th>已处理消息</th>
+                                            <th>最近可见</th>
+                                            <th>创建时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,9 +83,9 @@ templ Subscribers(data dash.SubscribersData) {
                                                 <td>{subscriber.ConsumerGroup}</td>
                                                 <td>
                                                     if subscriber.Status == "active" {
-                                                        <span class="badge bg-success">Active</span>
+                                                        <span class="badge bg-success">活跃</span>
                                                     } else if subscriber.Status == "inactive" {
-                                                        <span class="badge bg-warning">Inactive</span>
+                                                        <span class="badge bg-warning">非活跃</span>
                                                     } else {
                                                         <span class="badge bg-secondary">{subscriber.Status}</span>
                                                     }
@@ -95,7 +95,7 @@ templ Subscribers(data dash.SubscribersData) {
                                                     if !subscriber.LastSeen.IsZero() {
                                                         <span class="text-muted">{subscriber.LastSeen.Format("2006-01-02 15:04:05")}</span>
                                                     } else {
-                                                        <span class="text-muted">Never</span>
+                                                        <span class="text-muted">从未</span>
                                                     }
                                                 </td>
                                                 <td>

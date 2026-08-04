@@ -25,15 +25,15 @@ func (c *commandRemoteMountBuckets) Name() string {
 }
 
 func (c *commandRemoteMountBuckets) Help() string {
-	return `mount all buckets in remote storage and pull its metadata
+	return `挂载远端存储中的所有 bucket 并拉取其元数据
 
-	# assume a remote storage is configured to name "cloud1"
+	# 假设远端存储已配置为名称 "cloud1"
 	remote.configure -name=cloud1 -type=s3 -s3.access_key=xxx -s3.secret_key=yyy
 
-	# mount all buckets
+	# 挂载所有 bucket
 	remote.mount.buckets -remote=cloud1
 
-	# after mount, start a separate process to write updates to remote storage
+	# 挂载后，启动一个独立的进程将更新写入远端存储
 	weed filer.remote.gateway -filer=<filerHost>:<filerPort> -createBucketAt=cloud1
 
 `

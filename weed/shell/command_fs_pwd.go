@@ -17,7 +17,7 @@ func (c *commandFsPwd) Name() string {
 }
 
 func (c *commandFsPwd) Help() string {
-	return `print out current directory`
+	return `显示当前目录`
 }
 
 func (c *commandFsPwd) HasTag(CommandTag) bool {

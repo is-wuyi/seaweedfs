@@ -22,15 +22,15 @@ func (c *commandFsRm) Name() string {
 }
 
 func (c *commandFsRm) Help() string {
-	return `remove file and directory entries
+	return `删除文件和目录条目
 
 	fs.rm [-rf] <entry1> <entry2> ...
 
 	fs.rm /dir/file_name1 dir/file_name2
 	fs.rm /dir
 
-	The option "-r" can be recursive.
-	The option "-f" can be ignored by recursive error.
+	选项 "-r" 可递归删除。
+	选项 "-f" 可忽略递归错误。
 `
 }
 

@@ -20,7 +20,7 @@ func (c *commandSleep) Name() string {
 }
 
 func (c *commandSleep) Help() string {
-	return `sleep for N seconds (useful to simulate long running jobs)
+	return `睡眠 N 秒(用于模拟长时间运行的任务)
 
 	sleep 5
 `

@@ -27,21 +27,21 @@ func (c *commandVolumeTierCompact) Name() string {
 }
 
 func (c *commandVolumeTierCompact) Help() string {
-	return `compact remote volumes to reclaim space on cloud storage
+	return `压缩远程卷以回收云存储上的空间
 
 	volume.tier.compact [-volumeId=<volume_id>]
 	volume.tier.compact [-collection=""] [-garbageThreshold=0.3]
 
-	e.g.:
+	例如:
 	volume.tier.compact -volumeId=7
 	volume.tier.compact -collection="mybucket" -garbageThreshold=0.2
 
-	This command compacts cloud tier volumes by:
-	1. Downloading the .dat file from remote storage to local
-	2. Running compaction to remove deleted data
-	3. Uploading the compacted .dat file back to remote storage
+	此命令通过以下方式压缩云分层卷:
+	1. 将 .dat 文件从远程存储下载到本地
+	2. 运行压缩以移除已删除的数据
+	3. 将压缩后的 .dat 文件上传回远程存储
 
-	This reclaims space on remote storage that was used by deleted files.
+	此操作可回收远程存储上被已删除文件占用的空间。
 
 `
 }

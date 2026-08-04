@@ -22,13 +22,12 @@ func (c *commandS3AccessKeyCreate) Name() string {
 }
 
 func (c *commandS3AccessKeyCreate) Help() string {
-	return `create an additional access key for an S3 IAM user
+	return `为 S3 IAM 用户创建额外的访问密钥
 
 	s3.accesskey.create -user <username>
 	s3.accesskey.create -user <username> -access_key <key> -secret_key <secret>
 
-	Generates a new credential pair for an existing user. If -access_key and
-	-secret_key are omitted, they are generated automatically.
+	为已有用户生成新的凭证对。如果省略 -access_key 和 -secret_key，将自动生成。
 `
 }
 

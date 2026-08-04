@@ -50,16 +50,16 @@ func init() {
 
 var cmdFilerMetaBackup = &Command{
 	UsageLine: "filer.meta.backup [-filer=localhost:8888] [-filerDir=/] [-includePrefixes=...] [-excludePrefixes=...] [-restart] -config=/path/to/backup_filer.toml",
-	Short:     "continuously backup filer meta data changes to anther filer store specified in a backup_filer.toml",
-	Long: `continuously backup filer meta data changes.
-The backup writes to another filer store specified in a backup_filer.toml.
+	Short:     "持续将 filer 元数据变更备份到 backup_filer.toml 中指定的另一 filer 存储",
+	Long: `持续备份 filer 元数据变更。
+备份会写入到 backup_filer.toml 中指定的另一个 filer 存储。
 
 	weed filer.meta.backup -config=/path/to/backup_filer.toml -filer="localhost:8888"
 	weed filer.meta.backup -config=/path/to/backup_filer.toml -filer="localhost:8888" -restart
 
-The -includePrefixes and -excludePrefixes flags accept comma-separated path prefixes.
-Paths must be absolute (start with '/'). Matching is at directory boundaries.
-When both match, the deeper prefix wins.
+-includePrefixes 和 -excludePrefixes 标志接受以逗号分隔的路径前缀。
+路径必须为绝对路径(以 '/' 开头)。匹配在目录边界进行。
+当两者都匹配时,更深层的前缀优先。
   `,
 }
 

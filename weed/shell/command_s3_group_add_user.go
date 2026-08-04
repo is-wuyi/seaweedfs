@@ -22,7 +22,7 @@ func (c *commandS3GroupAddUser) Name() string {
 }
 
 func (c *commandS3GroupAddUser) Help() string {
-	return `add a user to an S3 IAM group
+	return `将用户添加到 S3 IAM 组
 
 	s3.group.add-user -group <groupname> -user <username>
 `

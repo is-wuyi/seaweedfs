@@ -83,52 +83,52 @@ type S3Options struct {
 
 func init() {
 	cmdS3.Run = runS3 // break init cycle
-	s3StandaloneOptions.filer = cmdS3.Flag.String("filer", "localhost:8888", "comma-separated filer server addresses for high availability")
-	s3StandaloneOptions.ip = cmdS3.Flag.String("ip", "", "ip address advertised to the cluster. If empty, default to -ip.bind, or the auto-detected address.")
-	s3StandaloneOptions.bindIp = cmdS3.Flag.String("ip.bind", "", "ip address to bind to. If empty, default to 0.0.0.0.")
-	s3StandaloneOptions.port = cmdS3.Flag.Int("port", 8333, "s3 server http listen port")
-	s3StandaloneOptions.portHttps = cmdS3.Flag.Int("port.https", 0, "s3 server https listen port")
-	s3StandaloneOptions.portGrpc = cmdS3.Flag.Int("port.grpc", 0, "s3 server grpc listen port")
-	s3StandaloneOptions.portIceberg = cmdS3.Flag.Int("port.iceberg", 8181, "Iceberg REST Catalog server listen port (0 to disable)")
-	s3StandaloneOptions.domainName = cmdS3.Flag.String("domainName", "", "suffix of the host name in comma separated list, {bucket}.{domainName}")
-	s3StandaloneOptions.allowedOrigins = cmdS3.Flag.String("allowedOrigins", "*", "comma separated list of allowed origins")
-	s3StandaloneOptions.dataCenter = cmdS3.Flag.String("dataCenter", "", "prefer to read and write to volumes in this data center")
-	s3StandaloneOptions.config = cmdS3.Flag.String("config", "", "path to the config file")
-	s3StandaloneOptions.iamConfig = cmdS3.Flag.String("iam.config", "", "path to the advanced IAM config file")
-	s3StandaloneOptions.auditLogConfig = cmdS3.Flag.String("auditLogConfig", "", "path to the audit log config file")
-	s3StandaloneOptions.tlsPrivateKey = cmdS3.Flag.String("key.file", "", "path to the TLS private key file")
-	s3StandaloneOptions.tlsCertificate = cmdS3.Flag.String("cert.file", "", "path to the TLS certificate file")
-	s3StandaloneOptions.tlsCACertificate = cmdS3.Flag.String("cacert.file", "", "path to the TLS CA certificate file")
-	s3StandaloneOptions.tlsVerifyClientCert = cmdS3.Flag.Bool("tlsVerifyClientCert", false, "whether to verify the client's certificate")
-	s3StandaloneOptions.metricsHttpPort = cmdS3.Flag.Int("metricsPort", 0, "Prometheus metrics listen port")
-	s3StandaloneOptions.metricsHttpIp = cmdS3.Flag.String("metricsIp", "", "metrics listen ip. If empty, default to same as -ip.bind option.")
-	cmdS3.Flag.Bool("allowEmptyFolder", true, "deprecated, ignored. Empty folder cleanup is now automatic.")
-	s3StandaloneOptions.allowDeleteBucketNotEmpty = cmdS3.Flag.Bool("allowDeleteBucketNotEmpty", true, "allow recursive deleting all entries along with bucket")
-	s3StandaloneOptions.localFilerSocket = cmdS3.Flag.String("localFilerSocket", "", "local filer socket path")
-	s3StandaloneOptions.localSocket = cmdS3.Flag.String("localSocket", "", "default to /tmp/seaweedfs-s3-<port>.sock")
-	s3StandaloneOptions.idleTimeout = cmdS3.Flag.Int("idleTimeout", 120, "connection idle seconds")
-	s3StandaloneOptions.concurrentUploadLimitMB = cmdS3.Flag.Int("concurrentUploadLimitMB", 0, "limit total concurrent upload size, 0 means unlimited")
-	s3StandaloneOptions.concurrentFileUploadLimit = cmdS3.Flag.Int("concurrentFileUploadLimit", 0, "limit number of concurrent file uploads, 0 means unlimited")
-	s3StandaloneOptions.enableIam = cmdS3.Flag.Bool("iam", true, "enable embedded IAM API on the same port")
-	s3StandaloneOptions.iamReadOnly = cmdS3.Flag.Bool("iam.readOnly", true, "disable IAM write operations on this server")
-	s3StandaloneOptions.debug = cmdS3.Flag.Bool("debug", false, "serves runtime profiling data via pprof on the port specified by -debug.port")
-	s3StandaloneOptions.debugPort = cmdS3.Flag.Int("debug.port", 6060, "http port for debugging")
-	s3StandaloneOptions.cipher = cmdS3.Flag.Bool("encryptVolumeData", false, "encrypt data on volume servers")
-	s3StandaloneOptions.externalUrl = cmdS3.Flag.String("externalUrl", "", "the external URL clients use to connect (e.g. https://api.example.com:9000). Used for S3 signature verification behind a reverse proxy. Falls back to S3_EXTERNAL_URL env var.")
-	s3StandaloneOptions.defaultFileMode = cmdS3.Flag.String("defaultFileMode", "", "default file mode for S3 uploaded objects, e.g. 0660, 0644, 0666")
+	s3StandaloneOptions.filer = cmdS3.Flag.String("filer", "localhost:8888", "逗号分隔的 filer 服务器地址,用于高可用")
+	s3StandaloneOptions.ip = cmdS3.Flag.String("ip", "", "向集群通告的 IP 地址。为空则默认为 -ip.bind,或自动检测的地址。")
+	s3StandaloneOptions.bindIp = cmdS3.Flag.String("ip.bind", "", "绑定的 IP 地址。为空则默认为 0.0.0.0。")
+	s3StandaloneOptions.port = cmdS3.Flag.Int("port", 8333, "s3 服务器 http 监听端口")
+	s3StandaloneOptions.portHttps = cmdS3.Flag.Int("port.https", 0, "s3 服务器 https 监听端口")
+	s3StandaloneOptions.portGrpc = cmdS3.Flag.Int("port.grpc", 0, "s3 服务器 grpc 监听端口")
+	s3StandaloneOptions.portIceberg = cmdS3.Flag.Int("port.iceberg", 8181, "Iceberg REST Catalog 服务器监听端口(0 表示禁用)")
+	s3StandaloneOptions.domainName = cmdS3.Flag.String("domainName", "", "以逗号分隔的主机名后缀列表,{bucket}.{domainName}")
+	s3StandaloneOptions.allowedOrigins = cmdS3.Flag.String("allowedOrigins", "*", "逗号分隔的允许来源列表")
+	s3StandaloneOptions.dataCenter = cmdS3.Flag.String("dataCenter", "", "优先读写此数据中心中的 volume")
+	s3StandaloneOptions.config = cmdS3.Flag.String("config", "", "配置文件路径")
+	s3StandaloneOptions.iamConfig = cmdS3.Flag.String("iam.config", "", "高级 IAM 配置文件路径")
+	s3StandaloneOptions.auditLogConfig = cmdS3.Flag.String("auditLogConfig", "", "审计日志配置文件路径")
+	s3StandaloneOptions.tlsPrivateKey = cmdS3.Flag.String("key.file", "", "TLS 私钥文件路径")
+	s3StandaloneOptions.tlsCertificate = cmdS3.Flag.String("cert.file", "", "TLS 证书文件路径")
+	s3StandaloneOptions.tlsCACertificate = cmdS3.Flag.String("cacert.file", "", "TLS CA 证书文件路径")
+	s3StandaloneOptions.tlsVerifyClientCert = cmdS3.Flag.Bool("tlsVerifyClientCert", false, "是否验证客户端证书")
+	s3StandaloneOptions.metricsHttpPort = cmdS3.Flag.Int("metricsPort", 0, "Prometheus 指标监听端口")
+	s3StandaloneOptions.metricsHttpIp = cmdS3.Flag.String("metricsIp", "", "指标监听 IP。为空则默认与 -ip.bind 选项相同。")
+	cmdS3.Flag.Bool("allowEmptyFolder", true, "已废弃,忽略。空文件夹清理现已自动执行。")
+	s3StandaloneOptions.allowDeleteBucketNotEmpty = cmdS3.Flag.Bool("allowDeleteBucketNotEmpty", true, "允许连同 bucket 递归删除所有条目")
+	s3StandaloneOptions.localFilerSocket = cmdS3.Flag.String("localFilerSocket", "", "本地 filer socket 路径")
+	s3StandaloneOptions.localSocket = cmdS3.Flag.String("localSocket", "", "默认为 /tmp/seaweedfs-s3-<port>.sock")
+	s3StandaloneOptions.idleTimeout = cmdS3.Flag.Int("idleTimeout", 120, "连接空闲秒数")
+	s3StandaloneOptions.concurrentUploadLimitMB = cmdS3.Flag.Int("concurrentUploadLimitMB", 0, "限制总并发上传大小,0 表示不限制")
+	s3StandaloneOptions.concurrentFileUploadLimit = cmdS3.Flag.Int("concurrentFileUploadLimit", 0, "限制并发文件上传数量,0 表示不限制")
+	s3StandaloneOptions.enableIam = cmdS3.Flag.Bool("iam", true, "在同一端口上启用内嵌 IAM API")
+	s3StandaloneOptions.iamReadOnly = cmdS3.Flag.Bool("iam.readOnly", true, "禁用此服务器上的 IAM 写操作")
+	s3StandaloneOptions.debug = cmdS3.Flag.Bool("debug", false, "在 -debug.port 指定的端口上通过 pprof 提供运行时性能分析数据")
+	s3StandaloneOptions.debugPort = cmdS3.Flag.Int("debug.port", 6060, "用于调试的 http 端口")
+	s3StandaloneOptions.cipher = cmdS3.Flag.Bool("encryptVolumeData", false, "加密 volume 服务器上的数据")
+	s3StandaloneOptions.externalUrl = cmdS3.Flag.String("externalUrl", "", "客户端用于连接的外部 URL(例如 https://api.example.com:9000)。用于反向代理后的 S3 签名验证。回退到 S3_EXTERNAL_URL 环境变量。")
+	s3StandaloneOptions.defaultFileMode = cmdS3.Flag.String("defaultFileMode", "", "S3 上传对象的默认文件模式,例如 0660、0644、0666")
 	s3StandaloneOptions.cacheSizeMB = cmdS3.Flag.Int64("cacheCapacityMB", 0, "in-memory chunk cache capacity in MB for S3 GETs shared across requests (0 disables)")
 }
 
 var cmdS3 = &Command{
 	UsageLine: "s3 [-port=8333] [-filer=<ip:port>[,<ip:port>]...] [-config=</path/to/config.json>]",
-	Short:     "start a s3 API compatible server that is backed by filer(s)",
-	Long: `start a s3 API compatible server that is backed by filer(s).
+	Short:     "启动一个由 filer 支撑的 S3 API 兼容服务器",
+	Long: `启动一个由 filer 支撑的 S3 API 兼容服务器。
 
-	Multiple filer addresses can be specified for high availability, separated by commas.
-	The S3 server will automatically failover between filers if one becomes unavailable.
+	可指定多个 filer 地址以实现高可用,以逗号分隔。
+	如果某个 filer 不可用,S3 服务器会自动在 filer 之间进行故障转移。
 
-	By default, you can use any access key and secret key to access the S3 APIs.
-	To enable credential based access, create a config.json file similar to this:
+	默认情况下,你可以使用任意访问密钥和秘密密钥来访问 S3 API。
+	要启用基于凭据的访问,请创建一个类似如下的 config.json 文件:
 
 {
   "identities": [
@@ -199,13 +199,12 @@ var cmdS3 = &Command{
   ]
 }
 
-	Alternatively, you can use environment variables as fallback admin credentials:
+	或者,你可以使用环境变量作为备用管理员凭据:
 
 	AWS_ACCESS_KEY_ID=your_access_key AWS_SECRET_ACCESS_KEY=your_secret_key weed s3
 
-	Environment variables are only used when no S3 configuration file is provided
-	and no configuration is available from the filer. This provides a simple way
-	to get started without requiring configuration files.
+	仅当未提供 S3 配置文件且无法从 filer 获取配置时,才会使用环境变量。
+	这提供了一种无需配置文件即可快速上手的简单方式。
 
 `,
 }

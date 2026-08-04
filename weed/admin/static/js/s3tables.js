@@ -56,7 +56,7 @@ function initS3TablesBuckets() {
                     });
                 } catch (error) {
                     console.error('Error fetching users for owner dropdown:', error);
-                    ownerSelect.innerHTML = '<option value="">No owner (admin-only access)</option>';
+                    ownerSelect.innerHTML = '<option value="">无所有者(仅管理员访问)</option>';
                     ownerSelect.selectedIndex = 0;
                 }
             }
@@ -118,13 +118,13 @@ function initS3TablesBuckets() {
                 });
                 const data = await response.json();
                 if (!response.ok) {
-                    alert(data.error || 'Failed to create bucket');
+                    alert(data.error || '创建桶失败');
                     return;
                 }
-                alert('Bucket created successfully');
+                alert('桶创建成功');
                 location.reload();
             } catch (error) {
-                alert('Failed to create bucket: ' + error.message);
+                alert('创建桶失败:' + error.message);
             }
         });
     }
@@ -136,7 +136,7 @@ function initS3TablesBuckets() {
             const bucketArn = document.getElementById('s3tablesBucketPolicyArn').value;
             const policy = document.getElementById('s3tablesBucketPolicyText').value.trim();
             if (!policy) {
-                alert('Policy JSON is required');
+                alert('策略 JSON 是必需的');
                 return;
             }
             try {
@@ -147,13 +147,13 @@ function initS3TablesBuckets() {
                 });
                 const data = await response.json();
                 if (!response.ok) {
-                    alert(data.error || 'Failed to update policy');
+                    alert(data.error || '更新策略失败');
                     return;
                 }
-                alert('Policy updated');
+                alert('策略已更新');
                 s3tablesBucketPolicyModal.hide();
             } catch (error) {
-                alert('Failed to update policy: ' + error.message);
+                alert('更新策略失败:' + error.message);
             }
         });
     }
@@ -165,7 +165,7 @@ function initS3TablesBuckets() {
             const resourceArn = document.getElementById('s3tablesTagsResourceArn').value;
             const tags = parseTagsInput(document.getElementById('s3tablesTagsInput').value.trim());
             if (tags === null || Object.keys(tags).length === 0) {
-                alert('Please provide tags to update');
+                alert('请提供要更新的标签');
                 return;
             }
             await updateS3TablesTags(resourceArn, tags);
@@ -237,7 +237,7 @@ function initS3TablesTables() {
                 try {
                     metadata = JSON.parse(metadataText);
                 } catch (error) {
-                    alert('Invalid metadata JSON');
+                    alert('无效的元数据 JSON');
                     return;
                 }
             }
@@ -253,13 +253,13 @@ function initS3TablesTables() {
                 });
                 const data = await response.json();
                 if (!response.ok) {
-                    alert(data.error || 'Failed to create table');
+                    alert(data.error || '创建表失败');
                     return;
                 }
-                alert('Table created');
+                alert('表已创建');
                 location.reload();
             } catch (error) {
-                alert('Failed to create table: ' + error.message);
+                alert('创建表失败:' + error.message);
             }
         });
     }
@@ -270,7 +270,7 @@ function initS3TablesTables() {
             e.preventDefault();
             const policy = document.getElementById('s3tablesTablePolicyText').value.trim();
             if (!policy) {
-                alert('Policy JSON is required');
+                alert('策略 JSON 是必需的');
                 return;
             }
             try {
@@ -281,13 +281,13 @@ function initS3TablesTables() {
                 });
                 const data = await response.json();
                 if (!response.ok) {
-                    alert(data.error || 'Failed to update policy');
+                    alert(data.error || '更新策略失败');
                     return;
                 }
-                alert('Policy updated');
+                alert('策略已更新');
                 s3tablesTablePolicyModal.hide();
             } catch (error) {
-                alert('Failed to update policy: ' + error.message);
+                alert('更新策略失败:' + error.message);
             }
         });
     }
@@ -299,7 +299,7 @@ function initS3TablesTables() {
             const resourceArn = document.getElementById('s3tablesTagsResourceArn').value;
             const tags = parseTagsInput(document.getElementById('s3tablesTagsInput').value.trim());
             if (tags === null || Object.keys(tags).length === 0) {
-                alert('Please provide tags to update');
+                alert('请提供要更新的标签');
                 return;
             }
             await updateS3TablesTags(resourceArn, tags);
@@ -342,13 +342,13 @@ function initIcebergNamespaces() {
                 });
                 const data = await response.json();
                 if (!response.ok) {
-                    alert(data.error || 'Failed to create namespace');
+                    alert(data.error || '创建命名空间失败');
                     return;
                 }
-                alert('Namespace created');
+                alert('命名空间已创建');
                 location.reload();
             } catch (error) {
-                alert('Failed to create namespace: ' + error.message);
+                alert('创建命名空间失败:' + error.message);
             }
         });
     }
@@ -361,13 +361,13 @@ function initIcebergNamespaceTree(container, bucketArn, catalogName) {
     nodes.forEach(node => {
         node.addEventListener('show.bs.collapse', async function () {
             if (node.dataset.loaded === 'true') return;
-            node.textContent = 'Loading...';
+            node.textContent = '加载中...';
             node.className = 'text-muted small';
             try {
                 await loadIcebergNamespaceTables(node, bucketArn, catalogName);
                 node.dataset.loaded = 'true';
             } catch (error) {
-                node.textContent = 'Failed to load. Collapse and expand to retry.';
+                node.textContent = '加载失败,折叠后重新展开可重试。';
                 node.className = 'text-danger small';
                 console.error('Error loading namespace tables:', error);
             }
@@ -378,7 +378,7 @@ function initIcebergNamespaceTree(container, bucketArn, catalogName) {
 async function loadIcebergNamespaceTables(node, bucketArn, catalogName) {
     const namespace = node.dataset.namespace || '';
     if (!bucketArn || !namespace) {
-        node.textContent = 'No namespace data available.';
+        node.textContent = '暂无命名空间数据。';
         node.className = 'text-muted small';
         throw new Error('Missing bucket or namespace');
     }
@@ -387,13 +387,13 @@ async function loadIcebergNamespaceTables(node, bucketArn, catalogName) {
         const response = await fetch(s3tBasePath(`/api/s3tables/tables?${query.toString()}`));
         const data = await response.json();
         if (!response.ok) {
-            node.textContent = data.error || 'Failed to load tables';
+            node.textContent = data.error || '加载表失败';
             node.className = 'text-danger small';
-            throw new Error(data.error || 'Failed to load tables');
+            throw new Error(data.error || '加载表失败');
         }
         const tables = data.tables || [];
         if (tables.length === 0) {
-            node.textContent = 'No tables found.';
+            node.textContent = '未找到表。';
             node.className = 'text-muted small ms-3';
             return;
         }
@@ -418,7 +418,7 @@ async function loadIcebergNamespaceTables(node, bucketArn, catalogName) {
         node.appendChild(list);
     } catch (error) {
         if (!node.textContent) {
-            node.textContent = 'Failed to load tables: ' + (error.message || 'Unknown error');
+            node.textContent = '加载表失败:' + (error.message || '未知错误');
             node.className = 'text-danger small';
         }
         throw error;
@@ -463,7 +463,7 @@ function initIcebergTables() {
                 try {
                     metadata = JSON.parse(metadataText);
                 } catch (error) {
-                    alert('Invalid metadata JSON');
+                    alert('无效的元数据 JSON');
                     return;
                 }
             }
@@ -479,13 +479,13 @@ function initIcebergTables() {
                 });
                 const data = await response.json();
                 if (!response.ok) {
-                    alert(data.error || 'Failed to create table');
+                    alert(data.error || '创建表失败');
                     return;
                 }
-                alert('Table created');
+                alert('表已创建');
                 location.reload();
             } catch (error) {
-                alert('Failed to create table: ' + error.message);
+                alert('创建表失败:' + error.message);
             }
         });
     }
@@ -524,13 +524,13 @@ async function deleteS3TablesBucket() {
         const response = await fetch(s3tBasePath(`/api/s3tables/buckets?bucket=${encodeURIComponent(bucketArn)}`), { method: 'DELETE', headers: s3tWriteHeaders() });
         const data = await response.json();
         if (!response.ok) {
-            alert(data.error || 'Failed to delete bucket');
+            alert(data.error || '删除桶失败');
             return;
         }
-        alert('Bucket deleted');
+        alert('桶已删除');
         location.reload();
     } catch (error) {
-        alert('Failed to delete bucket: ' + error.message);
+        alert('删除桶失败:' + error.message);
     }
 }
 
@@ -555,13 +555,13 @@ async function deleteS3TablesBucketPolicy() {
         const response = await fetch(s3tBasePath(`/api/s3tables/bucket-policy?bucket=${encodeURIComponent(bucketArn)}`), { method: 'DELETE', headers: s3tWriteHeaders() });
         const data = await response.json();
         if (!response.ok) {
-            alert(data.error || 'Failed to delete policy');
+            alert(data.error || '删除策略失败');
             return;
         }
-        alert('Policy deleted');
+        alert('策略已删除');
         document.getElementById('s3tablesBucketPolicyText').value = '';
     } catch (error) {
-        alert('Failed to delete policy: ' + error.message);
+        alert('删除策略失败:' + error.message);
     }
 }
 
@@ -584,13 +584,13 @@ async function deleteS3TablesTable() {
         const response = await fetch(s3tBasePath(`/api/s3tables/tables?${query.toString()}`), { method: 'DELETE', headers: s3tWriteHeaders() });
         const data = await response.json();
         if (!response.ok) {
-            alert(data.error || 'Failed to delete table');
+            alert(data.error || '删除表失败');
             return;
         }
-        alert('Table deleted');
+        alert('表已删除');
         location.reload();
     } catch (error) {
-        alert('Failed to delete table: ' + error.message);
+        alert('删除表失败:' + error.message);
     }
 }
 
@@ -615,10 +615,10 @@ async function deleteIcebergTable() {
         const response = await fetch(s3tBasePath(`/api/s3tables/tables?${query.toString()}`), { method: 'DELETE', headers: s3tWriteHeaders() });
         const data = await response.json();
         if (!response.ok) {
-            alert(data.error || 'Failed to drop table');
+            alert(data.error || '删除表失败');
             return;
         }
-        alert('Table dropped');
+        alert('表已删除');
         const isDetailsPage = window.location.pathname.includes('/tables/') && window.location.pathname.includes('/namespaces/');
         if (isDetailsPage && catalogName && namespace) {
             window.location.href = s3tBasePath(`/object-store/s3tables/buckets/${encodeURIComponent(catalogName)}/namespaces/${encodeURIComponent(namespace)}/tables`);
@@ -626,7 +626,7 @@ async function deleteIcebergTable() {
             location.reload();
         }
     } catch (error) {
-        alert('Failed to drop table: ' + error.message);
+        alert('删除表失败:' + error.message);
     }
 }
 
@@ -654,13 +654,13 @@ async function deleteS3TablesTablePolicy() {
         const response = await fetch(s3tBasePath(`/api/s3tables/table-policy?${query.toString()}`), { method: 'DELETE', headers: s3tWriteHeaders() });
         const data = await response.json();
         if (!response.ok) {
-            alert(data.error || 'Failed to delete policy');
+            alert(data.error || '删除策略失败');
             return;
         }
-        alert('Policy deleted');
+        alert('策略已删除');
         document.getElementById('s3tablesTablePolicyText').value = '';
     } catch (error) {
-        alert('Failed to delete policy: ' + error.message);
+        alert('删除策略失败:' + error.message);
     }
 }
 
@@ -670,34 +670,34 @@ function isLowercaseLetterOrDigit(ch) {
 
 function s3TablesBucketNameError(name) {
     if (!name) {
-        return 'Bucket name is required';
+        return '桶名称是必需的';
     }
     if (name.length < 3 || name.length > 63) {
-        return 'Bucket name must be between 3 and 63 characters';
+        return '桶名称长度必须在 3 到 63 个字符之间';
     }
     if (!isLowercaseLetterOrDigit(name[0])) {
-        return 'Bucket name must start with a letter or digit';
+        return '桶名称必须以字母或数字开头';
     }
     if (!isLowercaseLetterOrDigit(name[name.length - 1])) {
-        return 'Bucket name must end with a letter or digit';
+        return '桶名称必须以字母或数字结尾';
     }
     for (let i = 0; i < name.length; i++) {
         const ch = name[i];
         if (isLowercaseLetterOrDigit(ch) || ch === '-') {
             continue;
         }
-        return 'Bucket name can only contain lowercase letters, numbers, and hyphens';
+        return '桶名称只能包含小写字母、数字和连字符';
     }
     const reservedPrefixes = ['xn--', 'sthree-', 'amzn-s3-demo-', 'aws'];
     for (const prefix of reservedPrefixes) {
         if (name.startsWith(prefix)) {
-            return `Bucket name cannot start with reserved prefix: ${prefix}`;
+            return `桶名称不能以保留前缀开头:${prefix}`;
         }
     }
     const reservedSuffixes = ['-s3alias', '--ol-s3', '--x-s3', '--table-s3'];
     for (const suffix of reservedSuffixes) {
         if (name.endsWith(suffix)) {
-            return `Bucket name cannot end with reserved suffix: ${suffix}`;
+            return `桶名称不能以保留后缀结尾:${suffix}`;
         }
     }
     return '';
@@ -705,37 +705,37 @@ function s3TablesBucketNameError(name) {
 
 function s3TablesNamespaceNameError(name) {
     if (!name) {
-        return 'Namespace name is required';
+        return '命名空间名称是必需的';
     }
     if (name.length < 1 || name.length > 255) {
-        return 'Namespace name must be between 1 and 255 characters';
+        return '命名空间名称长度必须在 1 到 255 个字符之间';
     }
     if (name === '.' || name === '..') {
-        return "namespace name cannot be '.' or '..'";
+        return "命名空间名称不能为 '.' 或 '..'";
     }
     if (name.includes('/')) {
-        return "namespace name cannot contain '/'";
+        return "命名空间名称不能包含 '/'";
     }
 
     const parts = name.split('.');
     for (const part of parts) {
         if (!part) {
-            return 'namespace levels cannot be empty';
+            return '命名空间层级不能为空';
         }
         if (!isLowercaseLetterOrDigit(part[0])) {
-            return 'Namespace name must start with a letter or digit';
+            return '命名空间名称必须以字母或数字开头';
         }
         if (!isLowercaseLetterOrDigit(part[part.length - 1])) {
-            return 'Namespace name must end with a letter or digit';
+            return '命名空间名称必须以字母或数字结尾';
         }
         for (const ch of part) {
             if (isLowercaseLetterOrDigit(ch) || ch === '_') {
                 continue;
             }
-            return "invalid namespace name: only 'a-z', '0-9', and '_' are allowed";
+            return "无效的命名空间名称:只允许 'a-z'、'0-9' 和 '_'";
         }
         if (part.startsWith('aws')) {
-            return "namespace name cannot start with reserved prefix 'aws'";
+            return "命名空间名称不能以保留前缀 'aws' 开头";
         }
     }
     return '';
@@ -743,22 +743,22 @@ function s3TablesNamespaceNameError(name) {
 
 function s3TablesTableNameError(name) {
     if (!name) {
-        return 'Table name is required';
+        return '表名称是必需的';
     }
     if (name.length < 1 || name.length > 255) {
-        return 'Table name must be between 1 and 255 characters';
+        return '表名称长度必须在 1 到 255 个字符之间';
     }
     if (name === '.' || name === '..' || name.includes('/')) {
-        return "invalid table name: cannot be '.', '..' or contain '/'";
+        return "无效的表名称:不能为 '.'、'..' 或包含 '/'";
     }
     if (!isLowercaseLetterOrDigit(name[0])) {
-        return 'Table name must start with a letter or digit';
+        return '表名称必须以字母或数字开头';
     }
     for (const ch of name) {
         if (isLowercaseLetterOrDigit(ch) || ch === '_') {
             continue;
         }
-        return "invalid table name: only 'a-z', '0-9', and '_' are allowed";
+        return "无效的表名称:只允许 'a-z'、'0-9' 和 '_'";
     }
     return '';
 }
@@ -808,26 +808,26 @@ function parseTagsInput(input) {
         if (!trimmedPart) continue;
         const idx = trimmedPart.indexOf('=');
         if (idx <= 0) {
-            alert('Invalid tag format. Use key=value, and key cannot be empty.');
+            alert('无效的标签格式。请使用 key=value,且 key 不能为空。');
             return null;
         }
         const key = trimmedPart.slice(0, idx).trim();
         const value = trimmedPart.slice(idx + 1).trim();
         if (!key) {
-            alert('Invalid tag format. Use key=value, and key cannot be empty.');
+            alert('无效的标签格式。请使用 key=value,且 key 不能为空。');
             return null;
         }
         if (key.length > maxKeyLength) {
-            alert(`Tag key length must be <= ${maxKeyLength}`);
+            alert(`标签 key 长度必须 <= ${maxKeyLength}`);
             return null;
         }
         if (value.length > maxValueLength) {
-            alert(`Tag value length must be <= ${maxValueLength}`);
+            alert(`标签 value 长度必须 <= ${maxValueLength}`);
             return null;
         }
         tags[key] = value;
         if (Object.keys(tags).length > maxTags) {
-            alert(`Too many tags. Max ${maxTags} tags allowed.`);
+            alert(`标签过多。最多允许 ${maxTags} 个标签。`);
             return null;
         }
     }
@@ -839,7 +839,7 @@ async function openS3TablesTags(resourceArn) {
     document.getElementById('s3tablesTagsResourceArn').value = resourceArn;
     document.getElementById('s3tablesTagsInput').value = '';
     document.getElementById('s3tablesTagsDeleteInput').value = '';
-    document.getElementById('s3tablesTagsList').textContent = 'Loading...';
+    document.getElementById('s3tablesTagsList').textContent = '加载中...';
     s3tablesTagsModal.show();
     try {
         const response = await fetch(s3tBasePath(`/api/s3tables/tags?arn=${encodeURIComponent(resourceArn)}`));
@@ -847,7 +847,7 @@ async function openS3TablesTags(resourceArn) {
         if (response.ok) {
             document.getElementById('s3tablesTagsList').textContent = JSON.stringify(data.tags || {}, null, 2);
         } else {
-            document.getElementById('s3tablesTagsList').textContent = data.error || 'Failed to load tags';
+            document.getElementById('s3tablesTagsList').textContent = data.error || '加载标签失败';
         }
     } catch (error) {
         document.getElementById('s3tablesTagsList').textContent = error.message;
@@ -863,13 +863,13 @@ async function updateS3TablesTags(resourceArn, tags) {
         });
         const data = await response.json();
         if (!response.ok) {
-            alert(data.error || 'Failed to update tags');
+            alert(data.error || '更新标签失败');
             return;
         }
-        alert('Tags updated');
+        alert('标签已更新');
         openS3TablesTags(resourceArn);
     } catch (error) {
-        alert('Failed to update tags: ' + error.message);
+        alert('更新标签失败:' + error.message);
     }
 }
 
@@ -879,7 +879,7 @@ async function deleteS3TablesTags() {
     if (!resourceArn) return;
     const tagKeys = keysInput.split(',').map(k => k.trim()).filter(k => k);
     if (tagKeys.length === 0) {
-        alert('Provide tag keys to remove');
+        alert('请提供要移除的标签 key');
         return;
     }
     try {
@@ -890,12 +890,12 @@ async function deleteS3TablesTags() {
         });
         const data = await response.json();
         if (!response.ok) {
-            alert(data.error || 'Failed to remove tags');
+            alert(data.error || '移除标签失败');
             return;
         }
-        alert('Tags removed');
+        alert('标签已移除');
         openS3TablesTags(resourceArn);
     } catch (error) {
-        alert('Failed to remove tags: ' + error.message);
+        alert('移除标签失败:' + error.message);
     }
 }

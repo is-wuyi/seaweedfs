@@ -26,7 +26,7 @@ func (c *commandFsLs) Name() string {
 }
 
 func (c *commandFsLs) Help() string {
-	return `list all files under a directory
+	return `列出目录下的所有文件
 
 	fs.ls [-l] [-a] /dir/
 	fs.ls [-l] [-a] /dir/file_name

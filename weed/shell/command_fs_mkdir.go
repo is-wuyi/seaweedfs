@@ -22,7 +22,7 @@ func (c *commandFsMkdir) Name() string {
 }
 
 func (c *commandFsMkdir) Help() string {
-	return `create a directory
+	return `创建目录
 
 	fs.mkdir path/to/dir
 `

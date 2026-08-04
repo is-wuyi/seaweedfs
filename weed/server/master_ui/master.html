@@ -15,28 +15,28 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <h2>Cluster status</h2>
+            <h2>集群状态</h2>
             <table class="table table-condensed table-striped">
                 <tbody>
                 <tr>
-                    <th>Volume Size Limit</th>
+                    <th>卷大小上限</th>
                     <td>{{ .VolumeSizeLimitMB }}MB</td>
                 </tr>
                 <tr>
-                    <th>Free</th>
+                    <th>空闲</th>
                     <td>{{ .Topology.Free }}</td>
                 </tr>
                 <tr>
-                    <th>Max</th>
+                    <th>最大</th>
                     <td>{{ .Topology.Max }}</td>
                 </tr>
                 {{ with .RaftServer }}
                 <tr>
-                    <th>Leader</th>
+                    <th>leader</th>
                     <td><a href="{{ url .Leader }}">{{ .Leader }}</a></td>
                 </tr>
                 <tr>
-                    <th>Other Masters</th>
+                    <th>其他 master</th>
                     <td class="col-sm-5">
                         <ul class="list-unstyled">
                             {{ range $k, $p := .Peers }}
@@ -51,10 +51,10 @@
         </div>
 
         <div class="col-sm-6">
-            <h2>System Stats</h2>
+            <h2>系统统计</h2>
             <table class="table table-condensed table-striped">
                 <tr>
-                    <th>Concurrent Connections</th>
+                    <th>并发连接数</th>
                     <td>{{ .Counters.Connections.WeekCounter.Sum }}</td>
                 </tr>
                 {{ range $key, $val := .Stats }}
@@ -68,17 +68,17 @@
     </div>
 
     <div class="row">
-        <h2>Topology</h2>
+        <h2>拓扑</h2>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Data Center</th>
-                <th>Rack</th>
-                <th>RemoteAddr</th>
-                <th>#Volumes</th>
-                <th>Volume Ids</th>
-                <th>#ErasureCodingShards</th>
-                <th>Max</th>
+                <th>数据中心</th>
+                <th>机架</th>
+                <th>远程地址</th>
+                <th>卷数量</th>
+                <th>卷 ID</th>
+                <th>EC 分片数</th>
+                <th>最大</th>
             </tr>
             </thead>
             <tbody>

@@ -22,11 +22,11 @@ func (c *commandS3PolicyAttach) Name() string {
 }
 
 func (c *commandS3PolicyAttach) Help() string {
-	return `attach a policy to an S3 IAM user
+	return `将策略附加到 S3 IAM 用户
 
 	s3.policy.attach -policy <policy_name> -user <username>
 
-	The policy must already exist (create it with s3.policy -put).
+	策略必须已存在（使用 s3.policy -put 创建）。
 `
 }
 

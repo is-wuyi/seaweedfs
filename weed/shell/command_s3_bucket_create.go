@@ -26,24 +26,23 @@ func (c *commandS3BucketCreate) Name() string {
 }
 
 func (c *commandS3BucketCreate) Help() string {
-	return `create a bucket with a given name
+	return `使用给定名称创建一个 bucket
 
-	Example:
+	示例：
 		s3.bucket.create -name <bucket_name>
 		s3.bucket.create -name <bucket_name> -owner <identity_name>
 		s3.bucket.create -name <bucket_name> -withLock
 
-	The -owner flag sets the bucket owner identity. This is important when using
-	S3 IAM authentication, as non-admin users can only access buckets they own.
-	If not specified, the bucket will have no owner and will only be accessible
-	by admin users.
+	-owner 标志用于设置 bucket 的所有者身份。在使用 S3 IAM 身份验证时这很重要，
+	因为非管理员用户只能访问他们拥有的 bucket。如果未指定，bucket 将没有所有者，
+	只能由管理员用户访问。
 
-	The -owner value should match the identity name configured in your S3 IAM
-	system (the "name" field in s3.json identities configuration).
+	-owner 的值应与 S3 IAM 系统中配置的身份名称匹配（即 s3.json identities
+	配置中的 "name" 字段）。
 
-	The -withLock flag enables S3 Object Lock on the bucket. This provides WORM
-	(Write Once Read Many) protection for objects. Once enabled, Object Lock
-	cannot be disabled. Versioning is automatically enabled when using this flag.
+	-withLock 标志会在 bucket 上启用 S3 Object Lock。这为对象提供 WORM
+	（Write Once Read Many，一次写入多次读取）保护。一旦启用，Object Lock
+	无法被禁用。使用此标志时会自动启用版本控制。
 `
 }
 

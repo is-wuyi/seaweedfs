@@ -26,16 +26,15 @@ func (c *commandS3AnonymousSet) Name() string {
 }
 
 func (c *commandS3AnonymousSet) Help() string {
-	return `set anonymous (public) access on a bucket
+	return `为一个 bucket 设置匿名（公共）访问权限
 
 	s3.anonymous.set -bucket <bucket_name> -access Read,List
 	s3.anonymous.set -bucket <bucket_name> -access none
 
-	Supported actions: Read, Write, List, Tagging, Admin
-	Use "none" to remove all anonymous access for the bucket.
+	支持的操作：Read、Write、List、Tagging、Admin
+	使用 "none" 可移除该 bucket 的所有匿名访问权限。
 
-	This manages the special "anonymous" user's actions. It does not
-	use IAM policies — it sets legacy per-bucket actions directly.
+	此命令管理特殊 "anonymous" 用户的操作。它不使用 IAM 策略，而是直接设置传统的按 bucket 操作。
 `
 }
 

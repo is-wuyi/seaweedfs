@@ -78,24 +78,21 @@ func (c *commandEcShardUnmount) Name() string {
 }
 
 func (c *commandEcShardUnmount) Help() string {
-	return `Unmounts, and optionally deletes, EC volume shards.
+	return `卸载 EC 卷分片,并可选地删除它们。
 
-	ec.shard.unmount --volumeId=<volume id> --shardId=<comma-separated list of shard IDs> [--delete]
+	ec.shard.unmount --volumeId=<volume id> --shardId=<逗号分隔的分片 ID 列表> [--delete]
 
-	Shard IDs can be specified either as a single numeric ID (f.ex. "2") or with a
-	node address (<shard_id>@<address>, f.ex. "3@10.200.18.88:9007") to pick one
-	copy when shards are repeated and/or co-located on the same node. The live
-	topology is printed in the same form, so its entries can be copied verbatim.
+	分片 ID 可以指定为单个数字 ID(例如 "2"),也可以带节点地址
+	(<shard_id>@<address>,例如 "3@10.200.18.88:9007"),以便在分片重复
+	和/或共置于同一节点时选取其中一份副本。实时拓扑也以相同形式打印,
+	因此可以直接原样复制其条目。
 
-	Unmounting only takes shards offline on their volume servers; pass --delete to
-	also remove the shard files. This is useful to clean up over-replicated EC
-	volumes without a full rebalance.
+	卸载仅会在其 volume 服务器上将分片下线;传入 --delete 还会删除分片文件。
+	这对于在不进行完整 rebalance 的情况下清理副本过多的 EC 卷很有用。
 
-	Shards are processed one by one, best-effort: on error the command stops and
-	leaves already-processed shards as they are.
+	分片会逐个尽力处理:出错时命令会停止,并保留已处理分片的当前状态。
 
-	This command can, and will, irrevocably delete data if used incorrectly.
-	Tread carefully.
+	此命令如果使用不当,会且将会不可撤销地删除数据。请谨慎使用。
 `
 }
 

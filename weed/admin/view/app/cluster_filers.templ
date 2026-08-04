@@ -8,12 +8,12 @@ import (
 templ ClusterFilers(data dash.ClusterFilersData) {
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">
-			<i class="fas fa-folder-open me-2"></i>Filers
+			<i class="fas fa-folder-open me-2"></i>filer
 		</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group me-2">
 				<button type="button" class="btn btn-sm btn-outline-primary" onclick="exportFilers()">
-					<i class="fas fa-download me-1"></i>Export
+					<i class="fas fa-download me-1"></i>导出
 				</button>
 			</div>
 		</div>
@@ -28,7 +28,7 @@ templ ClusterFilers(data dash.ClusterFilersData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									Total Filers
+									filer 总数
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.TotalFilers) }
@@ -47,7 +47,7 @@ templ ClusterFilers(data dash.ClusterFilersData) {
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">
-					<i class="fas fa-folder-open me-2"></i>Filers
+					<i class="fas fa-folder-open me-2"></i>filer
 				</h6>
 			</div>
 			<div class="card-body">
@@ -56,12 +56,12 @@ templ ClusterFilers(data dash.ClusterFilersData) {
 						<table class="table table-hover" id="filersTable">
 							<thead>
 								<tr>
-									<th>Address</th>
-									<th>Version</th>
-									<th>Data Center</th>
-									<th>Rack</th>
-									<th>Created At</th>
-									<th>Actions</th>
+									<th>地址</th>
+									<th>版本</th>
+									<th>数据中心</th>
+									<th>机架</th>
+									<th>创建时间</th>
+									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -91,7 +91,7 @@ templ ClusterFilers(data dash.ClusterFilersData) {
 										</td>
 										<td>
 											<div class="btn-group btn-group-sm" role="group">
-												<button type="button" class="btn btn-outline-secondary btn-sm" title="File Browser" data-action="open-filer" data-address={ filer.Address }>
+												<button type="button" class="btn btn-outline-secondary btn-sm" title="文件浏览器" data-action="open-filer" data-address={ filer.Address }>
 													<i class="fas fa-folder-open"></i>
 												</button>
 											</div>
@@ -104,8 +104,8 @@ templ ClusterFilers(data dash.ClusterFilersData) {
 				} else {
 					<div class="text-center py-5">
 						<i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
-						<h5 class="text-muted">No Filers Found</h5>
-						<p class="text-muted">No filer servers are currently available in the cluster.</p>
+						<h5 class="text-muted">未找到 filer</h5>
+						<p class="text-muted">集群中当前没有可用的 filer 服务器。</p>
 					</div>
 				}
 			</div>
@@ -116,7 +116,7 @@ templ ClusterFilers(data dash.ClusterFilersData) {
 			<div class="col-12">
 				<small class="text-muted">
 					<i class="fas fa-clock me-1"></i>
-					Last updated: { data.LastUpdated.Format("2006-01-02 15:04:05") }
+					最后更新: { data.LastUpdated.Format("2006-01-02 15:04:05") }
 				</small>
 			</div>
 		</div>
@@ -164,8 +164,8 @@ templ ClusterFilers(data dash.ClusterFilersData) {
 			return null;
 		}).filter(row => row !== null);
 		
-		const csvContent = "data:text/csv;charset=utf-8," + 
-			"Address,Version,Data Center,Rack,Created At\n" +
+		const csvContent = "data:text/csv;charset=utf-8," +
+			"地址,版本,数据中心,机架,创建时间\n" +
 			rows.map(r => '"' + r.address + '","' + r.version + '","' + r.datacenter + '","' + r.rack + '","' + r.created + '"').join("\n");
 		
 		const encodedUri = encodeURI(csvContent);

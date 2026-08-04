@@ -8,12 +8,12 @@ import (
 templ ClusterBrokers(data dash.ClusterBrokersData) {
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">
-			<i class="fas fa-comments me-2"></i>Message Brokers
+			<i class="fas fa-comments me-2"></i>消息 broker
 		</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group me-2">
 				<button type="button" class="btn btn-sm btn-outline-primary" onclick="exportBrokers()">
-					<i class="fas fa-download me-1"></i>Export
+					<i class="fas fa-download me-1"></i>导出
 				</button>
 			</div>
 		</div>
@@ -28,7 +28,7 @@ templ ClusterBrokers(data dash.ClusterBrokersData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									Total Message Brokers
+									broker 总数
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.TotalBrokers) }
@@ -47,7 +47,7 @@ templ ClusterBrokers(data dash.ClusterBrokersData) {
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">
-					<i class="fas fa-comments me-2"></i>Message Brokers
+					<i class="fas fa-comments me-2"></i>消息 broker
 				</h6>
 			</div>
 			<div class="card-body">
@@ -56,11 +56,11 @@ templ ClusterBrokers(data dash.ClusterBrokersData) {
 						<table class="table table-hover" id="brokersTable">
 							<thead>
 								<tr>
-									<th>Address</th>
-									<th>Version</th>
-									<th>Data Center</th>
-									<th>Rack</th>
-									<th>Created At</th>
+									<th>地址</th>
+									<th>版本</th>
+									<th>数据中心</th>
+									<th>机架</th>
+									<th>创建时间</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -93,8 +93,8 @@ templ ClusterBrokers(data dash.ClusterBrokersData) {
 				} else {
 					<div class="text-center py-5">
 						<i class="fas fa-comments fa-3x text-muted mb-3"></i>
-						<h5 class="text-muted">No Message Brokers Found</h5>
-						<p class="text-muted">No message broker servers are currently available in the cluster.</p>
+						<h5 class="text-muted">未找到消息 broker</h5>
+						<p class="text-muted">集群中当前没有可用的消息 broker 服务器。</p>
 					</div>
 				}
 			</div>
@@ -105,7 +105,7 @@ templ ClusterBrokers(data dash.ClusterBrokersData) {
 			<div class="col-12">
 				<small class="text-muted">
 					<i class="fas fa-clock me-1"></i>
-					Last updated: { data.LastUpdated.Format("2006-01-02 15:04:05") }
+					最后更新: { data.LastUpdated.Format("2006-01-02 15:04:05") }
 				</small>
 			</div>
 		</div>

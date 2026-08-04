@@ -36,26 +36,25 @@ func (c *commandS3BucketAccess) Name() string {
 }
 
 func (c *commandS3BucketAccess) Help() string {
-	return `view or set per-bucket access for a user
+	return `查看或设置用户对单个 bucket 的访问权限
 
-	Example:
-		# View current access for a user on a bucket
+	示例：
+		# 查看用户对某个 bucket 的当前访问权限
 		s3.bucket.access -name <bucket_name> -user <username>
 
-		# Grant anonymous read and list access
+		# 授予匿名读取和列出权限
 		s3.bucket.access -name <bucket_name> -user anonymous -access Read,List
 
-		# Grant full anonymous access
+		# 授予完全匿名访问权限
 		s3.bucket.access -name <bucket_name> -user anonymous -access Read,Write,List
 
-		# Remove all access for a user on a bucket
+		# 移除用户对某个 bucket 的所有访问权限
 		s3.bucket.access -name <bucket_name> -user <username> -access none
 
-	Supported action names (comma-separated):
+	支持的操作名称（以逗号分隔）：
 		Read, Write, List, Tagging, Admin
 
-	The user is auto-created if it does not exist. Actions are scoped to
-	the specified bucket (stored as "Action:bucket" in the identity).
+	如果用户不存在则会自动创建。操作仅作用于指定的 bucket（在身份中以 "Action:bucket" 形式存储）。
 `
 }
 

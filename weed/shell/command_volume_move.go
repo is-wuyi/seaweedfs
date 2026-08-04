@@ -32,19 +32,19 @@ func (c *commandVolumeMove) Name() string {
 }
 
 func (c *commandVolumeMove) Help() string {
-	return `move a live volume from one volume server to another volume server
+	return `将一个存活的卷从一个 volume 服务器迁移到另一个 volume 服务器
 
 	volume.move -source <source volume server host:port> -target <target volume server host:port> -volumeId <volume id>
 	volume.move -source <source volume server host:port> -target <target volume server host:port> -volumeId <volume id> -disk [hdd|ssd|<tag>]
 
-	This command move a live volume from one volume server to another volume server. Here are the steps:
+	此命令将一个存活的卷从一个 volume 服务器迁移到另一个 volume 服务器。步骤如下:
 
-	1. This command marks the source volume as read-only, copies it to the target volume server, and records the last entry timestamp.
-	2. This command asks the target volume server to mount the new volume.
-	3. This command asks the target volume server to tail the source volume for updates after the timestamp, for 1 minutes to drain any in-flight requests.
-	4. This command asks the source volume server to delete the source volume.
+	1. 此命令将源卷标记为只读,将其复制到目标 volume 服务器,并记录最后一条 entry 的时间戳。
+	2. 此命令请求目标 volume 服务器挂载新卷。
+	3. 此命令请求目标 volume 服务器追尾源卷在该时间戳之后的更新,持续 1 分钟以排空在途请求。
+	4. 此命令请求源 volume 服务器删除源卷。
 
-	The option "-disk [hdd|ssd|<tag>]" can be used to change the volume disk type.
+	可使用选项 "-disk [hdd|ssd|<tag>]" 来更改卷的磁盘类型。
 
 `
 }

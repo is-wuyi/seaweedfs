@@ -20,11 +20,11 @@ func (c *commandS3GroupList) Name() string {
 }
 
 func (c *commandS3GroupList) Help() string {
-	return `list S3 IAM groups
+	return `列出 S3 IAM 组
 
 	s3.group.list
 
-	Output: JSON array of groups with members and policies.
+	输出：包含成员和策略的组 JSON 数组。
 `
 }
 

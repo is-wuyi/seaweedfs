@@ -22,7 +22,7 @@ func (c *commandS3GroupRemoveUser) Name() string {
 }
 
 func (c *commandS3GroupRemoveUser) Help() string {
-	return `remove a user from an S3 IAM group
+	return `从 S3 IAM 组中移除一个用户
 
 	s3.group.remove-user -group <groupname> -user <username>
 `

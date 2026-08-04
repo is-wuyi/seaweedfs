@@ -25,27 +25,25 @@ func (c *commandMqTopicConfigure) Name() string {
 }
 
 func (c *commandMqTopicConfigure) Help() string {
-	return `configure a topic with a given name
+	return `配置一个给定名称的 topic
 
-	Example:
+	示例：
 		mq.topic.configure -namespace <namespace> -topic <topic_name> -partitionCount <partition_count>
 
-	Retention (delete messages older than the configured duration):
+	保留（删除超过配置时长的消息）：
 		mq.topic.configure -namespace <namespace> -topic <topic_name> \
 			-retention 168h -retentionEnabled
 
-		# disable retention on an existing topic
+		# 在已有的 topic 上禁用保留
 		mq.topic.configure -namespace <namespace> -topic <topic_name> \
 			-retentionEnabled=false
 
-	-retention accepts any Go duration string ("24h", "168h", "30m"). Use
-	-retentionSeconds for raw seconds when scripting. Specifying both is an
-	error.
+	-retention 接受任意 Go duration 字符串（"24h"、"168h"、"30m"）。在脚本中
+	可使用 -retentionSeconds 指定原始秒数。两者同时指定会报错。
 
-	When you set only some retention flags (for example, -retentionEnabled
-	without -retention), the unspecified field is read from the current
-	server-side configuration so it isn't accidentally zeroed. Omitting all
-	retention flags leaves the existing retention configuration alone.
+	当你只设置了部分保留标志时（例如只设置 -retentionEnabled 而未设置
+	-retention），未指定的字段会从当前的服务端配置读取，以避免被意外置零。
+	省略所有保留标志则会保留现有的保留配置不变。
 `
 }
 

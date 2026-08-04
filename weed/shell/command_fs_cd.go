@@ -16,12 +16,12 @@ func (c *commandFsCd) Name() string {
 }
 
 func (c *commandFsCd) Help() string {
-	return `change directory to a directory /path/to/dir
+	return `切换到指定目录 /path/to/dir
 
-	The full path can be too long to type. For example,
+	完整路径可能太长难以输入。例如,
 		fs.ls /some/path/to/file_name
 
-	can be simplified as
+	可以简化为
 
 		fs.cd /some/path
 		fs.ls to/file_name

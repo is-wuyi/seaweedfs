@@ -255,7 +255,7 @@ function handleHTMXError(evt) {
     console.error('HTMX Request Error:', evt.detail);
 
     // Show error toast or message
-    showErrorMessage('Request failed. Please try again.');
+    showErrorMessage('请求失败,请重试。');
 
     hideLoadingIndicator();
 }
@@ -374,7 +374,7 @@ function confirmAction(message, callback) {
 // Global error handler
 window.addEventListener('error', function (e) {
     console.error('Global error:', e.error);
-    showErrorMessage('An unexpected error occurred.');
+    showErrorMessage('发生意外错误。');
 });
 
 // Export functions for global use
@@ -483,7 +483,7 @@ async function handleCreateBucket(event) {
 
         if (response.ok) {
             // Success
-            showAlert(`Bucket "${bucketData.name}" created successfully!`, 'success');
+            showAlert(`桶 "${bucketData.name}" 创建成功!`, 'success');
 
             // Close modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('createBucketModal'));
@@ -498,11 +498,11 @@ async function handleCreateBucket(event) {
             }, 1500);
         } else {
             // Error
-            showAlert(result.error || 'Failed to create bucket', 'danger');
+            showAlert(result.error || '创建桶失败', 'danger');
         }
     } catch (error) {
         console.error('Error creating bucket:', error);
-        showAlert('Network error occurred while creating bucket', 'danger');
+        showAlert('创建桶时发生网络错误', 'danger');
     }
 }
 
@@ -513,7 +513,7 @@ function validateBucketName(event) {
     const isValid = /^[a-z0-9.-]+$/.test(value) && value.length >= 3 && value.length <= 63;
 
     if (value.length > 0 && !isValid) {
-        input.setCustomValidity('Bucket name must contain only lowercase letters, numbers, dots, and hyphens (3-63 characters)');
+        input.setCustomValidity('桶名称只能包含小写字母、数字、点和连字符(3-63 个字符)');
     } else {
         input.setCustomValidity('');
     }
@@ -543,7 +543,7 @@ async function deleteBucket() {
 
         if (response.ok) {
             // Success
-            showAlert(`Bucket "${bucketToDelete}" deleted successfully!`, 'success');
+            showAlert(`桶 "${bucketToDelete}" 删除成功!`, 'success');
 
             // Close modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('deleteBucketModal'));
@@ -555,11 +555,11 @@ async function deleteBucket() {
             }, 1500);
         } else {
             // Error
-            showAlert(result.error || 'Failed to delete bucket', 'danger');
+            showAlert(result.error || '删除桶失败', 'danger');
         }
     } catch (error) {
         console.error('Error deleting bucket:', error);
-        showAlert('Network error occurred while deleting bucket', 'danger');
+        showAlert('删除桶时发生网络错误', 'danger');
     }
 
     bucketToDelete = '';
@@ -593,7 +593,7 @@ function exportBucketList() {
 
     // Convert to CSV
     const csv = [
-        ['Name', 'Owner', 'Created', 'Logical Size', 'Physical Size', 'Quota'].join(','),
+        ['名称', '所有者', '创建时间', '逻辑大小', '物理大小', '配额'].join(','),
         ...data.map(row => [
             row.name,
             row.owner,
@@ -627,7 +627,7 @@ function formatDate(date) {
 function adminCopyToClipboard(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-            showAlert('Copied to clipboard!', 'success');
+            showAlert('已复制到剪贴板!', 'success');
         }).catch(err => {
             console.error('Failed to copy text: ', err);
             fallbackCopyText(text);
@@ -653,13 +653,13 @@ function fallbackCopyText(text) {
     try {
         const successful = document.execCommand('copy');
         if (successful) {
-            showAlert('Copied to clipboard!', 'success');
+            showAlert('已复制到剪贴板!', 'success');
         } else {
-            showAlert('Failed to copy to clipboard', 'danger');
+            showAlert('复制到剪贴板失败', 'danger');
         }
     } catch (err) {
         console.error('Fallback copy failed: ', err);
-        showAlert('Failed to copy to clipboard', 'danger');
+        showAlert('复制到剪贴板失败', 'danger');
     }
 
     document.body.removeChild(textArea);
@@ -676,11 +676,11 @@ function refreshDashboard() {
 function exportVolumeServers() {
     const table = document.getElementById('hostsTable');
     if (!table) {
-        showErrorMessage('No volume servers data to export');
+        showErrorMessage('没有可导出的卷服务器数据');
         return;
     }
 
-    let csv = 'Server ID,Address,Data Center,Rack,Volumes,Capacity,Usage\n';
+    let csv = '服务器 ID,地址,数据中心,机架,卷,容量,使用量\n';
 
     const rows = table.querySelectorAll('tbody tr');
     rows.forEach(row => {
@@ -706,7 +706,7 @@ function exportVolumeServers() {
 function exportVolumes() {
     const table = document.getElementById('volumesTable');
     if (!table) {
-        showErrorMessage('No volumes data to export');
+        showErrorMessage('没有可导出的卷数据');
         return;
     }
 
@@ -752,11 +752,11 @@ function exportVolumeList() {
 function exportCollections() {
     const table = document.getElementById('collectionsTable');
     if (!table) {
-        showAlert('Collections table not found', 'error');
+        showAlert('未找到集合表', 'error');
         return;
     }
 
-    const headers = ['Collection Name', 'Volumes', 'Files', 'Size', 'Disk Types'];
+    const headers = ['集合名称', '卷', '文件', '大小', '磁盘类型'];
     const rows = [];
 
     // Get table rows
@@ -788,11 +788,11 @@ function exportCollections() {
 function exportMasters() {
     const table = document.getElementById('mastersTable');
     if (!table) {
-        showAlert('Masters table not found', 'error');
+        showAlert('未找到 Masters 表', 'error');
         return;
     }
 
-    const headers = ['Address', 'Role', 'Suffrage'];
+    const headers = ['地址', '角色', 'Suffrage'];
     const rows = [];
 
     // Get table rows
@@ -822,11 +822,11 @@ function exportMasters() {
 function exportFilers() {
     const table = document.getElementById('filersTable');
     if (!table) {
-        showAlert('Filers table not found', 'error');
+        showAlert('未找到 Filers 表', 'error');
         return;
     }
 
-    const headers = ['Address', 'Version', 'Data Center', 'Rack', 'Created At'];
+    const headers = ['地址', '版本', '数据中心', '机架', '创建时间'];
     const rows = [];
 
     // Get table rows
@@ -858,17 +858,17 @@ function exportFilers() {
 function exportUsers() {
     const table = document.getElementById('usersTable');
     if (!table) {
-        showAlert('Users table not found', 'error');
+        showAlert('未找到用户表', 'error');
         return;
     }
 
     const rows = table.querySelectorAll('tbody tr');
     if (rows.length === 0) {
-        showErrorMessage('No users to export');
+        showErrorMessage('没有可导出的用户');
         return;
     }
 
-    let csvContent = 'Username,Email,Access Key,Status,Created,Last Login\n';
+    let csvContent = '用户名,邮箱,访问密钥,状态,创建时间,最后登录\n';
 
     rows.forEach(row => {
         const cells = row.querySelectorAll('td');
@@ -912,7 +912,7 @@ async function deleteCollection(collectionName) {
         });
 
         if (response.ok) {
-            showSuccessMessage(`Collection "${collectionName}" deleted successfully`);
+            showSuccessMessage(`集合 "${collectionName}" 删除成功`);
             // Hide modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('deleteCollectionModal'));
             modal.hide();
@@ -922,11 +922,11 @@ async function deleteCollection(collectionName) {
             }, 1000);
         } else {
             const error = await response.json();
-            showErrorMessage(`Failed to delete collection: ${error.error || 'Unknown error'}`);
+            showErrorMessage(`删除集合失败:${error.error || '未知错误'}`);
         }
     } catch (error) {
         console.error('Error deleting collection:', error);
-        showErrorMessage('Failed to delete collection. Please try again.');
+        showErrorMessage('删除集合失败,请重试。');
     }
 }
 
@@ -970,7 +970,7 @@ function updateDeleteSelectedButton() {
     if (deleteBtn) {
         if (checkboxes.length > 0) {
             deleteBtn.style.display = 'inline-block';
-            deleteBtn.innerHTML = `<i class="fas fa-trash me-1"></i>Delete Selected (${checkboxes.length})`;
+            deleteBtn.innerHTML = `<i class="fas fa-trash me-1"></i>删除已选 (${checkboxes.length})`;
         } else {
             deleteBtn.style.display = 'none';
         }
@@ -1008,19 +1008,19 @@ function confirmDeleteSelected() {
     const selectedPaths = getSelectedFilePaths();
 
     if (selectedPaths.length === 0) {
-        showAlert('No files selected', 'warning');
+        showAlert('未选择文件', 'warning');
         return;
     }
 
     const fileNames = selectedPaths.map(path => path.split('/').pop()).join(', ');
     const message = selectedPaths.length === 1
-        ? `Are you sure you want to delete "${fileNames}"?`
-        : `Are you sure you want to delete ${selectedPaths.length} selected items?\n\n${fileNames.substring(0, 200)}${fileNames.length > 200 ? '...' : ''}`;
+        ? `确定要删除 "${fileNames}" 吗?`
+        : `确定要删除 ${selectedPaths.length} 个已选项目吗?\n\n${fileNames.substring(0, 200)}${fileNames.length > 200 ? '...' : ''}`;
 
     if (typeof window.showConfirm === 'function') {
         window.showConfirm(message, function () {
             deleteSelectedFiles(selectedPaths);
-        }, { title: 'Confirm Delete' });
+        }, { title: '确认删除' });
     } else {
         console.error('showConfirm() is not available');
     }
@@ -1029,7 +1029,7 @@ function confirmDeleteSelected() {
 // Delete multiple selected files
 async function deleteSelectedFiles(filePaths) {
     if (!filePaths || filePaths.length === 0) {
-        showAlert('No files selected', 'warning');
+        showAlert('未选择文件', 'warning');
         return;
     }
 
@@ -1037,7 +1037,7 @@ async function deleteSelectedFiles(filePaths) {
     const deleteBtn = document.getElementById('deleteSelectedBtn');
     const originalText = deleteBtn.innerHTML;
     deleteBtn.disabled = true;
-    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Deleting...';
+    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>删除中...';
 
     try {
         const response = await fetch(basePath('/api/files/delete-multiple'), {
@@ -1053,9 +1053,9 @@ async function deleteSelectedFiles(filePaths) {
 
             if (result.deleted > 0) {
                 if (result.failed === 0) {
-                    showAlert(`Successfully deleted ${result.deleted} item(s)`, 'success');
+                    showAlert(`成功删除 ${result.deleted} 项`, 'success');
                 } else {
-                    showAlert(`Deleted ${result.deleted} item(s), failed to delete ${result.failed} item(s)`, 'warning');
+                    showAlert(`已删除 ${result.deleted} 项,删除失败 ${result.failed} 项`, 'warning');
                     if (result.errors && result.errors.length > 0) {
                         console.warn('Deletion errors:', result.errors);
                     }
@@ -1066,7 +1066,7 @@ async function deleteSelectedFiles(filePaths) {
                     window.location.reload();
                 }, 1000);
             } else {
-                let errorMessage = result.message || 'Failed to delete all selected items';
+                let errorMessage = result.message || '删除所有已选项目失败';
                 if (result.errors && result.errors.length > 0) {
                     errorMessage += ': ' + result.errors.join(', ');
                 }
@@ -1074,11 +1074,11 @@ async function deleteSelectedFiles(filePaths) {
             }
         } else {
             const error = await response.json();
-            showAlert(`Failed to delete files: ${error.error || 'Unknown error'}`, 'error');
+            showAlert(`删除文件失败:${error.error || '未知错误'}`, 'error');
         }
     } catch (error) {
         console.error('Delete error:', error);
-        showAlert('Failed to delete files', 'error');
+        showAlert('删除文件失败', 'error');
     } finally {
         // Re-enable the button
         deleteBtn.disabled = false;
@@ -1104,20 +1104,20 @@ async function submitCreateFolder() {
     const currentPath = document.getElementById('currentPath').value;
 
     if (!folderName) {
-        showErrorMessage('Please enter a folder name');
+        showErrorMessage('请输入文件夹名称');
         return;
     }
 
     // Validate folder name
     if (folderName.includes('/') || folderName.includes('\\')) {
-        showErrorMessage('Folder names cannot contain / or \\ characters');
+        showErrorMessage('文件夹名称不能包含 / 或 \\ 字符');
         return;
     }
 
     // Additional validation for reserved names
     const reservedNames = ['.', '..', 'CON', 'PRN', 'AUX', 'NUL'];
     if (reservedNames.includes(folderName.toUpperCase())) {
-        showErrorMessage('This folder name is reserved and cannot be used');
+        showErrorMessage('此文件夹名称为保留名称,无法使用');
         return;
     }
 
@@ -1125,7 +1125,7 @@ async function submitCreateFolder() {
     const submitButton = document.querySelector('#createFolderModal .btn-primary');
     const originalText = submitButton.innerHTML;
     submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Creating...';
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>创建中...';
 
     try {
         const response = await fetch(basePath('/api/files/create-folder'), {
@@ -1140,7 +1140,7 @@ async function submitCreateFolder() {
         });
 
         if (response.ok) {
-            showSuccessMessage(`Folder "${folderName}" created successfully`);
+            showSuccessMessage(`文件夹 "${folderName}" 创建成功`);
             // Hide modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('createFolderModal'));
             modal.hide();
@@ -1152,11 +1152,11 @@ async function submitCreateFolder() {
             }, 1000);
         } else {
             const error = await response.json();
-            showErrorMessage(`Failed to create folder: ${error.error || 'Unknown error'}`);
+            showErrorMessage(`创建文件夹失败:${error.error || '未知错误'}`);
         }
     } catch (error) {
         console.error('Create folder error:', error);
-        showErrorMessage('Failed to create folder. Please try again.');
+        showErrorMessage('创建文件夹失败,请重试。');
     } finally {
         // Re-enable the button
         submitButton.disabled = false;
@@ -1170,7 +1170,7 @@ async function submitUploadFile() {
     const currentPath = document.getElementById('uploadPath').value;
 
     if (!fileInput.files || fileInput.files.length === 0) {
-        showErrorMessage('Please select at least one file to upload');
+        showErrorMessage('请至少选择一个文件上传');
         return;
     }
 
@@ -1180,7 +1180,7 @@ async function submitUploadFile() {
     // Validate total file size (limit to 500MB for admin interface)
     const maxSize = 500 * 1024 * 1024; // 500MB total
     if (totalSize > maxSize) {
-        showErrorMessage('Total file size exceeds 500MB limit. Please select fewer or smaller files.');
+        showErrorMessage('文件总大小超过 500MB 限制,请选择较少或较小的文件。');
         return;
     }
 
@@ -1203,9 +1203,9 @@ async function submitUploadFile() {
     progressBar.style.width = '0%';
     progressBar.setAttribute('aria-valuenow', '0');
     progressBar.textContent = '0%';
-    uploadStatus.textContent = `Uploading ${files.length} file(s)...`;
+    uploadStatus.textContent = `正在上传 ${files.length} 个文件...`;
     submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Uploading...';
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>上传中...';
 
     try {
         const xhr = new XMLHttpRequest();
@@ -1217,7 +1217,7 @@ async function submitUploadFile() {
                 progressBar.style.width = percentComplete + '%';
                 progressBar.setAttribute('aria-valuenow', percentComplete);
                 progressBar.textContent = percentComplete + '%';
-                uploadStatus.textContent = `Uploading ${files.length} file(s)... ${percentComplete}%`;
+                uploadStatus.textContent = `正在上传 ${files.length} 个文件... ${percentComplete}%`;
             }
         });
 
@@ -1229,7 +1229,7 @@ async function submitUploadFile() {
 
                     if (response.uploaded > 0) {
                         if (response.failed === 0) {
-                            showSuccessMessage(`Successfully uploaded ${response.uploaded} file(s)`);
+                            showSuccessMessage(`成功上传 ${response.uploaded} 个文件`);
                         } else {
                             showSuccessMessage(response.message);
                             // Show details of failed uploads
@@ -1245,38 +1245,38 @@ async function submitUploadFile() {
                             window.location.reload();
                         }, 1000);
                     } else {
-                        let errorMessage = response.message || 'All file uploads failed';
+                        let errorMessage = response.message || '所有文件上传失败';
                         if (response.errors && response.errors.length > 0) {
                             errorMessage += ': ' + response.errors.join(', ');
                         }
                         showErrorMessage(errorMessage);
                     }
                 } catch (e) {
-                    showErrorMessage('Upload completed but response format was unexpected');
+                    showErrorMessage('上传完成,但响应格式异常');
                 }
                 progressContainer.style.display = 'none';
             } else {
-                let errorMessage = 'Unknown error';
+                let errorMessage = '未知错误';
                 try {
                     const error = JSON.parse(xhr.responseText);
                     errorMessage = error.error || error.message || errorMessage;
                 } catch (e) {
-                    errorMessage = `Server returned status ${xhr.status}`;
+                    errorMessage = `服务器返回状态 ${xhr.status}`;
                 }
-                showErrorMessage(`Failed to upload files: ${errorMessage}`);
+                showErrorMessage(`上传文件失败:${errorMessage}`);
                 progressContainer.style.display = 'none';
             }
         });
 
         // Handle errors
         xhr.addEventListener('error', function () {
-            showErrorMessage('Failed to upload files. Please check your connection and try again.');
+            showErrorMessage('上传文件失败,请检查连接后重试。');
             progressContainer.style.display = 'none';
         });
 
         // Handle abort
         xhr.addEventListener('abort', function () {
-            showErrorMessage('File upload was cancelled.');
+            showErrorMessage('文件上传已取消。');
             progressContainer.style.display = 'none';
         });
 
@@ -1286,7 +1286,7 @@ async function submitUploadFile() {
 
     } catch (error) {
         console.error('Upload error:', error);
-        showErrorMessage('Failed to upload files. Please try again.');
+        showErrorMessage('上传文件失败,请重试。');
         progressContainer.style.display = 'none';
     } finally {
         // Re-enable the button
@@ -1299,11 +1299,11 @@ async function submitUploadFile() {
 function exportFileList() {
     const table = document.getElementById('fileTable');
     if (!table) {
-        showAlert('File table not found', 'error');
+        showAlert('未找到文件表', 'error');
         return;
     }
 
-    const headers = ['Name', 'Size', 'Type', 'Modified', 'Permissions'];
+    const headers = ['名称', '大小', '类型', '修改时间', '权限'];
     const rows = [];
 
     // Get table rows
@@ -1345,7 +1345,7 @@ async function viewFile(filePath) {
 
         if (!response.ok) {
             const error = await response.json();
-            showAlert(`Failed to view file: ${error.error || 'Unknown error'}`, 'error');
+            showAlert(`查看文件失败:${error.error || '未知错误'}`, 'error');
             return;
         }
 
@@ -1354,7 +1354,7 @@ async function viewFile(filePath) {
 
     } catch (error) {
         console.error('View file error:', error);
-        showAlert('Failed to view file', 'error');
+        showAlert('查看文件失败', 'error');
     }
 }
 
@@ -1365,7 +1365,7 @@ async function showProperties(filePath) {
 
         if (!response.ok) {
             const error = await response.json();
-            showAlert(`Failed to get file properties: ${error.error || 'Unknown error'}`, 'error');
+            showAlert(`获取文件属性失败:${error.error || '未知错误'}`, 'error');
             return;
         }
 
@@ -1374,7 +1374,7 @@ async function showProperties(filePath) {
 
     } catch (error) {
         console.error('Properties error:', error);
-        showAlert('Failed to get file properties', 'error');
+        showAlert('获取文件属性失败', 'error');
     }
 }
 
@@ -1401,16 +1401,16 @@ async function deleteFile(filePath) {
         });
 
         if (response.ok) {
-            showAlert(`Successfully deleted "${filePath}"`, 'success');
+            showAlert(`成功删除 "${filePath}"`, 'success');
             // Reload the page to update the file list
             window.location.reload();
         } else {
             const error = await response.json();
-            showAlert(`Failed to delete file: ${error.error || 'Unknown error'}`, 'error');
+            showAlert(`删除文件失败:${error.error || '未知错误'}`, 'error');
         }
     } catch (error) {
         console.error('Delete error:', error);
-        showAlert('Failed to delete file', 'error');
+        showAlert('删除文件失败', 'error');
     }
 }
 
@@ -1507,8 +1507,8 @@ function setupDragAndDrop() {
             overlay.innerHTML = `
                 <div class="text-center p-5">
                     <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
-                    <h5>Drop files here to upload</h5>
-                    <p class="text-muted">Release to upload files to this directory</p>
+                    <h5>将文件拖放到此处上传</h5>
+                    <p class="text-muted">释放即可上传文件到此目录</p>
                 </div>
             `;
             overlay.style.cssText = `
@@ -1578,8 +1578,8 @@ function updateFileListPreview() {
     const totalSize = files.reduce((sum, file) => sum + file.size, 0);
 
     let html = `<div class="d-flex justify-content-between align-items-center mb-2">
-        <strong>${files.length} file(s) selected</strong>
-        <small class="text-muted">Total: ${formatBytes(totalSize)}</small>
+        <strong>已选择 ${files.length} 个文件</strong>
+        <small class="text-muted">总计:${formatBytes(totalSize)}</small>
     </div>`;
 
     files.forEach((file, index) => {
@@ -1725,7 +1725,7 @@ async function handleUpdateQuota(event) {
 
         if (response.ok) {
             // Success
-            showAlert(`Quota for bucket "${bucketName}" updated successfully!`, 'success');
+            showAlert(`桶 "${bucketName}" 的配额更新成功!`, 'success');
 
             // Close modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('manageQuotaModal'));
@@ -1737,11 +1737,11 @@ async function handleUpdateQuota(event) {
             }, 1500);
         } else {
             // Error
-            showAlert(result.error || 'Failed to update bucket quota', 'danger');
+            showAlert(result.error || '更新桶配额失败', 'danger');
         }
     } catch (error) {
         console.error('Error updating bucket quota:', error);
-        showAlert('Network error occurred while updating bucket quota', 'danger');
+        showAlert('更新桶配额时发生网络错误', 'danger');
     }
 }
 
@@ -1758,18 +1758,18 @@ function showFileViewer(data) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="fileViewerModalLabel">
-                            <i class="fas fa-eye me-2"></i>File Viewer: ${file.name}
+                            <i class="fas fa-eye me-2"></i>文件查看器:${file.name}
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ${viewable ? createFileViewerContent(file, content) : createNonViewableContent(data.reason || 'File cannot be viewed')}
+                        ${viewable ? createFileViewerContent(file, content) : createNonViewableContent(data.reason || '文件无法查看')}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" onclick="downloadFile('${file.full_path}')">
-                            <i class="fas fa-download me-1"></i>Download
+                            <i class="fas fa-download me-1"></i>下载
                         </button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
@@ -1810,7 +1810,7 @@ function createFileViewerContent(file, content) {
             <div class="mb-3">
                 <small class="text-muted">
                     <i class="fas fa-info-circle me-1"></i>
-                    Size: ${formatBytes(file.size)} | Type: ${file.mime}
+                    大小:${formatBytes(file.size)} | 类型:${file.mime}
                 </small>
             </div>
             <pre><code class="language-${language}" style="max-height: 400px; overflow-y: auto;">${escapeHtml(content)}</code></pre>
@@ -1823,7 +1823,7 @@ function createFileViewerContent(file, content) {
             </div>
         `;
     } else {
-        return createNonViewableContent('This file type cannot be previewed in the browser.');
+        return createNonViewableContent('此文件类型无法在浏览器中预览。');
     }
 }
 
@@ -1832,7 +1832,7 @@ function createNonViewableContent(reason) {
     return `
         <div class="text-center py-5">
             <i class="fas fa-file fa-3x text-muted mb-3"></i>
-            <h5 class="text-muted">Cannot preview file</h5>
+            <h5 class="text-muted">无法预览文件</h5>
             <p class="text-muted">${reason}</p>
         </div>
     `;
@@ -1909,7 +1909,7 @@ function showPropertiesModal(properties) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="propertiesModalLabel">
-                            <i class="fas fa-info me-2"></i>Properties: ${properties.name}
+                            <i class="fas fa-info me-2"></i>属性:${properties.name}
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -1917,7 +1917,7 @@ function showPropertiesModal(properties) {
                         ${createPropertiesContent(properties)}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
@@ -1948,17 +1948,17 @@ function createPropertiesContent(properties) {
     let html = `
         <div class="row">
             <div class="col-md-6">
-                <h6 class="text-primary"><i class="fas fa-file me-1"></i>Basic Information</h6>
+                <h6 class="text-primary"><i class="fas fa-file me-1"></i>基本信息</h6>
                 <table class="table table-sm">
-                    <tr><td><strong>Name:</strong></td><td>${properties.name}</td></tr>
-                    <tr><td><strong>Full Path:</strong></td><td><code>${properties.full_path}</code></td></tr>
-                    <tr><td><strong>Type:</strong></td><td>${properties.is_directory ? 'Directory' : 'File'}</td></tr>
+                    <tr><td><strong>名称:</strong></td><td>${properties.name}</td></tr>
+                    <tr><td><strong>完整路径:</strong></td><td><code>${properties.full_path}</code></td></tr>
+                    <tr><td><strong>类型:</strong></td><td>${properties.is_directory ? '目录' : '文件'}</td></tr>
     `;
 
     if (!properties.is_directory) {
         html += `
-                    <tr><td><strong>Size:</strong></td><td>${properties.size_formatted || formatBytes(properties.size || 0)}</td></tr>
-                    <tr><td><strong>MIME Type:</strong></td><td>${properties.mime_type || 'Unknown'}</td></tr>
+                    <tr><td><strong>大小:</strong></td><td>${properties.size_formatted || formatBytes(properties.size || 0)}</td></tr>
+                    <tr><td><strong>MIME 类型:</strong></td><td>${properties.mime_type || '未知'}</td></tr>
         `;
     }
 
@@ -1966,25 +1966,25 @@ function createPropertiesContent(properties) {
                 </table>
             </div>
             <div class="col-md-6">
-                <h6 class="text-primary"><i class="fas fa-clock me-1"></i>Timestamps</h6>
+                <h6 class="text-primary"><i class="fas fa-clock me-1"></i>时间戳</h6>
                 <table class="table table-sm">
     `;
 
     if (properties.modified_time) {
-        html += `<tr><td><strong>Modified:</strong></td><td>${properties.modified_time}</td></tr>`;
+        html += `<tr><td><strong>修改时间:</strong></td><td>${properties.modified_time}</td></tr>`;
     }
     if (properties.created_time) {
-        html += `<tr><td><strong>Created:</strong></td><td>${properties.created_time}</td></tr>`;
+        html += `<tr><td><strong>创建时间:</strong></td><td>${properties.created_time}</td></tr>`;
     }
 
     html += `
                 </table>
                 
-                <h6 class="text-primary"><i class="fas fa-shield-alt me-1"></i>Permissions</h6>
+                <h6 class="text-primary"><i class="fas fa-shield-alt me-1"></i>权限</h6>
                 <table class="table table-sm">
-                    <tr><td><strong>Mode:</strong></td><td><code>${properties.file_mode_formatted || properties.file_mode}</code></td></tr>
-                    <tr><td><strong>UID:</strong></td><td>${properties.uid || 'N/A'}</td></tr>
-                    <tr><td><strong>GID:</strong></td><td>${properties.gid || 'N/A'}</td></tr>
+                    <tr><td><strong>模式:</strong></td><td><code>${properties.file_mode_formatted || properties.file_mode}</code></td></tr>
+                    <tr><td><strong>UID:</strong></td><td>${properties.uid || '无'}</td></tr>
+                    <tr><td><strong>GID:</strong></td><td>${properties.gid || '无'}</td></tr>
                 </table>
             </div>
         </div>
@@ -1995,9 +1995,9 @@ function createPropertiesContent(properties) {
         html += `
             <div class="row mt-3">
                 <div class="col-12">
-                    <h6 class="text-primary"><i class="fas fa-hourglass-half me-1"></i>TTL (Time To Live)</h6>
+                    <h6 class="text-primary"><i class="fas fa-hourglass-half me-1"></i>TTL(生存时间)</h6>
                     <table class="table table-sm">
-                        <tr><td><strong>TTL:</strong></td><td>${properties.ttl_formatted || properties.ttl_seconds + ' seconds'}</td></tr>
+                        <tr><td><strong>TTL:</strong></td><td>${properties.ttl_formatted || properties.ttl_seconds + ' 秒'}</td></tr>
                     </table>
                 </div>
             </div>
@@ -2009,14 +2009,14 @@ function createPropertiesContent(properties) {
         html += `
             <div class="row mt-3">
                 <div class="col-12">
-                    <h6 class="text-primary"><i class="fas fa-puzzle-piece me-1"></i>Chunks (${properties.chunk_count})</h6>
+                    <h6 class="text-primary"><i class="fas fa-puzzle-piece me-1"></i>分块 (${properties.chunk_count})</h6>
                     <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th>File ID</th>
-                                    <th>Offset</th>
-                                    <th>Size</th>
+                                    <th>文件 ID</th>
+                                    <th>偏移量</th>
+                                    <th>大小</th>
                                     <th>ETag</th>
                                 </tr>
                             </thead>
@@ -2029,7 +2029,7 @@ function createPropertiesContent(properties) {
                                     <td><code class="small">${chunk.file_id}</code></td>
                                     <td>${formatBytes(chunk.offset)}</td>
                                     <td>${formatBytes(chunk.size)}</td>
-                                    <td><code class="small">${chunk.e_tag || 'N/A'}</code></td>
+                                    <td><code class="small">${chunk.e_tag || '无'}</code></td>
                                 </tr>
             `;
         });
@@ -2048,7 +2048,7 @@ function createPropertiesContent(properties) {
         html += `
             <div class="row mt-3">
                 <div class="col-12">
-                    <h6 class="text-primary"><i class="fas fa-tags me-1"></i>Extended Attributes</h6>
+                    <h6 class="text-primary"><i class="fas fa-tags me-1"></i>扩展属性</h6>
                     <table class="table table-sm">
         `;
 
@@ -2138,7 +2138,7 @@ function showModal(title, content) {
     closeFooterButton.type = 'button';
     closeFooterButton.className = 'btn btn-secondary';
     closeFooterButton.setAttribute('data-bs-dismiss', 'modal');
-    closeFooterButton.textContent = 'Close';
+    closeFooterButton.textContent = '关闭';
 
     modalFooter.appendChild(closeFooterButton);
 
@@ -2170,10 +2170,10 @@ function showSecretKey(accessKey, secretKey) {
     const content = `
         <div class="alert alert-info">
             <i class="fas fa-info-circle me-2"></i>
-            <strong>Access Key Details:</strong> These credentials provide access to your object storage. Keep them secure and don't share them.
+            <strong>访问密钥详情:</strong> 这些凭证用于访问您的对象存储。请妥善保管,切勿分享。
         </div>
         <div class="mb-3">
-            <label class="form-label"><strong>Access Key:</strong></label>
+            <label class="form-label"><strong>访问密钥:</strong></label>
             <div class="input-group">
                 <input type="text" id="${modalId}_accessKey" class="form-control" value="${escapedAccessKey}" readonly>
                 <button class="btn btn-outline-secondary" onclick="copyFromInput('${modalId}_accessKey')">
@@ -2182,7 +2182,7 @@ function showSecretKey(accessKey, secretKey) {
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label"><strong>Secret Key:</strong></label>
+            <label class="form-label"><strong>秘密密钥:</strong></label>
             <div class="input-group">
                 <input type="text" id="${modalId}_secretKey" class="form-control" value="${escapedSecretKey}" readonly>
                 <button class="btn btn-outline-secondary" onclick="copyFromInput('${modalId}_secretKey')">
@@ -2191,7 +2191,7 @@ function showSecretKey(accessKey, secretKey) {
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label"><strong>Export Commands (for easy copy & paste):</strong></label>
+            <label class="form-label"><strong>导出命令(便于复制粘贴):</strong></label>
             <div class="input-group">
                 <textarea id="${modalId}_exportCommands" class="form-control font-monospace" rows="2" readonly>export AWS_ACCESS_KEY_ID=${escapedAccessKey}
 export AWS_SECRET_ACCESS_KEY=${escapedSecretKey}</textarea>
@@ -2202,7 +2202,7 @@ export AWS_SECRET_ACCESS_KEY=${escapedSecretKey}</textarea>
         </div>
     `;
 
-    showModal('Access Key Details', content);
+    showModal('访问密钥详情', content);
 }
 
 function showNewAccessKeyModal(accessKeyData) {
@@ -2213,10 +2213,10 @@ function showNewAccessKeyModal(accessKeyData) {
     const content = `
         <div class="alert alert-success">
             <i class="fas fa-check-circle me-2"></i>
-            <strong>Success!</strong> Your new access key has been created.
+            <strong>成功!</strong> 您的新访问密钥已创建。
         </div>
         <div class="mb-3">
-            <label class="form-label"><strong>Access Key:</strong></label>
+            <label class="form-label"><strong>访问密钥:</strong></label>
             <div class="input-group">
                 <input type="text" id="${modalId}_accessKey" class="form-control" value="${escapedAccessKey}" readonly>
                 <button class="btn btn-outline-secondary" onclick="copyFromInput('${modalId}_accessKey')">
@@ -2225,7 +2225,7 @@ function showNewAccessKeyModal(accessKeyData) {
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label"><strong>Secret Key:</strong></label>
+            <label class="form-label"><strong>秘密密钥:</strong></label>
             <div class="input-group">
                 <input type="text" id="${modalId}_secretKey" class="form-control" value="${escapedSecretKey}" readonly>
                 <button class="btn btn-outline-secondary" onclick="copyFromInput('${modalId}_secretKey')">
@@ -2234,7 +2234,7 @@ function showNewAccessKeyModal(accessKeyData) {
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label"><strong>Export Commands (for easy copy & paste):</strong></label>
+            <label class="form-label"><strong>导出命令(便于复制粘贴):</strong></label>
             <div class="input-group">
                 <textarea id="${modalId}_exportCommands" class="form-control font-monospace" rows="2" readonly>export AWS_ACCESS_KEY_ID=${escapedAccessKey}
 export AWS_SECRET_ACCESS_KEY=${escapedSecretKey}</textarea>
@@ -2245,7 +2245,7 @@ export AWS_SECRET_ACCESS_KEY=${escapedSecretKey}</textarea>
         </div>
     `;
 
-    showModal('New Access Key Created', content);
+    showModal('新访问密钥已创建', content);
 }
 
 // Helper function to copy from an input field
@@ -2258,21 +2258,21 @@ function copyFromInput(inputId) {
         try {
             const successful = document.execCommand('copy');
             if (successful) {
-                showAlert('Copied to clipboard!', 'success');
+                showAlert('已复制到剪贴板!', 'success');
             } else {
                 // Try modern clipboard API as fallback
                 navigator.clipboard.writeText(input.value).then(() => {
-                    showAlert('Copied to clipboard!', 'success');
+                    showAlert('已复制到剪贴板!', 'success');
                 }).catch(() => {
-                    showAlert('Failed to copy', 'danger');
+                    showAlert('复制失败', 'danger');
                 });
             }
         } catch (err) {
             // Try modern clipboard API as fallback
             navigator.clipboard.writeText(input.value).then(() => {
-                showAlert('Copied to clipboard!', 'success');
+                showAlert('已复制到剪贴板!', 'success');
             }).catch(() => {
-                showAlert('Failed to copy', 'danger');
+                showAlert('复制失败', 'danger');
             });
         }
     }

@@ -21,11 +21,11 @@ func (c *commandVolumeDelete) Name() string {
 }
 
 func (c *commandVolumeDelete) Help() string {
-	return `delete a live volume from one volume server
+	return `从一个 volume 服务器删除一个存活的卷
 
 	volume.delete -node <volume server host:port> -volumeId <volume id>
 
-	This command deletes a volume from one volume server.
+	此命令从一个 volume 服务器删除一个卷。
 
 `
 }

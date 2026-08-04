@@ -22,12 +22,11 @@ func (c *commandS3AccessKeyRotate) Name() string {
 }
 
 func (c *commandS3AccessKeyRotate) Help() string {
-	return `rotate an access key for an S3 IAM user
+	return `为 S3 IAM 用户轮换访问密钥
 
 	s3.accesskey.rotate -user <username> -access_key <old_key>
 
-	Creates a new credential pair and deletes the old one. There is a brief
-	window where both keys are valid.
+	创建新的凭证对并删除旧的凭证对。会有一段短暂的时间两个密钥同时有效。
 `
 }
 

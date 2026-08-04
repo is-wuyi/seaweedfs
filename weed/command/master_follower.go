@@ -48,25 +48,25 @@ func init() {
 
 var cmdMasterFollower = &Command{
 	UsageLine: "master.follower -port=9333 -master=<master1Host>:<master1Port>",
-	Short:     "start a master follower",
-	Long: `start a master follower to provide volume=>location mapping service
+	Short:     "启动一个 master follower",
+	Long: `启动一个 master follower,提供 volume=>location 映射服务
 
-	The master follower does not participate in master election.
-	It just follow the existing masters, and listen for any volume location changes.
+	master follower 不参与 master 选举。
+	它只是跟随现有的 master,并监听任何 volume location 变更。
 
-	In most cases, the master follower is not needed. In big data centers with thousands of volume
-	servers. In theory, the master may have trouble to keep up with the write requests and read requests.
+	在大多数情况下,不需要 master follower。在拥有数千台 volume 服务器的大型数据中心中,
+	理论上 master 可能难以跟上写请求和读请求。
 
-	The master follower can relieve the master from read requests, which only needs to
-	lookup a fileId or volumeId.
+	master follower 可以分担 master 的读请求,这些读请求只需要
+	查找 fileId 或 volumeId。
 
-	The master follower currently can handle fileId lookup requests:
+	master follower 目前可以处理 fileId 查找请求:
 		/dir/lookup?volumeId=4
 		/dir/lookup?fileId=4,49c50924569199
-	And gRPC API
+	以及 gRPC API
 		rpc LookupVolume (LookupVolumeRequest) returns (LookupVolumeResponse) {}
 
-	This master follower is stateless and can run from any place.
+	此 master follower 是无状态的,可以在任何地方运行。
 
   `,
 }

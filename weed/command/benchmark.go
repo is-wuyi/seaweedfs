@@ -74,34 +74,32 @@ func init() {
 
 var cmdBenchmark = &Command{
 	UsageLine: "benchmark -master=localhost:9333 -c=10 -n=100000",
-	Short:     "benchmark by writing millions of files and reading them out",
-	Long: `benchmark on an empty SeaweedFS file system.
+	Short:     "通过写入数百万文件并读取来执行基准测试",
+	Long: `在一个空的 SeaweedFS 文件系统上执行基准测试。
 
-  Two tests during benchmark:
-  1) write lots of small files to the system
-  2) read the files out
+  基准测试期间执行两项测试:
+  1) 向系统写入大量小文件
+  2) 读取这些文件
 
-  The file content is mostly zeros, but no compression is done.
+  文件内容大部分为零,但不进行压缩。
 
-  You can choose to only benchmark read or write:
-    -readOnly   only benchmark read operations
-    -writeOnly  only benchmark write operations
+  你可以选择只对读或写进行基准测试:
+    -readOnly   只对读操作进行基准测试
+    -writeOnly  只对写操作进行基准测试
 
-  During write, the list of uploaded file ids is stored in "-list" specified file.
-  You can also use your own list of file ids to run read test.
+  在写入期间,已上传的文件 ID 列表会存储到 "-list" 指定的文件中。
+  你也可以使用自己的文件 ID 列表来运行读测试。
 
-  Write speed and read speed will be collected.
-  The numbers are used to get a sense of the system.
-  Usually your network or the hard drive is the real bottleneck.
+  会收集写入速度和读取速度。
+  这些数值用于了解系统的整体情况。
+  通常你的网络或硬盘才是真正的瓶颈。
 
-  Another thing to watch is whether the volumes are evenly distributed
-  to each volume server. Because the 7 more benchmark volumes are randomly distributed
-  to servers with free slots, it's highly possible some servers have uneven amount of
-  benchmark volumes. To remedy this, you can use this to grow the benchmark volumes
-  before starting the benchmark command:
+  另一件需要注意的事是卷是否均匀分布到各个 volume 服务器。因为多出的 7 个基准卷会被随机分配
+  到有空闲槽位的服务器,很可能某些服务器上的基准卷数量不均。为缓解此问题,你可以在启动基准测试命令前,
+  使用以下方式增长基准卷:
     http://localhost:9333/vol/grow?collection=benchmark&count=5
 
-  After benchmarking, you can clean up the written data by deleting the benchmark collection
+  基准测试结束后,你可以通过删除 benchmark 集合来清理已写入的数据
     http://localhost:9333/col/delete?collection=benchmark
 
   `,

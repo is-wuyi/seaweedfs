@@ -24,14 +24,13 @@ func (c *commandS3IAMImport) Name() string {
 }
 
 func (c *commandS3IAMImport) Help() string {
-	return `import S3 IAM configuration from a JSON file
+	return `从 JSON 文件导入 S3 IAM 配置
 
 	s3.iam.import -file backup.json -apply
 
-	Replaces the entire IAM configuration (users, credentials, policies,
-	service accounts, groups) with the contents of the file.
+	用文件内容替换整个 IAM 配置（用户、凭证、策略、服务账号、组）。
 
-	Requires -apply to confirm, since this overwrites the current configuration.
+	因为会覆盖当前配置，所以需要 -apply 来确认。
 `
 }
 

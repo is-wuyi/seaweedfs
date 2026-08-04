@@ -52,8 +52,8 @@ func init() {
 
 var cmdFilerCat = &Command{
 	UsageLine: "filer.cat [-o <file>] http://localhost:8888/path/to/file",
-	Short:     "copy one file to local",
-	Long: `read one file to stdout or write to a file
+	Short:     "将一个文件复制到本地",
+	Long: `读取一个文件到 stdout 或写入到文件
 
 `,
 }

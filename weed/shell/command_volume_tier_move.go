@@ -44,26 +44,25 @@ func (c *commandVolumeTierMove) Name() string {
 }
 
 func (c *commandVolumeTierMove) Help() string {
-	return `change a volume from one disk type or data center to another
+	return `将卷从一种磁盘类型或数据中心更改为另一种
 
 	volume.tier.move -fromDiskType=hdd -toDiskType=ssd [-collectionPattern=""] [-fullPercent=95] [-quietFor=1h] [-parallelLimit=4] [-toReplication=XYZ]
 	volume.tier.move -fromDataCenter=dc1 -toDataCenter=dc2 [-collectionPattern=""] [-fullPercent=95] [-quietFor=1h]
 
-	-fromDataCenter limits the volumes to move to those with a replica in that data center.
-	-toDataCenter places the moved volumes in that data center.
-	When fromDiskType and toDiskType are the same, both data center flags are required,
-	and volumes are moved between data centers on the same disk type.
+	-fromDataCenter 限定只迁移在该数据中心有副本的卷。
+	-toDataCenter 将迁移后的卷放置到该数据中心。
+	当 fromDiskType 和 toDiskType 相同时,两个数据中心标志都是必需的,
+	卷会在相同磁盘类型的数据中心之间迁移。
 
-	The command ensures the target replication is fully achieved on the destination tier
-	before deleting old replicas. This prevents data loss if a destination disk fails
-	before replication repair completes.
+	此命令确保在删除旧副本之前,目标副本已在目标分层完全达成。
+	这样可防止在副本修复完成之前目标磁盘发生故障而导致数据丢失。
 
-	When -toReplication is specified, the moved volume is reconfigured with the new
-	replication setting. Otherwise, the volume's existing replication is preserved.
+	当指定 -toReplication 时,迁移后的卷会使用新的副本设置重新配置。
+	否则,保留卷原有的副本设置。
 
-	Note:
-		Use -collectionPattern="_default" to match only the default collection (volumes with no collection name).
-		Empty collectionPattern matches all collections.
+	注意:
+		使用 -collectionPattern="_default" 仅匹配默认集合(没有集合名称的卷)。
+		空的 collectionPattern 匹配所有集合。
 
 `
 }

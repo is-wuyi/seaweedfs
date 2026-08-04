@@ -24,24 +24,23 @@ func (c *commandS3BucketOwner) Name() string {
 }
 
 func (c *commandS3BucketOwner) Help() string {
-	return `view or change the owner of an S3 bucket
+	return `查看或更改 S3 bucket 的所有者
 
-	Example:
-		# View the current owner of a bucket
+	示例：
+		# 查看 bucket 当前的所有者
 		s3.bucket.owner -name <bucket_name>
 
-		# Set or change the owner of a bucket
+		# 设置或更改 bucket 的所有者
 		s3.bucket.owner -name <bucket_name> -owner <identity_name>
 
-		# Remove the owner (make bucket admin-only)
+		# 移除所有者（使 bucket 仅限管理员访问）
 		s3.bucket.owner -name <bucket_name> -delete
 
-	The owner identity determines which S3 user can access the bucket.
-	Non-admin users can only access buckets they own. Admin users can
-	access all buckets regardless of ownership.
+	所有者身份决定了哪个 S3 用户可以访问该 bucket。非管理员用户只能访问他们
+	拥有的 bucket。管理员用户可以访问所有 bucket，无论所有者是谁。
 
-	The -owner value should match the identity name configured in your
-	S3 IAM system (the "name" field in s3.json identities configuration).
+	-owner 的值应与 S3 IAM 系统中配置的身份名称匹配（即 s3.json identities
+	配置中的 "name" 字段）。
 `
 }
 

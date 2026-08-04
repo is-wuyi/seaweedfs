@@ -25,11 +25,11 @@ func (c *commandVolumeUnmount) Name() string {
 }
 
 func (c *commandVolumeUnmount) Help() string {
-	return `unmount a volume from one volume server
+	return `从一个 volume 服务器卸载卷
 
 	volume.unmount -node <volume server host:port> -volumeId <volume id>
 
-	This command unmounts a volume from one volume server.
+	此命令从一个 volume 服务器卸载卷。
 
 `
 }

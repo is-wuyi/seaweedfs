@@ -21,7 +21,7 @@ func (c *commandS3AccessKeyDelete) Name() string {
 }
 
 func (c *commandS3AccessKeyDelete) Help() string {
-	return `delete an access key from an S3 IAM user
+	return `从 S3 IAM 用户删除一个访问密钥
 
 	s3.accesskey.delete -user <username> -access_key <key>
 `

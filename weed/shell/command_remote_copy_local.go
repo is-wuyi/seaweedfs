@@ -30,39 +30,39 @@ func (c *commandRemoteCopyLocal) Name() string {
 }
 
 func (c *commandRemoteCopyLocal) Help() string {
-	return `copy local files to remote storage
+	return `将本地文件复制到远端存储
 
-	# assume a remote storage is configured to name "cloud1"
+	# 假设远端存储已配置为名称 "cloud1"
 	remote.configure -name=cloud1 -type=s3 -s3.access_key=xxx -s3.secret_key=yyy
-	# mount and pull one bucket
+	# 挂载并拉取一个 bucket
 	remote.mount -dir=/xxx -remote=cloud1/bucket
 
-	# copy local files to remote storage
-	remote.copy.local -dir=/xxx                                    # copy all local-only files
-	remote.copy.local -dir=/xxx -concurrent=16                     # with custom concurrency
-	remote.copy.local -dir=/xxx -include=*.pdf                     # only copy PDF files
-	remote.copy.local -dir=/xxx -exclude=*.tmp                     # exclude temporary files
-	remote.copy.local -dir=/xxx -dryRun=true                       # show what would be done without making changes
-	remote.copy.local -dir=/xxx -forceUpdate=true                  # force update even if remote exists
-	remote.copy.local -dir=/xxx -delete                            # also delete remote files that do not exist locally
+	# 将本地文件复制到远端存储
+	remote.copy.local -dir=/xxx                                    # 复制所有本地独有的文件
+	remote.copy.local -dir=/xxx -concurrent=16                     # 自定义并发数
+	remote.copy.local -dir=/xxx -include=*.pdf                     # 仅复制 PDF 文件
+	remote.copy.local -dir=/xxx -exclude=*.tmp                     # 排除临时文件
+	remote.copy.local -dir=/xxx -dryRun=true                       # 仅显示将要执行的操作，不实际修改
+	remote.copy.local -dir=/xxx -forceUpdate=true                  # 即使远端已存在也强制更新
+	remote.copy.local -dir=/xxx -delete                            # 同时删除本地不存在的远端文件
 
-	This command will:
-	1. Find local files that don't exist on remote storage
-	2. Copy these files to remote storage
-	3. Update local metadata with remote information
-	4. With -delete, remove remote files that do not exist locally (similar to rsync --delete)
+	此命令将：
+	1. 查找远端存储中不存在的本地文件
+	2. 将这些文件复制到远端存储
+	3. 用远端信息更新本地元数据
+	4. 使用 -delete 时，删除本地不存在的远端文件（类似 rsync --delete）
 
-	This is useful when:
-	- You deleted filer logs and need to copy existing files
-	- You have local files that were never copied to remote
-	- You want to ensure all local files are backed up to remote
-	- You want scheduled one-shot backups that also propagate local deletions (with -delete)
+	适用于以下场景：
+	- 你删除了 filer 日志并需要复制现有文件
+	- 你有从未复制到远端的本地文件
+	- 你想确保所有本地文件都备份到远端
+	- 你想进行计划性的一次性备份并同步本地删除（使用 -delete）
 
-	Notes on -delete:
-	- only remote files under -dir are considered; paths outside it are never deleted
-	- -include/-exclude patterns also limit which remote files are deleted
-	- size/age filters only apply to copying, not to deletion
-	- use -dryRun=true first to review what would be deleted
+	关于 -delete 的说明：
+	- 仅考虑 -dir 下的远端文件；不会删除该路径之外的文件
+	- -include/-exclude 模式也会限制要删除的远端文件
+	- 大小/时间过滤器仅适用于复制，不适用于删除
+	- 先使用 -dryRun=true 查看将要删除的内容
 
  `
 }

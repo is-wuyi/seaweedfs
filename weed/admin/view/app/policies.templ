@@ -8,12 +8,12 @@ import (
 templ Policies(data dash.PoliciesData) {
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">
-            <i class="fas fa-shield-alt me-2"></i>IAM Policies
+            <i class="fas fa-shield-alt me-2"></i>IAM 策略
         </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createPolicyModal">
-                    <i class="fas fa-plus me-1"></i>Create Policy
+                    <i class="fas fa-plus me-1"></i>创建策略
                 </button>
             </div>
         </div>
@@ -28,7 +28,7 @@ templ Policies(data dash.PoliciesData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total Policies
+                                    策略总数
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalPolicies)}
@@ -48,7 +48,7 @@ templ Policies(data dash.PoliciesData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Active Policies
+                                    活跃策略
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalPolicies)}
@@ -68,7 +68,7 @@ templ Policies(data dash.PoliciesData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                    Last Updated
+                                    最近更新
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {data.LastUpdated.Format("15:04")}
@@ -89,16 +89,16 @@ templ Policies(data dash.PoliciesData) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-shield-alt me-2"></i>IAM Policies
+                            <i class="fas fa-shield-alt me-2"></i>IAM 策略
                         </h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
-                                <div class="dropdown-header">Actions:</div>
+                                <div class="dropdown-header">操作:</div>
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-download me-2"></i>Export List
+                                    <i class="fas fa-download me-2"></i>导出列表
                                 </a>
                             </div>
                         </div>
@@ -108,12 +108,12 @@ templ Policies(data dash.PoliciesData) {
                             <table class="table table-hover" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Policy Name</th>
-                                        <th>Version</th>
-                                        <th>Statements</th>
-                                        <th>Created</th>
-                                        <th>Updated</th>
-                                        <th>Actions</th>
+                                        <th>策略名称</th>
+                                        <th>版本</th>
+                                        <th>语句</th>
+                                        <th>创建时间</th>
+                                        <th>更新时间</th>
+                                        <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -126,7 +126,7 @@ templ Policies(data dash.PoliciesData) {
                                                 <span class="badge bg-info">{policy.Document.Version}</span>
                                             </td>
                                             <td>
-                                                <span class="badge bg-secondary">{fmt.Sprintf("%d statements", len(policy.Document.Statement))}</span>
+                                                <span class="badge bg-secondary">{fmt.Sprintf("%d 条语句", len(policy.Document.Statement))}</span>
                                             </td>
                                             <td>
                                                 <small class="text-muted">{policy.CreatedAt.Format("2006-01-02 15:04")}</small>
@@ -136,13 +136,13 @@ templ Policies(data dash.PoliciesData) {
                                             </td>
                                             <td>
                                                 <div class="btn-group btn-group-sm" role="group">
-                                                    <button type="button" class="btn btn-outline-info view-policy-btn" title="View Policy" data-policy-name={policy.Name}>
+                                                    <button type="button" class="btn btn-outline-info view-policy-btn" title="查看策略" data-policy-name={policy.Name}>
                                                         <i class="fas fa-eye"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-outline-primary edit-policy-btn" title="Edit Policy" data-policy-name={policy.Name}>
+                                                    <button type="button" class="btn btn-outline-primary edit-policy-btn" title="编辑策略" data-policy-name={policy.Name}>
                                                         <i class="fas fa-edit"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-outline-danger delete-policy-btn" title="Delete Policy" data-policy-name={policy.Name}>
+                                                    <button type="button" class="btn btn-outline-danger delete-policy-btn" title="删除策略" data-policy-name={policy.Name}>
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -154,10 +154,10 @@ templ Policies(data dash.PoliciesData) {
                                             <td colspan="6" class="text-center text-muted py-4">
                                                 <i class="fas fa-shield-alt fa-3x mb-3 text-muted"></i>
                                                 <div>
-                                                    <h5>No IAM policies found</h5>
-                                                    <p>Create your first policy to manage access permissions.</p>
+                                                    <h5>未找到 IAM 策略</h5>
+                                                    <p>创建您的第一个策略以管理访问权限。</p>
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPolicyModal">
-                                                        <i class="fas fa-plus me-1"></i>Create Policy
+                                                        <i class="fas fa-plus me-1"></i>创建策略
                                                     </button>
                                                 </div>
                                             </td>
@@ -178,34 +178,34 @@ templ Policies(data dash.PoliciesData) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createPolicyModalLabel">
-                        <i class="fas fa-shield-alt me-2"></i>Create IAM Policy
+                        <i class="fas fa-shield-alt me-2"></i>创建 IAM 策略
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createPolicyForm">
                         <div class="mb-3">
-                            <label for="policyName" class="form-label">Policy Name</label>
-                            <input type="text" class="form-control" id="policyName" name="name" required placeholder="e.g., S3ReadOnlyPolicy">
-                            <div class="form-text">Enter a unique name for this policy (alphanumeric and underscores only)</div>
+                            <label for="policyName" class="form-label">策略名称</label>
+                            <input type="text" class="form-control" id="policyName" name="name" required placeholder="例如,S3ReadOnlyPolicy">
+                            <div class="form-text">为此策略输入唯一名称(仅限字母数字和下划线)</div>
                         </div>
                         
                         <div class="mb-3">
-                            <label for="policyDocument" class="form-label">Policy Document</label>
-                            <textarea class="form-control" id="policyDocument" name="document" rows="15" required placeholder="Enter IAM policy JSON document..."></textarea>
-                            <div class="form-text">Enter the policy document in AWS IAM JSON format</div>
+                            <label for="policyDocument" class="form-label">策略文档</label>
+                            <textarea class="form-control" id="policyDocument" name="document" rows="15" required placeholder="输入 IAM 策略 JSON 文档..."></textarea>
+                            <div class="form-text">以 AWS IAM JSON 格式输入策略文档</div>
                         </div>
 
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-outline-info btn-sm" onclick="insertSamplePolicy()">
-                                        <i class="fas fa-file-alt me-1"></i>Use Sample Policy
+                                        <i class="fas fa-file-alt me-1"></i>使用示例策略
                                     </button>
                                 </div>
                                 <div class="col-md-6 text-end">
                                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="validatePolicyDocument()">
-                                        <i class="fas fa-check me-1"></i>Validate JSON
+                                        <i class="fas fa-check me-1"></i>验证 JSON
                                     </button>
                                 </div>
                             </div>
@@ -213,9 +213,9 @@ templ Policies(data dash.PoliciesData) {
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" onclick="createPolicy()">
-                        <i class="fas fa-plus me-1"></i>Create Policy
+                        <i class="fas fa-plus me-1"></i>创建策略
                     </button>
                 </div>
             </div>
@@ -228,24 +228,24 @@ templ Policies(data dash.PoliciesData) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="viewPolicyModalLabel">
-                        <i class="fas fa-eye me-2"></i>View IAM Policy
+                        <i class="fas fa-eye me-2"></i>查看 IAM 策略
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
                 </div>
                 <div class="modal-body">
                     <div id="viewPolicyContent">
                         <div class="text-center">
                             <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                                <span class="visually-hidden">加载中...</span>
                             </div>
-                            <p class="mt-2">Loading policy...</p>
+                            <p class="mt-2">正在加载策略...</p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary" id="editFromViewBtn">
-                        <i class="fas fa-edit me-1"></i>Edit Policy
+                        <i class="fas fa-edit me-1"></i>编辑策略
                     </button>
                 </div>
             </div>
@@ -258,34 +258,34 @@ templ Policies(data dash.PoliciesData) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editPolicyModalLabel">
-                        <i class="fas fa-edit me-2"></i>Edit IAM Policy
+                        <i class="fas fa-edit me-2"></i>编辑 IAM 策略
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editPolicyForm">
                         <div class="mb-3">
-                            <label for="editPolicyName" class="form-label">Policy Name</label>
+                            <label for="editPolicyName" class="form-label">策略名称</label>
                             <input type="text" class="form-control" id="editPolicyName" name="name" readonly>
-                            <div class="form-text">Policy name cannot be changed</div>
+                            <div class="form-text">策略名称无法更改</div>
                         </div>
-                        
+
                         <div class="mb-3">
-                            <label for="editPolicyDocument" class="form-label">Policy Document</label>
+                            <label for="editPolicyDocument" class="form-label">策略文档</label>
                             <textarea class="form-control" id="editPolicyDocument" name="document" rows="15" required></textarea>
-                            <div class="form-text">Edit the policy document in AWS IAM JSON format</div>
+                            <div class="form-text">以 AWS IAM JSON 格式编辑策略文档</div>
                         </div>
 
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-outline-info btn-sm" onclick="insertSamplePolicyEdit()">
-                                        <i class="fas fa-file-alt me-1"></i>Reset to Sample
+                                        <i class="fas fa-file-alt me-1"></i>重置为示例
                                     </button>
                                 </div>
                                 <div class="col-md-6 text-end">
                                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="validateEditPolicyDocument()">
-                                        <i class="fas fa-check me-1"></i>Validate JSON
+                                        <i class="fas fa-check me-1"></i>验证 JSON
                                     </button>
                                 </div>
                             </div>
@@ -293,9 +293,9 @@ templ Policies(data dash.PoliciesData) {
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" onclick="updatePolicy()">
-                        <i class="fas fa-save me-1"></i>Save Changes
+                        <i class="fas fa-save me-1"></i>保存更改
                     </button>
                 </div>
             </div>
@@ -351,7 +351,7 @@ templ Policies(data dash.PoliciesData) {
         const policyDocumentText = formData.get('document');
         
         if (!policyName || !policyDocumentText) {
-            showAlert('Please fill in all required fields', 'warning');
+            showAlert('请填写所有必填字段', 'warning');
             return;
         }
         
@@ -359,7 +359,7 @@ templ Policies(data dash.PoliciesData) {
         try {
             policyDocument = JSON.parse(policyDocumentText);
         } catch (e) {
-            showAlert('Invalid JSON in policy document: ' + e.message, 'error');
+            showAlert('策略文档中的 JSON 无效: ' + e.message, 'error');
             return;
         }
         
@@ -378,17 +378,17 @@ templ Policies(data dash.PoliciesData) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                showAlert('Policy created successfully!', 'success');
+                showAlert('策略创建成功!', 'success');
                 const modal = bootstrap.Modal.getInstance(document.getElementById('createPolicyModal'));
                 if (modal) modal.hide();
                 location.reload(); // Refresh the page to show the new policy
             } else {
-                showAlert('Error creating policy: ' + (data.error || 'Unknown error'), 'error');
+                showAlert('创建策略失败: ' + (data.error || '未知错误'), 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            showAlert('Error creating policy: ' + error.message, 'error');
+            showAlert('创建策略失败: ' + error.message, 'error');
         });
     }
     
@@ -401,9 +401,9 @@ templ Policies(data dash.PoliciesData) {
         document.getElementById('viewPolicyContent').innerHTML = `
             <div class="text-center">
                 <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                    <span class="visually-hidden">加载中...</span>
                 </div>
-                <p class="mt-2">Loading policy...</p>
+                <p class="mt-2">正在加载策略...</p>
             </div>
         `;
         
@@ -411,7 +411,7 @@ templ Policies(data dash.PoliciesData) {
         fetch(basePath('/api/object-store/policies/' + encodeURIComponent(policyName)))
         .then(response => {
             if (!response.ok) {
-                throw new Error('Policy not found');
+                throw new Error('未找到策略');
             }
             return response.json();
         })
@@ -424,7 +424,7 @@ templ Policies(data dash.PoliciesData) {
             document.getElementById('viewPolicyContent').innerHTML = `
                 <div class="alert alert-danger" role="alert">
                     <i class="fas fa-exclamation-triangle me-2"></i>
-                    Error loading policy: ${error.message}
+                    加载策略失败: ${error.message}
                 </div>
             `;
         });
@@ -438,21 +438,21 @@ templ Policies(data dash.PoliciesData) {
             statementsHtml = policy.document.Statement.map((stmt, index) => `
                 <div class="card mb-2">
                     <div class="card-header py-2">
-                        <h6 class="mb-0">Statement ${index + 1}</h6>
+                        <h6 class="mb-0">语句 ${index + 1}</h6>
                     </div>
                     <div class="card-body py-2">
                         <div class="row">
                             <div class="col-md-6">
-                                <strong>Effect:</strong> 
+                                <strong>效果:</strong>
                                 <span class="badge ${stmt.Effect === 'Allow' ? 'bg-success' : 'bg-danger'}">${stmt.Effect}</span>
                             </div>
                             <div class="col-md-6">
-                                <strong>Actions:</strong> ${Array.isArray(stmt.Action) ? stmt.Action.join(', ') : stmt.Action}
+                                <strong>操作:</strong> ${Array.isArray(stmt.Action) ? stmt.Action.join(', ') : stmt.Action}
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-12">
-                                <strong>Resources:</strong> ${Array.isArray(stmt.Resource) ? stmt.Resource.join(', ') : stmt.Resource}
+                                <strong>资源:</strong> ${Array.isArray(stmt.Resource) ? stmt.Resource.join(', ') : stmt.Resource}
                             </div>
                         </div>
                     </div>
@@ -463,22 +463,22 @@ templ Policies(data dash.PoliciesData) {
         content.innerHTML = `
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <strong>Policy Name:</strong> ${policy.name || 'Unknown'}
+                    <strong>策略名称:</strong> ${policy.name || '未知'}
                 </div>
                 <div class="col-md-6">
-                    <strong>Version:</strong> <span class="badge bg-info">${policy.document?.Version || 'Unknown'}</span>
+                    <strong>版本:</strong> <span class="badge bg-info">${policy.document?.Version || '未知'}</span>
                 </div>
             </div>
             
             <div class="mb-3">
-                <strong>Statements:</strong>
+                <strong>语句:</strong>
                 <div class="mt-2">
-                    ${statementsHtml || '<p class="text-muted">No statements found</p>'}
+                    ${statementsHtml || '<p class="text-muted">未找到语句</p>'}
                 </div>
             </div>
             
             <div class="mb-3">
-                <strong>Raw Policy Document:</strong>
+                <strong>原始策略文档:</strong>
                 <pre class="bg-light p-3 border rounded mt-2"><code>${JSON.stringify(policy.document, null, 2)}</code></pre>
             </div>
         `;
@@ -491,13 +491,13 @@ templ Policies(data dash.PoliciesData) {
         
         // Set policy name
         document.getElementById('editPolicyName').value = policyName;
-        document.getElementById('editPolicyDocument').value = 'Loading...';
+        document.getElementById('editPolicyDocument').value = '加载中...';
         
         // Fetch policy data
         fetch(basePath('/api/object-store/policies/' + encodeURIComponent(policyName)))
         .then(response => {
             if (!response.ok) {
-                throw new Error('Policy not found');
+                throw new Error('未找到策略');
             }
             return response.json();
         })
@@ -507,7 +507,7 @@ templ Policies(data dash.PoliciesData) {
         })
         .catch(error => {
             console.error('Error:', error);
-            showAlert('Error loading policy for editing: ' + error.message, 'error');
+            showAlert('加载策略用于编辑失败: ' + error.message, 'error');
             const editModal = bootstrap.Modal.getInstance(document.getElementById('editPolicyModal'));
             if (editModal) editModal.hide();
         });
@@ -518,7 +518,7 @@ templ Policies(data dash.PoliciesData) {
         const policyDocumentText = document.getElementById('editPolicyDocument').value;
         
         if (!policyName || !policyDocumentText) {
-            showAlert('Please fill in all required fields', 'warning');
+            showAlert('请填写所有必填字段', 'warning');
             return;
         }
         
@@ -526,7 +526,7 @@ templ Policies(data dash.PoliciesData) {
         try {
             policyDocument = JSON.parse(policyDocumentText);
         } catch (e) {
-            showAlert('Invalid JSON in policy document: ' + e.message, 'error');
+            showAlert('策略文档中的 JSON 无效: ' + e.message, 'error');
             return;
         }
         
@@ -544,17 +544,17 @@ templ Policies(data dash.PoliciesData) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                showAlert('Policy updated successfully!', 'success');
+                showAlert('策略更新成功!', 'success');
                 const modal = bootstrap.Modal.getInstance(document.getElementById('editPolicyModal'));
                 if (modal) modal.hide();
                 location.reload(); // Refresh the page to show the updated policy
             } else {
-                showAlert('Error updating policy: ' + (data.error || 'Unknown error'), 'error');
+                showAlert('更新策略失败: ' + (data.error || '未知错误'), 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            showAlert('Error updating policy: ' + error.message, 'error');
+            showAlert('更新策略失败: ' + error.message, 'error');
         });
     }
     
@@ -610,7 +610,7 @@ templ Policies(data dash.PoliciesData) {
     
     function validatePolicyJSON(policyText) {
         if (!policyText) {
-            showAlert('Please enter a policy document first', 'warning');
+            showAlert('请先输入策略文档', 'warning');
             return;
         }
         
@@ -619,18 +619,18 @@ templ Policies(data dash.PoliciesData) {
             
             // Basic validation
             if (!policy.Version) {
-                showAlert('Policy must have a Version field', 'error');
+                showAlert('策略必须包含 Version 字段', 'error');
                 return;
             }
             
             if (!policy.Statement || !Array.isArray(policy.Statement)) {
-                showAlert('Policy must have a Statement array', 'error');
+                showAlert('策略必须包含 Statement 数组', 'error');
                 return;
             }
             
-            showAlert('Policy document is valid JSON!', 'success');
+            showAlert('策略文档是有效的 JSON!', 'success');
         } catch (e) {
-            showAlert('Invalid JSON: ' + e.message, 'error');
+            showAlert('无效的 JSON: ' + e.message, 'error');
         }
     }
     
@@ -642,15 +642,15 @@ templ Policies(data dash.PoliciesData) {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    showAlert('Policy deleted successfully!', 'success');
+                    showAlert('策略删除成功!', 'success');
                     location.reload();
                 } else {
-                    showAlert('Error deleting policy: ' + (data.error || 'Unknown error'), 'error');
+                    showAlert('删除策略失败: ' + (data.error || '未知错误'), 'error');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                showAlert('Error deleting policy: ' + error.message, 'error');
+                showAlert('删除策略失败: ' + error.message, 'error');
             });
         });
     }

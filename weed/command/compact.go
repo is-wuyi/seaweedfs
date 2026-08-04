@@ -15,14 +15,14 @@ func init() {
 
 var cmdCompact = &Command{
 	UsageLine: "compact -dir=/tmp -volumeId=234",
-	Short:     "run weed tool compact on volume file",
-	Long: `Force an compaction to remove deleted files from volume files.
-  The compacted .dat file is stored as .cpd file.
-  The compacted .idx file is stored as .cpx file.
+	Short:     "对 volume 文件运行 weed 工具 compact",
+	Long: `强制执行 compact,从卷文件中移除已删除的文件。
+  compact 后的 .dat 文件存储为 .cpd 文件。
+  compact 后的 .idx 文件存储为 .cpx 文件。
 
-  Supports two compaction methods:
-    * data:  compacts based on the .dat file, works if .idx file is corrupted.
-    * index: compacts based on the .idx file, works if deletion happened but not written to .dat files.
+  支持两种 compact 方式:
+    * data:  基于 .dat 文件进行 compact,在 .idx 文件损坏时仍可工作。
+    * index: 基于 .idx 文件进行 compact,在已发生删除但未写入 .dat 文件时仍可工作。
 
   `,
 }

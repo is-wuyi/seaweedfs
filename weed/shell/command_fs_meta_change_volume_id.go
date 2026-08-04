@@ -26,13 +26,13 @@ func (c *commandFsMetaChangeVolumeId) Name() string {
 }
 
 func (c *commandFsMetaChangeVolumeId) Help() string {
-	return `change volume id in existing metadata.
+	return `更改现有元数据中的 volume id。
 
 	fs.meta.changeVolumeId -dir=/path/to/a/dir -fromVolumeId=x -toVolumeId=y -apply
 	fs.meta.changeVolumeId -dir=/path/to/a/dir -mapping=/path/to/mapping/file -apply
 
-	The mapping file should have these lines, each line is: [fromVolumeId]=>[toVolumeId]
-	e.g.
+	映射文件应包含以下行,每行格式为:[fromVolumeId]=>[toVolumeId]
+	例如:
 		1 => 2
 		3 => 4
 

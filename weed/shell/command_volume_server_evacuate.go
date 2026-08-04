@@ -29,19 +29,18 @@ func (c *commandVolumeServerEvacuate) Name() string {
 }
 
 func (c *commandVolumeServerEvacuate) Help() string {
-	return `move out all data on a volume server
+	return `迁出某个 volume 服务器上的所有数据
 
 	volumeServer.evacuate -node <host:port>
 
-	This command moves all data away from the volume server.
-	The volumes on the volume servers will be redistributed.
+	此命令将所有数据从该 volume 服务器迁出。
+	volume 服务器上的卷将被重新分布。
 
-	Usually this is used to prepare to shutdown or upgrade the volume server.
+	通常用于准备关闭或升级 volume 服务器。
 
-	Sometimes a volume can not be moved because there are no
-	good destination to meet the replication requirement. 
-	E.g. a volume replication 001 in a cluster with 2 volume servers can not be moved.
-	You can use "-skipNonMoveable" to move the rest volumes.
+	有时某个卷无法迁移,因为没有合适的目标能满足副本要求。
+	例如,在仅有 2 个 volume 服务器的集群中,副本数为 001 的卷无法迁移。
+	可使用 "-skipNonMoveable" 来迁移其余的卷。
 
 `
 }

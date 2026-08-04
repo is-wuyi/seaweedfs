@@ -40,26 +40,26 @@ func init() {
 
 var cmdMqKafkaGateway = &Command{
 	UsageLine: "mq.kafka.gateway [-ip=<host>] [-ip.bind=<bind_addr>] [-port=9092] [-master=<master_servers>] [-filerGroup=<group>] [-default-partitions=4] -schema-registry-url=<url>",
-	Short:     "start a Kafka wire-protocol gateway for SeaweedMQ with schema management",
-	Long: `Start a Kafka wire-protocol gateway translating Kafka client requests to SeaweedMQ.
+	Short:     "为 SeaweedMQ 启动一个带 schema 管理的 Kafka 线协议网关",
+	Long: `启动一个 Kafka 线协议网关,将 Kafka 客户端请求转换为 SeaweedMQ 请求。
 
-Connects to SeaweedFS master servers to discover available brokers and integrates with
-Schema Registry for schema-aware topic management.
+连接到 SeaweedFS master 服务器以发现可用的 broker,并与 Schema Registry 集成
+以实现具备 schema 感知的 topic 管理。
 
-Options:
-  -ip                  Advertised host address that clients should connect to (default: auto-detected)
-  -ip.bind             Bind address for the gateway to listen on (default: same as -ip)
-                       Use 0.0.0.0 to bind to all interfaces while advertising specific IP
-  -port                Listen port (default: 9092)
-  -default-partitions  Default number of partitions for auto-created topics (default: 4)
-  -schema-registry-url Schema Registry URL (REQUIRED for schema management)
+选项:
+  -ip                  客户端应连接的对外主机地址(默认:自动检测)
+  -ip.bind             网关监听的绑定地址(默认:与 -ip 相同)
+                       使用 0.0.0.0 绑定到所有接口,同时通告特定 IP
+  -port                监听端口(默认:9092)
+  -default-partitions  自动创建的 topic 的默认分区数(默认:4)
+  -schema-registry-url Schema Registry URL(schema 管理所必需)
 
-Examples:
+示例:
   weed mq.kafka.gateway -port=9092 -master=localhost:9333 -schema-registry-url=http://localhost:8081
   weed mq.kafka.gateway -ip=gateway1 -port=9092 -master=master1:9333,master2:9333 -schema-registry-url=http://schema-registry:8081
   weed mq.kafka.gateway -ip=external.host.com -ip.bind=0.0.0.0 -master=localhost:9333 -schema-registry-url=http://schema-registry:8081
 
-This is experimental and currently supports a minimal subset for development.
+这是实验性功能,目前仅支持用于开发的最小子集。
 `,
 }
 

@@ -8,12 +8,12 @@ import (
 templ Admin(data dash.AdminData) {
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">
-            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+            <i class="fas fa-tachometer-alt me-2"></i>仪表盘
         </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                  				<a href={ dash.PUrl(ctx, "/object-store/buckets") } class="btn btn-sm btn-primary">
-					<i class="fas fa-cube me-1"></i>Object Store Buckets
+					<i class="fas fa-cube me-1"></i>对象存储 Buckets
                 </a>
 
             </div>
@@ -30,7 +30,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Total Volumes
+                                    卷总数
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalVolumes)}
@@ -51,7 +51,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                    Total Files
+                                    文件总数
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {formatNumber(data.TotalFiles)}
@@ -72,7 +72,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Total Size
+                                    总大小
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {formatBytes(data.TotalSize)}
@@ -93,7 +93,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Volume Size Limit
+                                    卷大小上限
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d MB", data.VolumeSizeLimitMB)}
@@ -116,7 +116,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
-                                    EC Volumes
+                                    EC 卷
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalEcVolumes)}
@@ -136,7 +136,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                                    EC Shards
+                                    EC 分片
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalEcShards)}
@@ -157,7 +157,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                    Active Tasks
+                                    活跃任务
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     { data.Trends.TasksValue }
@@ -178,7 +178,7 @@ templ Admin(data dash.AdminData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Workers
+                                    Worker
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     { data.Trends.WorkersValue }
@@ -200,10 +200,10 @@ templ Admin(data dash.AdminData) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-plug me-2"></i>Mount Clients
+                            <i class="fas fa-plug me-2"></i>Mount 客户端
                         </h6>
                         <a id="mountClientsDetailsLink" href="/cluster/mount-clients" class="btn btn-sm btn-outline-primary">
-                            View Details <i class="fas fa-arrow-right ms-1"></i>
+                            查看详情 <i class="fas fa-arrow-right ms-1"></i>
                         </a>
                     </div>
                     <div class="card-body">
@@ -211,7 +211,7 @@ templ Admin(data dash.AdminData) {
                             <i class="fas fa-plug fa-2x text-gray-300 me-3"></i>
                             <div>
                                 <div class="h4 mb-0 font-weight-bold text-gray-800">{fmt.Sprintf("%d", data.TotalMountClients)}</div>
-                                <div class="text-xs text-muted text-uppercase">Connected FUSE/VFS mount clients</div>
+                                <div class="text-xs text-muted text-uppercase">已连接的 FUSE/VFS mount 客户端</div>
                             </div>
                         </div>
                     </div>
@@ -228,7 +228,7 @@ templ Admin(data dash.AdminData) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-server me-2"></i>Master Nodes
+                            <i class="fas fa-server me-2"></i>master 节点
                         </h6>
                     </div>
                     <div class="card-body">
@@ -236,8 +236,8 @@ templ Admin(data dash.AdminData) {
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Address</th>
-                                        <th>Role</th>
+                                        <th>地址</th>
+                                        <th>角色</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -251,9 +251,9 @@ templ Admin(data dash.AdminData) {
                                             </td>
                                             <td>
                                                 if master.IsLeader {
-                                                    <span class="badge bg-primary">Leader</span>
+                                                    <span class="badge bg-primary">leader</span>
                                                 } else {
-                                                    <span class="badge bg-secondary">Follower</span>
+                                                    <span class="badge bg-secondary">follower</span>
                                                 }
                                             </td>
                                         </tr>
@@ -270,7 +270,7 @@ templ Admin(data dash.AdminData) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-chart-pie me-2"></i>Cluster
+                            <i class="fas fa-chart-pie me-2"></i>集群
                         </h6>
                     </div>
                     <div class="card-body text-center">
@@ -279,7 +279,7 @@ templ Admin(data dash.AdminData) {
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h5>{fmt.Sprintf("%d", len(data.MasterNodes))}</h5>
-                                        <small class="text-muted">Masters</small>
+                                        <small class="text-muted">master</small>
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@ templ Admin(data dash.AdminData) {
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h5>{fmt.Sprintf("%d", len(data.VolumeServers))}</h5>
-                                        <small class="text-muted">Volume Servers</small>
+                                        <small class="text-muted">volume 服务器</small>
                                     </div>
                                 </div>
                             </div>
@@ -295,7 +295,7 @@ templ Admin(data dash.AdminData) {
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h5>{fmt.Sprintf("%d", len(data.FilerNodes))}</h5>
-                                        <small class="text-muted">Filers</small>
+                                        <small class="text-muted">filer</small>
                                     </div>
                                 </div>
                             </div>
@@ -303,7 +303,7 @@ templ Admin(data dash.AdminData) {
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h5>{fmt.Sprintf("%d", len(data.S3Nodes))}</h5>
-                                        <small class="text-muted">S3 Servers</small>
+                                        <small class="text-muted">S3 服务器</small>
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +311,7 @@ templ Admin(data dash.AdminData) {
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h5>{fmt.Sprintf("%d", len(data.MessageBrokers))}</h5>
-                                        <small class="text-muted">Message Brokers</small>
+                                        <small class="text-muted">消息 broker</small>
                                     </div>
                                 </div>
                             </div>
@@ -327,16 +327,16 @@ templ Admin(data dash.AdminData) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-database me-2"></i>Volume Servers
+                            <i class="fas fa-database me-2"></i>volume 服务器
                         </h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
-                                <div class="dropdown-header">Actions:</div>
-                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/volumes") }>View Details</a>
-                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/cluster") }>Topology View</a>
+                                <div class="dropdown-header">操作:</div>
+                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/volumes") }>查看详情</a>
+                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/cluster") }>拓扑视图</a>
                             </div>
                         </div>
                     </div>
@@ -346,12 +346,12 @@ templ Admin(data dash.AdminData) {
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Address</th>
-                                        <th>Data Center</th>
-                                        <th>Rack</th>
-                                        <th>Volumes</th>
-                                        <th>EC Shards</th>
-                                        <th>Capacity</th>
+                                        <th>地址</th>
+                                        <th>数据中心</th>
+                                        <th>机架</th>
+                                        <th>卷</th>
+                                        <th>EC 分片</th>
+                                        <th>容量</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -391,7 +391,7 @@ templ Admin(data dash.AdminData) {
                                         <tr>
                                             <td colspan="7" class="text-center text-muted py-4">
                                                 <i class="fas fa-info-circle me-2"></i>
-                                                No volume servers found
+                                                未找到 volume 服务器
                                             </td>
                                         </tr>
                                     }
@@ -409,16 +409,16 @@ templ Admin(data dash.AdminData) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-folder me-2"></i>Filer Nodes
+                            <i class="fas fa-folder me-2"></i>filer 节点
                         </h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
-                                <div class="dropdown-header">Actions:</div>
-                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/filer") }>File Browser</a>
-                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/cluster") }>Topology View</a>
+                                <div class="dropdown-header">操作:</div>
+                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/filer") }>文件浏览器</a>
+                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/cluster") }>拓扑视图</a>
                             </div>
                         </div>
                     </div>
@@ -427,10 +427,10 @@ templ Admin(data dash.AdminData) {
                             <table class="table table-hover" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Address</th>
-                                        <th>Data Center</th>
-                                        <th>Rack</th>
-                                        <th>Last Updated</th>
+                                        <th>地址</th>
+                                        <th>数据中心</th>
+                                        <th>机架</th>
+                                        <th>最后更新</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -451,7 +451,7 @@ templ Admin(data dash.AdminData) {
                                         <tr>
                                             <td colspan="4" class="text-center text-muted py-4">
                                                 <i class="fas fa-info-circle me-2"></i>
-                                                No filer nodes found
+                                                未找到 filer 节点
                                             </td>
                                         </tr>
                                     }
@@ -469,15 +469,15 @@ templ Admin(data dash.AdminData) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-cloud me-2"></i>S3 Servers
+                            <i class="fas fa-cloud me-2"></i>S3 服务器
                         </h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
-                                <div class="dropdown-header">Actions:</div>
-                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/cluster/s3") }>View Details</a>
+                                <div class="dropdown-header">操作:</div>
+                                <a class="dropdown-item" href={ dash.PUrl(ctx, "/cluster/s3") }>查看详情</a>
                             </div>
                         </div>
                     </div>
@@ -486,9 +486,9 @@ templ Admin(data dash.AdminData) {
                             <table class="table table-hover" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Address</th>
-                                        <th>Data Center</th>
-                                        <th>Last Updated</th>
+                                        <th>地址</th>
+                                        <th>数据中心</th>
+                                        <th>最后更新</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -503,7 +503,7 @@ templ Admin(data dash.AdminData) {
                                         <tr>
                                             <td colspan="3" class="text-center text-muted py-4">
                                                 <i class="fas fa-info-circle me-2"></i>
-                                                No S3 servers found
+                                                未找到 S3 服务器
                                             </td>
                                         </tr>
                                     }
@@ -520,7 +520,7 @@ templ Admin(data dash.AdminData) {
             <div class="col-12">
                 <small class="text-muted">
                     <i class="fas fa-clock me-1"></i>
-                    Last updated: {data.LastUpdated.Format("2006-01-02 15:04:05")}
+                    最后更新: {data.LastUpdated.Format("2006-01-02 15:04:05")}
                 </small>
             </div>
         </div>

@@ -16,7 +16,7 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group me-2">
 				<a href={ dash.PUrl(ctx, "/object-store/s3tables/buckets") } class="btn btn-sm btn-primary">
-					<i class="fas fa-plus me-1"></i>Create Table Bucket
+					<i class="fas fa-plus me-1"></i>创建表桶
 				</a>
 			</div>
 			<div class="btn-group me-2">
@@ -34,7 +34,7 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 				<div>
 					<strong>Iceberg REST Catalog</strong>
 					<p id="iceberg-rest-info" class="mb-0 mt-1" data-iceberg-port={ fmt.Sprintf("%d", data.IcebergPort) }>
-						Connect your Iceberg clients (DuckDB, Spark, etc.) to:
+						将您的 Iceberg 客户端(DuckDB、Spark 等)连接到:
 						<code><span id="iceberg-protocol">http</span>://<span id="iceberg-host">localhost</span>:{fmt.Sprintf("%d", data.IcebergPort)}/v1</code>
 					</p>
 					<script>
@@ -64,7 +64,7 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									Catalogs (Table Buckets)
+									Catalog(表桶)
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.TotalCatalogs) }
@@ -83,7 +83,7 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-									REST Port
+									REST 端口
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 									{ fmt.Sprintf("%d", data.IcebergPort) }
@@ -102,7 +102,7 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-									Last Updated
+									最后更新
 								</div>
 								<div class="h6 mb-0 font-weight-bold text-gray-800">
 									if data.LastUpdated.IsZero() {
@@ -127,22 +127,22 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 				<div class="card shadow mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary">
-							<i class="fas fa-snowflake me-2"></i>Available Catalogs
+							<i class="fas fa-snowflake me-2"></i>可用 Catalog
 						</h6>
 					</div>
 					<div class="card-body">
 						<p class="text-muted mb-3">
-							Each S3 Table Bucket acts as an Iceberg catalog. Use the bucket name as the catalog prefix in your REST API calls.
+							每个 S3 表桶作为一个 Iceberg catalog。在 REST API 调用中使用 bucket 名称作为 catalog 前缀。
 						</p>
 						<div class="table-responsive">
 							<table class="table table-hover" width="100%" cellspacing="0" id="icebergCatalogsTable">
 								<thead>
 									<tr>
-										<th>Catalog Name</th>
-										<th>Owner</th>
-										<th>REST Endpoint</th>
-										<th>Created</th>
-										<th>Actions</th>
+										<th>Catalog 名称</th>
+									<th>所有者</th>
+									<th>REST 端点</th>
+									<th>创建时间</th>
+									<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -167,7 +167,7 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 												<div class="btn-group btn-group-sm" role="group">
 													{{ bucketName, parseErr := s3tables.ParseBucketNameFromARN(catalog.ARN) }}
 													if parseErr == nil {
-														<a class="btn btn-outline-primary btn-sm" href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/iceberg/%s/namespaces", url.PathEscape(bucketName))) } title="Browse Namespaces">
+														<a class="btn btn-outline-primary btn-sm" href={ dash.PUrl(ctx, fmt.Sprintf("/object-store/iceberg/%s/namespaces", url.PathEscape(bucketName))) } title="浏览命名空间">
 															<i class="fas fa-folder-open"></i>
 														</a>
 													} else {
@@ -184,11 +184,11 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 											<td colspan="5" class="text-center text-muted py-4">
 												<i class="fas fa-snowflake fa-3x mb-3 text-muted"></i>
 												<div>
-													<h5>No catalogs available</h5>
-													<p>Create an S3 Table Bucket first to use as an Iceberg catalog.</p>
-													<a href={ dash.PUrl(ctx, "/object-store/s3tables/buckets") } class="btn btn-primary">
-														<i class="fas fa-plus me-1"></i>Create Table Bucket
-													</a>
+													<h5>暂无可用 catalog</h5>
+												<p>请先创建一个 S3 表桶以作为 Iceberg catalog。</p>
+												<a href={ dash.PUrl(ctx, "/object-store/s3tables/buckets") } class="btn btn-primary">
+													<i class="fas fa-plus me-1"></i>创建表桶
+												</a>
 												</div>
 											</td>
 										</tr>
@@ -207,7 +207,7 @@ templ IcebergCatalog(data dash.IcebergCatalogData) {
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">
-							<i class="fas fa-code me-2"></i>Example Usage
+							<i class="fas fa-code me-2"></i>使用示例
 						</h6>
 					</div>
 					<div class="card-body">

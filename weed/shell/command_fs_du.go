@@ -22,7 +22,7 @@ func (c *commandFsDu) Name() string {
 }
 
 func (c *commandFsDu) Help() string {
-	return `show disk usage
+	return `显示磁盘使用量
 
 	fs.du /dir
 	fs.du /dir/file_name

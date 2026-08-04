@@ -22,7 +22,7 @@ func (c *commandS3AccessKeyList) Name() string {
 }
 
 func (c *commandS3AccessKeyList) Help() string {
-	return `list access keys for an S3 IAM user
+	return `列出 S3 IAM 用户的访问密钥
 
 	s3.accesskey.list -user <username>
 `

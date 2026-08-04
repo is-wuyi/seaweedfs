@@ -49,22 +49,19 @@ func init() {
 
 var cmdFilerSyncVerify = &Command{
 	UsageLine: "filer.sync.verify -a=<oneFilerHost>:<oneFilerPort> -b=<otherFilerHost>:<otherFilerPort>",
-	Short:     "compare entries between two filers and report differences",
-	Long: `compare entries between two filers and report differences, then exit.
+	Short:     "比较两个 filer 之间的条目并报告差异",
+	Long: `比较两个 filer 之间的条目并报告差异,然后退出。
 
-	Useful for validating active/passive sync targets agree with the source.
-	Reports MISSING (in A but not in B), ONLY_IN_B (in B but not in A; suppressed
-	in active-passive mode), SIZE_MISMATCH, and ETAG_MISMATCH. Honors
-	-modifiedTimeAgo to skip recently-modified files (sync-lag tolerance) and
-	-isActivePassive for unidirectional comparison.
+	用于验证主备同步目标是否与源一致。
+	报告 MISSING(在 A 中但不在 B 中)、ONLY_IN_B(在 B 中但不在 A 中;在主备模式下被抑制)、
+	SIZE_MISMATCH 和 ETAG_MISMATCH。支持通过 -modifiedTimeAgo 跳过最近修改的文件
+	(同步延迟容忍),以及通过 -isActivePassive 进行单向比较。
 
-	A chunk-derived ETag (no stored attr.Md5) can differ between clusters only
-	because the chunk slice was assembled in a different order, since ETagChunks
-	does not sort by offset. Such files are byte-identical and reported as
-	CHUNK_REORDER: not counted as errors, always counted in the summary, listed
-	only at -v=1.
+	由 chunk 派生的 ETag(没有存储 attr.Md5)在不同集群间可能不同,
+	仅因为 chunk 切片的组装顺序不同,因为 ETagChunks 不会按偏移量排序。这类文件字节相同,
+	会被报告为 CHUNK_REORDER:不计为错误,始终计入摘要,仅在 -v=1 时列出。
 
-	Exits with code 0 on agreement, 2 on differences or operational errors.
+	一致时退出码为 0,存在差异或操作错误时退出码为 2。
 
 `,
 }

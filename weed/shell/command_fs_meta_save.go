@@ -34,16 +34,16 @@ func (c *commandFsMetaSave) Name() string {
 }
 
 func (c *commandFsMetaSave) Help() string {
-	return `save all directory and file meta data to a local file for metadata backup.
+	return `将所有目录和文件的元数据保存到本地文件用于元数据备份。
 
-	fs.meta.save /               # save from the root
-	fs.meta.save -v -o t.meta /  # save from the root, output to t.meta file.
-	fs.meta.save /path/to/save   # save from the directory /path/to/save
-	fs.meta.save .               # save from current directory
-	fs.meta.save                 # save from current directory
+	fs.meta.save /               # 从根目录保存
+	fs.meta.save -v -o t.meta /  # 从根目录保存,输出到 t.meta 文件。
+	fs.meta.save /path/to/save   # 从目录 /path/to/save 保存
+	fs.meta.save .               # 从当前目录保存
+	fs.meta.save                 # 从当前目录保存
 
-	The meta data will be saved into a local <filer_host>-<port>-<time>.meta.gz file.
-	These meta data can be later loaded by fs.meta.load command
+	元数据将保存到本地 <filer_host>-<port>-<time>.meta.gz 文件中。
+	这些元数据之后可以通过 fs.meta.load 命令加载
 
 `
 }

@@ -20,14 +20,14 @@ func (c *commandEcBalance) Name() string {
 }
 
 func (c *commandEcBalance) Help() string {
-	return `balance all ec shards among all racks and volume servers
+	return `在所有机架和 volume 服务器之间均衡所有 EC 分片
 
 	ec.balance [-c EACH_COLLECTION|<collection_name>] [-apply] [-dataCenter <data_center>] [-shardReplicaPlacement <replica_placement>] [-diskType <disk_type>]
 
-	Options:
-	  -diskType: the disk type for EC shards (hdd, ssd, or empty for default hdd)
+	选项:
+	  -diskType: EC 分片的磁盘类型(hdd、ssd,或留空默认为 hdd)
 
-	Algorithm:
+	算法:
 	` + ecBalanceAlgorithmDescription
 }
 

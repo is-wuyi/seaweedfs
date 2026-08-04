@@ -22,7 +22,7 @@ func (c *commandFsTree) Name() string {
 }
 
 func (c *commandFsTree) Help() string {
-	return `recursively list all files under a directory
+	return `递归列出目录下的所有文件
 
 	fs.tree /some/dir
 

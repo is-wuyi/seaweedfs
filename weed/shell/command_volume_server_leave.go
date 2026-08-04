@@ -24,15 +24,15 @@ func (c *commandVolumeServerLeave) Name() string {
 }
 
 func (c *commandVolumeServerLeave) Help() string {
-	return `stop a volume server from sending heartbeats to the master
+	return `停止 volume 服务器向 master 发送心跳
 
 	volumeServer.leave -node <volume server host:port> [-apply]
 
-	This command enables gracefully shutting down the volume server.
-	The volume server will stop sending heartbeats to the master.
-	After draining the traffic for a few seconds, you can safely shut down the volume server.
+	此命令用于优雅地关闭 volume 服务器。
+	volume 服务器将停止向 master 发送心跳。
+	在排空流量几秒后,即可安全地关闭 volume 服务器。
 
-	This operation is not revocable unless the volume server is restarted.
+	此操作不可撤销,除非重启 volume 服务器。
 `
 }
 

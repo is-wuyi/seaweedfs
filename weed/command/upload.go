@@ -50,19 +50,19 @@ func init() {
 
 var cmdUpload = &Command{
 	UsageLine: "upload -master=localhost:9333 file1 [file2 file3]\n         weed upload -master=localhost:9333 -dir=one_directory -include=*.pdf",
-	Short:     "upload one or a list of files",
-	Long: `upload one or a list of files, or batch upload one whole folder recursively.
+	Short:     "上传一个或一组文件",
+	Long: `上传一个或一组文件,或递归批量上传整个文件夹。
 
-  If uploading a list of files:
-  It uses consecutive file keys for the list of files.
-  e.g. If the file1 uses key k, file2 can be read via k_1
+  如果上传一组文件:
+  会为这组文件使用连续的文件键。
+  例如,如果 file1 使用键 k,则 file2 可通过 k_1 读取
 
-  If uploading a whole folder recursively:
-  All files under the folder and subfolders will be uploaded, each with its own file key.
-  Optional parameter "-include" allows you to specify the file name patterns.
+  如果递归上传整个文件夹:
+  文件夹及子文件夹下的所有文件都会被上传,每个文件都有自己的文件键。
+  可选参数 "-include" 允许你指定文件名模式。
 
-  If "maxMB" is set to a positive number, files larger than it would be split into chunks and uploaded separately.
-  The list of file ids of those chunks would be stored in an additional chunk, and this additional chunk's file id would be returned.
+  如果 "maxMB" 设置为正数,大于该值的文件会被切分成 chunk 并分别上传。
+  这些 chunk 的文件 ID 列表会存储在一个额外的 chunk 中,并返回这个额外 chunk 的文件 ID。
 
   `,
 }

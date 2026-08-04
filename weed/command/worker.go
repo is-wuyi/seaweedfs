@@ -9,22 +9,22 @@ import (
 
 var cmdWorker = &Command{
 	UsageLine: "worker -admin=<admin_server> [-id=<worker_id>] [-jobType=all] [-workingDir=<path>] [-heartbeat=15s] [-reconnect=5s] [-maxDetect=1] [-maxExecute=4] [-metricsPort=<port>] [-metricsIp=<ip>] [-debug]",
-	Short:     "start a plugin.proto worker process",
-	Long: `Start an external plugin worker using weed/pb/plugin.proto over gRPC.
+	Short:     "启动一个 plugin.proto worker 进程",
+	Long: `通过 gRPC 启动一个使用 weed/pb/plugin.proto 的外部 plugin worker。
 
-This command provides plugin job type handlers for cluster maintenance,
-including descriptor delivery, heartbeat/load reporting, detection, and execution.
+此命令提供用于集群维护的 plugin 作业类型处理器,
+包括描述符投递、心跳/负载上报、探测和执行。
 
-Behavior:
-  - Use -jobType to choose handlers by category or explicit name (comma-separated)
-  - Categories: "all" (every registered handler), "default" (lightweight jobs),
-    "heavy" (resource-intensive jobs like erasure coding)
-  - Explicit job type names and aliases are still supported (e.g. "vacuum", "ec")
-  - Categories and explicit names can be mixed (e.g. "default,iceberg")
-  - Use -workingDir to persist worker.id for stable worker identity across restarts
-  - Use -metricsPort/-metricsIp to expose /health, /ready, and /metrics
+行为:
+  - 使用 -jobType 按类别或显式名称(逗号分隔)选择处理器
+  - 类别:"all"(所有已注册处理器)、"default"(轻量作业)、
+    "heavy"(资源密集型作业,如纠删码)
+  - 仍支持显式作业类型名称和别名(例如 "vacuum"、"ec")
+  - 类别和显式名称可混合使用(例如 "default,iceberg")
+  - 使用 -workingDir 持久化 worker.id,以便在重启后保持稳定的 worker 身份
+  - 使用 -metricsPort/-metricsIp 暴露 /health、/ready 和 /metrics
 
-Examples:
+示例:
   weed worker -admin=localhost:23646
   weed worker -admin=localhost:23646 -jobType=all
   weed worker -admin=localhost:23646 -jobType=default

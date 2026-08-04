@@ -26,39 +26,35 @@ func (c *commandS3VersionsAudit) Name() string {
 }
 
 func (c *commandS3VersionsAudit) Help() string {
-	return `audit .versions/ directories under a prefix for stranded pointer/missing-file state
+	return `审计某个前缀下 .versions/ 目录的指针搁浅/文件缺失状态
 
-	Walks every entry under the given prefix and, for each directory whose
-	name ends in ".versions", checks whether its extended-attr latest-version
-	pointer references a file that actually exists in the directory.
+	遍历给定前缀下的每个条目，对于名称以 ".versions" 结尾的目录，
+	检查其扩展属性中的最新版本指针是否引用了目录中实际存在的文件。
 
-	Reports counts for:
-	  - directories scanned
-	  - clean (no pointer, or pointer matches existing file)
-	  - stranded (pointer set but file is missing) — the symptom seen by
-	    Veeam/etc. as "Storage not found" on the next GET
-	  - orphan (directory has files lacking the version-id extended attr,
-	    which the post-delete cleanup path will refuse to rm)
-	  - empty (no pointer and no children — residue of a fully-drained key;
-	    every GET of the key replays the read-side self-heal rescan)
+	报告以下计数：
+	  - 已扫描的目录数
+	  - 干净（无指针，或指针匹配现有文件）
+	  - 搁浅（已设置指针但文件缺失）—— Veeam 等客户端在下一次 GET 时
+	    会看到 "Storage not found" 症状
+	  - 孤儿（目录中存在缺少 version-id 扩展属性的文件，
+	    删除后的清理路径会拒绝将其移除）
+	  - 空目录（无指针且无子项——已完全排空 key 的残留；每次 GET
+	    该 key 都会重放读侧的自愈重扫）
 
-	Example:
-		# Audit a whole bucket
+	示例：
+		# 审计整个 bucket
 		s3.versions.audit -prefix /buckets/mybucket
 
-		# Audit a specific client subtree, print each finding
+		# 审计特定客户端子树，打印每个发现
 		s3.versions.audit -prefix /buckets/mybucket/Veeam/Backup/groupsoftware/Clients/<uuid>/ -v
 
-		# Dry run (default) — read-only, prints what would be healed
-		# Add -heal to clear stranded pointers in place (calls the same path
-		# the read-side self-heal uses)
+		# 试运行（默认）—— 只读，打印将被自愈的内容
+		# 添加 -heal 可就地清除搁浅指针（调用读侧自愈使用的同一路径）
 		s3.versions.audit -prefix /buckets/mybucket -heal
 
-	This command is read-only by default. With -heal, it clears the stale
-	latest-version pointer on stranded directories and removes empty ones;
-	the blob is already gone, so reads then return NoSuchKey via the
-	clean-miss path instead of replaying the 10-retry self-heal loop on
-	every request.
+	此命令默认为只读。使用 -heal 时，会清除搁浅目录上过期的最新版本指针并移除空目录；
+	数据 blob 已经不存在，因此读取会通过 clean-miss 路径返回 NoSuchKey，
+	而不是在每次请求时重放 10 次重试的自愈循环。
 `
 }
 

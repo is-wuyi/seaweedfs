@@ -22,12 +22,12 @@ func (c *commandVolumeCopy) Name() string {
 }
 
 func (c *commandVolumeCopy) Help() string {
-	return `copy a volume from one volume server to another volume server
+	return `将卷从一个 volume 服务器复制到另一个 volume 服务器
 
 	volume.copy -source <source volume server host:port> -target <target volume server host:port> -volumeId <volume id>
 
-	This command copies a volume from one volume server to another volume server.
-	Usually you will want to unmount the volume first before copying.
+	此命令将卷从一个 volume 服务器复制到另一个 volume 服务器。
+	通常在复制之前应先卸载该卷。
 
 `
 }

@@ -25,7 +25,7 @@ func (c *commandS3AnonymousList) Name() string {
 }
 
 func (c *commandS3AnonymousList) Help() string {
-	return `list all buckets with anonymous access
+	return `列出所有配置了匿名访问的 bucket
 
 	s3.anonymous.list
 `

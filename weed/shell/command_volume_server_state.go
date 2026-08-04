@@ -28,23 +28,22 @@ func (c *commandVolumeServerState) Name() string {
 }
 
 func (c *commandVolumeServerState) Help() string {
-	return `query/update volume server state settings
+	return `查询/更新 volume 服务器的状态设置
 
-	volumeServer.state [-nodes <host:port>] [..state flags...]
+	volumeServer.state [-nodes <host:port>] [..状态标志...]
 
-	This command display volume server state flags for the provided
-	list of nodes; if empty, all nodes in the topology are queried.
-	For example:
+	此命令显示所提供节点列表的 volume 服务器状态标志;
+	如果为空,则查询拓扑中的所有节点。
+	例如:
 
 	  volumeServer.state --nodes 192.168.10.111:9000,192.168.10.112:9000
 
-	Additionally, if any flags are provided, these are applied
-	to the selected node(s). The command will display the resulting
-	state for each node *after* the state is updated. For example...
+	此外,如果提供了任何标志,这些标志会应用到所选节点。
+	命令会显示每个节点在状态更新 *之后* 的结果状态。例如...
 
 	  volumeServer.state --nodes 192.168.10.111:9000 --maintenanceOn
 
-	...will set the specified volume server to maintenance mode.
+	...会将指定的 volume 服务器设置为维护模式。
 
 `
 }

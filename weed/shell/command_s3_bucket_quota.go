@@ -22,13 +22,13 @@ func (c *commandS3BucketQuota) Name() string {
 }
 
 func (c *commandS3BucketQuota) Help() string {
-	return `set/remove/enable/disable quota for a bucket
+	return `为 bucket 设置/移除/启用/禁用配额
 
-	Example:
+	示例：
 		s3.bucket.quota -name=<bucket_name> -op=set -sizeMB=1024
 
-	Removing or disabling the quota also clears the read-only flag that
-	s3.bucket.quota.enforce may have set on the bucket.
+	移除或禁用配额时，还会清除 s3.bucket.quota.enforce 可能已在该 bucket
+	上设置的只读标志。
 `
 }
 

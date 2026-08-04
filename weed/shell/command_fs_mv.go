@@ -21,9 +21,9 @@ func (c *commandFsMv) Name() string {
 }
 
 func (c *commandFsMv) Help() string {
-	return `move or rename a file or a folder
+	return `移动或重命名文件或目录
 
-	fs.mv  <source entry> <destination entry> 
+	fs.mv  <source entry> <destination entry>
 
 	fs.mv /dir/file_name /dir2/filename2
 	fs.mv /dir/file_name /dir2

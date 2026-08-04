@@ -27,30 +27,30 @@ func (c *commandRemoteCache) Name() string {
 }
 
 func (c *commandRemoteCache) Help() string {
-	return `comprehensive synchronization and caching between local and remote storage
+	return `本地与远端存储之间的全面同步和缓存
 
-	# assume a remote storage is configured to name "cloud1"
+	# 假设远端存储已配置为名称 "cloud1"
 	remote.configure -name=cloud1 -type=s3 -s3.access_key=xxx -s3.secret_key=yyy
-	# mount and pull one bucket
+	# 挂载并拉取一个 bucket
 	remote.mount -dir=/xxx -remote=cloud1/bucket
 
-	# comprehensive sync and cache: update metadata, cache content, and remove deleted files
-	remote.cache -dir=/xxx                                # sync metadata, cache content, and remove deleted files (default)
-	remote.cache -dir=/xxx -cacheContent=false            # sync metadata and cleanup only, no caching
-	remote.cache -dir=/xxx -deleteLocalExtra=false        # skip removal of local files missing from remote
-	remote.cache -dir=/xxx -concurrent=32                 # with custom file-level concurrency
-	remote.cache -dir=/xxx -chunkConcurrency=16           # parallel chunk downloads per file (0 = server default 8)
-	remote.cache -dir=/xxx -downloadConcurrency=10        # S3 multipart download concurrency per chunk (0 = server default 5)
-	remote.cache -dir=/xxx -include=*.pdf                 # only sync PDF files
-	remote.cache -dir=/xxx -exclude=*.tmp                 # exclude temporary files
-	remote.cache -dir=/xxx -dryRun=true                   # show what would be done without making changes
+	# 全面同步和缓存：更新元数据、缓存内容，并移除已删除的文件
+	remote.cache -dir=/xxx                                # 同步元数据、缓存内容并移除已删除的文件（默认）
+	remote.cache -dir=/xxx -cacheContent=false            # 仅同步元数据和清理，不进行缓存
+	remote.cache -dir=/xxx -deleteLocalExtra=false        # 跳过移除远端已不存在的本地文件
+	remote.cache -dir=/xxx -concurrent=32                 # 自定义文件级并发数
+	remote.cache -dir=/xxx -chunkConcurrency=16           # 每个文件的并行 chunk 下载（0 = 服务器默认 8）
+	remote.cache -dir=/xxx -downloadConcurrency=10        # 每个 chunk 的 S3 分段下载并发数（0 = 服务器默认 5）
+	remote.cache -dir=/xxx -include=*.pdf                 # 仅同步 PDF 文件
+	remote.cache -dir=/xxx -exclude=*.tmp                 # 排除临时文件
+	remote.cache -dir=/xxx -dryRun=true                   # 仅显示将要执行的操作，不实际修改
 
-	This command will:
-	1. Synchronize metadata from remote storage
-	2. Cache file content from remote by default
-	3. Remove local files that no longer exist on remote by default (use -deleteLocalExtra=false to disable)
+	此命令将：
+	1. 从远端存储同步元数据
+	2. 默认从远端缓存文件内容
+	3. 默认移除远端已不存在的本地文件（使用 -deleteLocalExtra=false 可禁用）
 
-	This is designed to run regularly. So you can add it to some cronjob.
+	此命令设计为定期运行，因此可以将其加入 cron 定时任务。
 
 `
 }

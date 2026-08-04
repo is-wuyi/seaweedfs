@@ -24,13 +24,12 @@ func (c *commandS3IAMExport) Name() string {
 }
 
 func (c *commandS3IAMExport) Help() string {
-	return `export the full S3 IAM configuration as JSON
+	return `以 JSON 格式导出完整的 S3 IAM 配置
 
 	s3.iam.export
 	s3.iam.export -file backup.json
 
-	Exports all users, credentials, policies, service accounts, and groups.
-	Without -file, prints to stdout.
+	导出所有用户、凭证、策略、服务账号和组。不指定 -file 时输出到 stdout。
 `
 }
 

@@ -9,21 +9,21 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div>
             <h1 class="h2">
-                <i class="fas fa-th-large me-2"></i>EC Shards
+                <i class="fas fa-th-large me-2"></i>EC 分片
             </h1>
             if data.FilterCollection != "" {
                 <div class="d-flex align-items-center mt-2">
                     if data.FilterCollection == "default" {
                         <span class="badge bg-secondary text-white me-2">
-                            <i class="fas fa-filter me-1"></i>Collection: default
+                            <i class="fas fa-filter me-1"></i>集合: default
                         </span>
                     } else {
                         <span class="badge bg-info text-white me-2">
-                            <i class="fas fa-filter me-1"></i>Collection: {data.FilterCollection}
+                            <i class="fas fa-filter me-1"></i>集合: {data.FilterCollection}
                         </span>
                     }
                     <a href={ dash.PUrl(ctx, "/storage/ec-shards") } class="btn btn-sm btn-outline-secondary">
-                        <i class="fas fa-times me-1"></i>Clear Filter
+                        <i class="fas fa-times me-1"></i>清除过滤
                     </a>
                 </div>
             }
@@ -31,13 +31,13 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <select class="form-select form-select-sm me-2" id="pageSizeSelect" onchange="changePageSize()" style="width: auto;">
-                    <option value="50" if data.PageSize == 50 { selected="selected" }>50 per page</option>
-                    <option value="100" if data.PageSize == 100 { selected="selected" }>100 per page</option>
-                    <option value="200" if data.PageSize == 200 { selected="selected" }>200 per page</option>
-                    <option value="500" if data.PageSize == 500 { selected="selected" }>500 per page</option>
+                    <option value="50" if data.PageSize == 50 { selected="selected" }>每页 50 条</option>
+                    <option value="100" if data.PageSize == 100 { selected="selected" }>每页 100 条</option>
+                    <option value="200" if data.PageSize == 200 { selected="selected" }>每页 200 条</option>
+                    <option value="500" if data.PageSize == 500 { selected="selected" }>每页 500 条</option>
                 </select>
                 <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportEcShards()">
-                    <i class="fas fa-download me-1"></i>Export
+                    <i class="fas fa-download me-1"></i>导出
                 </button>
             </div>
         </div>
@@ -50,7 +50,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h6 class="card-title">Total Shards</h6>
+                            <h6 class="card-title">分片总数</h6>
                             <h4 class="mb-0">{fmt.Sprintf("%d", data.TotalShards)}</h4>
                         </div>
                         <div class="align-self-center">
@@ -65,7 +65,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h6 class="card-title">EC Volumes</h6>
+                            <h6 class="card-title">EC 卷</h6>
                             <h4 class="mb-0">{fmt.Sprintf("%d", data.TotalVolumes)}</h4>
                         </div>
                         <div class="align-self-center">
@@ -80,9 +80,9 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h6 class="card-title">Healthy Volumes</h6>
+                            <h6 class="card-title">健康卷</h6>
                             <h4 class="mb-0">{fmt.Sprintf("%d", data.VolumesWithAllShards)}</h4>
-                            <small>Complete (14/14 shards)</small>
+                            <small>完整(14/14 分片)</small>
                         </div>
                         <div class="align-self-center">
                             <i class="fas fa-check-circle fa-2x"></i>
@@ -96,9 +96,9 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h6 class="card-title">Degraded Volumes</h6>
+                            <h6 class="card-title">降级卷</h6>
                             <h4 class="mb-0">{fmt.Sprintf("%d", data.VolumesWithMissingShards)}</h4>
-                            <small>Incomplete/Critical</small>
+                            <small>不完整/严重</small>
                         </div>
                         <div class="align-self-center">
                             <i class="fas fa-exclamation-triangle fa-2x"></i>
@@ -116,7 +116,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                 <tr>
                     <th>
                         <a href="#" onclick="sortBy('volume_id')" class="text-dark text-decoration-none">
-                            Volume ID
+                            卷 ID
                             if data.SortBy == "volume_id" {
                                 if data.SortOrder == "asc" {
                                     <i class="fas fa-sort-up ms-1"></i>
@@ -132,7 +132,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                     if data.ShowCollectionColumn {
                         <th>
                             <a href="#" onclick="sortBy('collection')" class="text-dark text-decoration-none">
-                                Collection
+                                集合
                                 if data.SortBy == "collection" {
                                     if data.SortOrder == "asc" {
                                         <i class="fas fa-sort-up ms-1"></i>
@@ -148,7 +148,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                     if data.ShowDataCenterColumn {
                         <th>
                             <a href="#" onclick="sortBy('datacenter')" class="text-dark text-decoration-none">
-                                Data Center
+                                数据中心
                                 if data.SortBy == "datacenter" {
                                     if data.SortOrder == "asc" {
                                         <i class="fas fa-sort-up ms-1"></i>
@@ -163,7 +163,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                     }
                     <th>
                         <a href="#" onclick="sortBy('server')" class="text-dark text-decoration-none">
-                            Server
+                            服务器
                             if data.SortBy == "server" {
                                 if data.SortOrder == "asc" {
                                     <i class="fas fa-sort-up ms-1"></i>
@@ -178,7 +178,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                     if data.ShowRackColumn {
                         <th>
                             <a href="#" onclick="sortBy('rack')" class="text-dark text-decoration-none">
-                                Rack
+                                机架
                                 if data.SortBy == "rack" {
                                     if data.SortOrder == "asc" {
                                         <i class="fas fa-sort-up ms-1"></i>
@@ -191,9 +191,9 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                             </a>
                         </th>
                     }
-                    <th class="text-dark">Distribution</th>
-                    <th class="text-dark">Status</th>
-                    <th class="text-dark">Actions</th>
+                    <th class="text-dark">分布</th>
+                    <th class="text-dark">状态</th>
+                    <th class="text-dark">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -239,7 +239,7 @@ templ ClusterEcShards(data dash.ClusterEcShardsData) {
                                 <button type="button" class="btn btn-sm btn-outline-primary" 
                                         onclick="showShardDetails(event)" 
                                         data-volume-id={ fmt.Sprintf("%d", shard.VolumeID) }
-                                        title="View EC volume details">
+                                        title="查看 EC 卷详情">
                                     <i class="fas fa-info-circle"></i>
                                 </button>
                             </div>
@@ -394,16 +394,16 @@ templ displayShardDistribution(shard dash.EcShardWithInfo, allShards []dash.EcSh
 // displayVolumeStatus shows an improved status display
 templ displayVolumeStatus(shard dash.EcShardWithInfo) {
     if shard.IsComplete {
-        <span class="badge bg-success"><i class="fas fa-check me-1"></i>Complete</span>
+        <span class="badge bg-success"><i class="fas fa-check me-1"></i>完整</span>
     } else {
         if len(shard.MissingShards) > 10 {
-            <span class="badge bg-danger"><i class="fas fa-skull me-1"></i>Critical ({fmt.Sprintf("%d", len(shard.MissingShards))} missing)</span>
+            <span class="badge bg-danger"><i class="fas fa-skull me-1"></i>严重({fmt.Sprintf("%d", len(shard.MissingShards))} 缺失)</span>
         } else if len(shard.MissingShards) > 6 {
-            <span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i>Degraded ({fmt.Sprintf("%d", len(shard.MissingShards))} missing)</span>
+            <span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i>降级({fmt.Sprintf("%d", len(shard.MissingShards))} 缺失)</span>
         } else if len(shard.MissingShards) > 2 {
-            <span class="badge bg-warning"><i class="fas fa-info-circle me-1"></i>Incomplete ({fmt.Sprintf("%d", len(shard.MissingShards))} missing)</span>
+            <span class="badge bg-warning"><i class="fas fa-info-circle me-1"></i>不完整({fmt.Sprintf("%d", len(shard.MissingShards))} 缺失)</span>
         } else {
-            <span class="badge bg-info"><i class="fas fa-info-circle me-1"></i>Minor Issues ({fmt.Sprintf("%d", len(shard.MissingShards))} missing)</span>
+            <span class="badge bg-info"><i class="fas fa-info-circle me-1"></i>轻微问题({fmt.Sprintf("%d", len(shard.MissingShards))} 缺失)</span>
         }
     }
 }
@@ -422,6 +422,6 @@ func calculateDistributionSummary(volumeID uint32, allShards []dash.EcShardWithI
         }
     }
     
-    return fmt.Sprintf("%d DCs, %d racks, %d servers", len(dataCenters), len(racks), len(servers))
+    return fmt.Sprintf("%d 个数据中心, %d 个机架, %d 台服务器", len(dataCenters), len(racks), len(servers))
 }
 

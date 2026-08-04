@@ -17,17 +17,17 @@ async function deleteUser(username) {
             });
 
             if (response.ok) {
-                showAlert('User deleted successfully', 'success');
+                showAlert('用户删除成功', 'success');
                 setTimeout(() => window.location.reload(), 1000);
             } else {
                 const error = await response.json().catch(() => ({}));
-                showAlert('Failed to delete user: ' + (error.error || 'Unknown error'), 'error');
+                showAlert('删除用户失败:' + (error.error || '未知错误'), 'error');
             }
         } catch (error) {
             console.error('Error deleting user:', error);
-            showAlert('Failed to delete user: ' + error.message, 'error');
+            showAlert('删除用户失败:' + error.message, 'error');
         }
-    }, 'Are you sure you want to delete this user? This action cannot be undone.');
+    }, '确定要删除此用户吗?此操作不可撤销。');
 }
 
 // Delete group function
@@ -40,17 +40,17 @@ async function deleteGroup(name) {
             });
 
             if (response.ok) {
-                showAlert('Group deleted successfully', 'success');
+                showAlert('组删除成功', 'success');
                 setTimeout(() => window.location.reload(), 1000);
             } else {
                 const error = await response.json().catch(() => ({}));
-                showAlert('Failed to delete group: ' + (error.error || 'Unknown error'), 'error');
+                showAlert('删除组失败:' + (error.error || '未知错误'), 'error');
             }
         } catch (error) {
             console.error('Error deleting group:', error);
-            showAlert('Failed to delete group: ' + error.message, 'error');
+            showAlert('删除组失败:' + error.message, 'error');
         }
-    }, 'Are you sure you want to delete this group? This action cannot be undone.');
+    }, '确定要删除此组吗?此操作不可撤销。');
 }
 
 // Delete access key function
@@ -64,7 +64,7 @@ async function deleteAccessKey(username, accessKey) {
             });
 
             if (response.ok) {
-                showAlert('Access key deleted successfully', 'success');
+                showAlert('访问密钥删除成功', 'success');
                 // If refreshAccessKeysList exists (in object_store_users.templ), use it
                 if (typeof refreshAccessKeysList === 'function') {
                     refreshAccessKeysList(username);
@@ -73,11 +73,11 @@ async function deleteAccessKey(username, accessKey) {
                 }
             } else {
                 const error = await response.json().catch(() => ({}));
-                showAlert('Failed to delete access key: ' + (error.error || 'Unknown error'), 'error');
+                showAlert('删除访问密钥失败:' + (error.error || '未知错误'), 'error');
             }
         } catch (error) {
             console.error('Error deleting access key:', error);
-            showAlert('Failed to delete access key: ' + error.message, 'error');
+            showAlert('删除访问密钥失败:' + error.message, 'error');
         }
-    }, 'Are you sure you want to delete this access key?');
+    }, '确定要删除此访问密钥吗?');
 }

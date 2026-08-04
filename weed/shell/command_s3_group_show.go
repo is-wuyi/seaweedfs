@@ -22,11 +22,11 @@ func (c *commandS3GroupShow) Name() string {
 }
 
 func (c *commandS3GroupShow) Help() string {
-	return `show details of an S3 IAM group
+	return `显示 S3 IAM 组的详情
 
 	s3.group.show -name <groupname>
 
-	Output: JSON with group name, status, members, and attached policies.
+	输出：包含组名称、状态、成员和附加策略的 JSON。
 `
 }
 

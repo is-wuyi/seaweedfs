@@ -22,11 +22,11 @@ func (c *commandS3GroupDelete) Name() string {
 }
 
 func (c *commandS3GroupDelete) Help() string {
-	return `delete an S3 IAM group
+	return `删除一个 S3 IAM 组
 
 	s3.group.delete -name <groupname>
 
-	The group must have no members and no attached policies.
+	该组必须没有成员，也没有附加的策略。
 `
 }
 

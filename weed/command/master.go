@@ -82,53 +82,53 @@ type MasterOptions struct {
 
 func init() {
 	cmdMaster.Run = runMaster // break init cycle
-	m.port = cmdMaster.Flag.Int("port", 9333, "http listen port")
-	m.portGrpc = cmdMaster.Flag.Int("port.grpc", 0, "grpc listen port")
-	m.ip = cmdMaster.Flag.String("ip", util.DetectedHostAddress(), "master <ip>|<server> address, also used as identifier")
-	m.ipBind = cmdMaster.Flag.String("ip.bind", "", "ip address to bind to. If empty, default to same as -ip option.")
-	m.metaFolder = cmdMaster.Flag.String("mdir", os.TempDir(), "data directory to store meta data")
-	m.peers = cmdMaster.Flag.String("peers", "", "all master nodes in comma separated ip:port list, example: 127.0.0.1:9093,127.0.0.1:9094,127.0.0.1:9095; use 'none' for single-master mode")
-	m.volumeSizeLimitMB = cmdMaster.Flag.Uint("volumeSizeLimitMB", 30*1000, "Master stops directing writes to oversized volumes.")
-	m.volumePreallocate = cmdMaster.Flag.Bool("volumePreallocate", false, "Preallocate disk space for volumes.")
-	m.maxParallelVacuumPerServer = cmdMaster.Flag.Int("maxParallelVacuumPerServer", 1, "maximum number of volumes to vacuum in parallel per volume server")
-	// m.pulseSeconds = cmdMaster.Flag.Int("pulseSeconds", 5, "number of seconds between heartbeats")
-	m.defaultReplication = cmdMaster.Flag.String("defaultReplication", "", "Default replication type if not specified.")
-	m.garbageThreshold = cmdMaster.Flag.Float64("garbageThreshold", 0.3, "threshold to vacuum and reclaim spaces")
-	m.whiteList = cmdMaster.Flag.String("whiteList", "", "comma separated Ip addresses having write permission. No limit if empty.")
-	m.disableHttp = cmdMaster.Flag.Bool("disableHttp", false, "disable http requests, only gRPC operations are allowed.")
-	m.metricsAddress = cmdMaster.Flag.String("metrics.address", "", "Prometheus gateway address <host>:<port>")
-	m.metricsIntervalSec = cmdMaster.Flag.Int("metrics.intervalSeconds", 15, "Prometheus push interval in seconds")
-	m.metricsHttpPort = cmdMaster.Flag.Int("metricsPort", 0, "Prometheus metrics listen port")
-	m.metricsHttpIp = cmdMaster.Flag.String("metricsIp", "", "metrics listen ip. If empty, default to same as -ip.bind option.")
-	m.raftResumeState = cmdMaster.Flag.Bool("resumeState", true, "resume previous state on start master server")
-	m.heartbeatInterval = cmdMaster.Flag.Duration("heartbeatInterval", 300*time.Millisecond, "heartbeat interval of master servers, and will be randomly multiplied by [1, 1.25)")
-	m.electionTimeout = cmdMaster.Flag.Duration("electionTimeout", 10*time.Second, "election timeout of master servers")
-	m.raftHashicorp = cmdMaster.Flag.Bool("raftHashicorp", false, "use hashicorp raft")
-	m.raftBootstrap = cmdMaster.Flag.Bool("raftBootstrap", false, "Whether to bootstrap the Raft cluster")
-	m.telemetryUrl = cmdMaster.Flag.String("telemetry.url", "https://telemetry.seaweedfs.com/api/collect", "telemetry server URL to send usage statistics")
-	m.telemetryEnabled = cmdMaster.Flag.Bool("telemetry", true, "report anonymous cluster statistics to telemetry.url, use -telemetry=false to opt out")
-	m.debug = cmdMaster.Flag.Bool("debug", false, "serves runtime profiling data via pprof on the port specified by -debug.port")
-	m.debugPort = cmdMaster.Flag.Int("debug.port", 6060, "http port for debugging")
+	m.port = cmdMaster.Flag.Int("port", 9333, "http 监听端口")
+	m.portGrpc = cmdMaster.Flag.Int("port.grpc", 0, "grpc 监听端口")
+	m.ip = cmdMaster.Flag.String("ip", util.DetectedHostAddress(), "master <ip>|<server> 地址,同时用作标识符")
+	m.ipBind = cmdMaster.Flag.String("ip.bind", "", "绑定的 IP 地址。为空则默认与 -ip 选项相同。")
+	m.metaFolder = cmdMaster.Flag.String("mdir", os.TempDir(), "存储元数据的数据目录")
+	m.peers = cmdMaster.Flag.String("peers", "", "以逗号分隔的 ip:port 列表形式给出所有 master 节点,例如:127.0.0.1:9093,127.0.0.1:9094,127.0.0.1:9095;单 master 模式时使用 'none'")
+	m.volumeSizeLimitMB = cmdMaster.Flag.Uint("volumeSizeLimitMB", 30*1000, "master 停止向超限 volume 分配写入")
+	m.volumePreallocate = cmdMaster.Flag.Bool("volumePreallocate", false, "为 volume 预分配磁盘空间。")
+	m.maxParallelVacuumPerServer = cmdMaster.Flag.Int("maxParallelVacuumPerServer", 1, "每个 volume 服务器并行 vacuum 的最大 volume 数量")
+	// m.pulseSeconds = cmdMaster.Flag.Int("pulseSeconds", 5, "心跳之间的秒数")
+	m.defaultReplication = cmdMaster.Flag.String("defaultReplication", "", "未指定时的默认副本策略。")
+	m.garbageThreshold = cmdMaster.Flag.Float64("garbageThreshold", 0.3, "vacuum 并回收空间的阈值")
+	m.whiteList = cmdMaster.Flag.String("whiteList", "", "逗号分隔的具有写权限的 IP 地址列表,为空则不限制")
+	m.disableHttp = cmdMaster.Flag.Bool("disableHttp", false, "禁用 http 请求,仅允许 gRPC 操作。")
+	m.metricsAddress = cmdMaster.Flag.String("metrics.address", "", "Prometheus 网关地址 <host>:<port>")
+	m.metricsIntervalSec = cmdMaster.Flag.Int("metrics.intervalSeconds", 15, "Prometheus 推送间隔,单位为秒")
+	m.metricsHttpPort = cmdMaster.Flag.Int("metricsPort", 0, "Prometheus 指标监听端口")
+	m.metricsHttpIp = cmdMaster.Flag.String("metricsIp", "", "指标监听 IP。为空则默认与 -ip.bind 选项相同。")
+	m.raftResumeState = cmdMaster.Flag.Bool("resumeState", true, "启动 master 服务器时恢复先前的状态")
+	m.heartbeatInterval = cmdMaster.Flag.Duration("heartbeatInterval", 300*time.Millisecond, "master 服务器的心跳间隔,将被随机乘以 [1, 1.25)")
+	m.electionTimeout = cmdMaster.Flag.Duration("electionTimeout", 10*time.Second, "master 服务器的选举超时")
+	m.raftHashicorp = cmdMaster.Flag.Bool("raftHashicorp", false, "使用 hashicorp raft")
+	m.raftBootstrap = cmdMaster.Flag.Bool("raftBootstrap", false, "是否引导启动 Raft 集群")
+	m.telemetryUrl = cmdMaster.Flag.String("telemetry.url", "https://telemetry.seaweedfs.com/api/collect", "用于发送使用统计的遥测服务器 URL")
+	m.telemetryEnabled = cmdMaster.Flag.Bool("telemetry", true, "向 telemetry.url 上报匿名集群统计,使用 -telemetry=false 可退出")
+	m.debug = cmdMaster.Flag.Bool("debug", false, "通过 pprof 在 -debug.port 指定的端口上提供运行时性能分析数据")
+	m.debugPort = cmdMaster.Flag.Int("debug.port", 6060, "用于调试的 http 端口")
 }
 
 var cmdMaster = &Command{
 	UsageLine: "master -port=9333",
-	Short:     "start a master server",
-	Long: `start a master server to provide volume=>location mapping service and sequence number of file ids
+	Short:     "启动 master 服务器",
+	Long: `启动一个 master 服务器,提供 volume=>location 映射服务以及文件 ID 的序列号
 
-	The configuration file "security.toml" is read from ".", "$HOME/.seaweedfs/", "/usr/local/etc/seaweedfs/", or "/etc/seaweedfs/", in that order.
+	配置文件 "security.toml" 会按以下顺序读取:"."、"$HOME/.seaweedfs/"、"/usr/local/etc/seaweedfs/" 或 "/etc/seaweedfs/"。
 
-	The example security.toml configuration file can be generated by "weed scaffold -config=security"
+	示例 security.toml 配置文件可通过 "weed scaffold -config=security" 生成
 
-	For single-master setups, use -peers=none to skip Raft quorum wait and enable instant startup.
-	This is ideal for development or standalone deployments.
+	对于单 master 部署,使用 -peers=none 可跳过 Raft quorum 等待并实现即时启动。
+	这非常适合开发或独立部署场景。
 
   `,
 }
 
 var (
-	masterCpuProfile = cmdMaster.Flag.String("cpuprofile", "", "cpu profile output file")
-	masterMemProfile = cmdMaster.Flag.String("memprofile", "", "memory profile output file")
+	masterCpuProfile = cmdMaster.Flag.String("cpuprofile", "", "CPU 性能分析输出文件")
+	masterMemProfile = cmdMaster.Flag.String("memprofile", "", "内存性能分析输出文件")
 )
 
 func runMaster(cmd *Command, args []string) bool {

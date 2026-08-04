@@ -21,7 +21,7 @@ func (c *commandMqBalanceTopics) Name() string {
 }
 
 func (c *commandMqBalanceTopics) Help() string {
-	return `balance topic partitions
+	return `均衡 topic 分区
 
 `
 }

@@ -34,25 +34,25 @@ func (c *commandEcDecode) Name() string {
 }
 
 func (c *commandEcDecode) Help() string {
-	return `decode a erasure coded volume into a normal volume
+	return `将一个 erasure coded 卷解码为普通卷
 
 	ec.decode [-collection=""] [-volumeId=<volume_id>] [-batchSize=10] [-diskType=<disk_type>] [-checkMinFreeSpace]
 
-	The -collection parameter supports regular expressions for pattern matching:
-	  - Use exact match: ec.decode -collection="^mybucket$"
-	  - Match multiple buckets: ec.decode -collection="bucket.*"
-	  - Match all collections: ec.decode -collection=".*"
+	-collection 参数支持使用正则表达式进行模式匹配:
+	  - 精确匹配:ec.decode -collection="^mybucket$"
+	  - 匹配多个 bucket:ec.decode -collection="bucket.*"
+	  - 匹配所有集合:ec.decode -collection=".*"
 
-	Options:
-	  -diskType: source disk type where EC shards are stored (hdd, ssd, or empty for default hdd)
-	  -checkMinFreeSpace: check min free space when selecting the decode target (default true)
-	  -batchSize: decode this many volumes per topology refresh (default 10; 0 = one snapshot for all volumes)
+	选项:
+	  -diskType:EC 分片所在的源磁盘类型(hdd、ssd,或留空默认为 hdd)
+	  -checkMinFreeSpace:在选择解码目标时检查最小可用空间(默认 true)
+	  -batchSize:每次拓扑刷新解码的卷数量(默认 10;0 = 对所有卷做一次快照)
 
-	Examples:
-	  # Decode EC shards from HDD (default)
+	示例:
+	  # 从 HDD 解码 EC 分片(默认)
 	  ec.decode -collection=mybucket
 
-	  # Decode EC shards from SSD
+	  # 从 SSD 解码 EC 分片
 	  ec.decode -collection=mybucket -diskType=ssd
 
 `

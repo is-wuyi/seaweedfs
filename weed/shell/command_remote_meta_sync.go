@@ -27,28 +27,28 @@ func (c *commandRemoteMetaSync) Name() string {
 }
 
 func (c *commandRemoteMetaSync) Help() string {
-	return `synchronize the local file meta data with the remote file metadata
+	return `将本地文件元数据与远端文件元数据同步
 
-	# assume a remote storage is configured to name "cloud1"
+	# 假设远端存储已配置为名称 "cloud1"
 	remote.configure -name=cloud1 -type=s3 -s3.access_key=xxx -s3.secret_key=yyy
-	# mount and pull one bucket
+	# 挂载并拉取一个 bucket
 	remote.mount -dir=/xxx -remote=cloud1/bucket
 
-	After mount, if the remote file can be changed, 
-	run this command to synchronize the metadata of the mounted folder or any sub folder
+	挂载后，如果远端文件可能被更改，
+	运行此命令可同步已挂载目录或任意子目录的元数据
 
 		remote.meta.sync -dir=/xxx
 		remote.meta.sync -dir=/xxx/some/subdir
 
-	Local metadata for files and directories removed from the remote is also
-	removed by default; pass -delete=false to keep it.
+	对于远端已删除的文件和目录，默认也会删除其本地元数据；
+	传入 -delete=false 可保留它们。
 
-	S3 listings do not report Content-Encoding; pass -statFiles to stat each
-	new or changed file so that metadata is synchronized too.
+	S3 列表不报告 Content-Encoding；传入 -statFiles 可对每个新增或变更的
+	文件执行 stat，以便同步该元数据。
 
-	This is designed to run regularly. So you can add it to some cronjob.
+	此命令设计为定期运行，因此可以将其加入 cron 定时任务。
 
-	If there are no other operations changing remote files, this operation is not needed.
+	如果没有其他操作在更改远端文件，则不需要运行此操作。
 
 `
 }

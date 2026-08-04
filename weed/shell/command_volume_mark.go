@@ -25,12 +25,12 @@ func (c *commandVolumeMark) Name() string {
 }
 
 func (c *commandVolumeMark) Help() string {
-	return `Mark volume writable or readonly from one volume server, or all volume replicas in one collection
+	return `将一个 volume 服务器上的卷,或一个集合中所有卷的副本标记为可写或只读
 
 	volume.mark -node <volume server host:port> -volumeId <volume id> -writable or -readonly
 	volume.mark -collection <collection> -writable or -readonly
 
-	Use -collection ` + CollectionDefault + ` to target volumes that belong to no named collection.
+	使用 -collection ` + CollectionDefault + ` 来定位不属于任何命名集合的卷。
 `
 }
 

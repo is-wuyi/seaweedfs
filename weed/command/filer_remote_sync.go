@@ -55,19 +55,19 @@ func init() {
 
 var cmdFilerRemoteSynchronize = &Command{
 	UsageLine: "filer.remote.sync",
-	Short:     "resumable continuously write back updates to remote storage",
-	Long: `resumable continuously write back updates to remote storage
+	Short:     "可断点续传地持续将更新回写到远端存储",
+	Long: `可断点续传地持续将更新回写到远端存储
 
-	filer.remote.sync listens on filer update events. 
-	If any mounted remote file is updated, it will fetch the updated content,
-	and write to the remote storage.
+	filer.remote.sync 监听 filer 更新事件。
+	如果有任何已挂载的远端文件被更新,它会获取更新后的内容,
+	并写入到远端存储。
 
 		weed filer.remote.sync -dir=/mount/s3_on_cloud
 
-	The metadata sync starting time is determined with the following priority order:
-	1. specified by timeAgo
-	2. last sync timestamp for this directory
-	3. directory creation time
+	元数据同步起始时间按以下优先级顺序确定:
+	1. 由 timeAgo 指定
+	2. 该目录的上次同步时间戳
+	3. 目录创建时间
 
 `,
 }

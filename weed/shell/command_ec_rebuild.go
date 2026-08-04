@@ -43,40 +43,39 @@ func (c *commandEcRebuild) Name() string {
 }
 
 func (c *commandEcRebuild) Help() string {
-	return `find and rebuild missing ec shards among volume servers
+	return `查找并重建 volume 服务器之间缺失的 EC 分片
 
 	ec.rebuild [-c EACH_COLLECTION|<collection_name>] [-apply] [-maxParallelization N] [-diskType=<disk_type>]
 
-	Before rebuilding, asks volume servers to recover any shards left unmounted by
-	a missing .ecx index (the index resides only on a peer server). Such shards are
-	invisible to the master, so recovering them first avoids regenerating data that
-	is actually present (issue #10104).
+	在重建之前,会请求 volume 服务器恢复因缺失 .ecx 索引(该索引仅存在于对端服务器上)
+	而遗留未挂载的分片。这些分片对 master 不可见,因此先恢复它们可避免重新生成
+	实际已存在的数据(issue #10104)。
 
-	Options:
-	  -collection: specify a collection name, or "EACH_COLLECTION" to process all collections
-	  -apply: actually perform the rebuild operations (default is dry-run mode)
-	  -maxParallelization: number of volumes to rebuild concurrently (default: 10)
-	                       Increase for faster rebuilds with more system resources.
-	                       Decrease if experiencing resource contention or instability.
-	  -diskType: disk type for EC shards (hdd, ssd, or empty for default hdd)
+	选项:
+	  -collection:指定一个集合名,或 "EACH_COLLECTION" 处理所有集合
+	  -apply:实际执行重建操作(默认为试运行模式)
+	  -maxParallelization:并发重建的卷数量(默认:10)
+	                     系统资源充足时可增大以加快重建。
+	                     遇到资源争用或不稳定时可减小。
+	  -diskType:EC 分片的磁盘类型(hdd、ssd,或留空默认为 hdd)
 
-	Algorithm:
+	算法:
 
-	For each type of volume server (different max volume count limit){
-		for each collection {
-			rebuildEcVolumes()
-		}
+对于每种类型的 volume 服务器(不同的最大卷数限制){
+	for each collection {
+		rebuildEcVolumes()
 	}
+}
 
 	func rebuildEcVolumes(){
 		idealWritableVolumes = totalWritableVolumes / numVolumeServers
 		for {
-			sort all volume servers ordered by the number of local writable volumes
-			pick the volume server A with the lowest number of writable volumes x
-			pick the volume server B with the highest number of writable volumes y
+			按本地可写卷数量对所有 volume 服务器排序
+			选取可写卷数量 x 最少的 volume 服务器 A
+			选取可写卷数量 y 最多的 volume 服务器 B
 			if y > idealWritableVolumes and x +1 <= idealWritableVolumes {
-				if B has a writable volume id v that A does not have {
-					move writable volume v from A to B
+				if B 拥有 A 没有的可写卷 id v {
+					将可写卷 v 从 A 迁移到 B
 				}
 			}
 		}

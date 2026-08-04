@@ -8,12 +8,12 @@ import (
 templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">
-            <i class="fas fa-server me-2"></i>Volume Servers
+            <i class="fas fa-server me-2"></i>volume 服务器
         </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportVolumeServers()">
-                    <i class="fas fa-download me-1"></i>Export
+                    <i class="fas fa-download me-1"></i>导出
                 </button>
             </div>
         </div>
@@ -28,7 +28,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total Volume Servers
+                                    volume 服务器总数
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalVolumeServers)}
@@ -50,7 +50,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                    Total Volumes
+                                    卷总数
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalVolumes)}
@@ -70,7 +70,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Total Capacity
+                                    总容量
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {formatBytes(data.TotalCapacity)}
@@ -89,7 +89,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    <i class="fas fa-server me-2"></i>Volume Servers
+                    <i class="fas fa-server me-2"></i>volume 服务器
                 </h6>
             </div>
             <div class="card-body">
@@ -98,15 +98,15 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                         <table class="table table-hover" id="hostsTable">
                             <thead>
                                 <tr>
-                                    <th>Address</th>
-                                    <th>Data Center</th>
-                                    <th>Rack</th>
-                                    <th>Volumes</th>
-                                    <th>Max Volumes</th>
-                                    <th>EC Shards</th>
-                                    <th>Capacity</th>
-                                    <th>Usage</th>
-                                    <th>Actions</th>
+                                    <th>地址</th>
+                                    <th>数据中心</th>
+                                    <th>机架</th>
+                                    <th>卷</th>
+                                    <th>最大卷数</th>
+                                    <th>EC 分片</th>
+                                    <th>容量</th>
+                                    <th>使用率</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -149,11 +149,11 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                                                 <div class="d-flex align-items-center">
                                                     <i class="fas fa-layer-group me-1 text-info"></i>
                                                     <span class="badge bg-info text-white me-1">{fmt.Sprintf("%d", host.EcShards)}</span>
-                                                    <small class="text-muted">shards</small>
+                                                    <small class="text-muted">分片</small>
                                                 </div>
                                                 if host.EcVolumes > 0 {
                                                     <div class="mt-1">
-                                                        <small class="text-muted">{fmt.Sprintf("%d EC volumes", host.EcVolumes)}</small>
+                                                        <small class="text-muted">{fmt.Sprintf("%d 个 EC 卷", host.EcVolumes)}</small>
                                                     </div>
                                                 }
                                             } else {
@@ -175,7 +175,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                                             if host.PublicURL != "" {
                                                 <button type="button" 
                                                         class="btn btn-outline-primary btn-sm" 
-                                                        title="View Details"
+                                                        title="查看详情"
                                                         data-action="view-details"
                                                         data-id={host.ID}
                                                         data-address={host.Address}
@@ -194,7 +194,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                                             } else {
                                                 <button type="button" 
                                                         class="btn btn-outline-primary btn-sm" 
-                                                        title="View Details"
+                                                        title="查看详情"
                                                         data-action="view-details"
                                                         data-id={host.ID}
                                                         data-address={host.Address}
@@ -220,8 +220,8 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
                 } else {
                     <div class="text-center py-5">
                         <i class="fas fa-server fa-3x text-muted mb-3"></i>
-                        <h5 class="text-muted">No Volume Servers Found</h5>
-                        <p class="text-muted">No volume servers are currently available in the cluster.</p>
+                        <h5 class="text-muted">未找到 volume 服务器</h5>
+                        <p class="text-muted">集群中当前没有可用的 volume 服务器。</p>
                     </div>
                 }
             </div>
@@ -232,7 +232,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
             <div class="col-12">
                 <small class="text-muted">
                     <i class="fas fa-clock me-1"></i>
-                    Last updated: {data.LastUpdated.Format("2006-01-02 15:04:05")}
+                    最后更新: {data.LastUpdated.Format("2006-01-02 15:04:05")}
                 </small>
             </div>
         </div>
@@ -278,26 +278,26 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
             '<div class="modal-dialog modal-lg">' +
             '<div class="modal-content">' +
             '<div class="modal-header">' +
-            '<h5 class="modal-title"><i class="fas fa-server me-2"></i>Volume Server Details: ' + server.address + '</h5>' +
+            '<h5 class="modal-title"><i class="fas fa-server me-2"></i>volume 服务器详情: ' + server.address + '</h5>' +
             '<button type="button" class="btn-close" data-bs-dismiss="modal"></button>' +
             '</div>' +
             '<div class="modal-body">' +
             '<div class="row">' +
             '<div class="col-md-6">' +
-            '<h6 class="text-primary"><i class="fas fa-info-circle me-1"></i>Basic Information</h6>' +
+            '<h6 class="text-primary"><i class="fas fa-info-circle me-1"></i>基本信息</h6>' +
             '<table class="table table-sm">' +
-            '<tr><td><strong>Server ID:</strong></td><td><code>' + server.id + '</code></td></tr>' +
-            '<tr><td><strong>Address:</strong></td><td>' + server.address + '</td></tr>' +
-            '<tr><td><strong>Public URL:</strong></td><td>' + server.publicUrl + '</td></tr>' +
-            '<tr><td><strong>Data Center:</strong></td><td><span class="badge bg-light text-dark">' + server.datacenter + '</span></td></tr>' +
-            '<tr><td><strong>Rack:</strong></td><td><span class="badge bg-light text-dark">' + server.rack + '</span></td></tr>' +
-            '<tr><td><strong>Last Heartbeat:</strong></td><td>' + server.lastHeartbeat + '</td></tr>' +
+            '<tr><td><strong>服务器 ID:</strong></td><td><code>' + server.id + '</code></td></tr>' +
+            '<tr><td><strong>地址:</strong></td><td>' + server.address + '</td></tr>' +
+            '<tr><td><strong>公开 URL:</strong></td><td>' + server.publicUrl + '</td></tr>' +
+            '<tr><td><strong>数据中心:</strong></td><td><span class="badge bg-light text-dark">' + server.datacenter + '</span></td></tr>' +
+            '<tr><td><strong>机架:</strong></td><td><span class="badge bg-light text-dark">' + server.rack + '</span></td></tr>' +
+            '<tr><td><strong>最近心跳:</strong></td><td>' + server.lastHeartbeat + '</td></tr>' +
             '</table>' +
             '</div>' +
             '<div class="col-md-6">' +
-            '<h6 class="text-primary"><i class="fas fa-chart-bar me-1"></i>Usage Statistics</h6>' +
+            '<h6 class="text-primary"><i class="fas fa-chart-bar me-1"></i>使用统计</h6>' +
             '<table class="table table-sm">' +
-            '<tr><td><strong>Volumes:</strong></td><td>' +
+            '<tr><td><strong>卷:</strong></td><td>' +
             '<div class="d-flex align-items-center">' +
             '<div class="progress me-2" style="width: 100px; height: 20px;">' +
             '<div class="progress-bar" role="progressbar" style="width: ' + volumePercent + '%"></div>' +
@@ -305,7 +305,7 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
             '<span>' + server.volumes + '/' + server.maxVolumes + ' (' + volumePercent + '%)</span>' +
             '</div>' +
             '</td></tr>' +
-            '<tr><td><strong>Disk Usage:</strong></td><td>' +
+            '<tr><td><strong>磁盘使用率:</strong></td><td>' +
             '<div class="d-flex align-items-center">' +
             '<div class="progress me-2" style="width: 100px; height: 20px;">' +
             '<div class="progress-bar" role="progressbar" style="width: ' + diskPercent + '%"></div>' +
@@ -313,39 +313,39 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
             '<span>' + formatBytes(server.diskUsage) + '/' + formatBytes(server.diskCapacity) + ' (' + diskPercent + '%)</span>' +
             '</div>' +
             '</td></tr>' +
-            '<tr><td><strong>Available Space:</strong></td><td>' + formatBytes(server.diskCapacity - server.diskUsage) + '</td></tr>' +
+            '<tr><td><strong>可用空间:</strong></td><td>' + formatBytes(server.diskCapacity - server.diskUsage) + '</td></tr>' +
             '</table>' +
             '</div>' +
             '</div>' +
-            
+
             // Add EC Shard information if available
-            (server.ecShards > 0 ? 
+            (server.ecShards > 0 ?
             '<div class="row mt-3">' +
             '<div class="col-12">' +
-            '<h6 class="text-primary"><i class="fas fa-layer-group me-1"></i>Erasure Coding Information</h6>' +
+            '<h6 class="text-primary"><i class="fas fa-layer-group me-1"></i>纠删码信息</h6>' +
             '<table class="table table-sm">' +
-            '<tr><td><strong>EC Volumes:</strong></td><td><span class="badge bg-info text-white">' + server.ecVolumes + '</span></td></tr>' +
-            '<tr><td><strong>EC Shards:</strong></td><td><span class="badge bg-info text-white">' + server.ecShards + '</span></td></tr>' +
+            '<tr><td><strong>EC 卷:</strong></td><td><span class="badge bg-info text-white">' + server.ecVolumes + '</span></td></tr>' +
+            '<tr><td><strong>EC 分片:</strong></td><td><span class="badge bg-info text-white">' + server.ecShards + '</span></td></tr>' +
             '</table>' +
             '</div>' +
             '</div>' : '') +
-            
+
             '<div class="row mt-3">' +
             '<div class="col-12">' +
-            '<h6 class="text-primary"><i class="fas fa-link me-1"></i>Quick Actions</h6>' +
+            '<h6 class="text-primary"><i class="fas fa-link me-1"></i>快速操作</h6>' +
             '<div class="d-grid gap-2 d-md-flex">' +
             '<a href="//' + (server.publicUrl || server.address) + '/ui/index.html" target="_blank" class="btn btn-outline-primary">' +
-            '<i class="fas fa-external-link-alt me-1"></i>Open Volume Server UI' +
+            '<i class="fas fa-external-link-alt me-1"></i>打开 volume 服务器 UI' +
             '</a>' +
             '<a href="' + (window.__BASE_PATH__ || '') + '/storage/volumes?server=' + encodeURIComponent(server.address) + '" class="btn btn-outline-info">' +
-            '<i class="fas fa-database me-1"></i>View Volumes' +
+            '<i class="fas fa-database me-1"></i>查看卷' +
             '</a>' +
             '</div>' +
             '</div>' +
             '</div>' +
             '</div>' +
             '<div class="modal-footer">' +
-            '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>' +
+            '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -394,8 +394,8 @@ templ ClusterVolumeServers(data dash.ClusterVolumeServersData) {
             return null;
         }).filter(row => row !== null);
         
-        const csvContent = "data:text/csv;charset=utf-8," + 
-            "Server ID,Address,Data Center,Rack,Volumes,Capacity,Usage\n" +
+        const csvContent = "data:text/csv;charset=utf-8," +
+            "服务器 ID,地址,数据中心,机架,卷,容量,使用率\n" +
             rows.map(r => '"' + r.id + '","' + r.address + '","' + r.datacenter + '","' + r.rack + '","' + r.volumes + '","' + r.capacity + '","' + r.usage + '"').join("\n");
         
         const encodedUri = encodeURI(csvContent);

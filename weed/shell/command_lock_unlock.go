@@ -21,9 +21,9 @@ func (c *commandLock) Name() string {
 }
 
 func (c *commandLock) Help() string {
-	return `lock in order to exclusively manage the cluster
+	return `锁定以独占管理集群
 
-	This is a blocking operation if there is already another lock.
+	如果已存在另一个锁,此操作会阻塞。
 `
 }
 
@@ -67,7 +67,7 @@ func (c *commandUnlock) Name() string {
 }
 
 func (c *commandUnlock) Help() string {
-	return `unlock the cluster-wide lock
+	return `解锁集群范围的锁
 
 `
 }

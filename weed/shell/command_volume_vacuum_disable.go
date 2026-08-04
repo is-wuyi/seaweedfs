@@ -19,7 +19,7 @@ func (c *commandDisableVacuum) Name() string {
 }
 
 func (c *commandDisableVacuum) Help() string {
-	return `disable vacuuming request from Master, however volume.vacuum still works.
+	return `禁用来自 Master 的 vacuum 请求,但 volume.vacuum 仍然可用。
 
 	volume.vacuum.disable
 

@@ -24,7 +24,7 @@
                         <div class="modal-header" id="globalAlertModalHeader">
                             <h5 class="modal-title" id="globalAlertModalLabel">
                                 <i class="fas fa-info-circle me-2" id="globalAlertModalIcon"></i>
-                                <span id="globalAlertModalTitle">Notice</span>
+                                <span id="globalAlertModalTitle">提示</span>
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -32,7 +32,7 @@
                             <!-- Message will be inserted here -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">确定</button>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="modal-content">
                         <div class="modal-header bg-warning">
                             <h5 class="modal-title" id="globalConfirmModalLabel">
-                                <i class="fas fa-question-circle me-2"></i><span id="globalConfirmModalTitleText">Confirm Action</span>
+                                <i class="fas fa-question-circle me-2"></i><span id="globalConfirmModalTitleText">确认操作</span>
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -52,8 +52,8 @@
                             <!-- Message will be inserted here -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="globalConfirmCancelBtn">Cancel</button>
-                            <button type="button" class="btn btn-primary" id="globalConfirmOkBtn">OK</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="globalConfirmCancelBtn">取消</button>
+                            <button type="button" class="btn btn-primary" id="globalConfirmOkBtn">确定</button>
                         </div>
                     </div>
                 </div>
@@ -65,19 +65,19 @@
                     <div class="modal-content">
                         <div class="modal-header bg-danger text-white">
                             <h5 class="modal-title" id="globalDeleteModalLabel">
-                                <i class="fas fa-exclamation-triangle me-2"></i>Confirm Delete
+                                <i class="fas fa-exclamation-triangle me-2"></i>确认删除
                             </h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p class="mb-2" id="globalDeleteModalMessage">Are you sure you want to delete this item?</p>
+                            <p class="mb-2" id="globalDeleteModalMessage">确定要删除此项吗?</p>
                             <p class="mb-0"><strong id="globalDeleteModalItemName"></strong></p>
-                            <p class="text-muted small mt-2 mb-0">This action cannot be undone.</p>
+                            <p class="text-muted small mt-2 mb-0">此操作不可撤销。</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                             <button type="button" class="btn btn-danger" id="globalDeleteConfirmBtn">
-                                <i class="fas fa-trash me-1"></i>Delete
+                                <i class="fas fa-trash me-1"></i>删除
                             </button>
                         </div>
                     </div>
@@ -118,25 +118,25 @@
         // Configuration for different types
         const types = {
             'success': {
-                title: 'Success',
+                title: '成功',
                 icon: 'fa-check-circle',
                 headerClass: 'bg-success text-white',
                 btnClose: 'btn-close-white'
             },
             'error': {
-                title: 'Error',
+                title: '错误',
                 icon: 'fa-exclamation-triangle',
                 headerClass: 'bg-danger text-white',
                 btnClose: 'btn-close-white'
             },
             'warning': {
-                title: 'Warning',
+                title: '警告',
                 icon: 'fa-exclamation-circle',
                 headerClass: 'bg-warning text-dark',
                 btnClose: ''
             },
             'info': {
-                title: 'Notice',
+                title: '提示',
                 icon: 'fa-info-circle',
                 headerClass: 'bg-info text-white',
                 btnClose: 'btn-close-white'
@@ -199,7 +199,7 @@
         if (title) {
             titleEl.textContent = title;
         } else {
-            titleEl.textContent = 'Confirm Action';
+            titleEl.textContent = '确认操作';
         }
 
         // Set message
@@ -253,7 +253,7 @@
         if (message) {
             messageEl.textContent = message;
         } else {
-            messageEl.textContent = 'Are you sure you want to delete this item?';
+            messageEl.textContent = '确定要删除此项吗?';
         }
 
         // Set item name

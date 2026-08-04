@@ -22,12 +22,12 @@ func (c *commandS3GroupCreate) Name() string {
 }
 
 func (c *commandS3GroupCreate) Help() string {
-	return `create an S3 IAM group
+	return `创建一个 S3 IAM 组
 
 	s3.group.create -name <groupname>
 
-	Creates a new empty group. Add users with s3.group.add-user and
-	attach policies with s3.policy.attach or the IAM API.
+	创建一个新的空组。使用 s3.group.add-user 添加用户，并使用 s3.policy.attach
+	或 IAM API 附加策略。
 `
 }
 

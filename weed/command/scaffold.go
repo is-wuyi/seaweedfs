@@ -15,16 +15,16 @@ func init() {
 
 var cmdScaffold = &Command{
 	UsageLine: "scaffold -config=[filer|notification|replication|security|master|volume|shell|credential|admin]",
-	Short:     "generate basic configuration files",
-	Long: `Generate configuration files with all possible configurations for you to customize.
+	Short:     "生成基础配置文件",
+	Long: `生成配置文件,包含所有可能的配置项供你自定义。
 
-	The options can also be overwritten by environment variables.
-	For example, the filer.toml mysql password can be overwritten by environment variable
+	这些选项也可以通过环境变量覆盖。
+	例如,filer.toml 的 mysql 密码可以通过环境变量覆盖
 		export WEED_MYSQL_PASSWORD=some_password
-	Environment variable rules:
-		* Prefix the variable name with "WEED_".
-		* Uppercase the rest of the variable name.
-		* Replace '.' with '_'.
+	环境变量规则:
+		* 在变量名前加 "WEED_" 前缀。
+		* 变量名其余部分大写。
+		* 将 '.' 替换为 '_'。
 
   `,
 }

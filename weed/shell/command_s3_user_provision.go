@@ -26,20 +26,20 @@ func (c *commandS3UserProvision) Name() string {
 }
 
 func (c *commandS3UserProvision) Help() string {
-	return `create a user with a bucket policy in one step
+	return `一步创建带 bucket 策略的用户
 
 	s3.user.provision -name <username> -bucket <bucket_name> -role readwrite
 	s3.user.provision -name <username> -bucket <bucket_name> -role readonly
 
-	Convenience wrapper that performs these steps:
-	  1. Creates an IAM policy for the bucket and role
-	  2. Creates the user with auto-generated credentials
-	  3. Attaches the policy to the user
+	便捷封装，执行以下步骤：
+	  1. 为 bucket 和角色创建 IAM 策略
+	  2. 使用自动生成的凭证创建用户
+	  3. 将策略附加到用户
 
-	Roles:
+	角色：
 	  readonly   - s3:GetObject, s3:ListBucket
 	  readwrite  - s3:GetObject, s3:PutObject, s3:DeleteObject, s3:ListBucket
-	  admin      - s3:* (full access to the bucket)
+	  admin      - s3:*（对该 bucket 的完全访问权限）
 `
 }
 

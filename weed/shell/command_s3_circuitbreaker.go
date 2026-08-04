@@ -30,25 +30,25 @@ func (c *commandS3CircuitBreaker) Name() string {
 }
 
 func (c *commandS3CircuitBreaker) Help() string {
-	return `configure and apply s3 circuit breaker options for each bucket
+	return `为每个 bucket 配置并应用 s3 熔断器选项
 
-	# examples
-	# add circuit breaker config for global
+	# 示例
+	# 为全局添加熔断器配置
 	s3.circuitBreaker -global -type count -actions Read,Write -values 500,200 -apply
 
-	# disable global config
+	# 禁用全局配置
 	s3.circuitBreaker -global -disable -apply
 
-	# add circuit breaker config for buckets x,y,z
+	# 为 bucket x、y、z 添加熔断器配置
 	s3.circuitBreaker -buckets x,y,z -type count -actions Read,Write -values 200,100 -apply
 
-	# disable circuit breaker config of x
+	# 禁用 x 的熔断器配置
 	s3.circuitBreaker -buckets x -disable -apply
 
-	# delete circuit breaker config of x
+	# 删除 x 的熔断器配置
 	s3.circuitBreaker -buckets x -delete -apply
 
-	# clear all circuit breaker config
+	# 清除所有熔断器配置
 	s3.circuitBreaker -delete -apply
 	`
 }

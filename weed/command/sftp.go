@@ -47,12 +47,11 @@ type SftpOptions struct {
 // cmdSftp defines the SFTP command similar to the S3 command.
 var cmdSftp = &Command{
 	UsageLine: "sftp [-port=2022] [-filer=<ip:port>] [-sshPrivateKey=</path/to/private_key>]",
-	Short:     "start an SFTP server that is backed by a SeaweedFS filer",
-	Long: `Start an SFTP server that leverages the SeaweedFS filer service to handle file operations.
+	Short:     "启动一个由 SeaweedFS filer 支撑的 SFTP 服务器",
+	Long: `启动一个 SFTP 服务器,利用 SeaweedFS filer 服务来处理文件操作。
 
-Instead of reading from or writing to a local filesystem, all file operations
-are routed through the filer (filer_pb) gRPC API. This allows you to centralize
-your file management in SeaweedFS.
+所有文件操作都不会读写本地文件系统,而是通过 filer(filer_pb)gRPC API 路由。
+这样你就可以将文件管理集中到 SeaweedFS 中。
 	`,
 }
 

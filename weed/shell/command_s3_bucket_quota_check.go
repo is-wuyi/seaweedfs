@@ -24,9 +24,9 @@ func (c *commandS3BucketQuotaEnforce) Name() string {
 }
 
 func (c *commandS3BucketQuotaEnforce) Help() string {
-	return `check quota for all buckets, make the bucket read only if over the limit
+	return `检查所有 bucket 的配额，超过限制时将 bucket 设为只读
 
-	Example:
+	示例：
 		s3.bucket.quota.enforce -apply
 `
 }

@@ -65,16 +65,16 @@ func init() {
 
 var cmdFilerCopy = &Command{
 	UsageLine: "filer.copy file_or_dir1 [file_or_dir2 file_or_dir3] http://localhost:8888/path/to/a/folder/",
-	Short:     "copy one or a list of files to a filer folder",
-	Long: `copy one or a list of files, or batch copy one whole folder recursively, to a filer folder
+	Short:     "将一个或一组文件复制到 filer 目录",
+	Long: `将一个或一组文件,或递归批量复制整个文件夹,到 filer 目录
 
-  It can copy one or a list of files or folders.
+  可以复制一个或一组文件或文件夹。
 
-  If copying a whole folder recursively:
-  All files under the folder and sub folders will be copied.
-  Optional parameter "-include" allows you to specify the file name patterns.
+  如果递归复制整个文件夹:
+  文件夹及子文件夹下的所有文件都会被复制。
+  可选参数 "-include" 允许你指定文件名模式。
 
-  If "maxMB" is set to a positive number, files larger than it would be split into chunks.
+  如果 "maxMB" 设置为正数,大于该值的文件会被切分成 chunk。
 
 `,
 }

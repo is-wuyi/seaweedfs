@@ -39,9 +39,9 @@ func (c *commandVolumeList) Name() string {
 }
 
 func (c *commandVolumeList) Help() string {
-	return `list all volumes
+	return `列出所有卷
 
-	This command list all volumes as a tree of dataCenter > rack > dataNode > volume.
+	此命令以 dataCenter > rack > dataNode > volume 的树形结构列出所有卷。
 
 `
 }

@@ -21,11 +21,11 @@ func (c *commandS3UserList) Name() string {
 }
 
 func (c *commandS3UserList) Help() string {
-	return `list S3 IAM users
+	return `列出 S3 IAM 用户
 
 	s3.user.list
 
-	Output: JSON array of users with status, policies, and credential count.
+	输出：包含状态、策略和凭证数量的用户 JSON 数组。
 `
 }
 

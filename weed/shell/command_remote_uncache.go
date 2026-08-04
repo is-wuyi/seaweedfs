@@ -26,18 +26,18 @@ func (c *commandRemoteUncache) Name() string {
 }
 
 func (c *commandRemoteUncache) Help() string {
-	return `keep the metadata but remote cache the file content for mounted directories or files
+	return `保留元数据但取消缓存已挂载目录或文件的文件内容
 
-	This is designed to run regularly. So you can add it to some cronjob.
-	If a file is not synchronized with the remote copy, the file will be skipped to avoid loss of data.
+	此命令设计为定期运行，因此可以将其加入 cron 定时任务。
+	如果文件未与远端副本同步，将被跳过以避免数据丢失。
 
 	remote.uncache -dir=/xxx
 	remote.uncache -dir=/xxx/some/sub/dir
 	remote.uncache -dir=/xxx/some/sub/dir -include=*.pdf
 	remote.uncache -dir=/xxx/some/sub/dir -exclude=*.txt
-	remote.uncache -minSize=1024000    # uncache files larger than 100K
-	remote.uncache -minAge=3600        # uncache files older than 1 hour (created time)
-	remote.uncache -minCacheAge=3600   # uncache files older than 1 hour (cached time)
+	remote.uncache -minSize=1024000    # 取消缓存大于 100K 的文件
+	remote.uncache -minAge=3600        # 取消缓存超过 1 小时的文件（创建时间）
+	remote.uncache -minCacheAge=3600   # 取消缓存超过 1 小时的文件（缓存时间）
 
 `
 }

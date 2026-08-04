@@ -39,10 +39,10 @@ type ExportOptions struct {
 
 var cmdExport = &Command{
 	UsageLine: "export -dir=/tmp -volumeId=234 -o=/dir/name.tar -fileNameFormat={{.Name}} -newer='" + timeFormat + "'",
-	Short:     "list or export files from one volume data file",
-	Long: `List all files in a volume, or Export all files in a volume to a tar file if the output is specified.
+	Short:     "列出一个 volume 数据文件中的文件或导出文件",
+	Long: `列出一个卷中的所有文件,或在指定输出时将一个卷中的所有文件导出为 tar 文件。
 
-	The format of file name in the tar file can be customized. Default is {{.Mime}}/{{.Id}}:{{.Name}}. Also available is {{.Key}}.
+	tar 文件中的文件名格式可自定义。默认为 {{.Mime}}/{{.Id}}:{{.Name}}。也可使用 {{.Key}}。
 
   `,
 }

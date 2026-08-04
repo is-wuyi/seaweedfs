@@ -23,21 +23,21 @@ func (c *commandS3TablesTable) Name() string {
 }
 
 func (c *commandS3TablesTable) Help() string {
-	return `manage s3tables tables
+	return `管理 s3tables tables
 
-# create a table
+# 创建 table
 s3tables.table -create -bucket <bucket> -account <account_id> -namespace <namespace> -name <table> -format ICEBERG [-metadata metadata.json] [-tags key=value]
 
-# list tables
+# 列出 table
 s3tables.table -list -bucket <bucket> -account <account_id> [-namespace <namespace>] [-prefix <prefix>] [-limit <n>] [-continuation <token>]
 
-# get table details
+# 获取 table 详情
 s3tables.table -get -bucket <bucket> -account <account_id> -namespace <namespace> -name <table>
 
-# delete table
+# 删除 table
 s3tables.table -delete -bucket <bucket> -account <account_id> -namespace <namespace> -name <table> [-version <token>]
 
-# manage table policy
+# 管理 table policy
 s3tables.table -put-policy -bucket <bucket> -account <account_id> -namespace <namespace> -name <table> -file policy.json
 s3tables.table -get-policy -bucket <bucket> -account <account_id> -namespace <namespace> -name <table>
 s3tables.table -delete-policy -bucket <bucket> -account <account_id> -namespace <namespace> -name <table>

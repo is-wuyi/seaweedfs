@@ -26,7 +26,7 @@ func (c *commandClusterCheck) Name() string {
 }
 
 func (c *commandClusterCheck) Help() string {
-	return `check current cluster network connectivity
+	return `检查当前集群的网络连通性
 
 	cluster.check
 

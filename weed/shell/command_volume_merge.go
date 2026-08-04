@@ -44,17 +44,17 @@ func (c *commandVolumeMerge) Name() string {
 }
 
 func (c *commandVolumeMerge) Help() string {
-	return `merge replicas for a volume id in timestamp order into a fresh copy
+	return `按时间戳顺序将某个 volume id 的副本合并为一份新的副本
 
 	volume.merge -volumeId <volume id>
 
-This command:
-	1) marks the volume readonly on replicas (if not already)
-	2) allocates a temporary copy on a third location
-	3) merges replicas in append timestamp order, skipping duplicates
-	4) verifies the merged copy is not short before touching the replicas
-	5) replaces the original replicas with the merged volume
-	6) restores writable state if it was writable before
+此命令:
+	1) 将副本上的卷标记为只读(若尚未标记)
+	2) 在第三个位置分配一份临时副本
+	3) 按追加时间戳顺序合并副本,跳过重复项
+	4) 在替换原副本前,验证合并后的副本没有短缺
+	5) 用合并后的卷替换原有副本
+	6) 如果之前是可写状态,则恢复为可写
 `
 }
 

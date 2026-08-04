@@ -24,7 +24,7 @@ func (c *commandVacuum) Name() string {
 }
 
 func (c *commandVacuum) Help() string {
-	return `compact volumes if deleted entries are more than the limit
+	return `当已删除条目超过阈值时对卷进行压缩
 
 	volume.vacuum [-garbageThreshold=0.3] [-collection=<collection name>] [-volumeId=<volume id>]
 

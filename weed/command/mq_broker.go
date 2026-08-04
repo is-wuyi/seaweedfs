@@ -49,11 +49,11 @@ func init() {
 
 var cmdMqBroker = &Command{
 	UsageLine: "mq.broker [-port=17777] [-master=<ip:port>]",
-	Short:     "<WIP> start a message queue broker",
-	Long: `start a message queue broker
+	Short:     "<WIP> 启动一个消息队列 broker",
+	Long: `启动一个消息队列 broker
 
-	The broker can accept gRPC calls to write or read messages. The messages are stored via filer.
-	The brokers are stateless. To scale up, just add more brokers.
+	broker 可以接受 gRPC 调用来写入或读取消息。消息通过 filer 存储。
+	broker 是无状态的。要扩展,只需添加更多 broker。
 
 `,
 }

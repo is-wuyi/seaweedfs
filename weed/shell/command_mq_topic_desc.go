@@ -23,7 +23,7 @@ func (c *commandMqTopicDescribe) Name() string {
 }
 
 func (c *commandMqTopicDescribe) Help() string {
-	return `describe a topic`
+	return `描述一个 topic`
 }
 
 func (c *commandMqTopicDescribe) HasTag(CommandTag) bool {

@@ -24,11 +24,11 @@ func (c *commandVolumeMount) Name() string {
 }
 
 func (c *commandVolumeMount) Help() string {
-	return `mount a volume from one volume server
+	return `从一个 volume 服务器挂载卷
 
 	volume.mount -node <volume server host:port> -volumeId <volume id>
 
-	This command mounts a volume from one volume server.
+	此命令从一个 volume 服务器挂载卷。
 
 `
 }

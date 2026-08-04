@@ -33,12 +33,12 @@ func (c *commandEcVolumeScrub) Name() string {
 }
 
 func (c *commandEcVolumeScrub) Help() string {
-	return `scrubs EC volume contents on volume servers.
+	return `校验 volume 服务器上的 EC 卷内容。
 
-	Supports either scrubbing only needle data, or deep scrubbing file contents as well.
+	支持仅校验 needle 数据,或同时深度校验文件内容。
 
-	Scrubbing can be limited to specific EC volume IDs for specific volume servers.
-	By default, all volume IDs across all servers are processed.
+	校验范围可限定为指定 volume 服务器的指定 EC volume ID。
+	默认情况下,会处理所有服务器上的所有 volume ID。
 `
 }
 

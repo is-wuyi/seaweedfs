@@ -24,26 +24,25 @@ func (c *commandEcCheckReplication) Name() string {
 }
 
 func (c *commandEcCheckReplication) Help() string {
-	return `check EC volumes for under- or over-replicated shards
+	return `检查 EC 卷中分片副本不足或副本过多的情况
 
 	ec.check.replication [-volumeIds=<id>,<id>...] [-details]
 
-	Reports EC volumes whose shards are:
-	  - under-replicated: at least one shard is missing from every node
-	  - over-replicated:  at least one shard has more than one copy, whether on
-	                      different nodes or on more than one disk of a node
+	报告符合以下情况的 EC 卷:
+	  - 副本不足:每个节点都至少缺失一个分片
+	  - 副本过多:至少一个分片有多于一份副本,无论位于
+	            不同节点,还是同一节点的多个磁盘上
 
-	Over-replication is normal and transient while ec.balance or ec.encode is
-	running, since shards are copied before the redundant copies are deleted;
-	re-check once those operations finish before treating it as a problem.
+	在 ec.balance 或 ec.encode 运行期间,副本过多属于正常且暂时的现象,
+	因为分片会先被复制再删除冗余副本;在这些操作完成后再重新检查,
+	确认其是否为问题。
 
-	Each volume is checked against its own data+parity ratio rather than a fixed
-	shard count, so volumes with non-default erasure coding ratios are reported
-	correctly.
+	每个卷按其自身的 data+parity 比例进行检查,而非固定的分片数,
+	因此非默认 erasure coding 比例的卷也能被正确报告。
 
-	Options:
-	  -volumeIds: comma-separated EC volume IDs to check (default: all EC volumes)
-	  -details:   print the per-shard node placement for each flagged volume
+	选项:
+	  -volumeIds:逗号分隔的要检查的 EC volume ID(默认:所有 EC 卷)
+	  -details:   为每个被标记的卷打印每个分片的节点分布
 `
 }
 

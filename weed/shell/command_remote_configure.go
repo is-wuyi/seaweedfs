@@ -28,12 +28,12 @@ func (c *commandRemoteConfigure) Name() string {
 }
 
 func (c *commandRemoteConfigure) Help() string {
-	return `remote storage configuration
+	return `远端存储配置
 
-	# see the current configurations
+	# 查看当前配置
 	remote.configure
 
-	# set or update a configuration
+	# 设置或更新配置
 	remote.configure -name=cloud1 -type=s3 -s3.access_key=xxx -s3.secret_key=yyy -s3.region=us-east-2
 	remote.configure -name=cloud1_deep -type=s3 -s3.access_key=xxx -s3.secret_key=yyy -s3.region=us-east-2 -s3.storage_class=DEEP_ARCHIVE
 	remote.configure -name=cloud2 -type=gcs -gcs.appCredentialsFile=~/service-account-file.json -gcs.projectId=yyy
@@ -45,7 +45,7 @@ func (c *commandRemoteConfigure) Help() string {
 	remote.configure -name=cloud7 -type=storj -storj.access_key=xxx -storj.secret_key=yyy -storj.endpoint=https://gateway.us1.storjshare.io
 	remote.configure -name=cloud8 -type=filebase -filebase.access_key=xxx -filebase.secret_key=yyy -filebase.endpoint=https://s3.filebase.com
 
-	# delete one configuration
+	# 删除一个配置
 	remote.configure -delete -name=cloud1
 
 `

@@ -36,42 +36,42 @@ func (c *commandFsDistributeChunks) Name() string {
 }
 
 func (c *commandFsDistributeChunks) Help() string {
-	return `redistribute file chunks evenly across volume server nodes
+	return `在 volume 服务器节点之间均匀重新分发文件 chunk
 
-	Modes:
-	  primary      (default) balance chunk count per node using topology-based ownership.
-	               Note: with replication, ownership is derived from volume ID hashing
-	               (vid %% node count), which may not reflect the actual Assign target.
-	               Results can be approximate in replicated environments.
+	模式:
+	  primary      (默认) 使用基于拓扑的所有权来平衡每个节点的 chunk 数量。
+	               注意:在副本环境下,所有权通过 volume ID 哈希
+	               (vid %% 节点数量) 推导,可能不反映实际的 Assign 目标。
+	               结果在副本环境下可能是近似的。
 
-	  replica      balance both ownership and replica copies across nodes.
-	               Step 1: owner-based balancing (same as primary mode).
-	               Step 2: additional moves to balance total copies (including replicas).
-	               Same ownership limitation as primary mode applies.
+	  replica      平衡节点间的所有权和副本拷贝。
+	               步骤 1:基于所有者的平衡(与 primary 模式相同)。
+	               步骤 2:额外移动以平衡总拷贝数(包括副本)。
+	               与 primary 模式相同的所有权限制适用。
 
-	  round-robin  assign chunks to nodes by file offset order (chunk[0]->A, chunk[1]->B,
-	               chunk[2]->C, ...). Best mode for sequential read performance — ensures
-	               consecutive chunks are on different nodes for I/O pipelining.
-	               Recommended for replication environments as it does not depend on
-	               ownership calculation.
+	  round-robin  按文件偏移顺序将 chunk 分配给节点(chunk[0]->A, chunk[1]->B,
+	               chunk[2]->C, ...)。最适合顺序读取性能的模式 — 确保
+	               连续的 chunk 位于不同节点以实现 I/O 流水线。
+	               推荐在副本环境下使用,因为它不依赖于
+	               所有权计算。
 
-	Files using chunk manifests (very large files) are handled by resolving manifests
-	to the underlying data chunks, redistributing those, then re-manifestizing before
-	updating the filer. Old manifest + data chunks are garbage-collected by the filer.
+	使用 chunk manifest 的文件(超大文件)通过解析 manifest 为底层的数据 chunk,
+	重新分发这些 chunk,然后在更新 filer 之前重新生成 manifest 来处理。
+	旧的 manifest + 数据 chunk 会被 filer 垃圾回收。
 
-	# analyze current distribution (dry-run, primary mode)
+	# 分析当前分布(试运行,primary 模式)
 	fs.distributeChunks -path=/buckets/my-bucket/large-file.dat
 
-	# apply redistribution
+	# 应用重新分发
 	fs.distributeChunks -path=/buckets/my-bucket/large-file.dat -apply
 
-	# distribute across 5 nodes (instead of all)
+	# 在 5 个节点上分发(而非全部节点)
 	fs.distributeChunks -path=/buckets/my-bucket/large-file.dat -nodes=5 -apply
 
-	# balance including replica copies
+	# 平衡包括副本拷贝
 	fs.distributeChunks -path=/buckets/my-bucket/large-file.dat -mode=replica -apply
 
-	# round-robin for sequential read performance (recommended with replication)
+	# round-robin 以获得顺序读取性能(推荐用于副本环境)
 	fs.distributeChunks -path=/buckets/my-bucket/large-file.dat -mode=round-robin -apply
 `
 }

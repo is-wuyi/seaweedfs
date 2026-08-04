@@ -25,7 +25,7 @@ func (c *commandFsMetaCat) Name() string {
 }
 
 func (c *commandFsMetaCat) Help() string {
-	return `print out the meta data content for a file or directory
+	return `显示文件或目录的元数据内容
 
 	fs.meta.cat /dir/
 	fs.meta.cat /dir/file_name

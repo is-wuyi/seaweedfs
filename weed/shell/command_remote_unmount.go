@@ -25,14 +25,14 @@ func (c *commandRemoteUnmount) Name() string {
 }
 
 func (c *commandRemoteUnmount) Help() string {
-	return `unmount remote storage
+	return `卸载远端存储
 
-	# assume a remote storage is configured to name "s3_1"
+	# 假设远端存储已配置为名称 "s3_1"
 	remote.configure -name=s3_1 -type=s3 -s3.access_key=xxx -s3.secret_key=yyy
-	# mount and pull one bucket
+	# 挂载并拉取一个 bucket
 	remote.mount -dir=/xxx -remote=s3_1/bucket
 
-	# unmount the mounted directory and remove its cache
+	# 卸载已挂载的目录并移除其缓存
 	remote.unmount -dir=/xxx
 
 `

@@ -10,15 +10,15 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div>
             <h1 class="h2">
-                <i class="fas fa-database me-2"></i>Cluster Volumes
+                <i class="fas fa-database me-2"></i>集群卷
             </h1>
             if data.FilterCollection != "" {
                 <div class="d-flex align-items-center mt-2">
                     <span class="badge bg-info me-2">
-                        <i class="fas fa-filter me-1"></i>Collection: {data.FilterCollection}
+                        <i class="fas fa-filter me-1"></i>集合: {data.FilterCollection}
                     </span>
                     <a href={ dash.PUrl(ctx, "/storage/volumes") } class="btn btn-sm btn-outline-secondary">
-                        <i class="fas fa-times me-1"></i>Clear Filter
+                        <i class="fas fa-times me-1"></i>清除过滤
                     </a>
                 </div>
             }
@@ -26,16 +26,16 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <select class="form-select form-select-sm me-2" id="pageSizeSelect" onchange="changePageSize()" style="width: auto;">
-                    <option value="50" if data.PageSize == 50 { selected="selected" }>50 per page</option>
-                    <option value="100" if data.PageSize == 100 { selected="selected" }>100 per page</option>
-                    <option value="200" if data.PageSize == 200 { selected="selected" }>200 per page</option>
-                    <option value="500" if data.PageSize == 500 { selected="selected" }>500 per page</option>
+                    <option value="50" if data.PageSize == 50 { selected="selected" }>每页 50 条</option>
+                    <option value="100" if data.PageSize == 100 { selected="selected" }>每页 100 条</option>
+                    <option value="200" if data.PageSize == 200 { selected="selected" }>每页 200 条</option>
+                    <option value="500" if data.PageSize == 500 { selected="selected" }>每页 500 条</option>
                 </select>
                 <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportVolumes()">
-                    <i class="fas fa-download me-1"></i>Export Page
+                    <i class="fas fa-download me-1"></i>导出本页
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportVolumeList()" title="Download the full cluster volume list as JSON">
-                    <i class="fas fa-file-export me-1"></i>Export All (JSON)
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportVolumeList()" title="下载完整的集群卷列表(JSON)">
+                    <i class="fas fa-file-export me-1"></i>导出全部(JSON)
                 </button>
             </div>
         </div>
@@ -50,7 +50,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total Volumes
+                                    卷总数
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {fmt.Sprintf("%d", data.TotalVolumes)}
@@ -71,9 +71,9 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     if data.CollectionCount == 1 {
-                                        Collection
+                                        集合
                                     } else {
-                                        Collections
+                                        集合
                                     }
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -99,9 +99,9 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     if data.DataCenterCount == 1 {
-                                        Data Center
+                                        数据中心
                                     } else {
-                                        Data Centers
+                                        数据中心
                                     }
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -127,9 +127,9 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                     if data.RackCount == 1 {
-                                        Rack
+                                        机架
                                     } else {
-                                        Racks
+                                        机架
                                     }
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -155,9 +155,9 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                     if data.DiskTypeCount == 1 {
-                                        Disk Type
+                                        磁盘类型
                                     } else {
-                                        Disk Types
+                                        磁盘类型
                                     }
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -183,9 +183,9 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">
                                     if data.VersionCount == 1 {
-                                        Version
+                                        版本
                                     } else {
-                                        Versions
+                                        版本
                                     }
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -210,7 +210,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Total Size
+                                    总大小
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     {formatBytes(data.TotalSize)}
@@ -229,7 +229,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    <i class="fas fa-database me-2"></i>Volume Details
+                    <i class="fas fa-database me-2"></i>卷详情
                 </h6>
             </div>
             <div class="card-body">
@@ -240,20 +240,20 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                 <tr>
                                     <th>
                                         <a href="#" onclick="sortTable('id')" class="text-decoration-none text-dark">
-                                            Volume ID
+                                            卷 ID
                                             @getSortIcon("id", data.SortBy, data.SortOrder)
                                         </a>
                                     </th>
                                     <th>
                                         <a href="#" onclick="sortTable('server')" class="text-decoration-none text-dark">
-                                            Server
+                                            服务器
                                             @getSortIcon("server", data.SortBy, data.SortOrder)
                                         </a>
                                     </th>
                                     if data.ShowDataCenterColumn {
                                         <th>
                                             <a href="#" onclick="sortTable('datacenter')" class="text-decoration-none text-dark">
-                                                Data Center
+                                                数据中心
                                                 @getSortIcon("datacenter", data.SortBy, data.SortOrder)
                                             </a>
                                         </th>
@@ -261,7 +261,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                     if data.ShowRackColumn {
                                         <th>
                                             <a href="#" onclick="sortTable('rack')" class="text-decoration-none text-dark">
-                                                Rack
+                                                机架
                                                 @getSortIcon("rack", data.SortBy, data.SortOrder)
                                             </a>
                                         </th>
@@ -269,34 +269,34 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                     if data.ShowCollectionColumn {
                                         <th>
                                             <a href="#" onclick="sortTable('collection')" class="text-decoration-none text-dark">
-                                                Collection
+                                                集合
                                                 @getSortIcon("collection", data.SortBy, data.SortOrder)
                                             </a>
                                         </th>
                                     }
                                     <th>
                                         <a href="#" onclick="sortTable('size')" class="text-decoration-none text-dark">
-                                            Size
+                                            大小
                                             @getSortIcon("size", data.SortBy, data.SortOrder)
                                         </a>
                                     </th>
-                                    <th>Volume Utilization</th>
+                                    <th>卷使用率</th>
                                     <th>
                                         <a href="#" onclick="sortTable('filecount')" class="text-decoration-none text-dark">
-                                            File Count
+                                            文件数
                                             @getSortIcon("filecount", data.SortBy, data.SortOrder)
                                         </a>
                                     </th>
                                     <th>
                                         <a href="#" onclick="sortTable('replication')" class="text-decoration-none text-dark">
-                                            Replication
+                                            副本策略
                                             @getSortIcon("replication", data.SortBy, data.SortOrder)
                                         </a>
                                     </th>
                                     if data.ShowDiskTypeColumn {
                                         <th>
                                             <a href="#" onclick="sortTable('disktype')" class="text-decoration-none text-dark">
-                                                Disk Type
+                                                磁盘类型
                                                 @getSortIcon("disktype", data.SortBy, data.SortOrder)
                                             </a>
                                         </th>
@@ -304,12 +304,12 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                     if data.ShowVersionColumn {
                                         <th>
                                             <a href="#" onclick="sortTable('version')" class="text-decoration-none text-dark">
-                                                Version
+                                                版本
                                                 @getSortIcon("version", data.SortBy, data.SortOrder)
                                             </a>
                                         </th>
                                     }
-                                    <th>Actions</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -318,7 +318,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                         <td>
                                             <code class="volume-id-link" style="cursor: pointer; text-decoration: underline; color: #0d6efd;" 
                                                   data-volume-id={fmt.Sprintf("%d", volume.Id)}
-                                                  title="Click to view volume details">
+                                                  title="点击查看卷详情">
                                                 {fmt.Sprintf("%d", volume.Id)}
                                             </code>
                                         </td>
@@ -367,7 +367,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                                  }
                                                  return 0
                                              }())}
-                                         title={fmt.Sprintf("Active: %s", formatBytes(int64(volume.Size - volume.DeletedByteCount)))}>
+                                         title={fmt.Sprintf("活跃: %s", formatBytes(int64(volume.Size - volume.DeletedByteCount)))}>
                                     </div>
                                     <!-- Garbage data (red) -->
                                     <div class="progress-bar bg-danger" role="progressbar" 
@@ -381,7 +381,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                                  }
                                                  return 0
                                              }())}
-                                         title={fmt.Sprintf("Garbage: %s", formatBytes(int64(volume.DeletedByteCount)))}>
+                                         title={fmt.Sprintf("垃圾: %s", formatBytes(int64(volume.DeletedByteCount)))}>
                                     </div>
                                 </div>
                                 <small class="text-muted">
@@ -410,11 +410,11 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                                         }
                                         <td>
                                             <div class="btn-group btn-group-sm">
-                                                <button type="button" class="btn btn-outline-primary btn-sm view-details-btn" 
-                                                        title="View Details" data-volume-id={fmt.Sprintf("%d", volume.Id)}>
+                                                <button type="button" class="btn btn-outline-primary btn-sm view-details-btn"
+                                                        title="查看详情" data-volume-id={fmt.Sprintf("%d", volume.Id)}>
                                                     <i class="fas fa-eye"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm vacuum-btn" 
+                                                <button type="button" class="btn btn-outline-secondary btn-sm vacuum-btn"
                                                         title="Vacuum"
                                                         data-volume-id={fmt.Sprintf("%d", volume.Id)}
                                                         data-server={volume.Server}>
@@ -432,13 +432,13 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                             <small class="text-muted">
-                                Showing {fmt.Sprintf("%d", (data.CurrentPage-1)*data.PageSize + 1)} to {fmt.Sprintf("%d", minInt(data.CurrentPage*data.PageSize, data.TotalVolumes))} of {fmt.Sprintf("%d", data.TotalVolumes)} volumes
+                                显示第 {fmt.Sprintf("%d", (data.CurrentPage-1)*data.PageSize + 1)} 到 {fmt.Sprintf("%d", minInt(data.CurrentPage*data.PageSize, data.TotalVolumes))} 条,共 {fmt.Sprintf("%d", data.TotalVolumes)} 个卷
                             </small>
                         </div>
                         if data.TotalPages > 1 {
                             <div>
                                 <small class="text-muted">
-                                    Page {fmt.Sprintf("%d", data.CurrentPage)} of {fmt.Sprintf("%d", data.TotalPages)}
+                                    第 {fmt.Sprintf("%d", data.CurrentPage)} 页,共 {fmt.Sprintf("%d", data.TotalPages)} 页
                                 </small>
                             </div>
                         }
@@ -498,8 +498,8 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                 } else {
                     <div class="text-center py-5">
                         <i class="fas fa-database fa-3x text-muted mb-3"></i>
-                        <h5 class="text-muted">No Volumes Found</h5>
-                        <p class="text-muted">No volumes are currently available in the cluster.</p>
+                        <h5 class="text-muted">未找到卷</h5>
+                        <p class="text-muted">集群中当前没有可用的卷。</p>
                     </div>
                 }
             </div>
@@ -510,7 +510,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
             <div class="col-12">
                 <small class="text-muted">
                     <i class="fas fa-clock me-1"></i>
-                    Last updated: {data.LastUpdated.Format("2006-01-02 15:04:05")}
+                    最后更新: {data.LastUpdated.Format("2006-01-02 15:04:05")}
                 </small>
             </div>
         </div>
@@ -616,7 +616,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
                 if (data.error) {
                     showMessage(data.error, 'error');
                 } else {
-                    showMessage(data.message || 'Volume vacuum started successfully', 'success');
+                    showMessage(data.message || '卷 vacuum 已成功启动', 'success');
                     // Optionally refresh the page after a delay to show updated vacuum status
                     setTimeout(() => {
                         window.location.reload();
@@ -625,7 +625,7 @@ templ ClusterVolumes(data dash.ClusterVolumesData) {
             })
             .catch(error => {
                 console.error('Error:', error);
-                showMessage('Failed to start vacuum operation', 'error');
+                showMessage('启动 vacuum 操作失败', 'error');
             })
             .finally(() => {
                 // Re-enable button

@@ -29,10 +29,10 @@ func init() {
 
 var cmdShell = &Command{
 	UsageLine: "shell",
-	Short:     "run interactive administrative commands",
-	Long: `run interactive administrative commands.
+	Short:     "运行交互式管理命令",
+	Long: `运行交互式管理命令。
 
-	Generate shell.toml via "weed scaffold -config=shell"
+	通过 "weed scaffold -config=shell" 生成 shell.toml
 
 `,
 }

@@ -21,9 +21,9 @@ func (c *commandRaftServerAdd) Name() string {
 }
 
 func (c *commandRaftServerAdd) Help() string {
-	return `add a server to the raft cluster
+	return `向 raft 集群添加一个服务器
 
-	Example:
+	示例:
 		cluster.raft.add -id <server_name> -address <server_host:port> -voter
 `
 }

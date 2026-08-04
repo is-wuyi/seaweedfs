@@ -23,25 +23,25 @@ func (c *commandS3BucketLock) Name() string {
 }
 
 func (c *commandS3BucketLock) Help() string {
-	return `view or enable Object Lock for an S3 bucket
+	return `查看或为一个 S3 bucket 启用 Object Lock
 
-	Example:
-		# View the current Object Lock status of a bucket
+	示例：
+		# 查看 bucket 当前的 Object Lock 状态
 		s3.bucket.lock -name <bucket_name>
 
-		# Enable Object Lock on an existing bucket (irreversible)
+		# 为已有的 bucket 启用 Object Lock（不可逆）
 		s3.bucket.lock -name <bucket_name> -enable
 
-	Object Lock provides WORM (Write Once Read Many) protection for objects.
-	Once enabled, Object Lock cannot be disabled on a bucket.
+	Object Lock 为对象提供 WORM（Write Once Read Many，一次写入多次读取）保护。
+	一旦启用，无法在 bucket 上禁用 Object Lock。
 
-	Requirements:
-		- Versioning will be automatically enabled if not already enabled
-		- Object Lock can only be enabled, never disabled (following AWS S3 behavior)
+	要求：
+		- 如果尚未启用版本控制，将自动启用版本控制
+		- Object Lock 只能启用，不能禁用（遵循 AWS S3 行为）
 
-	After enabling Object Lock, you can:
-		- Set default retention policy on the bucket
-		- Set retention and legal hold on individual objects
+	启用 Object Lock 后，你可以：
+		- 在 bucket 上设置默认保留策略
+		- 在单个对象上设置保留和法律保留
 `
 }
 

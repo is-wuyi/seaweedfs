@@ -27,29 +27,29 @@ func (c *commandFsConfigure) Name() string {
 }
 
 func (c *commandFsConfigure) Help() string {
-	return `configure and apply storage options for each location
+	return `为每个位置配置并应用存储选项
 
-	# see the current configuration file content
+	# 查看当前配置文件内容
 	fs.configure
 
-	# trying the changes and see the possible configuration file content
+	# 尝试更改并查看可能的配置文件内容
 	fs.configure -locationPrefix=/my/folder -collection=abc
 	fs.configure -locationPrefix=/my/folder -collection=abc -ttl=7d
 
-	# example: configure adding only 1 physical volume for each bucket collection
+	# 示例:为每个 bucket 集合配置仅添加 1 个物理 volume
 	fs.configure -locationPrefix=/buckets/ -volumeGrowthCount=1
 
-	# apply the changes
+	# 应用更改
 	fs.configure -locationPrefix=/my/folder -collection=abc -apply
 
-	# example: unlock a bucket that quota enforcement made read-only
+	# 示例:解锁因配额限制变为只读的 bucket
 	fs.configure -locationPrefix=/buckets/my_bucket/ -readOnly=false -apply
 
-	# example: keep one directory writable under a worm-protected tree
+	# 示例:在受 worm 保护的目录树下保持一个目录可写
 	fs.configure -locationPrefix=/buckets/my_bucket/ -worm -apply
 	fs.configure -locationPrefix=/buckets/my_bucket/scratch/ -worm=false -apply
 
-	# delete the changes
+	# 删除更改
 	fs.configure -locationPrefix=/my/folder -delete -apply
 
 `

@@ -109,27 +109,26 @@ func uninstallAutoCompletion() bool {
 var cmdAutocomplete = &Command{
 	Run:       runAutocomplete,
 	UsageLine: "autocomplete [shell]",
-	Short:     "generate or install shell autocomplete script",
-	Long: `Generate shell autocomplete script or install it to your shell configuration.
+	Short:     "生成或安装 shell 自动补全脚本",
+	Long: `生成 shell 自动补全脚本或将其安装到你的 shell 配置中。
 
-Usage:
-    weed autocomplete [bash|zsh|fish]  # print autocomplete script to stdout
-    weed autocomplete install          # install to shell config files
+用法:
+    weed autocomplete [bash|zsh|fish]  # 将自动补全脚本打印到 stdout
+    weed autocomplete install          # 安装到 shell 配置文件
 
-    When a shell name is provided, the autocomplete script is printed to stdout.
-    You can then add it to your shell configuration manually, e.g.:
+    当提供 shell 名称时,自动补全脚本会打印到 stdout。
+    你可以手动将其添加到 shell 配置中,例如:
 
-        # For bash:
+        # 对于 bash:
         weed autocomplete bash >> ~/.bashrc
 
-        # Or use eval in your shell config:
+        # 或者在你的 shell 配置中使用 eval:
         eval "$(weed autocomplete bash)"
 
-    When 'install' is provided (or no argument), the script is automatically
-    installed to your shell configuration files.
+    当提供 'install'(或无参数)时,脚本会自动安装到你的 shell 配置文件中。
 
-    Supported shells are bash, zsh, and fish.
-    Windows is not supported.
+    支持的 shell 有 bash、zsh 和 fish。
+    不支持 Windows。
 
 `,
 }
@@ -157,10 +156,10 @@ func runAutocomplete(cmd *Command, args []string) bool {
 var cmdUnautocomplete = &Command{
 	Run:       runUnautocomplete,
 	UsageLine: "autocomplete.uninstall",
-	Short:     "uninstall autocomplete",
-	Long: `weed autocomplete is uninstalled in the shell.
+	Short:     "卸载自动补全",
+	Long: `在 shell 中卸载 weed 自动补全。
 
-    Windows is not supported.
+    不支持 Windows。
 
 `,
 }

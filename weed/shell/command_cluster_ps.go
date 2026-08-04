@@ -29,7 +29,7 @@ func (c *commandClusterPs) Name() string {
 }
 
 func (c *commandClusterPs) Help() string {
-	return `check current cluster process status
+	return `检查当前集群的进程状态
 
 	cluster.ps
 

@@ -23,7 +23,7 @@ func (c *commandS3BucketDelete) Name() string {
 }
 
 func (c *commandS3BucketDelete) Help() string {
-	return `delete a bucket by a given name
+	return `按给定名称删除一个 bucket
 
 	s3.bucket.delete -name <bucket_name>
 `

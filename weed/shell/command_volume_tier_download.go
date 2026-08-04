@@ -29,20 +29,20 @@ func (c *commandVolumeTierDownload) Name() string {
 }
 
 func (c *commandVolumeTierDownload) Help() string {
-	return `download the dat file of a volume from a remote tier
+	return `从远程分层下载某个卷的 dat 文件
 
 	volume.tier.download [-collection=""]
 	volume.tier.download [-collection=""] -volumeId=<volume_id>
 
-	The -collection parameter supports regular expressions for pattern matching:
-	  - Use exact match: volume.tier.download -collection="^mybucket$"
-	  - Match multiple buckets: volume.tier.download -collection="bucket.*"
-	  - Match all collections: volume.tier.download -collection=".*"
+	-collection 参数支持使用正则表达式进行模式匹配:
+	  - 精确匹配:volume.tier.download -collection="^mybucket$"
+	  - 匹配多个 bucket:volume.tier.download -collection="bucket.*"
+	  - 匹配所有集合:volume.tier.download -collection=".*"
 
-	e.g.:
+	例如:
 	volume.tier.download -volumeId=7
 
-	This command will download the dat file of a volume from a remote tier to a volume server in local cluster.
+	此命令会将某个卷的 dat 文件从远程分层下载到本地集群中的 volume 服务器。
 
 `
 }

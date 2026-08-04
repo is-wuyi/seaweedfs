@@ -23,24 +23,22 @@ func (c *commandS3BucketLifecycleFastpath) Name() string {
 }
 
 func (c *commandS3BucketLifecycleFastpath) Help() string {
-	return `view or toggle the per-bucket lifecycle TTL fast path
+	return `查看或切换按 bucket 的生命周期 TTL 快速路径
 
-	When enabled, an Expiration.Days lifecycle rule is stamped as a volume
-	TTL at PutObject time, so the volume server reclaims the data on its own
-	and the lifecycle worker skips per-chunk deletes. Off by default: a
-	volume TTL is baked into the object at write time and can't honor a later
-	policy change (rule removed or lengthened), unlike worker-driven
-	expiration. The fast path never applies to versioned or object-locked
-	buckets regardless of this flag.
+	启用后，Expiration.Days 生命周期规则会在 PutObject 时被标记为 volume TTL，
+	这样 volume 服务器会自行回收数据，生命周期 worker 会跳过按 chunk 的删除。
+	默认关闭：volume TTL 在写入时固化到对象中，无法遵循后续的策略变更（规则被移除
+	或延长），这与 worker 驱动的过期不同。无论此标志如何设置，快速路径都不会
+	应用于启用了版本控制或 Object Lock 的 bucket。
 
-	Example:
-		# Show the current setting
+	示例：
+		# 显示当前设置
 		s3.bucket.lifecycle.fastpath -name <bucket_name>
 
-		# Enable
+		# 启用
 		s3.bucket.lifecycle.fastpath -name <bucket_name> -enable
 
-		# Disable
+		# 禁用
 		s3.bucket.lifecycle.fastpath -name <bucket_name> -disable
 `
 }

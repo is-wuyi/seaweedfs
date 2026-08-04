@@ -21,7 +21,7 @@ func (c *commandRaftClusterPs) Name() string {
 }
 
 func (c *commandRaftClusterPs) Help() string {
-	return `check current raft cluster status
+	return `检查当前 raft 集群状态
 
 	cluster.raft.ps
 `

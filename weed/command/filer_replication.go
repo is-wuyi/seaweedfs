@@ -17,13 +17,13 @@ func init() {
 
 var cmdFilerReplicate = &Command{
 	UsageLine: "filer.replicate",
-	Short:     "replicate file changes to another destination",
-	Long: `replicate file changes to another destination
+	Short:     "将文件变更复制到另一个目的地",
+	Long: `将文件变更复制到另一个目的地
 
-	filer.replicate listens on filer notifications. If any file is updated, it will fetch the updated content,
-	and write to the other destination.
+	filer.replicate 监听 filer 通知。如果有任何文件被更新,它会获取更新后的内容,
+	并写入到另一个目的地。
 
-	Run "weed scaffold -config=replication" to generate a replication.toml file and customize the parameters.
+	运行 "weed scaffold -config=replication" 生成 replication.toml 文件并自定义参数。
 
   `,
 }

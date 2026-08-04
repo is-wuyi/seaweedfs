@@ -38,28 +38,28 @@ func (c *commandVolumeFixReplication) Name() string {
 }
 
 func (c *commandVolumeFixReplication) Help() string {
-	return `add or remove replicas to volumes that are missing replicas or over-replicated
+	return `为缺少副本或副本过多的卷添加或删除副本
 
-	This command finds all over-replicated volumes. If found, it will purge the oldest copies and stop.
+	此命令查找所有副本过多的卷。如果找到,会清除最旧的副本然后停止。
 
-	This command also finds all under-replicated volumes, and finds volume servers with free slots.
-	If the free slots satisfy the replication requirement, the volume content is copied over and mounted.
+	此命令还会查找所有副本不足的卷,并查找有空闲槽位的 volume 服务器。
+	如果空闲槽位满足副本要求,则将卷内容复制过去并挂载。
 
-	Misplaced volumes with a surplus replica have a misplaced replica deleted. Without a surplus, a
-	well-placed replica is added first and the misplaced one is trimmed on a later pass, so the volume
-	never drops below its intended replica count.
+	对于放置错误且有多余副本的卷,会删除放置错误的副本。如果没有多余副本,
+	则先添加一个正确放置的副本,并在后续轮次裁剪放置错误的副本,使卷的副本数
+	永远不会低于预期的副本数。
 
-	volume.fix.replication                                # do not take action
-	volume.fix.replication -apply                         # actually deleting or copying the volume files and mount the volume
-	volume.fix.replication -collectionPattern=important*  # fix any collections with prefix "important"
+	volume.fix.replication                                # 不执行操作
+	volume.fix.replication -apply                         # 实际删除或复制卷文件并挂载卷
+	volume.fix.replication -collectionPattern=important*  # 修复任何以 "important" 为前缀的集合
 
-	Note:
-		* each time this will only add back one replica for each volume id that is under replicated.
-		  If there are multiple replicas are missing, e.g. replica count is > 2, you may need to run this multiple times.
-		* do not run this too quickly within seconds, since the new volume replica may take a few seconds
-		  to register itself to the master.
-		* under-replicated volumes are copied up to -maxParallelization at a time, with at most
-		  -maxParallelizationPerServer concurrent copies onto any single destination server.
+	注意:
+		* 每次只会为每个副本不足的 volume id 添加回一个副本。
+		  如果缺失多个副本,例如副本数 > 2,可能需要多次运行此命令。
+		* 不要在几秒内频繁运行,因为新的卷副本可能需要几秒钟
+		  才能向 master 注册。
+		* 副本不足的卷每次最多复制 -maxParallelization 个,且对任意单个目标服务器
+		  最多有 -maxParallelizationPerServer 个并发复制。
 
 `
 }

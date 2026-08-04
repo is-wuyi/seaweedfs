@@ -27,9 +27,9 @@ func (c *commandS3CleanUploads) Name() string {
 }
 
 func (c *commandS3CleanUploads) Help() string {
-	return `clean up stale multipart uploads
+	return `清理过期的分段上传
 
-	Example:
+	示例：
 		s3.clean.uploads -timeAgo 1.5h
 
 `

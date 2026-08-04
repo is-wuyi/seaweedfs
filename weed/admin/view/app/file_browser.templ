@@ -19,35 +19,35 @@ templ FileBrowser(data dash.FileBrowserData) {
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">
 		if data.IsTableBucketPath && data.TableBucketName != "" {
-			<i class="fas fa-table me-2"></i>Table Bucket: {data.TableBucketName}
+			<i class="fas fa-table me-2"></i>表桶: {data.TableBucketName}
 		} else if data.IsBucketPath && data.BucketName != "" {
-			<i class="fas fa-cube me-2"></i>S3 Bucket: {data.BucketName}
+			<i class="fas fa-cube me-2"></i>S3 桶: {data.BucketName}
 		} else {
-			<i class="fas fa-folder-open me-2"></i>File Browser
+			<i class="fas fa-folder-open me-2"></i>文件浏览器
 		}
 		</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group me-2">
 			if data.IsTableBucketPath && data.TableBucketName != "" {
 				<a href={ dash.PUrl(ctx, "/object-store/s3tables/buckets") } class="btn btn-sm btn-outline-secondary">
-					<i class="fas fa-arrow-left me-1"></i>Back to Table Buckets
+					<i class="fas fa-arrow-left me-1"></i>返回表桶
 				</a>
 			} else if data.IsBucketPath && data.BucketName != "" {
 				<a href={ dash.PUrl(ctx, "/object-store/buckets") } class="btn btn-sm btn-outline-secondary">
-					<i class="fas fa-arrow-left me-1"></i>Back to Buckets
+					<i class="fas fa-arrow-left me-1"></i>返回桶
 				</a>
 			}
 				<button type="button" class="btn btn-sm btn-outline-primary" onclick="createFolder()">
-					<i class="fas fa-folder-plus me-1"></i>New Folder
+					<i class="fas fa-folder-plus me-1"></i>新建文件夹
 				</button>
 				<button type="button" class="btn btn-sm btn-outline-secondary" onclick="uploadFile()">
-					<i class="fas fa-upload me-1"></i>Upload
+					<i class="fas fa-upload me-1"></i>上传
 				</button>
 				<button type="button" class="btn btn-sm btn-outline-danger" id="deleteSelectedBtn" onclick="confirmDeleteSelected()" style="display: none;">
-					<i class="fas fa-trash me-1"></i>Delete Selected
+					<i class="fas fa-trash me-1"></i>删除选中
 				</button>
 				<button type="button" class="btn btn-sm btn-outline-info" onclick="exportFileList()">
-					<i class="fas fa-download me-1"></i>Export
+					<i class="fas fa-download me-1"></i>导出
 				</button>
 			</div>
 		</div>
@@ -83,11 +83,11 @@ templ FileBrowser(data dash.FileBrowserData) {
 			<h6 class="m-0 font-weight-bold text-primary">
 				<i class="fas fa-folder-open me-2"></i>
 			if data.CurrentPath == "/" {
-				<a href={ dash.PUrl(ctx, fileBrowserPathURL("/")) } class="text-decoration-none text-primary">Root Directory</a>
+				<a href={ dash.PUrl(ctx, fileBrowserPathURL("/")) } class="text-decoration-none text-primary">根目录</a>
 			} else if data.CurrentPath == "/buckets" {
-										<a href={ dash.PUrl(ctx, fileBrowserPathURL("/buckets")) } class="text-decoration-none text-primary">Object Store Buckets Directory</a>
+										<a href={ dash.PUrl(ctx, fileBrowserPathURL("/buckets")) } class="text-decoration-none text-primary">对象存储桶目录</a>
 				<a href={ dash.PUrl(ctx, "/object-store/buckets") } class="btn btn-sm btn-outline-primary ms-2">
-					<i class="fas fa-cube me-1"></i>Manage Buckets
+					<i class="fas fa-cube me-1"></i>管理桶
 				</a>
 		} else {
 				<a href={ dash.PUrl(ctx, fileBrowserPathURL(data.CurrentPath)) } class="text-decoration-none text-primary">{ filepath.Base(data.CurrentPath) }</a>
@@ -97,7 +97,7 @@ templ FileBrowser(data dash.FileBrowserData) {
 			<!-- Compact pagination controls -->
 			<div class="d-flex align-items-center gap-2 ms-auto">
 				<div class="d-flex align-items-center">
-					<label class="me-1 mb-0 small text-muted">Show:</label>
+					<label class="me-1 mb-0 small text-muted">显示:</label>
 					<select id="file-browser-page-size-top" class="form-select form-select-sm" style="width: 70px; font-size: 0.875rem;" onchange={ changePageSize(data.CurrentPath, data.CurrentLastFileName, "file-browser-page-size-top") }>
 						<option value="20" selected?={ data.PageSize == 20 }>20</option>
 						<option value="50" selected?={ data.PageSize == 50 }>50</option>
@@ -107,17 +107,17 @@ templ FileBrowser(data dash.FileBrowserData) {
 				</div>
 				<div class="btn-group btn-group-sm" role="group">
 					if data.HasNextPage {
-						<a href={ dash.PUrl(ctx, fileBrowserPageURL(data.CurrentPath, data.LastFileName, data.PageSize)) } class="btn btn-outline-primary" title="Next page">
-							Next <i class="fas fa-angle-right"></i>
+						<a href={ dash.PUrl(ctx, fileBrowserPageURL(data.CurrentPath, data.LastFileName, data.PageSize)) } class="btn btn-outline-primary" title="下一页">
+							下一页 <i class="fas fa-angle-right"></i>
 						</a>
 					} else {
-						<button class="btn btn-outline-secondary" disabled title="Next page">
-							Next <i class="fas fa-angle-right"></i>
+						<button class="btn btn-outline-secondary" disabled title="下一页">
+							下一页 <i class="fas fa-angle-right"></i>
 						</button>
 					}
 					if data.ParentPath != data.CurrentPath {
-						<a href={ dash.PUrl(ctx, fileBrowserPathURL(data.ParentPath)) } class="btn btn-outline-secondary" title="Go up one directory">
-							<i class="fas fa-arrow-up"></i> Up
+						<a href={ dash.PUrl(ctx, fileBrowserPathURL(data.ParentPath)) } class="btn btn-outline-secondary" title="返回上一级目录">
+							<i class="fas fa-arrow-up"></i> 上级
 						</a>
 					}
 				</div>
@@ -132,12 +132,12 @@ templ FileBrowser(data dash.FileBrowserData) {
 								<th width="40px">
 									<input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
 								</th>
-								<th>Name</th>
-								<th>Size</th>
-								<th>Type</th>
-								<th>Modified</th>
-								<th>Permissions</th>
-								<th>Actions</th>
+								<th>名称</th>
+								<th>大小</th>
+								<th>类型</th>
+								<th>修改时间</th>
+								<th>权限</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -169,8 +169,8 @@ templ FileBrowser(data dash.FileBrowserData) {
 									<td>
 										<span class="badge bg-light text-dark">
 											if entry.IsDirectory {
-												Directory
-											} else {
+											目录
+										} else {
 												{ getMimeDisplayName(entry.Mime) }
 											}
 										</span>
@@ -188,22 +188,22 @@ templ FileBrowser(data dash.FileBrowserData) {
 									<td>
 										<div class="btn-group btn-group-sm" role="group">
 											if !entry.IsDirectory {
-												<button type="button" class="btn btn-outline-primary btn-sm" title="Download" data-action="download" data-path={ entry.FullPath }>
-													<i class="fas fa-download"></i>
-												</button>
-												<button type="button" class="btn btn-outline-info btn-sm" title="View" data-action="view" data-path={ entry.FullPath }>
-													<i class="fas fa-eye"></i>
-												</button>
-											}
-											<button type="button" class="btn btn-outline-secondary btn-sm" title="Properties" data-action="properties" data-path={ entry.FullPath }>
-												<i class="fas fa-info-circle"></i>
+											<button type="button" class="btn btn-outline-primary btn-sm" title="下载" data-action="download" data-path={ entry.FullPath }>
+												<i class="fas fa-download"></i>
 											</button>
-											<button type="button" class="btn btn-outline-success btn-sm" title="Export metadata" data-action="export-metadata" data-path={ entry.FullPath }>
-												<i class="fas fa-file-export"></i>
+											<button type="button" class="btn btn-outline-info btn-sm" title="查看" data-action="view" data-path={ entry.FullPath }>
+												<i class="fas fa-eye"></i>
 											</button>
-											<button type="button" class="btn btn-outline-danger btn-sm" title="Delete" data-action="delete" data-path={ entry.FullPath }>
-												<i class="fas fa-trash"></i>
-											</button>
+										}
+										<button type="button" class="btn btn-outline-secondary btn-sm" title="属性" data-action="properties" data-path={ entry.FullPath }>
+											<i class="fas fa-info-circle"></i>
+										</button>
+										<button type="button" class="btn btn-outline-success btn-sm" title="导出元数据" data-action="export-metadata" data-path={ entry.FullPath }>
+											<i class="fas fa-file-export"></i>
+										</button>
+										<button type="button" class="btn btn-outline-danger btn-sm" title="删除" data-action="delete" data-path={ entry.FullPath }>
+											<i class="fas fa-trash"></i>
+										</button>
 										</div>
 									</td>
 								</tr>
@@ -214,8 +214,8 @@ templ FileBrowser(data dash.FileBrowserData) {
 			} else {
 				<div class="text-center py-5">
 					<i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
-					<h5 class="text-muted">Empty Directory</h5>
-					<p class="text-muted">This directory contains no files or subdirectories.</p>
+					<h5 class="text-muted">空目录</h5>
+					<p class="text-muted">此目录不包含任何文件或子目录。</p>
 				</div>
 			}
 		</div>
@@ -227,14 +227,14 @@ templ FileBrowser(data dash.FileBrowserData) {
 		<div class="row mb-3">
 			<div class="col-md-6">
 				<div class="d-flex align-items-center">
-					<label class="me-2 mb-0">Show:</label>
+					<label class="me-2 mb-0">显示:</label>
 					<select id="file-browser-page-size-bottom" class="form-select form-select-sm" style="width: auto;" onchange={ changePageSize(data.CurrentPath, data.CurrentLastFileName, "file-browser-page-size-bottom") }>
 						<option value="20" selected?={ data.PageSize == 20 }>20</option>
 						<option value="50" selected?={ data.PageSize == 50 }>50</option>
 						<option value="100" selected?={ data.PageSize == 100 }>100</option>
 						<option value="200" selected?={ data.PageSize == 200 }>200</option>
 					</select>
-					<span class="ms-2 text-muted">entries per page</span>
+					<span class="ms-2 text-muted">条/页</span>
 				</div>
 			</div>
 			<div class="col-md-6 text-end">
@@ -242,11 +242,11 @@ templ FileBrowser(data dash.FileBrowserData) {
 
 					if data.HasNextPage {
 						<a href={ dash.PUrl(ctx, fileBrowserPageURL(data.CurrentPath, data.LastFileName, data.PageSize)) } class="btn btn-outline-primary">
-							Next <i class="fas fa-angle-right ms-1"></i>
+							下一页 <i class="fas fa-angle-right ms-1"></i>
 						</a>
 					} else {
 						<button class="btn btn-outline-secondary" disabled>
-							Next <i class="fas fa-angle-right ms-1"></i>
+							下一页 <i class="fas fa-angle-right ms-1"></i>
 						</button>
 					}
 				</div>
@@ -256,7 +256,7 @@ templ FileBrowser(data dash.FileBrowserData) {
 		<div class="col-12">
 			<small class="text-muted">
 				<i class="fas fa-clock me-1"></i>
-				Last updated: { data.LastUpdated.Format("2006-01-02 15:04:05") }
+				最后更新: { data.LastUpdated.Format("2006-01-02 15:04:05") }
 			</small>
 		</div>
 	</div>
@@ -267,27 +267,27 @@ templ FileBrowser(data dash.FileBrowserData) {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="createFolderModalLabel">
-						<i class="fas fa-folder-plus me-2"></i>Create New Folder
+						<i class="fas fa-folder-plus me-2"></i>新建文件夹
 					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form id="createFolderForm">
 						<div class="mb-3">
-							<label for="folderName" class="form-label">Folder Name</label>
-							<input type="text" class="form-control" id="folderName" name="folderName" required 
-								   placeholder="Enter folder name" maxlength="255">
+							<label for="folderName" class="form-label">文件夹名称</label>
+							<input type="text" class="form-control" id="folderName" name="folderName" required
+								   placeholder="请输入文件夹名称" maxlength="255">
 							<div class="form-text">
-								Folder names cannot contain / or \ characters.
+								文件夹名称不能包含 / 或 \ 字符。
 							</div>
 						</div>
 						<input type="hidden" id="currentPath" name="currentPath" value={ data.CurrentPath }>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 					<button type="button" class="btn btn-primary" onclick="submitCreateFolder()">
-						<i class="fas fa-folder-plus me-1"></i>Create Folder
+						<i class="fas fa-folder-plus me-1"></i>创建文件夹
 					</button>
 				</div>
 			</div>
@@ -300,45 +300,45 @@ templ FileBrowser(data dash.FileBrowserData) {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="uploadFileModalLabel">
-						<i class="fas fa-upload me-2"></i>Upload Files
+						<i class="fas fa-upload me-2"></i>上传文件
 					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form id="uploadFileForm" enctype="multipart/form-data">
 						<div class="mb-3">
-							<label for="fileInput" class="form-label">Select Files</label>
+							<label for="fileInput" class="form-label">选择文件</label>
 							<input type="file" class="form-control" id="fileInput" name="files" multiple required>
 							<div class="form-text">
-								Choose one or more files to upload to the current directory. You can select multiple files by holding Ctrl (Cmd on Mac) while clicking.
+								选择一个或多个文件上传到当前目录。按住 Ctrl(在 Mac 上为 Cmd)键点击可选择多个文件。
 							</div>
 						</div>
 						<input type="hidden" id="uploadPath" name="path" value={ data.CurrentPath }>
-						
+
 						<!-- File List Preview -->
 						<div id="fileListPreview" class="mb-3" style="display: none;">
-							<label class="form-label">Selected Files:</label>
+							<label class="form-label">已选文件:</label>
 							<div id="selectedFilesList" class="border rounded p-2 bg-light">
 								<!-- Files will be listed here -->
 							</div>
 						</div>
-						
+
 						<!-- Upload Progress -->
 						<div class="mb-3" id="uploadProgress" style="display: none;">
-							<label class="form-label">Upload Progress:</label>
+							<label class="form-label">上传进度:</label>
 							<div class="progress mb-2">
 								<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
 							</div>
 							<div id="uploadStatus" class="small text-muted">
-								Preparing upload...
+								正在准备上传...
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 					<button type="button" class="btn btn-primary" onclick="submitUploadFile()">
-						<i class="fas fa-upload me-1"></i>Upload Files
+						<i class="fas fa-upload me-1"></i>上传文件
 					</button>
 				</div>
 			</div>
@@ -384,7 +384,7 @@ templ FileBrowser(data dash.FileBrowserData) {
 					const fileName = path.split('/').pop();
 					showDeleteConfirm(fileName, function() {
 						deleteFile(path);
-					}, `Are you sure you want to delete "${fileName}"? This action cannot be undone.`);
+					}, `确定要删除 "${fileName}" 吗?此操作无法撤销。`);
 					break;
 			}
 		});
@@ -417,14 +417,14 @@ templ FileBrowser(data dash.FileBrowserData) {
 			.then(response => response.json())
 			.then(data => {
 				if (data.error) {
-					showAlert('Error loading file properties: ' + data.error, 'error');
+					showAlert('加载文件属性失败: ' + data.error, 'error');
 				} else {
 					displayFileProperties(data);
 				}
 			})
 			.catch(error => {
 				console.error('Error fetching file properties:', error);
-				showAlert('Error loading file properties: ' + error.message, 'error');
+				showAlert('加载文件属性失败: ' + error.message, 'error');
 			});
 	}
 	
@@ -434,14 +434,14 @@ templ FileBrowser(data dash.FileBrowserData) {
 			'<div class="modal-dialog modal-lg">' +
 			'<div class="modal-content">' +
 			'<div class="modal-header">' +
-			'<h5 class="modal-title"><i class="fas fa-info-circle me-2"></i>Properties: ' + (data.name || 'Unknown') + '</h5>' +
+			'<h5 class="modal-title"><i class="fas fa-info-circle me-2"></i>属性: ' + (data.name || '未知') + '</h5>' +
 			'<button type="button" class="btn-close" data-bs-dismiss="modal"></button>' +
 			'</div>' +
 			'<div class="modal-body">' +
 			createFilePropertiesContent(data) +
 			'</div>' +
 			'<div class="modal-footer">' +
-			'<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>' +
+			'<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>' +
 			'</div>' +
 			'</div>' +
 			'</div>' +
@@ -467,85 +467,85 @@ templ FileBrowser(data dash.FileBrowserData) {
 	function createFilePropertiesContent(data) {
 		let html = '<div class="row">' +
 			'<div class="col-12">' +
-			'<h6 class="text-primary"><i class="fas fa-file me-1"></i>Basic Information</h6>' +
+			'<h6 class="text-primary"><i class="fas fa-file me-1"></i>基本信息</h6>' +
 			'<table class="table table-sm">' +
-			'<tr><td style="width: 120px;"><strong>Name:</strong></td><td>' + (data.name || 'N/A') + '</td></tr>' +
-			'<tr><td><strong>Full Path:</strong></td><td><code class="text-break">' + (data.full_path || 'N/A') + '</code></td></tr>' +
-			'<tr><td><strong>Type:</strong></td><td>' + (data.is_directory ? 'Directory' : 'File') + '</td></tr>';
-		
+			'<tr><td style="width: 120px;"><strong>名称:</strong></td><td>' + (data.name || 'N/A') + '</td></tr>' +
+			'<tr><td><strong>完整路径:</strong></td><td><code class="text-break">' + (data.full_path || 'N/A') + '</code></td></tr>' +
+			'<tr><td><strong>类型:</strong></td><td>' + (data.is_directory ? '目录' : '文件') + '</td></tr>';
+
 		if (!data.is_directory) {
-			html += '<tr><td><strong>Size:</strong></td><td>' + (data.size_formatted || (data.size ? formatBytes(data.size) : 'N/A')) + '</td></tr>' +
-				'<tr><td><strong>MIME Type:</strong></td><td>' + (data.mime_type || 'N/A') + '</td></tr>';
+			html += '<tr><td><strong>大小:</strong></td><td>' + (data.size_formatted || (data.size ? formatBytes(data.size) : 'N/A')) + '</td></tr>' +
+				'<tr><td><strong>MIME 类型:</strong></td><td>' + (data.mime_type || 'N/A') + '</td></tr>';
 		}
-		
+
 		html += '</table>' +
 			'</div>' +
 			'</div>' +
 			'<div class="row">' +
 			'<div class="col-md-6">' +
-			'<h6 class="text-primary"><i class="fas fa-clock me-1"></i>Timestamps</h6>' +
+			'<h6 class="text-primary"><i class="fas fa-clock me-1"></i>时间戳</h6>' +
 			'<table class="table table-sm">';
-		
+
 		if (data.modified_time) {
-			html += '<tr><td><strong>Modified:</strong></td><td>' + data.modified_time + '</td></tr>';
+			html += '<tr><td><strong>修改时间:</strong></td><td>' + data.modified_time + '</td></tr>';
 		}
 		if (data.created_time) {
-			html += '<tr><td><strong>Created:</strong></td><td>' + data.created_time + '</td></tr>';
+			html += '<tr><td><strong>创建时间:</strong></td><td>' + data.created_time + '</td></tr>';
 		}
-		
+
 		html += '</table>' +
 			'</div>' +
 			'<div class="col-md-6">' +
-			'<h6 class="text-primary"><i class="fas fa-shield-alt me-1"></i>Permissions</h6>' +
+			'<h6 class="text-primary"><i class="fas fa-shield-alt me-1"></i>权限</h6>' +
 			'<table class="table table-sm">';
-		
+
 		if (data.file_mode) {
 			const rwxPermissions = formatPermissions(data.file_mode, data.is_directory);
-			html += '<tr><td><strong>Permissions:</strong></td><td><code>' + rwxPermissions + '</code></td></tr>';
+			html += '<tr><td><strong>权限:</strong></td><td><code>' + rwxPermissions + '</code></td></tr>';
 		}
 		if (data.uid !== undefined) {
-			html += '<tr><td><strong>User ID:</strong></td><td>' + data.uid + '</td></tr>';
+			html += '<tr><td><strong>用户 ID:</strong></td><td>' + data.uid + '</td></tr>';
 		}
 		if (data.gid !== undefined) {
-			html += '<tr><td><strong>Group ID:</strong></td><td>' + data.gid + '</td></tr>';
+			html += '<tr><td><strong>组 ID:</strong></td><td>' + data.gid + '</td></tr>';
 		}
-		
+
 		html += '</table>' +
 			'</div>' +
 			'</div>';
-		
+
 		// Add advanced info
 		html += '<div class="row">' +
 			'<div class="col-12">' +
-			'<h6 class="text-primary"><i class="fas fa-cog me-1"></i>Advanced</h6>' +
+			'<h6 class="text-primary"><i class="fas fa-cog me-1"></i>高级信息</h6>' +
 			'<table class="table table-sm">';
-		
+
 		if (data.chunk_count) {
-			html += '<tr><td style="width: 120px;"><strong>Chunks:</strong></td><td>' + data.chunk_count + '</td></tr>';
+			html += '<tr><td style="width: 120px;"><strong>分片数:</strong></td><td>' + data.chunk_count + '</td></tr>';
 		}
 		if (data.ttl_formatted) {
 			html += '<tr><td><strong>TTL:</strong></td><td>' + data.ttl_formatted + '</td></tr>';
 		}
-		
+
 		html += '</table>' +
 			'</div>' +
 			'</div>';
-		
+
 		// Add chunk details if available (show top 5)
 		if (data.chunks && data.chunks.length > 0) {
 			const chunksToShow = data.chunks.slice(0, 5);
 			html += '<div class="row mt-3">' +
 				'<div class="col-12">' +
-				'<h6 class="text-primary"><i class="fas fa-puzzle-piece me-1"></i>Chunk Details' +
-				(data.chunk_count > 5 ? ' (Top 5 of ' + data.chunk_count + ')' : ' (' + data.chunk_count + ')') +
+				'<h6 class="text-primary"><i class="fas fa-puzzle-piece me-1"></i>分片详情' +
+				(data.chunk_count > 5 ? ' (前 5 个,共 ' + data.chunk_count + ' 个)' : ' (' + data.chunk_count + ' 个)') +
 				'</h6>' +
 				'<div class="table-responsive" style="max-height: 200px; overflow-y: auto;">' +
 				'<table class="table table-sm table-striped">' +
 				'<thead>' +
 				'<tr>' +
-				'<th>File ID</th>' +
-				'<th>Offset</th>' +
-				'<th>Size</th>' +
+				'<th>文件 ID</th>' +
+				'<th>偏移量</th>' +
+				'<th>大小</th>' +
 				'<th>ETag</th>' +
 				'</tr>' +
 				'</thead>' +
@@ -571,7 +571,7 @@ templ FileBrowser(data dash.FileBrowserData) {
 		if (data.extended && Object.keys(data.extended).length > 0) {
 			html += '<div class="row">' +
 				'<div class="col-12">' +
-				'<h6 class="text-primary"><i class="fas fa-tags me-1"></i>Extended Attributes</h6>' +
+				'<h6 class="text-primary"><i class="fas fa-tags me-1"></i>扩展属性</h6>' +
 				'<table class="table table-sm">';
 			
 			for (const [key, value] of Object.entries(data.extended)) {
@@ -707,8 +707,8 @@ templ FileBrowser(data dash.FileBrowserData) {
 			return null;
 		}).filter(row => row !== null);
 		
-		const csvContent = "data:text/csv;charset=utf-8," + 
-			"Name,Size,Type,Modified,Permissions\n" +
+		const csvContent = "data:text/csv;charset=utf-8," +
+			"名称,大小,类型,修改时间,权限\n" +
 			rows.map(r => '"' + r.name + '","' + r.size + '","' + r.type + '","' + r.modified + '","' + r.permissions + '"').join("\n");
 		
 		const encodedUri = encodeURI(csvContent);

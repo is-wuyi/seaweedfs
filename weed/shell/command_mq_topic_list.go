@@ -23,7 +23,7 @@ func (c *commandMqTopicList) Name() string {
 }
 
 func (c *commandMqTopicList) Help() string {
-	return `print out all topics`
+	return `打印所有 topic`
 }
 
 func (c *commandMqTopicList) HasTag(CommandTag) bool {

@@ -20,18 +20,18 @@ func (c *commandS3TablesNamespace) Name() string {
 }
 
 func (c *commandS3TablesNamespace) Help() string {
-	return `manage s3tables namespaces
+	return `管理 s3tables namespaces
 
-# create a namespace
+# 创建 namespace
 s3tables.namespace -create -bucket <bucket> -account <account_id> -name <namespace>
 
-# list namespaces
+# 列出 namespace
 s3tables.namespace -list -bucket <bucket> -account <account_id> [-prefix <prefix>] [-limit <n>] [-continuation <token>]
 
-# get namespace details
+# 获取 namespace 详情
 s3tables.namespace -get -bucket <bucket> -account <account_id> -name <namespace>
 
-# delete namespace
+# 删除 namespace
 s3tables.namespace -delete -bucket <bucket> -account <account_id> -name <namespace>
 `
 }
