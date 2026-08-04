@@ -1,0 +1,52 @@
+name: "zh: build binaries"
+
+on:
+  push:
+    branches: [ zh ]
+    paths:
+      - 'weed/**'
+      - 'go.mod'
+      - 'go.sum'
+      - '.github/workflows/zh-build.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: zh-build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - goos: linux
+            goarch: amd64
+          - goos: linux
+            goarch: arm64
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build
+        env:
+          CGO_ENABLED: "0"
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          cd weed
+          go build -tags 5BytesOffset -ldflags "-s -w -extldflags -static -X github.com/seaweedfs/seaweedfs/weed/util/version.COMMIT=${{ github.sha }}" -o weed-${{ matrix.goos }}-${{ matrix.goarch }} .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weed-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: weed/weed-${{ matrix.goos }}-${{ matrix.goarch }}
