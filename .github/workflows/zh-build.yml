@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -23,25 +23,22 @@ jobs:
     strategy:
       matrix:
         include:
-          # Linux
           - goos: linux
             goarch: amd64
           - goos: linux
             goarch: arm64
-          # Windows
           - goos: windows
             goarch: amd64
+            ext: .exe
           - goos: windows
             goarch: arm64
-          # macOS
+            ext: .exe
           - goos: darwin
             goarch: amd64
           - goos: darwin
             goarch: arm64
-          # FreeBSD
           - goos: freebsd
             goarch: amd64
-          # OpenBSD
           - goos: openbsd
             goarch: amd64
 
@@ -60,14 +57,55 @@ jobs:
           GOARCH: ${{ matrix.goarch }}
         run: |
           cd weed
-          EXTENSION=""
-          if [ "$GOOS" = "windows" ]; then
-            EXTENSION=".exe"
-          fi
-          go build -tags 5BytesOffset -ldflags "-s -w -extldflags -static -X github.com/seaweedfs/seaweedfs/weed/util/version.COMMIT=${{ github.sha }}" -o weed-${{ matrix.goos }}-${{ matrix.goarch }}${EXTENSION} .
+          go build -tags 5BytesOffset -ldflags "-s -w -extldflags -static -X github.com/seaweedfs/seaweedfs/weed/util/version.COMMIT=${{ github.sha }}" -o weed-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }} .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: weed-${{ matrix.goos }}-${{ matrix.goarch }}
           path: weed/weed-*
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      
+      - name: List artifacts
+        run: ls -la artifacts/
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v4.40-zh-${{ github.run_number }}
+          name: "汉化版 SeaweedFS v4.40"
+          body: |
+            ## 汉化版 SeaweedFS v4.40
+            
+            构建时间: ${{ github.event.head_commit.timestamp }}
+            提交: ${{ github.sha }}
+            
+            ### 支持平台
+            - Linux (amd64, arm64)
+            - Windows (amd64, arm64)
+            - macOS (amd64, arm64)
+            - FreeBSD (amd64)
+            - OpenBSD (amd64)
+            
+            ### 汉化内容
+            - 管理界面汉化
+            - 命令行输出汉化
+          files: |
+            artifacts/**/weed-*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
