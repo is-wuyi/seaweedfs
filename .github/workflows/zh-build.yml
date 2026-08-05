@@ -23,10 +23,27 @@ jobs:
     strategy:
       matrix:
         include:
+          # Linux
           - goos: linux
             goarch: amd64
           - goos: linux
             goarch: arm64
+          # Windows
+          - goos: windows
+            goarch: amd64
+          - goos: windows
+            goarch: arm64
+          # macOS
+          - goos: darwin
+            goarch: amd64
+          - goos: darwin
+            goarch: arm64
+          # FreeBSD
+          - goos: freebsd
+            goarch: amd64
+          # OpenBSD
+          - goos: openbsd
+            goarch: amd64
 
     steps:
       - uses: actions/checkout@v4
@@ -43,10 +60,14 @@ jobs:
           GOARCH: ${{ matrix.goarch }}
         run: |
           cd weed
-          go build -tags 5BytesOffset -ldflags "-s -w -extldflags -static -X github.com/seaweedfs/seaweedfs/weed/util/version.COMMIT=${{ github.sha }}" -o weed-${{ matrix.goos }}-${{ matrix.goarch }} .
+          EXTENSION=""
+          if [ "$GOOS" = "windows" ]; then
+            EXTENSION=".exe"
+          fi
+          go build -tags 5BytesOffset -ldflags "-s -w -extldflags -static -X github.com/seaweedfs/seaweedfs/weed/util/version.COMMIT=${{ github.sha }}" -o weed-${{ matrix.goos }}-${{ matrix.goarch }}${EXTENSION} .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: weed-${{ matrix.goos }}-${{ matrix.goarch }}
-          path: weed/weed-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: weed/weed-*
